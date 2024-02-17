@@ -3,10 +3,11 @@ import React, { ReactNode, useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-
+import { RiSearch2Fill } from "react-icons/ri";
 import {  Notification, UserProfile } from './index';
 import { useAppSelector,useAppDispatch } from '@/redux/hooks';
 import {setScreenSize,setActiveMenu,handleClick} from "@/redux/action/themeSlice"
+import SearchBar from '../Search/SearchBar';
 
 type Props = {
   customFunc:()=>void, icon:ReactNode, color:string, dotColor?:string
@@ -30,7 +31,7 @@ const NavButton: React.FC<Props> = ({  customFunc, icon, color, dotColor }) => (
 
 const Navbar = () => {
   const dispatch = useAppDispatch()
-  const { currentColor, activeMenu, isClicked, screenSize } = useAppSelector((state) => state.theme);
+  const { currentColor, activeMenu, isClicked,  } = useAppSelector((state) => state.theme);
 
   useEffect(() => {
     const handleResize = () => dispatch(setScreenSize(window.innerWidth));
@@ -42,13 +43,6 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    if (screenSize <= 900) {
-      dispatch(setActiveMenu(false));
-    } else {
-      dispatch(setActiveMenu(true));
-    }
-  }, [screenSize]);
 
   const handleActiveMenu = () => dispatch(setActiveMenu(!activeMenu));
 
@@ -56,7 +50,8 @@ const Navbar = () => {
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
 
       <NavButton  customFunc={handleActiveMenu} color={currentColor} icon={<AiOutlineMenu />} />
-      <div className="flex">
+      <div className="flex gap-x-2">
+        <NavButton customFunc={() => dispatch(handleClick('searchBar'))} color={currentColor} icon={<RiSearch2Fill />} />
         <NavButton  dotColor="rgb(254, 201, 15)" customFunc={() => dispatch(handleClick('notification'))} color={currentColor} icon={<RiNotification3Line />} />
         <div >
           <div
@@ -77,6 +72,7 @@ const Navbar = () => {
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </div>
+        {isClicked.searchBar && (<SearchBar/>)}
         {isClicked.notification && (<Notification />)}
         {isClicked.userProfile && (<UserProfile />)}
       </div>

@@ -7,10 +7,11 @@ export const themeSlice = createSlice({
         currentColor:'#03C9D7',
         currentMode:'Light',
         themeSettings:false,
-        activeMenu:true,
+        activeMenu:false,
         isClicked:{
             userProfile: false,
             notification: false,
+            searchBar: false,
           }
 
       },
@@ -19,15 +20,14 @@ export const themeSlice = createSlice({
         handleClick: (state, action: PayloadAction<string>) => {
         state.isClicked = { ...state.isClicked, [action.payload]: true }
       },
-      setIsClicked: (state, action: PayloadAction<{userProfile:boolean,notification:boolean}>) => {
-        console.log(action.payload)
+      setIsClicked: (state, action: PayloadAction<{userProfile:boolean,notification:boolean,searchBar:boolean}>) => {
         state.isClicked = {
           userProfile: false,
           notification: false,
+          searchBar: false,
         }
       },
       setActiveMenu: (state, action) => {
-        console.log(action.payload)
         state.activeMenu = action.payload
       },
       setScreenSize: (state, action) => {

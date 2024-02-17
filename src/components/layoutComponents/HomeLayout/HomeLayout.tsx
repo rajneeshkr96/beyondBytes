@@ -10,7 +10,7 @@ export default function HomeLayout({
     children: React.ReactNode
   }) {
     const { currentMode, activeMenu, currentColor, themeSettings}  = useAppSelector((state) => state.theme)
-    console.log(themeSettings)
+  
     const dispatch = useAppDispatch()
     useEffect(() => {
         const currentThemeColor = localStorage.getItem('colorMode');
@@ -57,7 +57,7 @@ export default function HomeLayout({
           <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
             <Navbar />
           </div>
-          <div>
+          <div className="m-2 md:m-10 mt-24 p-2 md:p-10  dark:text-gray-300 ">
             {themeSettings && (<ThemeSettings />)}
             {children}
           </div>
