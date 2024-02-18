@@ -17,6 +17,8 @@ import { IoMdContacts } from 'react-icons/io';
 import { CiDiscount1 } from "react-icons/ci";
 import { RiContactsLine } from 'react-icons/ri';
 import { PiChartPolarThin } from "react-icons/pi";
+import {ReactLenis} from  "@studio-freight/react-lenis";
+import gsap from 'gsap';
 
 const Sidebar = () => {
   const { currentColor, activeMenu, screenSize } = useAppSelector((state) => state.theme);
@@ -142,6 +144,7 @@ const Sidebar = () => {
   const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2';
 
   return (
+    <ReactLenis root options={{ lerp: 0.1, duration: 2, smoothWheel:true }}>
     <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 ">
       {activeMenu && (
         <>
@@ -185,6 +188,7 @@ const Sidebar = () => {
         </>
       )}
     </div>
+    </ReactLenis>
   );
 };
 
