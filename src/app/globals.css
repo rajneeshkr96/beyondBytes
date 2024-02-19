@@ -39,3 +39,26 @@ body{
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
+@keyframes sLideUp {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}
+
+.col {
+  animation: sLideUp 1.2s ease-out both;
+}
+.col1 {
+  animation: sLideUp 1.4s ease-out both;
+}
+.col2 {
+  animation: sLideUp 1.6s ease-out both;
+}
+.col3 {
+  animation: sLideUp 1.8s ease-out both;
+}
+
+
