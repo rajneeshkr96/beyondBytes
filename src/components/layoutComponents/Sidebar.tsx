@@ -145,7 +145,7 @@ const Sidebar = () => {
 
   return (
     <ReactLenis root options={{ lerp: 0.1, duration: 2, smoothWheel:true }}>
-    <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 ">
+    <div  className="sideBar ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 ">
       {activeMenu && (
         <>
           <div className="flex justify-between items-center">

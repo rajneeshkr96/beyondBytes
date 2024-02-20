@@ -4,6 +4,7 @@ import { FiSettings } from 'react-icons/fi';
 import { setCurrentColor,setCurrentMode,setThemeSettings } from '@/redux/action/themeSlice';
 import { useAppSelector,useAppDispatch } from '@/redux/hooks';
 import { Navbar,Footer,Sidebar,ThemeSettings } from '@/components/layoutComponents/index';
+import { ReactLenis } from "@studio-freight/react-lenis";
 export default function HomeLayout({
     children,
   }: {
@@ -57,9 +58,11 @@ export default function HomeLayout({
           <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
             <Navbar />
           </div>
-          <div className="m-2 md:m-10 mt-24 p-2 md:p-10  dark:text-gray-300 ">
             {themeSettings && (<ThemeSettings />)}
-            {children}
+          <div className="m-2 md:m-10 mt-24 p-2 md:p-10  dark:text-gray-300 ">
+            <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel:true  }}>
+              {children}
+            </ReactLenis>
           </div>
           <Footer />
         </div>
