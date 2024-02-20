@@ -1,5 +1,7 @@
 "use client"
-import HeroSlide from "@/components/HeroSeaction/heroSlide";
+
+import HeroSlide from "@/components/HeroSeaction/HeroSlide";
+
 
 export default function Home() {
   return (

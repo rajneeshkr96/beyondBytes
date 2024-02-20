@@ -57,22 +57,8 @@ html::-webkit-scrollbar-thumb {
 }
 
 /* hero slider  */
-.container {
-  height: 400px;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: start;
-}
+
 .card {
-  width: 80px;
-  border-radius: .75rem;
-  background-size: cover;
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: 2rem;
-  margin: 0 10px;
-  display: flex;
-  align-items: flex-end;
   transition: .6s cubic-bezier(.28,-0.03,0,.99);
   box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
 }
@@ -83,16 +69,6 @@ html::-webkit-scrollbar-thumb {
   flex-wrap: nowrap;
 }
 
-.card > .row > .icon {
-  background: #223;
-  color: white;
-  border-radius: 50%;
-  width: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 15px;
-}
 
 .card > .row > .description {
   display: flex;
@@ -107,25 +83,18 @@ html::-webkit-scrollbar-thumb {
   transition: all .3s ease;
 }
 
-.description p {
-  color: #b0b0ba;
-  padding-top: 5px;
-}
 
-.description h4 {
-  text-transform: uppercase;
-}
 
-input {
+
+.sliderLabel {
   display: none;
 }
 
-input:checked + label {
-  width: 600px;
- ;
+.sliderLabel:checked + label {
+  width: 60%;
 }
 
-input:checked + label .description {
+.sliderLabel:checked + label .description {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
