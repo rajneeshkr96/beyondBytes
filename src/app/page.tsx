@@ -1,6 +1,7 @@
 "use client"
 
-import HeroSlide from "@/components/HeroSeaction/HeroSlide";
+import HeroSlide from "@/components/HeroSection/HeroSlide";
+
 
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
     
     <main className="min-h-screen">
       <HeroSlide/>
+   
     </main>
 
  

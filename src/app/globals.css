@@ -69,7 +69,6 @@ html::-webkit-scrollbar-thumb {
   flex-wrap: nowrap;
 }
 
-
 .card > .row > .description {
   display: flex;
   justify-content: center;
@@ -82,10 +81,6 @@ html::-webkit-scrollbar-thumb {
   transition-delay: .3s;
   transition: all .3s ease;
 }
-
-
-
-
 .sliderLabel {
   display: none;
 }
@@ -109,16 +104,16 @@ html::-webkit-scrollbar-thumb {
 }
 
 .col {
-  animation: sLideUp 1.2s ease-out both;
-}
-.col1 {
   animation: sLideUp 1.4s ease-out both;
 }
-.col2 {
+.col1 {
   animation: sLideUp 1.6s ease-out both;
 }
-.col3 {
+.col2 {
   animation: sLideUp 1.8s ease-out both;
+}
+.col3 {
+  animation: sLideUp 2s ease-out both;
 }
 
 
