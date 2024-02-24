@@ -1,5 +1,5 @@
 // export { default as Button } from './Button';
-export { default as Button } from './Button';
+export { default as Button } from './Button/Button';
 export { default as ThemeSettings } from './ThemeSettings';
 export { default as Sidebar } from './Sidebar';
 export { default as Navbar } from './Navbar';

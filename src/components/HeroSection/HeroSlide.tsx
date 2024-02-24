@@ -44,7 +44,7 @@ export default function HeroSlide() {
       >
         beyondbytes
       </h1>
-      <div className="min-h-96 h-[60vh] flex flex-nowrap justify-start w-full">
+      <div className="min-h-96 h-[60vh] flex flex-nowrap justify-start w-11/12 mx-auto">
         {slide.map((val, index) => (
           <>
             <input

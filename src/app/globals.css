@@ -117,3 +117,28 @@ html::-webkit-scrollbar-thumb {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* test css */
+.tooltip {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  display: none;
+}
+
+.tooltip-container:hover .tooltip {
+  display: block;
+}
