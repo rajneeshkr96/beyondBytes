@@ -26,7 +26,7 @@ const FeatureCards = () => {
   ];
   return (
     <div className="w-full">
-      <h1 className="text-4xl font-bold px-4 max-sm:px-6   ">Feature Blogs</h1>
+      <h2 className="text-4xl font-bold px-4 max-sm:px-6   ">Feature Blogs</h2>
       <div className="flex flex-wrap gap-2 w-full max-sm:flex-col items-center p-4 mt-4">
         <div className="group relative w-3/5 max-sm:w-11/12">
           <Image
@@ -46,8 +46,8 @@ const FeatureCards = () => {
         </div>
         {/* only index 2 and index 3 has to map */}
        <div className="flex gap-2 flex-col w-[30%] max-sm:w-11/12">
-       {data.slice(1).map((item) => (
-          <div className=" group relative   ">
+       {data.slice(1).map((item,index) => (
+          <div key={index} className=" group relative   ">
             <Image
               src={item.image}
               alt="Picture of the author"

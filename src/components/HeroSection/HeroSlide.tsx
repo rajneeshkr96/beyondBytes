@@ -36,6 +36,11 @@ export default function HeroSlide() {
       description: "Space engineering becomes more and more advanced",
     },
   ];
+  const setIndex = () => {
+    const val = document.getElementsByClassName("card")
+    console.log(val);
+  }
+  
   return (
     <div className="min-h-screen gap-y-12 flex flex-col ">
       <h1
@@ -44,7 +49,7 @@ export default function HeroSlide() {
       >
         beyondbytes
       </h1>
-      <div className="min-h-96 h-[60vh] flex flex-nowrap justify-start w-11/12 mx-auto">
+      <div  className="min-h-96 h-[60vh] relative flex flex-nowrap justify-start w-11/12 mx-auto">
         {slide.map((val, index) => (
           <>
             <input
@@ -56,8 +61,9 @@ export default function HeroSlide() {
               defaultChecked={index === 1 ? true : false}
             />
             <label
-              key={val.id}
+              key={index}
               htmlFor={val.id}
+              onClick={setIndex}
               className="card w-20 mx-3 my-0  bg-cover cursor-pointer overflow-hidden rounded-3xl flex items-end "
               style={{ backgroundImage: `url(${val.url})` }}
             >

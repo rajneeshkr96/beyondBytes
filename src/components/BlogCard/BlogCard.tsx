@@ -11,6 +11,7 @@ export interface BlogcardProps{
     bookmark?:boolean;
     likes?:number;
     meLike?:boolean;
+    userProfile?:string
     title: string;
     description: string;
     image: string;
@@ -20,14 +21,14 @@ export interface BlogcardProps{
     readTime: string;
 }
 
-const BlogCard:FC<BlogcardProps> = ({id,tag,bookmark=false,likes,meLike,title,description,image,date,author,slug,readTime}) => {
+const BlogCard:FC<BlogcardProps> = ({id,tag,bookmark=false,likes,meLike,userProfile,title,description,image,date,author,slug,readTime}) => {
   return (
-    <div className='w-1/4 px-4 py-2 shadow mx-4 my-2'>
+    <div className='w-11/12 min-w-80 max-w-96 sm:w-1/2 md:w-1/4  px-4 py-2 shadow mx-4 my-2'>
       {/* card head  */}
       <div style={{gridTemplateColumns:"3rem 1fr 2rem"}} className='grid grid-rows-1 justify-start place-items-center gap-x-2 my-2'>
         <Image
-          src={image}
-          alt={title}
+          src={userProfile?userProfile:"/user.png"}
+          alt={author}
           width={300}
           height={200}
           className="w-12 h-12 rounded-full justify-self-start"
@@ -59,13 +60,13 @@ const BlogCard:FC<BlogcardProps> = ({id,tag,bookmark=false,likes,meLike,title,de
       </div>
       {/* end post with title description and read more */}
       <div className='flex flex-col gap-y-2'>
-      <h4 className="w-full overflow-hidden text-base font-medium line-clamp-2 px-2 capitalize">
+      <h4 className="text-[#333] w-full overflow-hidden text-base font-medium line-clamp-2 px-2 capitalize">
         {title}
       </h4>
-        <p className='text-[#5f5f5f] w-full overflow-hidden text-sm line-clamp-3 px-4 capitalize'>{description}</p>
+        <p className='text-[#5f5f5f] w-full overflow-hidden text-sm line-clamp-3 px-2 capitalize'>{description}</p>
         <Link
         href={"#"}
-        className='capitalize px-4'
+        className='capitalize px-2'
         >read more</Link>
       </div>
     </div>
