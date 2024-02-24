@@ -1,8 +1,12 @@
 import React from 'react'
+import FeatureCards from '@/components/FeatureCards/FeatureCards'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <FeatureCards />
+
+    </div>
   )
 }
 
