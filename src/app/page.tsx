@@ -1,7 +1,9 @@
 
 import BlogCard from "@/components/BlogCard/BlogCard";
+import FeatureCards from "@/components/FeatureCards/FeatureCards";
 import HeroSlide from "@/components/HeroSection/HeroSlide";
 import TagSlide from "@/components/TagSlide/TagSlide";
+
 
 
 
@@ -106,6 +108,8 @@ export default function Home() {
 
       </section>
       
+      <FeatureCards/>
+   
     </main>
 
  
