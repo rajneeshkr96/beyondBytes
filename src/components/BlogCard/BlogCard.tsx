@@ -25,7 +25,7 @@ const BlogCard:FC<BlogcardProps> = ({id,tag,bookmark=false,likes,meLike,userProf
   return (
     <div className='w-11/12 min-w-80 max-w-96 sm:w-1/2 md:w-1/4  px-4 py-2 shadow mx-4 my-2'>
       {/* card head  */}
-      <div style={{gridTemplateColumns:"3rem 1fr 2rem"}} className='grid grid-rows-1 justify-start place-items-center gap-x-2 my-2'>
+      <div style={{gridTemplateColumns:"3rem 1fr 2rem"}} className='grid grid-rows-1 justify-start items-start gap-x-2 my-2'>
         <Image
           src={userProfile?userProfile:"/user.png"}
           alt={author}

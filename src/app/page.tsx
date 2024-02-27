@@ -90,9 +90,10 @@ export default function Home() {
     
     <main className="min-h-screen">
       <HeroSlide/>
+      <FeatureCards/>
       <TagSlide/>
       <h2 className="text-4xl font-bold px-4 max-sm:px-6   ">Feature Blogs</h2>
-      <section className="flex justify-center flex-wrap ">
+      <section className="flex justify-start  flex-wrap ">
       {blog.map((data)=>
       <BlogCard
         key={data.id}
@@ -114,7 +115,7 @@ export default function Home() {
 
       </section>
       
-      <FeatureCards/>
+      
    
     </main>
 
