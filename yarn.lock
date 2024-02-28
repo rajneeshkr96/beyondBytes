@@ -25,6 +25,13 @@
     preact "10.11.3"
     preact-render-to-string "5.2.3"
 
+"@auth/prisma-adapter@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@auth/prisma-adapter/-/prisma-adapter-1.4.0.tgz#fc5dfd8ce442fcc4237e313ce55ea4936a2c1251"
+  integrity sha512-k5D6ajX8MZv9107WWaIpzcNmsB8+sumyc7y46lnAMbLdgBoUcwAYtxGLbwEFSvzgjDcxjWqzlB5AIAED4vioDA==
+  dependencies:
+    "@auth/core" "0.27.0"
+
 "@babel/runtime@^7.23.2":
   version "7.23.9"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.9.tgz#47791a15e4603bb5f905bc0753801cf21d6345f7"
