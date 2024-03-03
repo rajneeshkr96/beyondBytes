@@ -20,43 +20,34 @@ export const {
 } = NextAuth({
   callbacks: {
     async session({ session, token }) {
-      if (session.user?.id === token.sub) {
-        const existingUser = await dataBasePrisma.user.findUnique({
-          where: { id: token.sub },
-        });
+      try {
+        await dataBasePrisma.$connect();
 
-        session.user = {
-          ...session.user,
-          ...(existingUser ? existingUser : {}), // Include data from database if found
-        };
-      }
+        const { name, email } = session.user;
+        const user = await dataBasePrisma.user.findUnique({ where: { email } });
 
-      return session;
-    },
-
-    async jwt({ token }) {
-      if (token.sub) {
-        const existingUser = await dataBasePrisma.user.findUnique({
-          where: { email: token.email },
-        });
-
-        if (existingUser) {
-          token.role = existingUser.role;
-        } else {
-          // Create new user if not existing
-          await dataBasePrisma.user.create({
+        if (!user) {
+          const newUser = await dataBasePrisma.user.create({
             data: {
-              email: token.email,
-              name: token.name,
-              image: token.picture, // Assuming "picture" is available in token
+              name,
+              email,
+              role: "USER",
             },
           });
-        }
-      }
+          session.user.id = newUser.id;
+         session.user.name = newUser.name;
+         
+          
+        } 
 
-      return token;
+        return session;
+      } finally {
+        await dataBasePrisma.$disconnect();
+      }
     },
   },
+
+
   adapter : PrismaAdapter(dataBasePrisma),
   session : { strategy : "jwt" },
   pages : {
