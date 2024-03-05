@@ -1,36 +1,41 @@
-import React from 'react';
-import { MdOutlineCancel } from 'react-icons/md';
-import { Button } from '.';
-import { useAppSelector } from '@/redux/hooks';
+import React from "react";
 
-import {  FiCreditCard } from 'react-icons/fi';
-import {  BsCurrencyDollar, BsShield } from 'react-icons/bs';
+import { MdOutlineCancel } from "react-icons/md";
+import { Button } from ".";
+import { useAppSelector } from "@/redux/hooks";
+
+import { currentUser } from "@/lib/authDet";
+import { FiCreditCard } from "react-icons/fi";
+import { BsCurrencyDollar, BsShield } from "react-icons/bs";
 
 
-const UserProfile = () => {
-  const { currentColor } = useAppSelector((state) => state.theme);
+const UserProfile = async () => {
+ 
   
+
+  const { currentColor } = useAppSelector((state) => state.theme);
+
   const userProfileData = [
     {
       icon: <BsCurrencyDollar />,
-      title: 'My Profile',
-      desc: 'Account Settings',
-      iconColor: '#03C9D7',
-      iconBg: '#E5FAFB',
+      title: "My Profile",
+      desc: "Account Settings",
+      iconColor: "#03C9D7",
+      iconBg: "#E5FAFB",
     },
     {
       icon: <BsShield />,
-      title: 'My Inbox',
-      desc: 'Messages & Emails',
-      iconColor: 'rgb(0, 194, 146)',
-      iconBg: 'rgb(235, 250, 242)',
+      title: "My Inbox",
+      desc: "Messages & Emails",
+      iconColor: "rgb(0, 194, 146)",
+      iconBg: "rgb(235, 250, 242)",
     },
     {
       icon: <FiCreditCard />,
-      title: 'My Tasks',
-      desc: 'To-do and Daily Tasks',
-      iconColor: 'rgb(255, 244, 229)',
-      iconBg: 'rgb(254, 201, 15)',
+      title: "My Tasks",
+      desc: "To-do and Daily Tasks",
+      iconColor: "rgb(255, 244, 229)",
+      iconBg: "rgb(254, 201, 15)",
     },
   ];
 
@@ -50,18 +55,32 @@ const UserProfile = () => {
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
         <img
           className="rounded-full h-24 w-24"
-          src={"https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+          src={
+            "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          }
           alt="user-profile"
         />
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200"> Michael Roberts </p>
-          <p className="text-gray-500 text-sm dark:text-gray-400">  Administrator   </p>
-          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> info@shop.com </p>
+          <p className="font-semibold text-xl dark:text-gray-200">
+            {" "}
+            Michael Roberts{" "}
+          </p>
+          <p className="text-gray-500 text-sm dark:text-gray-400">
+            {" "}
+            Administrator{" "}
+          </p>
+          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400">
+            {" "}
+            info@shop.com{" "}
+          </p>
         </div>
       </div>
       <div>
         {userProfileData.map((item, index) => (
-          <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
+          <div
+            key={index}
+            className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]"
+          >
             <button
               type="button"
               style={{ color: item.iconColor, backgroundColor: item.iconBg }}
@@ -72,7 +91,10 @@ const UserProfile = () => {
 
             <div>
               <p className="font-semibold dark:text-gray-200 ">{item.title}</p>
-              <p className="text-gray-500 text-sm dark:text-gray-400"> {item.desc} </p>
+              <p className="text-gray-500 text-sm dark:text-gray-400">
+                {" "}
+                {item.desc}{" "}
+              </p>
             </div>
           </div>
         ))}
@@ -87,7 +109,6 @@ const UserProfile = () => {
         />
       </div>
     </div>
-
   );
 };
 
