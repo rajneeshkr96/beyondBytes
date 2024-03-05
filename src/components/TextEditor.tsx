@@ -25,6 +25,10 @@ import TableRow from '@tiptap/extension-table-row'
   import { GrTableAdd } from "react-icons/gr";
   import { RiInsertColumnRight,RiDeleteColumn,RiDeleteRow,RiInsertRowBottom } from "react-icons/ri";
   import { FcDeleteDatabase } from "react-icons/fc";
+
+
+  // types 
+
 const TextEditor = () => {
     const editor = useEditor({
         extensions: [
@@ -96,32 +100,83 @@ const TextEditor = () => {
           })
         }
       }
+
+       
       const iconClass:string =  "text-white hover:text-gray-200"
       const isActive:string = "text-green-200"
       const menuStyle:string = "bg-[#333] flex gap-x-3 text text-xl px-3 py-2 rounded-md"
       const floatIcon = "bg-[#333] p-2 rounded-full justify-center items-center"
+      // interface BtnDetails{
+      //   onclick:void;
+      //   isActive:string;
+      //   icon:React.JSX.Element
+      // }
+      // type BtnDetailsType = BtnDetails[]
+      // tool bar icons .....................................................
+      const toolBarIcons = [
+        {onclick:()=>editor.chain().focus().toggleHeading({ level: 4 }).run(),
+        isActive:editor.isActive('heading', { level: 4 })? isActive : iconClass,
+        icon:<LuHeading4 />},
+        {onclick:() => editor.chain().focus().toggleHeading({ level: 5 }).run(),
+        isActive:editor.isActive('heading', { level: 5 })? isActive : iconClass,
+        icon:<LuHeading5 />},
+        {onclick:()=>editor.chain().focus().toggleHeading({ level: 6 }).run(),
+        isActive:editor.isActive('heading', { level: 6 })? isActive : iconClass,
+        icon:<LuHeading6 />},
+        {onclick:()=>editor.chain().focus().toggleOrderedList().run(),
+        isActive:editor.isActive('orderedList')? isActive : iconClass,
+        icon:<FaListOl />},
+        {onclick:()=>editor.chain().focus().toggleBulletList().run(),
+        isActive:editor.isActive('bulletList')? isActive : iconClass,
+        icon:<FaListUl />},
+      ]
+      const toolBarIconsTable = [
+        // table btn start 
+        {onclick:()=>editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run(),
+          isActive:iconClass,
+          icon:<GrTableAdd />},
+        {onclick:()=>editor.chain().focus().addColumnAfter().run(),
+          isActive:iconClass,
+          icon:<RiInsertColumnRight />},
+        {onclick:()=>editor.chain().focus().deleteColumn().run(),
+          isActive:iconClass,
+          icon:<RiDeleteColumn />},
+        {onclick:()=>editor.chain().focus().addRowAfter().run(),
+          isActive:iconClass,
+          icon:<RiInsertRowBottom />},
+        {onclick:()=>editor.chain().focus().deleteRow().run(),
+          isActive:iconClass,
+          icon:<RiDeleteRow />},
+        {onclick:()=>editor.chain().focus().deleteTable().run(),
+          isActive:iconClass,
+          icon:<FcDeleteDatabase />},
+        {onclick:()=>editor.chain().focus().mergeCells().run(),
+          isActive:iconClass,
+          icon:<AiOutlineMergeCells />},
+        {onclick:()=>editor.chain().focus().splitCell().run(),
+          isActive:iconClass,
+          icon:<PiSquareSplitHorizontalFill />},
+        {onclick:()=>editor.chain().focus().toggleHeaderColumn().run(),
+          isActive:iconClass,
+          icon:<FaTable />},
+        {onclick:()=>editor.chain().focus().toggleHeaderRow().run(),
+          isActive:iconClass,
+          icon:<FaTableList />},
+      ]
+      const selectOptions = [
+        {onclick:()=>editor.chain().focus().toggleBold().run(),
+        isActive:editor.isActive('bold') ? isActive : iconClass,
+        icon:<FaBold   />},
+        {onclick:()=>editor.chain().focus().toggleItalic().run(),
+        isActive:editor.isActive('italic') ? isActive : iconClass,
+        icon:<FaItalic  />},
+        {onclick:()=>setLink(),
+        isActive:editor.isActive('link') ? isActive : iconClass,
+        icon:<BiLink />},
+      ]
       return (
         <>
             <span className='bg-[#333] text-2xl flex justify-center gap-x-4 px-4 py-2 my-2 rounded-lg'>
-    
-                <button
-                    onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-                    className={editor.isActive('heading', { level: 4 }) ? isActive : iconClass}
-                >
-                    <LuHeading4 />
-                </button>
-                <button
-                    onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-                    className={editor.isActive('heading', { level: 5 }) ? isActive : iconClass}
-                >
-                    <LuHeading5 />
-                </button>
-                <button
-                    onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-                    className={editor.isActive('heading', { level: 6 }) ? isActive : iconClass}
-                >
-                    <LuHeading6 />
-                </button>
                 <button
                     onClick={() => editor.chain().focus().toggleCode().run()}
                     disabled={
@@ -135,75 +190,34 @@ const TextEditor = () => {
                 >
                     <FaCode />
                 </button>
+                {toolBarIcons.map((val)=>  
                 <button
-                    onClick={() => editor.chain().focus().toggleOrderedList().run()}
-                    className={editor.isActive('orderedList') ? isActive : iconClass}
+                    onClick={() => val.onclick()}
+                    className={val.isActive }
                 >
-                    <FaListOl />
-                </button>
-
-                <button
-                    onClick={() => editor.chain().focus().toggleBulletList().run()}
-                    className={editor.isActive('bulletList') ? isActive : iconClass}
-                >
-                    <FaListUl />
-                </button>
+                    {val.icon}
+                </button>)}
                 <span className='border-x-1'></span>
                 {/* table  */}
+                {toolBarIconsTable.map((val)=>  
                 <button
-                    className={iconClass} 
-                    onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
-                    }
+                    onClick={() => val.onclick()}
+                    className={val.isActive }
                 >
-                    <GrTableAdd />
-                </button>
-                <button className={iconClass} onClick={() => editor.chain().focus().addColumnAfter().run()}>
-                    <RiInsertColumnRight />
-                </button>
-                <button className={iconClass}  onClick={() => editor.chain().focus().deleteColumn().run()}>
-                    <RiDeleteColumn />
-                </button>
-                <button className={iconClass}  onClick={() => editor.chain().focus().addRowAfter().run()}>
-                    <RiInsertRowBottom />
-                </button>
-                <button className={iconClass}  onClick={() => editor.chain().focus().deleteRow().run()}>
-                    <RiDeleteRow />
-                </button>
-                <button className={iconClass}  onClick={() => editor.chain().focus().deleteTable().run()}>
-                    <FcDeleteDatabase />
-                </button>
-                <button className={iconClass}  onClick={() => editor.chain().focus().mergeCells().run()}>
-                    <AiOutlineMergeCells />
-                    </button>
-                <button className={iconClass}  onClick={() => editor.chain().focus().splitCell().run()}>
-                    <PiSquareSplitHorizontalFill />
-                </button>
-                <button className={iconClass}  onClick={() => editor.chain().focus().toggleHeaderColumn().run()}>
-                    <FaTable />
-                </button>
-                <button className={iconClass}  onClick={() => editor.chain().focus().toggleHeaderRow().run()}>
-                    <FaTableList />
-                </button>
-
-
+                    {val.icon}
+                </button>)}
 
             </span>
+
+            {/* selectOptions */}
           {editor && <BubbleMenu className={menuStyle} tippyOptions={{ duration: 100 }} editor={editor}>
-            <button
-              onClick={() => editor.chain().focus().toggleBold().run()}
-              className={editor.isActive('bold') ? isActive : iconClass}
-            >
-              <FaBold   />
-            </button>
-            <button
-              onClick={() => editor.chain().focus().toggleItalic().run()}
-              className={editor.isActive('italic') ? isActive : iconClass}
-            >
-              <FaItalic  />
-            </button>
-            <button onClick={setLink} className={editor.isActive('link') ? isActive : iconClass}>
-            <BiLink />
-            </button>
+            {selectOptions.map((val)=>  
+                  <button
+                      onClick={() => val.onclick()}
+                      className={val.isActive }
+                  >
+                      {val.icon}
+                  </button>)}
             <span className='border-r-1'></span>
             <button
               onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
@@ -238,13 +252,11 @@ const TextEditor = () => {
             >
                 <PiCodeBlockFill />
             </button>
-            <button id="add" className={`${iconClass} ${floatIcon} `} onClick={() => editor.chain().focus().setHardBreak().run()}>
-                <MdLineWeight />
-            </button>
 
           </FloatingMenu>}
     
           <EditorContent editor={editor} />
+          
           <button onClick={()=>console.log(editor.getHTML())}>
             get code
           </button>
