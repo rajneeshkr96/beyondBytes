@@ -35,28 +35,10 @@ model User {
   image         String?
   password      String?
   role          UserRole @default(USER)
-  accounts      Account[]
   posts         Post[]
   
 }
-model Account {
-  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-refreshToken String? 
-  accessToken String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String? 
-  session_state      String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
 
 model Comment {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
@@ -66,9 +48,3 @@ model Comment {
 }
 
 // Address is an embedded document
-type Address {
-  street String
-  city   String
-  state  String
-  zip    String
-}
