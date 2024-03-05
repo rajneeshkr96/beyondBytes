@@ -20,16 +20,16 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <SessionProvider session={session}>
     <html lang="en">
       <body className={inter.className}>
+      <SessionProvider session={session}>
         <ReduxProvider>
           <HomeLayout>
             {children}
           </HomeLayout>
         </ReduxProvider>
+    </SessionProvider>
       </body>
     </html>
-    </SessionProvider>
   );
 }

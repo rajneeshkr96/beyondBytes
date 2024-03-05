@@ -1,4 +1,4 @@
-"use client"
+
 import React, { ReactNode } from 'react';
 import { useAppSelector,useAppDispatch } from '@/redux/hooks';
 import {setIsClicked} from "@/redux/action/themeSlice"
