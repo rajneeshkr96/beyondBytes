@@ -4,7 +4,6 @@ import { MdOutlineCancel } from "react-icons/md";
 import { Button } from ".";
 import { useAppSelector } from "@/redux/hooks";
 
-
 import { currentUser } from "@/lib/authDet";
 import { FiCreditCard } from "react-icons/fi";
 import { BsCurrencyDollar, BsShield } from "react-icons/bs";

@@ -176,7 +176,7 @@ const TextEditor = () => {
       ]
       return (
         <>
-            <span className='bg-[#333] text-2xl flex justify-center gap-x-4 px-4 py-2 my-2 rounded-lg'>
+            <span className='bg-[#333] text-2xl flex justify-center gap-x-4 px-4 py-2  rounded-t-md max-sm:overflow-scroll max-sm:px-6'>
                 <button
                     onClick={() => editor.chain().focus().toggleCode().run()}
                     disabled={

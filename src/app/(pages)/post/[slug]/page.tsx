@@ -1,21 +1,15 @@
-import Image from 'next/image'
+import PostBody from '@/components/post/body/PostBody'
+import Header from '@/components/post/header/Header'
 import React from 'react'
-
+import localFont from 'next/font/local'
+import PostFeatures from '@/components/post/postFeatures/PostFeatures'
+const ogg = localFont({ src: '../../../../fonts/Ogg-Medium-BF646c18fc4e918.otf' })
 const page = () => {
   return (
     <article>
-      <header>
-        <div>
-          <div>
-            <h1>Post</h1>
-            <p>2021-10-10</p>
-          </div>
-          <div>
-
-          </div>
-        </div>
-        <Image src={"/img1.jpg"} alt={"kkk"} width={2000} height={1000} className='w-full h-1/2' />
-      </header>
+      <Header font={ogg.className}/>
+      <PostBody font={ogg.className}/>
+      <PostFeatures/>
     </article>
   )
 }
