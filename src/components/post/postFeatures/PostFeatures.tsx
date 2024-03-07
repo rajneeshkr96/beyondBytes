@@ -1,48 +1,45 @@
-"use client"
-import React, { useState } from 'react'
-import { IoIosHeart } from "react-icons/io";
-import { FaCommentAlt } from "react-icons/fa";
-
-
-
-function Comment({visible}:{visible:boolean}) {
-     
-  return (
-    <div className={`fixed w-[25vw] z-20 right-0 top-0  ease-in duration-75 bg-white min-h-screen ${visible?"translate-x-[0] visible":"translate-x-[25vw] "}`}>
-      kkkkkkkkkkkkkkkkkkkkkkkkkkkdsfjlksjkfkkkkkkkkkkkkjj
-    </div>
-  )
+"use client";
+import ActionBtn from '@/components/layoutComponents/Button/ActionBtn';
+import React, { useState, FC } from 'react';
+import { IoHeartCircleSharp, IoHeartDislikeCircle, IoChatboxEllipses, IoShareSocial } from "react-icons/io5";
+import { MdBookmarkAdd, MdOutlineBookmark } from "react-icons/md";
+import {  Comment } from './Comments';
+export interface PostFeaturesProps{
+    font: string
 }
+export const PostFeatures: FC<PostFeaturesProps> = ({ font }) => {
+    const [viewCmt, setViewCmt] = useState(false);
 
-
-
-const PostFeatures = () => {
-    const [viewCmt,setViewCmt] = useState(false);
-    console.log(viewCmt);
     return (
-        <section>
-            <div>
-                <span>tag</span>
-                <ul>
+        <section className='w-11/12 mx-auto flex flex-col items-center'>
+            <div className='flex gap-x-4 my-6 items-center'>
+                <span className={`${font} text-2xl`}>Tags</span>
+                <ul className='flex gap-x-2 font-bold'>
+                    <li>kkkk</li>
+                    <li>kkkk</li>
+                    <li>kkkk</li>
+                    <li>kkkk</li>
                     <li>kkkk</li>
                 </ul>
             </div>
 
-            <div className='flex justify-between'>
-                <span className='flex gap-x-8 text-4xl'>
+            <div className='flex justify-between w-10/12 text-4xl'>
+                <span className='flex gap-x-6 items-center '>
                     <span className='flex items-end cursor-pointer'>
-                        <IoIosHeart style={{ color: `${"meLike" ? "#ff5c63" : ""}` }} />
+                        {"kk" ? <IoHeartCircleSharp /> : <IoHeartDislikeCircle />}
                         <p className='text-[#5f5f5f] text-base '>{"55"}</p>
                     </span>
-                    <FaCommentAlt onClick={()=>setViewCmt(!viewCmt)} />
+                    <IoChatboxEllipses className='cursor-pointer' onClick={() => setViewCmt(!viewCmt)} />
                 </span>
-                <span></span>
+                <span className='flex gap-x-2 items-center'>
+                    <IoShareSocial className='cursor-pointer' />
+                    {'bookmark' ? <MdOutlineBookmark className='cursor-pointer' /> : <MdBookmarkAdd className='cursor-pointer' />}
+                    <ActionBtn  />
+                </span>
             </div>
 
-            <Comment visible={viewCmt}/>
+            <Comment visible={viewCmt} close={setViewCmt} />
 
         </section>
-    )
-}
-
-export default PostFeatures
+    );
+};

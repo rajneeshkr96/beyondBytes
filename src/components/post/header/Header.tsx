@@ -27,8 +27,8 @@ const Header:FC<HeaderProps> = ({font}) => {
                     </div>
                 </div>
                 <div className='col-start-3 col-end-4 px-6 py-2 flex  gap-x-2'>
-                <Image src={"/img3.jpg"} alt={"kkk"} width={200} height={300} className='w-12 h-12 rounded-full' />
-                <span className='uppercase font-bold mt-3 text-gray-600'>raju bhai....</span>
+                    <Image src={"/img3.jpg"} alt={"kkk"} width={200} height={300} className='w-12 h-12 rounded-full' />
+                    <span className='uppercase font-bold mt-3 text-gray-600'>raju bhai....</span>
                 </div>
             </div>
 

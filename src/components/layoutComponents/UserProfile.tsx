@@ -11,11 +11,7 @@ import { auth } from "@/backend/auth/auth";
 import { useSession } from "next-auth/react";
 
 
-const UserProfile = async () => {
-  const session = await auth()
-  console.log("session,,,,,,,,,,,,,,,",session)
- 
-  
+const UserProfile =  () => {
 
   const { currentColor } = useAppSelector((state) => state.theme);
 

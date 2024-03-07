@@ -11,6 +11,7 @@ const config: Config = {
     fontFamily: {
       display: ['Open Sans', 'sans-serif'],
       body: ['Open Sans', 'sans-serif'],
+      serif: ['var(--source_serif_4)'],
     },
     extend: {
       fontSize: {
