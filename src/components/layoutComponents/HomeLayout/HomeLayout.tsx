@@ -5,13 +5,17 @@ import { setCurrentColor,setCurrentMode,setThemeSettings } from '@/redux/action/
 import { useAppSelector,useAppDispatch } from '@/redux/hooks';
 import { Navbar,Footer,Sidebar,ThemeSettings } from '@/components/layoutComponents/index';
 import { ReactLenis } from "@studio-freight/react-lenis";
+import { useSession } from 'next-auth/react';
+
+
 export default function HomeLayout({
     children,
   }: {
-    children: React.ReactNode
+    children: React.ReactNode,name?:string,email?:string,role?:string,image?:string,oAuthSession?:string
   }) {
     const { currentMode, activeMenu, currentColor, themeSettings}  = useAppSelector((state) => state.theme)
-  
+    const session  = useSession()    
+   
     const dispatch = useAppDispatch()
     useEffect(() => {
         const currentThemeColor = localStorage.getItem('colorMode');
@@ -56,7 +60,7 @@ export default function HomeLayout({
           }
         >
           <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
-            <Navbar />
+            <Navbar email={session?.data?.user.email as string} role= {session?.data?.user?.role as string } name={session?.data?.user.name as string } oAuthSession={session.status as string} image={session?.data?.user.image as string} />
           </div>
             {themeSettings && (<ThemeSettings />)}
           <div className="m-2 md:m-10 mt-24 p-2 md:p-10  dark:text-gray-300 ">

@@ -25,6 +25,7 @@ model Post {
 enum UserRole {
   ADMIN
   USER
+  Writer
 }
 
 model User {

@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import { useAppSelector,useAppDispatch } from '@/redux/hooks';
 import {setIsClicked} from "@/redux/action/themeSlice"
 type Props = {
-  icon?:ReactNode, bgColor?:string, color?:string, bgHoverColor?:string, size?:string, text?:string, borderRadius?:string, width?:string
+  icon?:ReactNode, bgColor?:string, color?:string, bgHoverColor?:string, size?:string, text?:string, borderRadius?:string, width?:string,onClicked?:()=>void
 }
 const Button:React.FC<Props> = ({ icon, bgColor, color, bgHoverColor, size, text, borderRadius, width }) => {
   const { isClicked } = useAppSelector((state) => state.theme);

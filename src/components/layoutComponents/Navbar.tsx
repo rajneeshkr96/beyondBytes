@@ -12,7 +12,15 @@ import SearchBar from '../Search/SearchBar';
 type Props = {
   customFunc:()=>void, icon:ReactNode, color:string, dotColor?:string
 }
-const NavButton: React.FC<Props> = ({  customFunc, icon, color, dotColor }) => (
+interface NavbarProps {
+  name: string;
+  email: string;
+  role: string;
+  image: string;
+  oAuthSession?: string;
+}
+
+const NavButton: React.FC<Props> = ({  customFunc, icon, color, dotColor  }) => (
   <div >
     <button
       type="button"
@@ -29,7 +37,7 @@ const NavButton: React.FC<Props> = ({  customFunc, icon, color, dotColor }) => (
   </div>
 );
 
-const Navbar = () => {
+const Navbar :React.FC<NavbarProps> = ({email,name,role,image,oAuthSession}) => {
   const dispatch = useAppDispatch()
   const { currentColor, activeMenu, isClicked,  } = useAppSelector((state) => state.theme);
 
@@ -60,13 +68,13 @@ const Navbar = () => {
           >
             <img
               className="rounded-full w-8 h-8"
-              src={"https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+              src={image ? image:"https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
               alt="user-profile"
             />
             <p>
               <span className="text-gray-400 text-14">Hi,</span>{' '}
               <span className="text-gray-400 font-bold ml-1 text-14">
-                Michael
+                {name ? name.split(' ')[0]:"User"}
               </span>
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
@@ -74,7 +82,7 @@ const Navbar = () => {
         </div>
         {isClicked.searchBar && (<SearchBar/>)}
         {isClicked.notification && (<Notification />)}
-        {isClicked.userProfile && (<UserProfile />)}
+        {isClicked.userProfile && (<UserProfile email={email} name={name} role={role} image={image} oAuthSession={oAuthSession} />)}
       </div>
     </div>
   );
