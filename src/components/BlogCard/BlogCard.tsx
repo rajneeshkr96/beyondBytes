@@ -37,7 +37,9 @@ const BlogCard:FC<BlogcardProps> = ({id,tag,bookmark=false,likes,meLike,userProf
           <h5 className="uppercase">{author}</h5>
           <p className="text-[#b0b0ba] text-xs">{date}/{tag[0]}</p>
         </div>
-        <ActionBtn className='w-8 h-8 justify-self-end'/>
+        <Tooltip content='more'>
+          <ActionBtn className='w-8 h-8 justify-self-end'/>
+        </Tooltip>
       </div>
       {/* card image  */}
       <Image

@@ -4,14 +4,16 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 interface ActionBtnProps {
   className?: string;
+  actionIcon?: string | React.JSX.Element;
+  children?:  string | React.JSX.Element;
 }
 
-const ActionBtn: React.FC<ActionBtnProps> = ({ className }) => {
+const ActionBtn: React.FC<ActionBtnProps> = ({ className,actionIcon,children }) => {
   const [visible, setVisible] = useState(false);
   const actionBtnRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (actionBtnRef.current && !actionBtnRef.current.contains(event.target)) {
+    if (actionBtnRef.current && !actionBtnRef.current.contains(event?.target)) {
       setVisible(false);
     }
   };
@@ -26,13 +28,16 @@ const ActionBtn: React.FC<ActionBtnProps> = ({ className }) => {
       ref={actionBtnRef}
       className={`relative cursor-pointer rounded-full flex justify-center items-center ${className}`}
     >
-      <HiOutlineDotsHorizontal onClick={() => setVisible(!visible)} className='w-[90%] h-[90%] ' />
+      <span className='w-[90%] h-[90%] block' onClick={() => setVisible(!visible)}>
+        {actionIcon?actionIcon:<HiOutlineDotsHorizontal  className='w-[90%] h-[90%] ' />}
+      </span>
       <div
-        className={`absolute w-30 -bottom-5 right-1 bg-black text-white duration-75 translate-y-8 ease-in-out ${
+        className={`absolute -bottom-8 right-1 bg-black text-white duration-150  ease-in-out py-2 px-4 rounded-lg ${
           visible ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
-        Your content goes here
+        dkljfdkljfdlkjfdkljdfkljfkdljdfkljdfkljfd
+        {children}
       </div>
     </div>
   );

@@ -138,6 +138,12 @@ html::-webkit-scrollbar-thumb {
   animation: sLideUp 2s ease-out both;
 }
 
+/* tooltip  */
+.container-tooltip:hover > p {
+  visibility: visible;
+  transform: translateY(0);
+}
+
 
 /* tip top editor  */
 
