@@ -12,11 +12,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Post {
+model Blog {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   slug     String    @unique
   title    String
-  body     String
+  content     String
   author   User      @relation(fields: [authorId], references: [id])
   authorId String    @db.ObjectId
   comments Comment[]
@@ -25,7 +25,7 @@ model Post {
 enum UserRole {
   ADMIN
   USER
-  Writer
+  WRITER
 }
 
 model User {
@@ -34,20 +34,16 @@ model User {
   email         String?   @unique
   image         String?
   role          UserRole @default(USER)
-  posts         Post[]
+  Blogs         Blog[]
   createdAt     DateTime  @default(now()) @map("created_at") @updatedAt
   updatedAt     DateTime  @default(now()) @map("updated_at")
 }
 
-
-
-
-
 model Comment {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   comment String
-  post    Post   @relation(fields: [postId], references: [id])
-  postId  String @db.ObjectId
+  Blog    Blog   @relation(fields: [BlogId], references: [id])
+  BlogId  String @db.ObjectId
 }
 
 // Address is an embedded document
