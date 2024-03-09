@@ -2,7 +2,7 @@ import React from 'react'
 import { auth } from '@/backend/auth/auth'
 import Image from 'next/image';
 
-const page = async () => {
+const Page = async () => {
     const session = await auth();
     const data = {
         src : session?.user?.image as string ,
@@ -21,4 +21,4 @@ const page = async () => {
   )
 }
 
-export default page
+export default Page

@@ -190,17 +190,19 @@ const TextEditor = () => {
                 >
                     <FaCode />
                 </button>
-                {toolBarIcons.map((val)=>  
+                {toolBarIcons.map((val,index)=>  
                 <button
                     onClick={() => val.onclick()}
                     className={val.isActive }
+                    key={index + 1}
                 >
                     {val.icon}
                 </button>)}
                 <span className='border-x-1'></span>
                 {/* table  */}
-                {toolBarIconsTable.map((val)=>  
+                {toolBarIconsTable.map((val,index)=>  
                 <button
+                    key={index + 1}
                     onClick={() => val.onclick()}
                     className={val.isActive }
                 >
@@ -211,8 +213,9 @@ const TextEditor = () => {
 
             {/* selectOptions */}
           {editor && <BubbleMenu className={menuStyle} tippyOptions={{ duration: 100 }} editor={editor}>
-            {selectOptions.map((val)=>  
+            {selectOptions.map((val,index)=>  
                   <button
+                      key={index + 1}
                       onClick={() => val.onclick()}
                       className={val.isActive }
                   >

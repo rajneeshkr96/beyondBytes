@@ -5,7 +5,7 @@ import localFont from 'next/font/local'
 import { PostFeatures } from '@/components/post/postFeatures/PostFeatures'
 
 const ogg = localFont({ src: '../../../../fonts/Ogg-Medium-BF646c18fc4e918.otf' })
-const page = () => {
+const Page = () => {
   return (
     <article>
       <Header font={ogg.className}/>
@@ -15,4 +15,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

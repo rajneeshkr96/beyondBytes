@@ -9,6 +9,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 
 interface UserProfileProps {
   name: string;
@@ -70,7 +71,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
             />
           </div>
           <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
-            <img
+            <Image
               className="rounded-full h-24 w-24"
               src={
                 image

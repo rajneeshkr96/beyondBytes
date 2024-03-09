@@ -13,7 +13,7 @@ const Testing = () => {
 }
 
 
-const page = () => {
+const Page = () => {
   const actions =  [{action:"action",page:<Testing/>},{action:"more action",page:<Testing/>},{action:"more and more action",page:<Testing/>},{action:"action",page:<Testing/>}]
   const [active,setActive] = useState(0);
   return (
@@ -39,4 +39,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

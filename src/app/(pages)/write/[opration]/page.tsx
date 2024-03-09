@@ -3,7 +3,7 @@ import TextEditor from '@/components/TextEditor'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-const page = () => {
+const Page = () => {
   const [method, setMethod] = useState("firebase")
   const [preImage, setPreImage] = useState("/img1.jpg")
   return (
@@ -53,4 +53,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

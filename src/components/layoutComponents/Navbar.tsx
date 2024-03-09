@@ -8,6 +8,7 @@ import {  Notification, UserProfile } from './index';
 import { useAppSelector,useAppDispatch } from '@/redux/hooks';
 import {setScreenSize,setActiveMenu,handleClick} from "@/redux/action/themeSlice"
 import SearchBar from '../Search/SearchBar';
+import Image from 'next/image';
 
 type Props = {
   customFunc:()=>void, icon:ReactNode, color:string, dotColor?:string
@@ -49,7 +50,7 @@ const Navbar :React.FC<NavbarProps> = ({email,name,role,image,oAuthSession}) => 
     handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [dispatch]);
 
 
   const handleActiveMenu = () => dispatch(setActiveMenu(!activeMenu));
@@ -66,7 +67,7 @@ const Navbar :React.FC<NavbarProps> = ({email,name,role,image,oAuthSession}) => 
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => dispatch(handleClick('userProfile'))}
           >
-            <img
+            <Image
               className="rounded-full w-8 h-8"
               src={image ? image:"https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
               alt="user-profile"

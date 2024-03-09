@@ -24,7 +24,7 @@ export default function HomeLayout({
           dispatch(setCurrentColor(currentThemeColor));
           dispatch(setCurrentMode(currentThemeMode));
         }
-      }, []);
+      }, [dispatch]);
     return (
       <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <div className="flex relative dark:bg-main-dark-bg">
