@@ -69,8 +69,10 @@ const Navbar :React.FC<NavbarProps> = ({email,name,role,image,oAuthSession}) => 
           >
             <Image
               className="rounded-full w-8 h-8"
-              src={image ? image:"https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+              src={image ? image:"/user.png"}
               alt="user-profile"
+              width={32}
+              height={32}
             />
             <p>
               <span className="text-gray-400 text-14">Hi,</span>{' '}

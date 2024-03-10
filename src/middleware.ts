@@ -6,6 +6,8 @@ const {auth} = NextAuth(authConfig);
 
 export default auth((req:NextRequest) => {
   const {nextUrl} = req;
+  const cookes = req.cookies;
+  console.log(cookes);
   console.log("Middleware.....................", nextUrl.pathname)
   // const isLoggedIn = !!req.url;
   // console.log("Middleware.....................", isLoggedIn,req.url)

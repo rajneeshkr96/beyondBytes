@@ -260,7 +260,12 @@ const TextEditor = () => {
     
           <EditorContent editor={editor} />
           
-          <button onClick={()=>console.log(editor.getHTML())}>
+          <button onClick={()=>{
+            const data = JSON.stringify(editor.getHTML())
+            console.log(data)
+            // console.log(editor.getJSON())
+            // console.log(editor.getText())
+            }}>
             get code
           </button>
         </>
@@ -268,3 +273,6 @@ const TextEditor = () => {
 }
 
 export default TextEditor
+
+
+
