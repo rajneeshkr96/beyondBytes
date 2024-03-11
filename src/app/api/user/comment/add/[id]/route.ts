@@ -3,8 +3,11 @@ import { NextResponse } from "next/server";
 import { dataBasePrisma } from "@/databasePrisma";
 import { currentUser } from "@/lib/authDet";
 import { NextRequest } from "next/server";
+import { currentUserId } from "@/lib/authDet";
 export async function POST(req:NextRequest,context:{params:{id:string}}) {
-    const tempUserid = "65e6de30136474657e223231"
+
+    const userId:string = await currentUserId();
+    
     try {
         const user = await currentUser();
         console.log(user);
@@ -20,7 +23,7 @@ export async function POST(req:NextRequest,context:{params:{id:string}}) {
         const isCommentExist = await dataBasePrisma.comment.findFirst({
         where: {
             BlogId: blogId,
-            UserId: tempUserid,
+            UserId: userId,
         },
         });
         if (isCommentExist){
@@ -33,7 +36,7 @@ export async function POST(req:NextRequest,context:{params:{id:string}}) {
         data: {
             comment: comment,
             BlogId: blogId,
-            UserId: tempUserid,
+            UserId: userId,
         },
         });
         // update blog comment count
