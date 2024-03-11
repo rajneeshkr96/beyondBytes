@@ -54,12 +54,10 @@ const UserProfile: React.FC<UserProfileProps> = ({
   ];
 
   return (
-    <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
-      {oAuthSession == "authenticated" ? (
-        <>
+    <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96 shadow-md">
           <div className="flex justify-between items-center">
-            <p className="font-semibold text-lg dark:text-gray-200">
-              User Profile
+            <p className="font-semibold text-lg dark:text-gray-200 uppercase font-serif ">
+            😎
             </p>
             <Button
               icon={<MdOutlineCancel />}
@@ -67,18 +65,21 @@ const UserProfile: React.FC<UserProfileProps> = ({
               bgHoverColor="light-gray"
               size="2xl"
               borderRadius="50%"
-              // onClick={() => dispatch(handleClick('userProfile'))}
             />
           </div>
+      {oAuthSession == "authenticated" ? (
+        <>
           <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
             <Image
               className="rounded-full h-24 w-24"
               src={
                 image
                   ? image
-                  : "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  : "/user.png"
               }
               alt="user-profile"
+              width={200}
+              height={300}
             />
             <div>
               <p className="font-semibold text-xl dark:text-gray-200">
