@@ -4,7 +4,7 @@ import { dataBasePrisma } from "@/databasePrisma";
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const blog = await dataBasePrisma.Blog.findMany({
+    const blog = await dataBasePrisma.blog.findMany({
       where: {
         id: req.query.id as string,
       },
