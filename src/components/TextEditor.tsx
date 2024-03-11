@@ -1,7 +1,8 @@
 "use client"
-import React, { useCallback } from 'react'
+import React, { Dispatch, FC, SetStateAction, useCallback } from 'react'
 import {
     BubbleMenu,
+    Editor,
     EditorContent,
     FloatingMenu,
     useEditor,
@@ -28,8 +29,10 @@ import TableRow from '@tiptap/extension-table-row'
 
 
   // types 
-
-const TextEditor = () => {
+interface EditorProps {
+  setEditor:Dispatch<SetStateAction<Editor>>
+}
+const TextEditor:FC<EditorProps> = ({setEditor}) => {
     const editor = useEditor({
         extensions: [
           StarterKit,
@@ -61,6 +64,7 @@ const TextEditor = () => {
       if (!editor) {
         return null
       }
+      setEditor(editor)
       const setLink = () => {
         const previousUrl = editor.getAttributes('link').href
         const url = window.prompt('URL', previousUrl)

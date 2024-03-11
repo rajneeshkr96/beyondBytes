@@ -1,17 +1,14 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse,NextRequest } from "next/server";
 import { dataBasePrisma } from "@/databasePrisma";
 
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest) {
   try {
-    const blog = await dataBasePrisma.Blog.findMany({
-      where: {
-        id: req.query.id as string,
-      },
-    });
-    return res.json({ success: true, data: blog, message: "blog found" });
+    const blog = await dataBasePrisma.blog.findMany()
+    const length = blog.length
+    return NextResponse.json({ success: true,message:"fetched successfully",length:length, data: blog }, { status: 200 });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Error fetching blog" });
+    return NextResponse.json({ success: false,message:error }, { status: 500 });
   }
 }
