@@ -9,7 +9,7 @@ interface Blog {
   postData: string;
   metaTitle: string;
   metaDesc: string;
-  authorId: string;
+
 
 }
 
@@ -32,7 +32,8 @@ const genrateSlug = async (title:string) => {
 }
 export async function POST(request: NextRequest) {
   try {
-    const {title,image,content,postData,metaTitle,metaDesc,authorId}:Blog = await request.json();
+    const {title,image,content,postData,metaTitle,metaDesc}:Blog = await request.json();
+    const authorId = "65e6de30136474657e223231";
     const blog = await dataBasePrisma.blog.create({
       data: {
         title: title,

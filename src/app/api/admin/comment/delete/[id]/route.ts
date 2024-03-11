@@ -3,7 +3,7 @@ import { NextResponse,NextRequest } from "next/server";
 import { dataBasePrisma } from "@/databasePrisma";
 import { currentUser } from "@/lib/authDet";
 
-export default async function DELETE(req: NextRequest,context:{params:{id:string}}) {
+export async function DELETE(req: NextRequest,context:{params:{id:string}}) {
     try {
         const  id = context.params.id;
         if(id === undefined){
@@ -14,10 +14,10 @@ export default async function DELETE(req: NextRequest,context:{params:{id:string
                 id:id
             }
         })
-        return NextResponse.json({message:"comment deleted successfully"},{status:200})
+        return NextResponse.json({success: true,message:"comment deleted successfully"},{status:200})
         
     } catch (error) {
-        return NextResponse.json({message:"something went wrong"},{status:500})
+        return NextResponse.json({success: false,message:"something went wrong"},{status:500})
         
     }
     }

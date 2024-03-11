@@ -12,7 +12,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 enum UserRole {
   ADMIN
   USER
@@ -20,43 +19,44 @@ enum UserRole {
 }
 
 model Blog {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  slug      String      @unique
-  title     String      
-  image     String
-  content   String
-  postData  String
-  metaTitle String
-  metaDesc  String
-  author    User        @relation(fields: [authorId], references: [id])
-  authorId  String      @db.ObjectId
-  likesCount Int        @default(0)
-  commentsCount Int     @default(0)
-  viewsCount Int        @default(0)
-  comments  Comment[]
-  likes     Like[]
-  tags      String[]
-  bookmarks bookmarks[]
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  slug          String          @unique
+  title         String
+  image         String
+  content       String
+  postData      String
+  metaTitle     String
+  metaDesc      String
+  author        User            @relation(fields: [authorId], references: [id])
+  authorId      String          @db.ObjectId
+  likesCount    Int             @default(0)
+  commentsCount Int             @default(0)
+  viewsCount    Int             @default(0)
+  comments      Comment[]
+  likes         Like[]
+  tags          String[]
+  bookmarks     bookmarks[]
   notifications notifications[]
-  createdAt DateTime    @default(now()) @map("created_at")
-  updatedAt DateTime    @default(now()) @map("updated_at")
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @default(now()) @map("updated_at")
 }
 
 model User {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  name      String?
-  email     String?     @unique
-  image     String?
-  role      UserRole    @default(USER)
-  followers Follows[]   @relation("following")
-  following Follows[]   @relation("follower")
-  Blogs     Blog[]
-  comments  Comment[]
-  likes     Like[]
-  bookmarks bookmarks[]
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?         @unique
+  image         String?
+  role          UserRole        @default(USER)
+  followers     Follows[]       @relation("following")
+  following     Follows[]       @relation("follower")
+  Blogs         Blog[]
+  comments      Comment[]
+  likes         Like[]
+  tags          Tags[]
+  bookmarks     bookmarks[]
   notifications notifications[]
-  createdAt DateTime    @default(now()) @updatedAt @map("created_at")
-  updatedAt DateTime    @default(now()) @map("updated_at")
+  createdAt     DateTime        @default(now()) @updatedAt @map("created_at")
+  updatedAt     DateTime        @default(now()) @map("updated_at")
 }
 
 model Follows {
@@ -99,9 +99,19 @@ model bookmarks {
 }
 
 model notifications {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  natification String[]
+  Blog         Blog     @relation(fields: [BlogId], references: [id])
+  BlogId       String   @db.ObjectId
+  User         User     @relation(fields: [UserId], references: [id])
+  UserId       String   @db.ObjectId
+  createdAt    DateTime @default(now()) @map("created_at")
+}
+
+model Tags {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  Blog      Blog     @relation(fields: [BlogId], references: [id])
-  BlogId    String   @db.ObjectId
+  title     String
+  value     String[]
   User      User     @relation(fields: [UserId], references: [id])
   UserId    String   @db.ObjectId
   createdAt DateTime @default(now()) @map("created_at")
