@@ -71,8 +71,8 @@ const Navbar :React.FC<NavbarProps> = ({email,name,role,image,oAuthSession}) => 
               className="rounded-full w-8 h-8"
               src={image ? image:"/user.png"}
               alt="user-profile"
-              width={32}
-              height={32}
+              width={200}
+              height={300}
             />
             <p>
               <span className="text-gray-400 text-14">Hi,</span>{' '}
