@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 import { dataBasePrisma } from "@/databasePrisma";
 import { NextRequest } from "next/server";
 import { currentUser } from "@/lib/authDet";
+import { currentUserId } from "@/lib/authDet";
 export async function PUT(req:NextRequest,context:{params:{id:string}}) {
-    const tempUserid = "65e6de30136474657e223231"
+    
     try {
-        const user = await currentUser();
-        console.log(user);
+        const userId:string = await currentUserId();
         const commentId = context.params.id;
         const { comment } = await req.json();
         if (comment === undefined || commentId === undefined)
@@ -18,7 +18,7 @@ export async function PUT(req:NextRequest,context:{params:{id:string}}) {
         const isCommentExist = await dataBasePrisma.comment.findFirst({
         where: {
             id: commentId,
-            UserId: tempUserid,
+            UserId: userId,
         },
         });
         if (!isCommentExist){

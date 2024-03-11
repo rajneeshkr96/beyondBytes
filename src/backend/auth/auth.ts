@@ -9,6 +9,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  
   callbacks: {
     async session({ token, session }) {
       if (token.sub && session.user) {
@@ -20,6 +21,7 @@ export const {
       }
 
       if (session.user) {
+        session.user.userId = token.userId as string;
         session.user.name = token.name;
         session.user.email = token.email as string;
         session.user.image = token.picture as string;
@@ -49,12 +51,14 @@ export const {
           token.role = newUser.role;
           token.name = newUser.name;
           token.email = newUser.email;
+          token.userId = newUser.id;
 
           return token;
         }
         token.name = existingUser.name;
         token.email = existingUser.email;
         token.role = existingUser.role;
+        token.userId = existingUser.id;
         token.image = existingUser.image;
 
         return token;

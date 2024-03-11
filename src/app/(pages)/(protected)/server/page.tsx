@@ -6,7 +6,8 @@ const Page = async () => {
     const session = await auth();
     const data = {
         src : session?.user?.image as string ,
-        alt : session?.user?.name as string
+        alt : session?.user?.name as string,
+        id : session?.user?.userId as string
     }
     console.log(session)
   return (
@@ -17,6 +18,8 @@ const Page = async () => {
             
         }
         <Image  className='rounded-full'  src={data.src}  alt={data.alt} height={50} width={50} />
+        <br />
+        <h1>{data.id}</h1>
     </div>
   )
 }
