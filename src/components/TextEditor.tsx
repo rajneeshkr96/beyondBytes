@@ -5,16 +5,7 @@ import {
     Editor,
     EditorContent,
     FloatingMenu,
-    useEditor,
   } from '@tiptap/react'
-  import Link from '@tiptap/extension-link'
-  import StarterKit from '@tiptap/starter-kit'
-  import Image from '@tiptap/extension-image'
-  import Youtube from '@tiptap/extension-youtube'
-  import Table from '@tiptap/extension-table'
-import TableCell from '@tiptap/extension-table-cell'
-import TableHeader from '@tiptap/extension-table-header'
-import TableRow from '@tiptap/extension-table-row'
   import { FaBold,FaItalic,FaImage,FaHeading,FaYoutube,FaCode,FaListOl,FaListUl  } from "react-icons/fa";
   import { AiOutlineMergeCells } from "react-icons/ai";
   import { LuHeading4,LuHeading5,LuHeading6 } from "react-icons/lu";
@@ -30,41 +21,10 @@ import TableRow from '@tiptap/extension-table-row'
 
   // types 
 interface EditorProps {
-  setEditor:Dispatch<SetStateAction<Editor>>
+  editor:Editor;
 }
-const TextEditor:FC<EditorProps> = ({setEditor}) => {
-    const editor = useEditor({
-        extensions: [
-          StarterKit,
-          Image,
-          Link.configure({
-            openOnClick: false,
-            autolink: true,
-          }),
-          Youtube.configure({
-            controls: false,
-          }),
-          Table.configure({
-            resizable: true,
-          }),
-          TableRow,
-          TableHeader,
-          TableCell,
-        ],
-        content: `
-          <p>
-            Try to select <em>this text</em> to see what we call the bubble menu.
-          </p>
-          <p>
-            Neat, isn’t it? Add an empty paragraph to see the floating menu.
-          </p>
-        `,
-      })
+const TextEditor:FC<EditorProps> = ({editor}) => {
 
-      if (!editor) {
-        return null
-      }
-      setEditor(editor)
       const setLink = () => {
         const previousUrl = editor.getAttributes('link').href
         const url = window.prompt('URL', previousUrl)

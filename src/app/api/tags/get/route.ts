@@ -2,11 +2,10 @@
 import { NextResponse } from "next/server";
 import { dataBasePrisma } from "@/databasePrisma";
 import { NextRequest } from "next/server";
-import { currentUser } from "@/lib/authDet";
+
 export async function GET(req:NextRequest) {
     try {
-        const user = await currentUser();
-   
+
         const tag = await dataBasePrisma.tags.findMany();
         return NextResponse.json(
         { success: true, message: "all tags successfully", data: tag },

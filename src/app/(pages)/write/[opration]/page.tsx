@@ -1,59 +1,115 @@
 "use client"
 import TextEditor from '@/components/TextEditor'
-import Image from 'next/image'
-import { useParams } from 'next/navigation'
-import React, { useState } from 'react'
-import Select, { ValueType, OptionTypeBase } from 'react-select';
-import makeAnimated from 'react-select/animated';
-import { TiImage } from "react-icons/ti";
-const animatedComponents = makeAnimated();
+import {
 
+  useEditor,
+} from '@tiptap/react'
+import Link from '@tiptap/extension-link'
+import StarterKit from '@tiptap/starter-kit'
+import Image  from '@tiptap/extension-image'
+import Youtube from '@tiptap/extension-youtube'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
+import { useParams } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import axios from 'axios';
+import SubmitButton from '@/components/layoutComponents/Button/SubmitButton'
+import UploadImage from '@/components/uploadImageWithPre/UploadImage';
+import Modal from '@/components/Modal/Modal'
+import { UploadButton } from '@/utilis'
+
+const animatedComponents = makeAnimated();
+interface Option {
+  value: string;
+  label: string;
+}
 const Page = () => {
   const [method, setMethod] = useState("firebase")
+  const [dialog,setDialog] = useState();
   const [preImage, setPreImage] = useState("/img1.jpg")
-  const [selectedTags, setSelectedTags] = useState<ValueType<OptionTypeBase>>([])
-  const [tags, setTags] = useState([{ value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }])
-
-  const handleChange = (selectedOptions: ValueType<OptionTypeBase>) => {
-    setSelectedTags(selectedOptions);
-  };
-
+  const [selectedTags, setSelectedTags] = useState<Option[]>([]);
+  const [tags, setTags] = useState([]);
 
   const param = useParams();
 
+  useEffect(() => {
+    getData();
+
+  }, []);
+  const getData = async () => {
+    const { data } = await axios.get("/api/tags/get");
+    let tag = data.data.map((val: {
+                    UserId: string
+                    createdAt: Date
+                    id: string
+                    title: string
+                    value: string[]
+                    }) => {
+                      return val.value;
+                    })
+    tag = tag.flat(1).map((val:string) => {
+        return {value:val,label:val};
+      })
+    setTags(tag);
+  };
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Image,
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+      }),
+      Youtube.configure({
+        controls: false,
+      }),
+      Table.configure({
+        resizable: true,
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
+    ],
+    content: `
+      <p>
+      Try to select <em>this text</em> to see what we call the bubble menu.
+      </p>
+      <p>
+        Neat, isn’t it? Add an empty paragraph to see the floating menu.
+      </p>
+    `,
+  })
+  
+  if (!editor) {
+    return null
+  }
+
+  const handleChange = (options: readonly Option[] | null) => {
+    setSelectedTags(options ? Array.from(options) : []);
+  };
 
   return (
     <div className='min-h-screen'>
 
       {/* image uploading ................ */}
-      <div className=" w-full mx-auto sm:max-w-7xl my-2">
-        <div className='flex justify-center items-center gap-4 h-24 '>
-          {preImage && <Image src={preImage} alt='hero images' width={300} height={400} className='object-fill h-full w-auto' />}
-        </div>
-        {/* select method  */}
-        <div className="flex flex-col items-center justify-center w-full h-auto my-6 bg-white sm:w-full sm:rounded-lg sm:shadow-xl">
-          <div className="mt-10 mb-10 text-center">
-            <h2 className="text-2xl font-semibold mb-2">Upload your cover Image</h2>
-            <p className="text-xs text-gray-500">
-              File should be of format .jpg, .jpeg, .png or .svg
-            </p>
-            <section
-              className="relative w-[90%] h-32 mb-10 rounded-lg shadow-inner "
-            >
-              <div
-                className="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer"
-              >
-                <p className="z-10 text-xs font-light text-center text-gray-500">
-                  Drag &amp; Drop your files here
-                </p>
-                <TiImage width={'12px'} />
-              </div>
-            </section>
-          </div>
-        </div>
-      </div>
+      <Modal setDialog={setDialog} btnClass='w-full' button={ <UploadImage preImage={preImage}/>}>
+      <UploadButton
+        endpoint="imageUploader"
+        onClientUploadComplete={(res) => {
+          // Do something with the response
+          console.log("Files: ", res);
+          alert("Upload Completed");
+        }}
+        onUploadError={(error: Error) => {
+          // Do something with the error.
+          alert(`ERROR! ${error.message}`);
+        }}
+      />
+      </Modal>
 
       <div className='w-11/12 mx-auto mt-16'>
         {/* title ..................  */}
@@ -72,9 +128,10 @@ const Page = () => {
 
         </div>
 
-        <TextEditor setEditor />
+        <TextEditor editor={editor} /> 
 
       </div>
+      <SubmitButton value="test" />
     </div>
   )
 }

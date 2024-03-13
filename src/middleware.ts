@@ -2,12 +2,13 @@ import authConfig from "@/backend/auth/auth.config"
 import NextAuth from "next-auth"
 import { NextRequest, NextResponse } from "next/server";
 const {auth} = NextAuth(authConfig);
+
 // export {auth as Middleware} from "@/backend/auth/auth"
 
 export default auth((req:NextRequest) => {
   const {nextUrl} = req;
-  const cookes = req.cookies;
-  console.log(cookes);
+
+
   console.log("Middleware.....................", nextUrl.pathname)
   // const isLoggedIn = !!req.url;
   // console.log("Middleware.....................", isLoggedIn,req.url)
