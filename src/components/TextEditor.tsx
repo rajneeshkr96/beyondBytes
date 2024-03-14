@@ -222,7 +222,7 @@ const TextEditor:FC<EditorProps> = ({editor}) => {
 
           </FloatingMenu>}
     
-          <EditorContent editor={editor} />
+          <EditorContent  onChange={()=>console.log("object")} editor={editor} />
           
           <button onClick={()=>{
             const data = JSON.stringify(editor.getHTML())

@@ -2,7 +2,7 @@
 import React, { Dispatch, FC, MutableRefObject, useEffect } from "react";
 import { useRef } from "react";
 interface ModelProps {
-  setDialog?:Dispatch<MutableRefObject<HTMLDialogElement> | null>; 
+  setDialog?:Dispatch<React.SetStateAction<React.RefObject<HTMLDialogElement> | null>>; 
   btnClass?:string;
   button:React.ReactNode;
   children:React.ReactNode;
