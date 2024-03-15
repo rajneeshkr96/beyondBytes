@@ -2,31 +2,26 @@
 
 import { dataBasePrisma } from "@/databasePrisma";
 import { NextRequest,NextResponse } from "next/server";
-import { currentRole } from "@/lib/authDet";
+import { currentRole, currentUserId } from "@/lib/authDet";
+import { BlogPops } from "../create/route";
 
-interface Blog {
+interface Blog extends BlogPops{
   id: string;
-  title: string;
-  image: string;
-  content: string;
-  postData: string;
-  metaTitle: string;
-  metaDesc: string;
-  authorId: string;
 }
 
 export async function PUT(request: NextRequest) {
   try {
-    const {id,title,image,content,postData,metaTitle,metaDesc,authorId}:Blog = await request.json();
+    const {id,title,image,content,metaTitle,metaDesc}:Blog = await request.json();
+    const authorId = await currentUserId() || "65e6de30136474657e223231";
     const blog = await dataBasePrisma.blog.update({
       where: {
         id: id,
+        authorId: authorId
       },
       data: {
         title: title,
         image: image,
         content: content,
-        postData: postData,
         metaTitle: metaTitle,
         metaDesc: metaDesc,
       },

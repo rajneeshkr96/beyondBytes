@@ -224,19 +224,10 @@ const TextEditor:FC<EditorProps> = ({editor}) => {
     
           <EditorContent  onChange={()=>console.log("object")} editor={editor} />
           
-          <button onClick={()=>{
-            const data = JSON.stringify(editor.getHTML())
-            console.log(data)
-            // console.log(editor.getJSON())
-            // console.log(editor.getText())
-            }}>
-            get code
-          </button>
         </>
       )
 }
 
 export default TextEditor
-
 
 

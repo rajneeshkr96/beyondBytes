@@ -1,16 +1,14 @@
 import { dataBasePrisma } from "@/databasePrisma";
 import { currentRole } from "@/lib/authDet";
 import { NextRequest,NextResponse } from "next/server";
+import { currentUserId } from "@/lib/authDet";
 
-interface Blog {
+export interface BlogPops {
   title: string;
-  image: string;
+  image: object;
   content: string;
-  postData: string;
   metaTitle: string;
   metaDesc: string;
-
-
 }
 
 const genrateSlug = async (title:string) => {
@@ -32,14 +30,14 @@ const genrateSlug = async (title:string) => {
 }
 export async function POST(request: NextRequest) {
   try {
-    const {title,image,content,postData,metaTitle,metaDesc}:Blog = await request.json();
-    const authorId = "65e6de30136474657e223231";
+    const {title,image,content,metaTitle,metaDesc}:BlogPops = await request.json();
+    // todo remove id sting 
+    const authorId = await currentUserId() || "65e6de30136474657e223231";
     const blog = await dataBasePrisma.blog.create({
       data: {
         title: title,
         image: image,
         content: content,
-        postData: postData,
         metaTitle: metaTitle,
         metaDesc: metaDesc,
         authorId: authorId,

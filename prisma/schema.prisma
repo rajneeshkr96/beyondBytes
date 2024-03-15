@@ -22,9 +22,8 @@ model Blog {
   id            String          @id @default(auto()) @map("_id") @db.ObjectId
   slug          String          @unique
   title         String
-  image         String
+  image         Json
   content       String
-  postData      String
   metaTitle     String
   metaDesc      String
   author        User            @relation(fields: [authorId], references: [id])

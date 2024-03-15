@@ -39,28 +39,28 @@ export async function POST(
         { status: 400 }
       );
     }
-    // check user already follow the writer or not
-    const isAlreadyFollow = await dataBasePrisma.follows.findFirst({
-      where: {
-        followerId: userId,
-        followingId: writerId,
-      },
-    });
-    if (isAlreadyFollow !== null) {
-      return NextResponse.json(
-        { success: false, message: "you already follow this writer" },
-        { status: 400 }
-      );
-    }
-    //follow the writer
-    const follow = await dataBasePrisma.follows.create({
-      data: {
-        followerId: userId,
-        followingId: writerId,
-      },
-    });
+    // // check user already follow the writer or not
+    // const isAlreadyFollow = await dataBasePrisma.follows.findFirst({
+    //   where: {
+    //     followerId: userId,
+    //     followingId: writerId,
+    //   },
+    // });
+    // if (isAlreadyFollow !== null) {
+    //   return NextResponse.json(
+    //     { success: false, message: "you already follow this writer" },
+    //     { status: 400 }
+    //   );
+    // }
+    // //follow the writer
+    // const follow = await dataBasePrisma.follows.create({
+    //   data: {
+    //     followerId: userId,
+    //     followingId: writerId,
+    //   },
+    // });
     return NextResponse.json(
-      { success: true, message: "followed successfully", data: follow },
+      { success: true, message: "followed successfully", data: "follow" },
       { status: 200 }
     );
   } catch (error) {

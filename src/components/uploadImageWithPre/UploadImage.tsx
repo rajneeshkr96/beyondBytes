@@ -1,11 +1,12 @@
 import React from 'react'
 import { TiImage } from "react-icons/ti";
 import Image from 'next/image'
-const UploadImage = ({preImage,...props}:{preImage:string}) => {
+import { PreImageProps } from '@/app/(pages)/write/[operation]/page';
+const UploadImage = ({preImage,...props}:{preImage:PreImageProps}) => {
   return (
     <div className=" w-full mx-auto sm:max-w-7xl my-2">
     <div className='flex justify-center items-center gap-4 h-24 '>
-      {preImage && <Image src={preImage} alt='hero images' width={300} height={400} className='object-fill h-full w-auto' />}
+      {preImage.src && <Image src={preImage.src} alt={preImage.alt} width={300} height={400} className='object-fill h-full w-auto' />}
     </div>
     {/* select method  */}
     <div className="flex flex-col items-center justify-center w-full h-auto my-6 bg-white sm:w-full sm:rounded-lg sm:shadow-xl">
