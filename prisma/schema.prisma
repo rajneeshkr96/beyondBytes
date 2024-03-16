@@ -36,6 +36,7 @@ model Blog {
   tags          String[]
   bookmarks     bookmarks[]
   notifications notifications[]
+  readTime      String
   createdAt     DateTime        @default(now()) @map("created_at")
   updatedAt     DateTime        @default(now()) @map("updated_at")
 }

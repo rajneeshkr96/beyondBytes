@@ -200,6 +200,10 @@ html::-webkit-scrollbar-thumb {
   color: #36c;
   cursor: pointer;
 }
+.tiptap img {
+  width: 60%;
+  margin: 0 auto !important;
+}
 
 .tiptap pre {
   background: #0d0d0d;

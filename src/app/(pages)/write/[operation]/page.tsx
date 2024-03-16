@@ -20,7 +20,7 @@ import UploadImage from '@/components/uploadImageWithPre/UploadImage';
 import Modal from '@/components/Modal/Modal'
 import { UploadButton } from '@/utilis'
 import { useDebouncedCallback } from 'use-debounce';
-import { errorToastHandler } from '@/components/errorTostHandler'
+import { ErrorResponse, errorToastHandler } from '@/components/errorTostHandler'
 import { useRouter } from 'next/navigation'
 const animatedComponents = makeAnimated();
 interface Option {
@@ -34,6 +34,7 @@ export interface PreImageProps {
 
 const Page = () => {
   const router = useRouter();
+  const [loading,setLoading] = useState(false);
   const heroImageRef = useRef<HTMLInputElement>(null);
   const [title,setTitle] = useState<string >("");
   const [metaTitle,setMetaTitle] = useState<string >("");
@@ -49,7 +50,7 @@ const Page = () => {
     getData();
     if(param.operation === "new"){
         setTitle(localStorage.getItem("title") ?? "")
-        setPreImage({src: localStorage.getItem("heroImage") ?? "",alt: localStorage.getItem("heroImage") ?? ""})
+        setPreImage({src: localStorage.getItem("heroImage") ?? "",alt: localStorage.getItem("alt") ?? ""})
         setMetaTitle(localStorage.getItem("metaTitle") ?? "");
         setMetaDes(localStorage.getItem("metaDes") ?? ""); 
     }
@@ -119,22 +120,28 @@ const Page = () => {
 
   const publicBlog = async () => {
     try {
-
-      if(!title || !preImage.src || !preImage.alt || !metaDes || !metaTitle || selectedTags.length > 1){
+      setLoading(true);
+      if(!title || !preImage.src || !preImage.alt || !metaDes || !metaTitle || selectedTags.length < 1){
         toast.error("Please fill all fields....");
+        setLoading(false);
+        return;
       }
+      const tags = selectedTags.map(tag =>tag.value);
       const res = await axios.post("/api/blog/writer/create", {
         title: title,
         image: preImage,
         content: JSON.stringify(editor.getHTML()),
         metaTitle: metaTitle,
-        metaDesc: metaDes
+        metaDesc: metaDes,
+        tags: tags
       })
       if(res.data.success){
         toast.success("published.....")
         // router.push()
       }
-    } catch (error) {
+      setLoading(false);
+    } catch (error:ErrorResponse | any) {
+      setLoading(false);
       errorToastHandler(error);
     }
   }
@@ -150,7 +157,7 @@ const Page = () => {
         <input onChange={(e)=>{
             setPreImage({src:preImage.src,alt:e.target.value})
             debounced({key:"alt",value:e.target.value});
-            }} value={preImage.alt} type="text" name="" id="" placeholder='Meta title....' className="w-full px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" />
+            }} value={preImage.alt} type="text" name="" id="" placeholder='image title....' className="w-full px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" />
         {/* select method  */}
         <div className='flex justify-center gap-x-4 mx-auto my-6'>
           <label>
@@ -239,7 +246,7 @@ const Page = () => {
         <TextEditor editor={editor} /> 
 
       </div>
-      <SubmitButton value="Public" className='bg-green-700 text-blue-50 px-4 py-2 rounded-full block mx-auto mt-4 hover:bg-green-600 font-bold ' onClick={()=>publicBlog()} />
+      <SubmitButton loading={loading} value="Public" className='bg-green-700 text-blue-50 px-4 py-2 rounded-full block mx-auto mt-4 hover:bg-green-600 font-bold ' onClick={()=>publicBlog()} />
     </div>
   )
 }

@@ -1,24 +1,27 @@
 import { toast } from "react-toastify";
-import { AxiosError } from 'axios';
 
-interface DataMessageErrorObject {
-  message: string;
+export interface ErrorResponse {
+  response?: {
+    data?: {
+      message?: string;
+      errors?: { msg: string }[];
+    };
+  };
+  message?: string;
 }
 
-interface DataErrorsErrorObject {
-  errors: { msg: string }[];
-}
-
-export const errorToastHandler = (error: AxiosError | any) => {
+export const errorToastHandler = (error: ErrorResponse): void => {
   const message =
-    (error.response && error.response.data as DataMessageErrorObject)?.message ||
-    (error.response && error.response.data as DataErrorsErrorObject)?.errors ||
+    (error.response &&
+      error.response.data &&
+      error.response.data.message) ||
+    (error.response && error.response.data && error.response.data.errors) ||
     error.message;
 
-  if (typeof message === 'string') {
+  if (typeof message === "string") {
     toast.error(message);
-  } else {
-    (message as { msg: string }[]).forEach((el) => {
+  } else if (Array.isArray(message)) {
+    message.forEach((el) => {
       toast.error(el.msg);
     });
   }

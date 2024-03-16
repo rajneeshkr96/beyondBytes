@@ -2,10 +2,11 @@ import { dataBasePrisma } from "@/databasePrisma";
 import { currentRole } from "@/lib/authDet";
 import { NextRequest,NextResponse } from "next/server";
 import { currentUserId } from "@/lib/authDet";
-
+import readingTime from 'reading-time';
 export interface BlogPops {
   title: string;
   image: object;
+  tags: string[];
   content: string;
   metaTitle: string;
   metaDesc: string;
@@ -30,17 +31,20 @@ const genrateSlug = async (title:string) => {
 }
 export async function POST(request: NextRequest) {
   try {
-    const {title,image,content,metaTitle,metaDesc}:BlogPops = await request.json();
+    const {title,tags,image,content,metaTitle,metaDesc}:BlogPops = await request.json();
     // todo remove id sting 
     const authorId = await currentUserId() || "65e6de30136474657e223231";
+    const readTime = readingTime(content).text;
     const blog = await dataBasePrisma.blog.create({
       data: {
         title: title,
+        tags: tags,
         image: image,
         content: content,
         metaTitle: metaTitle,
         metaDesc: metaDesc,
         authorId: authorId,
+        readTime: readTime,
         slug: await genrateSlug(title),
       },
     });
