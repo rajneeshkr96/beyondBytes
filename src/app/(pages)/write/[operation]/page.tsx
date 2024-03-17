@@ -118,7 +118,10 @@ const Page = () => {
     debounced({key:"content",value:editor.getHTML()});
   });
 
+
   const publicBlog = async () => {
+
+
     try {
       setLoading(true);
       if(!title || !preImage.src || !preImage.alt || !metaDes || !metaTitle || selectedTags.length < 1){
