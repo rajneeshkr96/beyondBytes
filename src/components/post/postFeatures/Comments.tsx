@@ -3,11 +3,44 @@ import ActionBtn from '@/components/layoutComponents/Button/ActionBtn';
 import SubmitButton from '@/components/layoutComponents/Button/SubmitButton';
 import { IoMdClose } from "react-icons/io";
 import Image from 'next/image';
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { errorToastHandler } from '@/components/errorTostHandler';
 
 
-export function Comment({visible,close}:{visible:boolean,close:Dispatch<SetStateAction<boolean>>}) {
+export function Comment({id,visible,close,isAuth,author}:{
+  id:string
+  visible:boolean,
+  close:Dispatch<SetStateAction<boolean>>,
+  isAuth:string,
+  author?:{id:string,name:string,email:string,image:string,role:string}
 
+}) {
+  const [comment,setComment] = useState("");
+  const addComment = async () => {
+    try {
+      if(!comment){
+        toast.error("Please enter a comment");
+        return;
+      }
+      if (isAuth === "authenticated") {
+        const res = await axios.post(`/api/user/comment/add/${id}`,{comment})
+        if(res.data.success){
+          toast.success("comment added successfully");
+          setComment("");
+          close(false);
+        }
+      } else {
+        toast.error("Please Login first")
+      }
+      
+      
+    } catch (error:any) {
+      errorToastHandler(error);
+    }
+  }
+  
   return (
     <section className={`fixed w-[25vw] px-4 py-6 z-20 right-0 top-0  ease-in duration-75 bg-white min-h-screen ${visible?"translate-x-[0] visible":"translate-x-[25vw] "}`}>
       <IoMdClose onClick={()=>close(!visible)} className='absolute text-black right-2 top-2 text-2xl cursor-pointer' />
@@ -18,8 +51,8 @@ export function Comment({visible,close}:{visible:boolean,close:Dispatch<SetState
             <Image src={"/img3.jpg"} alt={"kkk"} width={200} height={300} className='w-12 h-12 rounded-full' />
             <span className='uppercase font-bold mt-3 text-gray-600'>raju bhai....</span>
         </span>
-        <textarea name="comment" id="" placeholder='Write Your Comment Here........' className='w-full outline-none px-2 text-black my-2' cols={30}rows={6}></textarea>
-        <SubmitButton className='bg-[#333] text-white px-4 py-2 rounded-lg w-auto mx-auto block' value="comment..."/>
+        <textarea onChange={(e)=>setComment(e.target.value)} value={comment} name="comment" id="" placeholder='Write Your Comment Here........' className='w-full outline-none px-2 text-black my-2' cols={30}rows={6}></textarea>
+        <SubmitButton onClick={addComment} className='bg-[#333] text-white px-4 py-2 rounded-lg w-auto mx-auto block' value="comment..."/>
       </div>
       {/* comments  */}
       <div>

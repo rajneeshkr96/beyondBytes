@@ -6,8 +6,11 @@ import { MdBookmarkAdd, MdOutlineBookmark } from "react-icons/md";
 import {  Comment } from './Comments';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+import { errorToastHandler } from '@/components/errorTostHandler';
 export interface PostFeaturesProps{
     font: string,
+    id: string,
     tags: string[],
     bookmark?: boolean,
     likesCount: number,
@@ -15,30 +18,50 @@ export interface PostFeaturesProps{
     author?: {id:string; name:string, email:string,image:string,role:string}
     
 }
-export const PostFeatures: FC<PostFeaturesProps> = ({ font,tags,bookmark=false,likesCount,meLike=false,author}) => {
+export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,bookmark=false,likesCount,meLike=false,author}) => {
     const session  = useSession()
     const [viewCmt, setViewCmt] = useState(false);
     const [likesCounts,setLikeCounts] = useState(likesCount);
     const [meLikes,setMeLikes] = useState(meLike);
     const [meBookmark,setMeBookmark] = useState(bookmark);
 
-    const onLikesClick = () => {
+    const onLikesClick = async () => {
         if(session.status === 'authenticated'){
-            if(meLikes){
-                setMeLikes(false);
-                setLikeCounts(likesCounts-1);
-            }else{
-                setMeLikes(true);
-                setLikeCounts(likesCounts+1);
+            try {
+                if(meLikes){
+                    setMeLikes(false);
+                    setLikeCounts(likesCounts-1);
+                }else{
+                    setMeLikes(true);
+                    setLikeCounts(likesCounts+1);
+                }
+                const res = await axios.post(`/api/user/like/${id}`)
+                console.log(res.data);
+                if(res.data.success){
+                    toast.success(res.data.message)
+                }
+                
+            } catch (error:any) {
+                errorToastHandler(error);
             }
         }else{
             toast.error("Please login first");
         }
       
     }
-    const onBookmarkClick = () => {
+    const onBookmarkClick = async () => {
         if(session.status === 'authenticated'){
           setMeBookmark(!meBookmark);
+          try {
+              const res = await axios.post(`/api/user/bookmark/add/${id}`)
+              console.log(res.data);
+              if(res.data.success){
+                  toast.success(res.data.message)
+              }
+            
+          } catch (error:any) {
+            errorToastHandler(error);
+          }
         }else{
             toast.error("Please login first");
         }
@@ -72,7 +95,7 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ font,tags,bookmark=false,l
                 </span>
             </div>
 
-            <Comment visible={viewCmt} close={setViewCmt} />
+            <Comment id={id} author={author} isAuth={session.status} visible={viewCmt} close={setViewCmt} />
 
         </section>
     );

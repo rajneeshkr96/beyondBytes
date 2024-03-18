@@ -21,7 +21,7 @@ const Page = async (context: { params: { slug: string } }) => {
     <article>
       <Header title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime} author={blog.author} font={ogg.className}/>
       <PostBody image={blog.image} content={blog.content} font={ogg.className}/>
-      <PostFeatures font={ogg.className} likesCount={blog.likesCount} tags={blog.tags}/>
+      <PostFeatures font={ogg.className} likesCount={blog.likesCount} tags={blog.tags} id={blog.id}/>
     </article>
   )
 }

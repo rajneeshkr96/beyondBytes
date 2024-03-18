@@ -4,7 +4,7 @@ import { currentUserId } from "@/lib/authDet";
 
 export async function POST (req: NextRequest, context: { params: { id: string } }) {
     try {
-        const userId = await currentUserId();
+        const userId = await currentUserId() || "65e6de30136474657e223231";
         console.log(userId);
         const  blogId  = context.params.id;
         const isBookMarked = await dataBasePrisma.bookmarks.findFirst({
@@ -19,7 +19,7 @@ export async function POST (req: NextRequest, context: { params: { id: string } 
                     id: isBookMarked.id
                 }
             });
-            return NextResponse.json({ message: "blog already bookmarked" }, { status: 400 });
+            return NextResponse.json({success:true, message: "bookmarked removed...." }, { status: 200 });
         }
         
         const bookmark = await dataBasePrisma.bookmarks.create({
@@ -29,9 +29,9 @@ export async function POST (req: NextRequest, context: { params: { id: string } 
             }
         });
         
-        return NextResponse.json({ message: "blog bookmarked successfully", data: bookmark }, { status: 200 });
+        return NextResponse.json({success:true, message: "blog bookmarked successfully", data: bookmark }, { status: 200 });
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ message: "something went wrong" }, { status: 500 });
+        return NextResponse.json({success:false, message: "something went wrong" }, { status: 500 });
     }
 }

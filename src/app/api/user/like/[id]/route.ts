@@ -2,15 +2,16 @@
 
 import { dataBasePrisma } from "@/databasePrisma";
 import { NextResponse,NextRequest } from "next/server";
-import { currentUser } from "@/lib/authDet";
+import { currentUserId } from "@/lib/authDet";
 
 export async function POST(req: NextRequest,context:{params:{id:string}}) {
-    const tempUserid = "65e6de30136474657e223231"
+    // todo remove temp id 
+    const tempUserid = await currentUserId() || "65e6de30136474657e223231"
     try {
         const  blogId = context.params.id;
         
         if(blogId === undefined){
-            return NextResponse.json({message:"blogId is required"},{status:400})
+            return NextResponse.json({success:false,message:"blogId is required"},{status:400})
         }
           // if user allready like the blog do unlike and decrement the like count
           const isLikeExist = await dataBasePrisma.like.findFirst({
@@ -22,6 +23,7 @@ export async function POST(req: NextRequest,context:{params:{id:string}}) {
         if(isLikeExist){
             await dataBasePrisma.like.delete({
                 where:{
+                    BlogId:blogId,
                     id:isLikeExist.id
                 }
             })
@@ -35,7 +37,7 @@ export async function POST(req: NextRequest,context:{params:{id:string}}) {
                     }
                 }
             })
-            return NextResponse.json({message:"unliked successfully"},{status:200})
+            return NextResponse.json({success:true,message:"unliked successfully"},{status:200})
         }
         const like = await dataBasePrisma.like.create({
             data:{
@@ -56,8 +58,8 @@ export async function POST(req: NextRequest,context:{params:{id:string}}) {
       
         // updata blog like count
        
-        return NextResponse.json({message:"liked successfully"},{status:200})
+        return NextResponse.json({success:true, message:"liked successfully"},{status:200})
     } catch (error) {
-        return NextResponse.json({message:"something went wrong"},{status:500})
+        return NextResponse.json({success:false,message:"something went wrong"},{status:500})
     }
 }
