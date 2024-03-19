@@ -40,7 +40,7 @@ const TagSlide = ()=> {
   ]
     
   return (
-    <div className='px-16 py-6 flex flex-wrap justify-center items-center gap-x-6'>
+    <div className='px-16 py-6 flex flex-wrap justify-center items-center gap-x-6 gap-y-4 max-sm:flex-nowrap max-sm:overflow-scroll'>
       {tags.map(tag =>
       <Link
       key={tag.id}

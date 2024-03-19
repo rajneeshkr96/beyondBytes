@@ -16,5 +16,6 @@ export default {
           
         }),
       ],
+      
 
 } satisfies NextAuthConfig

@@ -17,6 +17,11 @@ export async function GET(req:NextRequest,context:{params:{id:string}}) {
         where: {
             BlogId: blogId,
         },
+        select:{
+            id:true,
+            comment:true,
+            User: true
+        }
         });
         return NextResponse.json(
         { success: true, message: "comments fetched successfully", data: comments },

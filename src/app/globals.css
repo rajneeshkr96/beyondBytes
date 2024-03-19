@@ -307,6 +307,12 @@ html::-webkit-scrollbar-thumb {
   cursor: col-resize;
 }
 
+/* action btn  */
+
+.action-btn {
+  top: calc(-90% + 3.5rem);
+}
+
 
 
 

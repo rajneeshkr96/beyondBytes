@@ -3,7 +3,7 @@ import React from "react";
 const loading = () => {
   return (
     <div>
-      <div className="fixed flex   justify-center   items-center z-50 h-screen w-screen top-0 right-0  ">
+      <div className="fixed flex   justify-center   items-center z-50 h-screen w-screen top-0 right-0  bg-white">
         <div className=" w-28 fixed z-50 duration-[1.5s] delay-100 animate-spin   ">
           <svg
             viewBox="0 0 99 100"

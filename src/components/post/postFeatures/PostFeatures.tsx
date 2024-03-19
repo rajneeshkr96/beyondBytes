@@ -12,13 +12,14 @@ export interface PostFeaturesProps{
     font: string,
     id: string,
     tags: string[],
+    commentCount: number
     bookmark?: boolean,
     likesCount: number,
     meLike?: boolean,
     author?: {id:string; name:string, email:string,image:string,role:string}
     
 }
-export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,bookmark=false,likesCount,meLike=false,author}) => {
+export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,commentCount,bookmark=false,likesCount,meLike=false,author}) => {
     const session  = useSession()
     const [viewCmt, setViewCmt] = useState(false);
     const [likesCounts,setLikeCounts] = useState(likesCount);
@@ -95,7 +96,7 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,bookmark=fals
                 </span>
             </div>
 
-            <Comment id={id} author={author} isAuth={session.status} visible={viewCmt} close={setViewCmt} />
+            <Comment id={id} commentCount={commentCount} author={author} isAuth={session.status} visible={viewCmt} close={setViewCmt} />
 
         </section>
     );

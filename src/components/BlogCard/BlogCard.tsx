@@ -1,10 +1,22 @@
 import Image from 'next/image';
 import React, { FC } from 'react'
-import Tooltip from '../layoutComponents/Tooltip';
 import ActionBtn from '../layoutComponents/Button/ActionBtn';
 import { IoIosHeart } from "react-icons/io";
 import { MdBookmarkAdd,MdOutlineBookmark  } from "react-icons/md";
 import Link from 'next/link';
+
+const ActionOptions = ({id}:{id:string}) => {
+  const btnClass = 'w-full px-4 py-2 capitalize'
+  return (
+    <>
+      <button className={btnClass}>follow author</button>
+      <button className={btnClass}>mute author</button>
+      <button className={`${btnClass} text-red-400`}>Report......</button>
+    </>
+  )
+}
+
+
 export interface BlogcardProps{
     id: string;
     tags?:Array<string>;
@@ -52,9 +64,9 @@ const BlogCard:FC<BlogcardProps> = ({id,tags=["blog"],bookmark=false,likesCount,
           <h5 className="uppercase">{author.name}</h5>
           <p className="text-[#b0b0ba] text-xs">{formatDate(createdAt)}/{tags[0]}</p>
         </div>
-        <Tooltip content='more'>
-          <ActionBtn className='w-8 h-8 justify-self-end'/>
-        </Tooltip>
+          <ActionBtn className='w-8 h-8 justify-self-end'>
+            <ActionOptions id={id}/>
+          </ActionBtn>
       </div>
       {/* card image  */}
       <Link

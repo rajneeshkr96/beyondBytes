@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-
+import { TbTriangleFilled } from "react-icons/tb";
 interface ActionBtnProps {
   className?: string;
   actionIcon?: string | React.JSX.Element;
@@ -41,12 +41,12 @@ const ActionBtn: React.FC<ActionBtnProps> = ({ className, actionIcon, children }
         {actionIcon ? actionIcon : <HiOutlineDotsHorizontal className='w-[90%] h-[90%]' />}
       </span>
       <div
-        className={`absolute -bottom-8 right-1 bg-black text-white duration-150 ease-in-out py-2 px-4 rounded-lg ${
+        className={`absolute action-btn right-3 bg-black text-white duration-150 ease-in-out   rounded-lg rounded-r-none min-w-36 ${
           visible ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
         {children}
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore accusamus, provident officia sit nisi unde, necessitatibus dolor quis dicta in ad ipsum. Amet, dicta? Possimus in consectetur incidunt nostrum. Cupiditate.
+        <TbTriangleFilled className='absolute -top-3 right-[1px] text-black' />
       </div>
     </div>
   );
