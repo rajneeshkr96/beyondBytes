@@ -19,10 +19,10 @@ export interface PostFeaturesProps{
     bookmark?: boolean,
     likesCount: number,
     meLike?: boolean,
-    author?: {id:string; name:string, email:string,image:string,role:string}
-    
+    slug:string,
+    baseurl:string 
 }
-export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,commentCount,bookmark=false,likesCount,meLike=false,author}) => {
+export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,slug,baseurl,commentCount,bookmark=false,likesCount,meLike=false}) => {
     const session  = useSession()
     const [viewCmt, setViewCmt] = useState(false);
     const [likesCounts,setLikeCounts] = useState(likesCount);
@@ -100,8 +100,8 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,commentCount,
                 </span>
                 <span className='flex gap-x-2 items-center'>
                     
-                    <ActionBtn className='text-lg w-56 !justify-end' actionIcon={<IoShareSocial className='cursor-pointer text-3xl' />}  >
-                        <ShareOptions/>
+                    <ActionBtn className='text-lg ' width='w-56' actionIcon={<IoShareSocial className='cursor-pointer text-3xl' />}  >
+                        <ShareOptions link={baseurl+"/post/"+slug}/>
                     </ActionBtn>
                     <span className='cursor-pointer' onClick={onBookmarkClick}>
                         {meBookmark ? <MdOutlineBookmark  /> : <MdBookmarkAdd  />}

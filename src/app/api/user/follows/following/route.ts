@@ -6,7 +6,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { currentRole } from "@/lib/authDet";
 import { currentUserId } from "@/lib/authDet";
 
-export async function POST(
+export async function GET(
   req: NextRequest,
   context: { params: { id: string } }
 ) {
@@ -15,17 +15,18 @@ export async function POST(
     const userRole = await currentRole();
     const writerId = context.params.id;
     // check writerId is undefined or not
+    if (writerId === undefined)
+    return NextResponse.json(
+      { success: false, message: "writerId is undefined" },
+      { status: 400 }
+    );
     const isWriterExist = await dataBasePrisma.user.findFirst({
       where: {
         id: writerId,
         role: "WRITER",
       },
     });
-    if (writerId === undefined)
-      return NextResponse.json(
-        { success: false, message: "writerId is undefined" },
-        { status: 400 }
-      );
+
     //    user can follow writer and writer can follow other writer but writer cannot follow user
     if (isWriterExist === null) {
       return NextResponse.json(

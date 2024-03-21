@@ -6,9 +6,10 @@ interface ActionBtnProps {
   actionIcon?: string | React.JSX.Element;
   children?:  string | React.JSX.Element;
   iconClass?: string | React.JSX.Element;
+  width?:string
 }
 
-const ActionBtn: React.FC<ActionBtnProps> = ({ className, actionIcon,iconClass, children }) => {
+const ActionBtn: React.FC<ActionBtnProps> = ({ className, actionIcon,iconClass,width, children }) => {
   const [visible, setVisible] = useState(false);
   const actionBtnRef = useRef<HTMLDivElement | null>(null);
 
@@ -41,7 +42,7 @@ const ActionBtn: React.FC<ActionBtnProps> = ({ className, actionIcon,iconClass, 
         {actionIcon ? actionIcon : <HiOutlineDotsHorizontal className={`w-[90%] h-[90%] ${iconClass}`} />}
       </span>
       <div
-        className={`absolute action-btn right-3 bg-black text-white duration-150 ease-in-out   rounded-lg rounded-r-none min-w-36 ${
+        className={`absolute action-btn right-3 bg-black text-white duration-150 ease-in-out   rounded-lg rounded-r-none min-w-36 ${width} ${
           visible ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >

@@ -8,6 +8,7 @@ const ogg = localFont({ src: '../../../../fonts/Ogg-Medium-BF646c18fc4e918.otf' 
 const Page = async (context: { params: { slug: string } }) => {
   let blog;
   const slug = context.params.slug
+  const baseURL = process.env.BASE_URL
   try {
    const res = await axios.get(`${process.env.BASE_URL}/api/blog/${slug}`);
     
@@ -21,7 +22,7 @@ const Page = async (context: { params: { slug: string } }) => {
     <article>
       <Header title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime} author={blog.author} font={ogg.className}/>
       <PostBody image={blog.image} content={blog.content} font={ogg.className}/>
-      <PostFeatures font={ogg.className} commentCount={blog.commentsCount} likesCount={blog.likesCount} tags={blog.tags} id={blog.id}/>
+      <PostFeatures baseurl={baseURL ?? ""} slug={blog.slug} font={ogg.className} commentCount={blog.commentsCount} likesCount={blog.likesCount} tags={blog.tags} id={blog.id}/>
     </article>
   )
 }
