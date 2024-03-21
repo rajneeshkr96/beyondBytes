@@ -8,6 +8,9 @@ import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { errorToastHandler } from '@/components/errorTostHandler';
+import ActionOptions from '@/components/BlogCard/ActionOptions';
+import Loading from '@/app/loading';
+import ShareOptions from './shareOptions';
 export interface PostFeaturesProps{
     font: string,
     id: string,
@@ -25,10 +28,12 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,commentCount,
     const [likesCounts,setLikeCounts] = useState(likesCount);
     const [meLikes,setMeLikes] = useState(meLike);
     const [meBookmark,setMeBookmark] = useState(bookmark);
+    const [loading,setLoading] = useState(false);
 
     const onLikesClick = async () => {
         if(session.status === 'authenticated'){
             try {
+                setLoading(true);
                 if(meLikes){
                     setMeLikes(false);
                     setLikeCounts(likesCounts-1);
@@ -38,11 +43,13 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,commentCount,
                 }
                 const res = await axios.post(`/api/user/like/${id}`)
                 console.log(res.data);
+                setLoading(false);
                 if(res.data.success){
                     toast.success(res.data.message)
                 }
                 
             } catch (error:any) {
+                setLoading(false);
                 errorToastHandler(error);
             }
         }else{
@@ -54,22 +61,26 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,commentCount,
         if(session.status === 'authenticated'){
           setMeBookmark(!meBookmark);
           try {
+            setLoading(true);
               const res = await axios.post(`/api/user/bookmark/add/${id}`)
               console.log(res.data);
               if(res.data.success){
                   toast.success(res.data.message)
               }
-            
-          } catch (error:any) {
-            errorToastHandler(error);
-          }
+              setLoading(false);
+            } catch (error:any) {
+                setLoading(false);
+                errorToastHandler(error);
+            }
         }else{
             toast.error("Please login first");
         }
 
     };
     return (
-        <section className='w-11/12 mx-auto flex flex-col items-center'>
+        <>
+        {loading && <Loading background='bg-[#33333375]' />}
+        <section className='w-11/12 mx-auto flex flex-col items-center '>
             <div className='flex gap-x-4 my-6 items-center'>
                 <span className={`${font} text-2xl`}>Tags</span>
                 <ul className='flex gap-x-2 font-bold'>
@@ -88,16 +99,22 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,commentCount,
                     <IoChatboxEllipses className='cursor-pointer' onClick={() => setViewCmt(!viewCmt)} />
                 </span>
                 <span className='flex gap-x-2 items-center'>
-                    <IoShareSocial className='cursor-pointer' />
+                    
+                    <ActionBtn className='text-lg w-56 !justify-end' actionIcon={<IoShareSocial className='cursor-pointer text-3xl' />}  >
+                        <ShareOptions/>
+                    </ActionBtn>
                     <span className='cursor-pointer' onClick={onBookmarkClick}>
                         {meBookmark ? <MdOutlineBookmark  /> : <MdBookmarkAdd  />}
                     </span>
-                    <ActionBtn  />
+                    <ActionBtn className='text-lg' iconClass="!text-3xl"  >
+                        <ActionOptions id={id}/>
+                    </ActionBtn>
                 </span>
             </div>
 
-            <Comment id={id} commentCount={commentCount} author={author} isAuth={session.status} visible={viewCmt} close={setViewCmt} />
+            <Comment id={id} commentCount={commentCount} author={{name:session.data?.user.name ?? "user",image:session.data?.user.image ?? "/user.png"}} isAuth={session.status} visible={viewCmt} close={setViewCmt} />
 
         </section>
+        </>
     );
 };

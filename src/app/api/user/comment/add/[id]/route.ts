@@ -26,7 +26,7 @@ export async function POST(req:NextRequest,context:{params:{id:string}}) {
             UserId: userId,
         },
         });
-        if (isCommentExist){
+        if (isCommentExist && user?.role !== "ADMIN"){
         return NextResponse.json(
             { success: false, message: "comment already exist" },
             { status: 400 }

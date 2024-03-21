@@ -4,17 +4,9 @@ import ActionBtn from '../layoutComponents/Button/ActionBtn';
 import { IoIosHeart } from "react-icons/io";
 import { MdBookmarkAdd,MdOutlineBookmark  } from "react-icons/md";
 import Link from 'next/link';
+import ActionOptions from './ActionOptions';
 
-const ActionOptions = ({id}:{id:string}) => {
-  const btnClass = 'w-full px-4 py-2 capitalize'
-  return (
-    <>
-      <button className={btnClass}>follow author</button>
-      <button className={btnClass}>mute author</button>
-      <button className={`${btnClass} text-red-400`}>Report......</button>
-    </>
-  )
-}
+
 
 
 export interface BlogcardProps{

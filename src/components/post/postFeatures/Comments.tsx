@@ -15,9 +15,10 @@ export function Comment({id,commentCount,visible,close,isAuth,author}:{
   close:Dispatch<SetStateAction<boolean>>,
   isAuth:string,
   commentCount:number,
-  author?:{id:string,name:string,email:string,image:string,role:string}
+  author?:{name:string,image:string}
 
 }) {
+  
   const [loading,setLoading] = useState(false);
   const [comment,setComment] = useState("");
   const [useComment,setUseComment] = useState([]);
@@ -61,19 +62,18 @@ export function Comment({id,commentCount,visible,close,isAuth,author}:{
     }
   }
 
-  console.log(useComment,commentCounts);
   return (
-    <section className={`fixed w-[25vw] px-4 py-6 z-20 right-0 top-0  ease-in duration-75 bg-white min-h-screen ${visible?"translate-x-[0] visible":"translate-x-[25vw] min-h-screen"}`}>
+    <section className={`fixed w-[28vw] h-screen overflow-y-scroll px-4 py-6 z-20 right-0 top-0  ease-in duration-75 bg-white min-h-screen  ${visible?"translate-x-[0] visible":"translate-x-[28vw] min-h-screen"}`}>
       <IoMdClose onClick={()=>close(!visible)} className='absolute text-black right-2 top-2 text-2xl cursor-pointer' />
 
       {/* write comment  */}
       <div className='shadow-lg py-2'>
         <span>
-            <Image src={"/img3.jpg"} alt={"kkk"} width={200} height={300} className='w-12 h-12 rounded-full' />
-            <span className='uppercase font-bold mt-3 text-gray-600'>raju bhai....</span>
+            <Image src={author?.image ?? "/user.png"} alt={author?.name ?? "user"} width={200} height={300} className='w-12 h-12 rounded-full' />
+            <span className='uppercase font-bold mt-3 text-gray-600'>{author?.name ?? "user"}</span>
         </span>
         <textarea onChange={(e)=>setComment(e.target.value)} value={comment} name="comment" id="" placeholder='Write Your Comment Here........' className='w-full outline-none px-2 text-black my-2' cols={30}rows={6}></textarea>
-        <SubmitButton onClick={addComment} className='bg-[#333] text-white px-4 py-2 rounded-lg w-auto mx-auto block' value="comment..."/>
+        <SubmitButton loading={loading} onClick={addComment} className='bg-[#333] text-white px-4 py-2 rounded-lg w-auto mx-auto block' value="comment..."/>
       </div>
       {/* comments  */}
       <div className=''>
@@ -81,7 +81,7 @@ export function Comment({id,commentCount,visible,close,isAuth,author}:{
           id:string,
           comment:string,
           User:{id:string,name:string,email:string,image:string,role:string}
-        },index)=><div key={index}  className='w-full px-6 py-4'>
+        },index)=><div key={index}  className='w-full px-6 py-4 shadow-md'>
           <span className='flex justify-between items-center'>
             <span>
               <Image src={val.User.image} alt={val.User.name} width={200} height={300} className='w-12 h-12 rounded-full' />

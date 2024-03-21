@@ -1,9 +1,9 @@
 import React from "react";
 
-const loading = () => {
+const Loading = ({background}:{background?:string}) => {
   return (
     <div>
-      <div className="fixed flex   justify-center   items-center z-50 h-screen w-screen top-0 right-0  bg-white">
+      <div className={`fixed flex   justify-center   items-center z-50 h-screen w-screen top-0 right-0  ${background?background:"bg-white"}`}>
         <div className=" w-28 fixed z-50 duration-[1.5s] delay-100 animate-spin   ">
           <svg
             viewBox="0 0 99 100"
@@ -29,14 +29,14 @@ const loading = () => {
           </svg>
         </div>
       </div>
-      <div className="w-full fixed z-40 top-0 left-0 flex">
+      {background ?"":<div className="w-full fixed z-40 top-0 left-0 flex">
         <div className="col border-x-1 border-gray-600 w-1/4 h-screen bg-[#ffe600] animate "></div>
         <div className="col1 border-x-1 border-gray-600 w-1/4 h-screen bg-[#ffe600] animate  delay-100"></div>
         <div className="col2 border-x-1 border-gray-600 w-1/4 h-screen bg-[#ffe600] animate  delay-200"></div>
         <div className="col3 border-x-1 border-gray-600 w-1/4 h-screen bg-[#ffe600] animate  delay-300"></div>
-      </div>
+      </div>}
     </div>
   );
 };
 
-export default loading;
+export default Loading;

@@ -1,14 +1,14 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { TbTriangleFilled } from "react-icons/tb";
 interface ActionBtnProps {
   className?: string;
   actionIcon?: string | React.JSX.Element;
   children?:  string | React.JSX.Element;
+  iconClass?: string | React.JSX.Element;
 }
 
-const ActionBtn: React.FC<ActionBtnProps> = ({ className, actionIcon, children }) => {
+const ActionBtn: React.FC<ActionBtnProps> = ({ className, actionIcon,iconClass, children }) => {
   const [visible, setVisible] = useState(false);
   const actionBtnRef = useRef<HTMLDivElement | null>(null);
 
@@ -38,7 +38,7 @@ const ActionBtn: React.FC<ActionBtnProps> = ({ className, actionIcon, children }
       className={`relative cursor-pointer rounded-full flex justify-center items-center ${className}`}
     >
       <span className='w-[90%] h-[90%] block' onClick={() => setVisible(!visible)}>
-        {actionIcon ? actionIcon : <HiOutlineDotsHorizontal className='w-[90%] h-[90%]' />}
+        {actionIcon ? actionIcon : <HiOutlineDotsHorizontal className={`w-[90%] h-[90%] ${iconClass}`} />}
       </span>
       <div
         className={`absolute action-btn right-3 bg-black text-white duration-150 ease-in-out   rounded-lg rounded-r-none min-w-36 ${
@@ -46,7 +46,6 @@ const ActionBtn: React.FC<ActionBtnProps> = ({ className, actionIcon, children }
         }`}
       >
         {children}
-        <TbTriangleFilled className='absolute -top-3 right-[1px] text-black' />
       </div>
     </div>
   );
