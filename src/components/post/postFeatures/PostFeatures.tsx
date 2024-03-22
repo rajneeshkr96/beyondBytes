@@ -12,9 +12,7 @@ import ActionOptions from '@/components/BlogCard/ActionOptions';
 import Loading from '@/app/loading';
 import ShareOptions from './shareOptions';
 export interface PostFeaturesProps{
-    font: string,
     id: string,
-    tags: string[],
     commentCount: number
     bookmark?: boolean,
     likesCount: number,
@@ -22,7 +20,7 @@ export interface PostFeaturesProps{
     slug:string,
     baseurl:string 
 }
-export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,slug,baseurl,commentCount,bookmark=false,likesCount,meLike=false}) => {
+export const PostFeatures: FC<PostFeaturesProps> = ({ id,slug,baseurl,commentCount,bookmark=false,likesCount,meLike=false}) => {
     const session  = useSession()
     const [viewCmt, setViewCmt] = useState(false);
     const [likesCounts,setLikeCounts] = useState(likesCount);
@@ -80,15 +78,10 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ font,id,tags,slug,baseurl,
     return (
         <>
         {loading && <Loading background='bg-[#33333375]' />}
-        <section className='w-11/12 mx-auto flex flex-col items-center '>
-            <div className='flex gap-x-4 my-6 items-center'>
-                <span className={`${font} text-2xl`}>Tags</span>
-                <ul className='flex gap-x-2 font-bold'>
-                    {tags.map((val,index)=><li key={index}>{val}</li>)}
-                </ul>
-            </div>
+        <section className='w-[70%]  flex flex-col justify-between items-center '>
+            
 
-            <div className='flex justify-between w-10/12 text-4xl'>
+            <div className='flex justify-between w-full my-2 text-4xl'>
                 <span className='flex gap-x-6 items-center '>
                     <span className='flex items-end'>
                         <span className='cursor-pointer' onClick={onLikesClick}>

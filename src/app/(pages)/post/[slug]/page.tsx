@@ -21,8 +21,14 @@ const Page = async (context: { params: { slug: string } }) => {
   return (
     <article>
       <Header title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime} author={blog.author} font={ogg.className}/>
+      <PostFeatures baseurl={baseURL ?? ""} slug={blog.slug}  commentCount={blog.commentsCount} likesCount={blog.likesCount}  id={blog.id}/>
       <PostBody image={blog.image} content={blog.content} font={ogg.className}/>
-      <PostFeatures baseurl={baseURL ?? ""} slug={blog.slug} font={ogg.className} commentCount={blog.commentsCount} likesCount={blog.likesCount} tags={blog.tags} id={blog.id}/>
+      <div className='flex w-9/12 justify-center gap-x-4 my-6 items-center'>
+                <span className={`${ogg.className} text-2xl`}>Tags</span>
+                <ul className='flex gap-x-2 font-bold'>
+                    {blog.tags.map((val:string  ,index:string)=><li key={index}>{val}</li>)}
+                </ul>
+            </div>
     </article>
   )
 }

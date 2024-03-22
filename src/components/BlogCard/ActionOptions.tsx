@@ -1,5 +1,4 @@
-
-"use Client"
+"use client"
 
 const   ActionOptions = ({id}:{id:string}) => {
     const btnClass = 'w-full px-4 py-2 capitalize'
