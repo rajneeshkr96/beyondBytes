@@ -3,10 +3,12 @@
 import { dataBasePrisma } from "@/databasePrisma";
 import { NextResponse,NextRequest } from "next/server";
 import { currentUserId } from "@/lib/authDet";
+import { currentUser } from "@/lib/authDet";
 
 export async function POST(req: NextRequest,context:{params:{id:string}}) {
     // todo remove temp id 
     const tempUserid = await currentUserId() || "65e6de30136474657e223231"
+    const user = await currentUser() 
     try {
         const  blogId = context.params.id;
         

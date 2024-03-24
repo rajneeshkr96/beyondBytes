@@ -88,6 +88,7 @@ model Comment {
 model Like {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   Blog      Blog     @relation(fields: [BlogId], references: [id])
+  like      Boolean  @default(true)
   BlogId    String   @db.ObjectId
   User      User     @relation(fields: [UserId], references: [id])
   UserId    String   @db.ObjectId
@@ -104,6 +105,7 @@ model commentLikes {
 
 model bookmarks {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  bookmark  Boolean  @default(true)
   Blog      Blog     @relation(fields: [BlogId], references: [id])
   BlogId    String   @db.ObjectId
   User      User     @relation(fields: [UserId], references: [id])
