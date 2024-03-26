@@ -2,11 +2,10 @@
 import { NextResponse } from "next/server";
 import { dataBasePrisma } from "@/databasePrisma";
 import { NextRequest } from "next/server";
-import { currentUser } from "@/lib/authDet";
+import {  currentUserId } from "@/lib/authDet";
 export async function GET(req:NextRequest,context:{params:{id:string}}) {
     try {
-        const user = await currentUser();
-        console.log(user)
+        const user = await currentUserId();
         const blogId = context.params.id;
         if (blogId === undefined)
         return NextResponse.json(
@@ -20,9 +19,26 @@ export async function GET(req:NextRequest,context:{params:{id:string}}) {
         select:{
             id:true,
             comment:true,
-            User: true
+            User: {
+                select:{
+                    id:true,
+                    name:true,
+                    email:true,
+                    image:true,
+                }
+            },
+            likesCount:true,
+            CommentLikes:{
+                select:{
+                    CommentId:true,
+                },
+                where:{
+                    UserId:user
+                }
+            }
         }
         });
+        console.log("commentLikes",comments);
         return NextResponse.json(
         { success: true, message: "comments fetched successfully", data: comments },
         { status: 200 }
