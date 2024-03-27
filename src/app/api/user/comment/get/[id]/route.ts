@@ -38,7 +38,7 @@ export async function GET(req:NextRequest,context:{params:{id:string}}) {
             }
         }
         });
-        console.log("commentLikes",comments);
+
         return NextResponse.json(
         { success: true, message: "comments fetched successfully", data: comments },
         { status: 200 }

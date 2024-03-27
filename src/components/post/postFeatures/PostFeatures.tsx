@@ -14,13 +14,14 @@ import ShareOptions from './shareOptions';
 export interface PostFeaturesProps{
     id: string,
     commentCount: number
+    authId: string,
     bookmark?: boolean,
     likesCount: number,
     meLike?: boolean,
     slug:string,
     baseurl:string 
 }
-export const PostFeatures: FC<PostFeaturesProps> = ({ id,slug,baseurl,commentCount,bookmark=false,likesCount,meLike=false}) => {
+export const PostFeatures: FC<PostFeaturesProps> = ({ id,authId,slug,baseurl,commentCount,bookmark=false,likesCount,meLike=false}) => {
     const session  = useSession()
     const [viewCmt, setViewCmt] = useState(false);
     const [likesCounts,setLikeCounts] = useState(likesCount);
@@ -100,7 +101,7 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ id,slug,baseurl,commentCou
                         {meBookmark ? <MdOutlineBookmark  /> : <MdBookmarkAdd  />}
                     </span>
                     <ActionBtn className='text-lg' iconClass="!text-3xl"  >
-                        <ActionOptions id={id}/>
+                        <ActionOptions authId={authId}  id={id}/>
                     </ActionBtn>
                 </span>
             </div>

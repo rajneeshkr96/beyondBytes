@@ -18,7 +18,16 @@ export async function GET(req: NextRequest,context: { params: { slug: string[] }
          slug: slug,
        },
        include:{
-         author:true,
+         author:{
+           select:{
+             id:true,
+             name:true,
+             email:true,
+             image:true,
+            role:true,
+           }
+         },
+         
          likes:{
            where:{
              UserId: userId,

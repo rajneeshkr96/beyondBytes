@@ -57,7 +57,7 @@ const BlogCard:FC<BlogcardProps> = ({id,tags=["blog"],bookmark=false,likesCount,
           <p className="text-[#b0b0ba] text-xs">{formatDate(createdAt)}/{tags[0]}</p>
         </div>
           <ActionBtn className='w-8 h-8 justify-self-end'>
-            <ActionOptions id={id}/>
+            <ActionOptions id={id} authId={author.id}/>
           </ActionBtn>
       </div>
       {/* card image  */}

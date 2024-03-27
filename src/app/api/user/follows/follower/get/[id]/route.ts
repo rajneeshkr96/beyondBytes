@@ -4,7 +4,7 @@ import { dataBasePrisma } from "@/databasePrisma";
 import { NextResponse, NextRequest } from "next/server";
 import { currentUser } from "@/lib/authDet";
 
-export async function POST(
+export async function GET(
   req: NextRequest,
   context: { params: { id: string } }
 ) {
@@ -15,7 +15,6 @@ export async function POST(
     const isWriterExist = await dataBasePrisma.user.findFirst({
       where: {
         id: writerId,
-        role: "WRITER",
       },
     });
     if (writerId === undefined)
@@ -38,13 +37,19 @@ export async function POST(
     }
     const myWriter = await dataBasePrisma.follows.findFirst({
       where: {
-        followingId: user?.id,
-        followerId: writerId,
+        followingId: writerId,
+        followerId: user.userId,
       },
     });
-   
+    console.log("user",user.userId,"writer",writerId,"follow",myWriter)
+    if (myWriter === null) {
+      return NextResponse.json(
+        { success: true, message: "its not follow",data:{follow:false} },
+        { status: 200 }
+      );
+    }
     return NextResponse.json(
-      { success: true, message: "followed successfully", data: myWriter },
+      { success: true, message: "its follow", data: {follow:true} },
       { status: 200 }
     );
   } catch (error) {

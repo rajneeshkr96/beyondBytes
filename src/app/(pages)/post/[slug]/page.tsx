@@ -26,10 +26,11 @@ const Page = async (context: { params: { slug: string } }) => {
   if (!success) {
     return notFound();
   }
+  console.log(blog);
   return (
     <article>
       <Header title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime} author={blog.author} font={ogg.className}/>
-      <PostFeatures baseurl={baseURL ?? ""} meLike={blog.likes && blog?.likes[0]?.like} bookmark={blog.bookmarks &&blog?.bookmarks[0]?.bookmark} slug={blog.slug}  commentCount={blog.commentsCount} likesCount={blog.likesCount}  id={blog.id}/>
+      <PostFeatures authId={blog.author.id}  baseurl={baseURL ?? ""} meLike={blog.likes && blog?.likes[0]?.like} bookmark={blog.bookmarks &&blog?.bookmarks[0]?.bookmark} slug={blog.slug}  commentCount={blog.commentsCount} likesCount={blog.likesCount}  id={blog.id}/>
       <PostBody image={blog.image} content={blog.content} font={ogg.className}/>
       <div className='flex w-9/12 justify-center gap-x-4 my-6 items-center'>
                 <span className={`${ogg.className} text-2xl`}>Tags</span>

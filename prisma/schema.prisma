@@ -46,7 +46,7 @@ model User {
   name          String?
   email         String?         @unique
   image         String?
-  about         String?
+  bio         String?
   isSuspend     Boolean         @default(false)
   role          UserRole        @default(USER)
   followers     Follows[]       @relation("following")
