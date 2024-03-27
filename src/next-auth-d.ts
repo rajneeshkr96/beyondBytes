@@ -8,6 +8,7 @@ export type ExtendedUser = DefaultSession["user"] & {
   isOAuth: boolean;
   userId: string;
   email: string;
+  username: string;
 };
 
 declare module "next-auth" {

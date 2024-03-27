@@ -38,10 +38,14 @@ export const {
           where: { email: token.email as string},
         });
         var newUser;
-
+        
+        
+        
         if (!existingUser) {
+          const userName = token?.email?.split('@')[0];
           newUser = await dataBasePrisma.user.create({
             data: {
+              username: userName,
               email: token.email,
               name: token.name,
               role: UserRole.USER,
