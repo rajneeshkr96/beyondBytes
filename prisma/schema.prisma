@@ -46,8 +46,12 @@ model User {
   name          String?
   email         String?         @unique
   image         String?
+<<<<<<< HEAD
   about         String?
   username      String?         @unique
+=======
+  bio         String?
+>>>>>>> 37c52dd203efd82846d7c5f4a334369bb76d273f
   isSuspend     Boolean         @default(false)
   role          UserRole        @default(USER)
   followers     Follows[]       @relation("following")
@@ -79,7 +83,7 @@ model Comment {
   Blog      Blog     @relation(fields: [BlogId], references: [id])
   CommentLikes commentLikes[]
   BlogId    String   @db.ObjectId
-  likesCount Int      @default(0)
+  likesCount Int     @default(0)
   User      User     @relation(fields: [UserId], references: [id])
   UserId    String   @db.ObjectId
   createdAt DateTime @default(now()) @map("created_at")
@@ -89,6 +93,7 @@ model Comment {
 model Like {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   Blog      Blog     @relation(fields: [BlogId], references: [id])
+  like      Boolean  @default(true)
   BlogId    String   @db.ObjectId
   User      User     @relation(fields: [UserId], references: [id])
   UserId    String   @db.ObjectId
@@ -105,6 +110,7 @@ model commentLikes {
 
 model bookmarks {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  bookmark  Boolean  @default(true)
   Blog      Blog     @relation(fields: [BlogId], references: [id])
   BlogId    String   @db.ObjectId
   User      User     @relation(fields: [UserId], references: [id])

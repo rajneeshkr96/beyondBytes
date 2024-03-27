@@ -7,7 +7,7 @@ const {auth} = NextAuth(authConfig);
 
 export default auth((req:NextRequest) => {
   const {nextUrl} = req;
-
+   // Access the token and parse it
 
   console.log("Middleware.....................", nextUrl.pathname)
   // const isLoggedIn = !!req.url;

@@ -37,7 +37,7 @@ export async function POST(req: NextRequest,context:{params:{id:string}}) {
                     }
                 }
             })
-            return NextResponse.json({success:true,message:"unliked successfully"},{status:200})
+            return NextResponse.json({success:true,message:"unliked successfully",data:{like:false}},{status:200})
         }
         const like = await dataBasePrisma.commentLikes.create({
             data:{
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest,context:{params:{id:string}}) {
                 UserId:tempUserid
             }
         })
-        await dataBasePrisma.blog.update({
+       let comment = await dataBasePrisma.comment.update({
             where:{
                 id:commentId
             },
@@ -57,9 +57,10 @@ export async function POST(req: NextRequest,context:{params:{id:string}}) {
         })
       
         // updata blog like count
-       
-        return NextResponse.json({success:true, message:"liked successfully"},{status:200})
-    } catch (error) {
+        console.log(comment);
+        return NextResponse.json({success:true, message:"liked successfully",data:{like:true}},{status:200})
+    } catch (error:any) {
+        console.log(error.message);
         return NextResponse.json({success:false,message:"something went wrong"},{status:500})
     }
 }

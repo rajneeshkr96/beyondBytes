@@ -3,7 +3,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { currentRole } from "@/lib/authDet";
 
 
-export async function Post(req:NextRequest,context:{params:{id:string}}){
+export async function POST(req:NextRequest,context:{params:{id:string}}){
     try {
         const userRole = await currentRole();
         if(userRole !== "ADMIN"){

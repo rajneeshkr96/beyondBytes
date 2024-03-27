@@ -1,19 +1,51 @@
 "use client"
-
-const   ActionOptions = ({id}:{id:string}) => {
-    const btnClass = 'w-full px-4 py-2 capitalize'
+import axios from "axios";
+import { useSession } from "next-auth/react"
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { errorToastHandler } from "../errorTostHandler";
+import Loading from "@/app/loading";
+const   ActionOptions = ({id,authId}:{id:string,authId:string}) => {
+  const session = useSession();
+  const btnClass = 'w-full px-4 py-2 capitalize'
+  const [isFollow,setIsFollow] = useState(false);
+  const [fullLoading,setFullLoading] = useState(false);
   const onFollow = async () =>{
     try {
-      
-    } catch (error) {
-      
+      if(session.status !== "authenticated"){
+        toast.error("please login");
+        return;
+      }
+      setFullLoading(true);
+      const res = await axios.post(`/api/user/follows/${id}`);
+      if(res.data.success){
+        setIsFollow(!isFollow);
+        toast.success(res.data.message);
+      }
+      setFullLoading(false);
+    } catch (error:any) {
+      setFullLoading(false);
+      setIsFollow(false);
+      errorToastHandler(error);
     }
   }
+
+  useEffect(() => {
+    if(session.status === 'authenticated'){
+      console.log(authId + ' is authenticated');
+      const res = axios.get(`/api/user/follows/follower/get/${authId}`);
+      res.then(res => {
+        console.log(res.data);
+        setIsFollow(res.data.data.follow);
+      })
+    }
+  }, []);
   const onMute = () =>{};
 
     return (
       <>
-        <button className={btnClass} onClick={onFollow}>follow author</button>
+        {fullLoading && <Loading background='bg-[#33333375]'/>}
+        <button className={btnClass} onClick={onFollow}>{isFollow?"unfollow author":"follow author"}</button>
         <button className={btnClass}>mute author</button>
         <button className={`${btnClass} text-red-400`}>Report......</button>
       </>
