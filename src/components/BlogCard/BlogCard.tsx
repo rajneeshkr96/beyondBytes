@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import React, { FC } from 'react'
 import ActionBtn from '../layoutComponents/Button/ActionBtn';
@@ -7,13 +8,12 @@ import Link from 'next/link';
 import ActionOptions from './ActionOptions';
 
 
-
-
 export interface BlogcardProps{
     id: string;
     tags?:Array<string>;
-    bookmark?:boolean;
+    bookmark?:boolean ;
     likesCount?:number;
+    disableBtn?:boolean;
     meLike?:boolean;
     title: string;
     metaDesc: string;
@@ -40,7 +40,7 @@ export function formatDate(dateString:Date) {
   return `${formattedDate} ${formattedTime}`;
 }
 
-const BlogCard:FC<BlogcardProps> = ({id,tags=["blog"],bookmark=false,likesCount,meLike=false,title,metaDesc,image,createdAt,author,slug,readTime}) => {
+const BlogCard:FC<BlogcardProps> = ({id,tags=["blog"],bookmark=false,disableBtn=false,likesCount,meLike=false,title,metaDesc,image,createdAt,author,slug,readTime}) => {
   return (
     <div className='w-11/12 min-w-80 max-w-96 sm:w-1/2 md:w-1/4  px-4 py-2 shadow mx-4 my-2'>
       {/* card head  */}
@@ -57,7 +57,7 @@ const BlogCard:FC<BlogcardProps> = ({id,tags=["blog"],bookmark=false,likesCount,
           <p className="text-[#b0b0ba] text-xs">{formatDate(createdAt)}/{tags[0]}</p>
         </div>
           <ActionBtn className='w-8 h-8 justify-self-end'>
-            <ActionOptions id={id} authId={author.id}/>
+            <ActionOptions disable={disableBtn} id={id} authId={author.id}/>
           </ActionBtn>
       </div>
       {/* card image  */}
@@ -75,12 +75,12 @@ const BlogCard:FC<BlogcardProps> = ({id,tags=["blog"],bookmark=false,likesCount,
       </Link>
     {/* like and bookmark  */}
       <div className='flex justify-between my-1 text-2xl'>
-        <span className='flex justify-end cursor-pointer'>
+        <span className='flex justify-end'>
           <IoIosHeart  style={{color:`${meLike?"#ff5c63":""}`}} />
           <p className='text-[#5f5f5f] text-xs'>{likesCount}</p>
         </span>
           <span className='text-[#5f5f5f] text-sm'>{readTime}</span>
-        <span className='cursor-pointer'>
+        <span >
           {bookmark? <MdOutlineBookmark /> : <MdBookmarkAdd />}
         </span>
       </div>

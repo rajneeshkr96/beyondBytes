@@ -79,7 +79,7 @@ export const Comment: React.FC<CommentProps> = ({ id, commentCount, visible, clo
   return (
     <>
     {fullLoading && <Loading background='bg-[#33333375]'/>}
-    <section className={`fixed w-[28vw] h-screen overflow-y-scroll px-4 py-6 z-20 right-0 top-0  ease-in duration-75 bg-white min-h-screen  ${visible ? "translate-x-[0] visible" : "translate-x-[28vw] min-h-screen"}`} onWheel={handleScroll}>
+    <section className={`fixed w-[28vw] max-lg:w-[50vw] max-md:w-[90vw] h-screen overflow-y-scroll px-4 py-6 z-[10000] right-0 top-0  ease-in duration-75 bg-white min-h-screen  ${visible ? "translate-x-[0] visible" : "translate-x-[28vw] max-lg:translate-x-[50vw] max-md:translate-x-[90vw] min-h-screen"}`} onWheel={handleScroll}>
       <IoMdClose onClick={() => close(!visible)} className='absolute text-black right-2 top-2 text-2xl cursor-pointer' />
 
       {/* Comment input */}

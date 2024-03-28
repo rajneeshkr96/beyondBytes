@@ -79,7 +79,7 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ id,authId,slug,baseurl,com
     return (
         <>
         {loading && <Loading background='bg-[#33333375]' />}
-        <section className='w-[70%]  flex flex-col justify-between items-center '>
+        <section className='w-[70%] max-lg:w-full max-lg:gap-x-2  flex flex-col justify-between items-center '>
             
 
             <div className='flex justify-between w-full my-2 text-4xl'>
@@ -101,7 +101,7 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ id,authId,slug,baseurl,com
                         {meBookmark ? <MdOutlineBookmark  /> : <MdBookmarkAdd  />}
                     </span>
                     <ActionBtn className='text-lg' iconClass="!text-3xl"  >
-                        <ActionOptions authId={authId}  id={id}/>
+                        <ActionOptions  authId={authId}  id={id}/>
                     </ActionBtn>
                 </span>
             </div>

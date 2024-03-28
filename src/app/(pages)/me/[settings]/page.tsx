@@ -1,5 +1,6 @@
 "use client"
 import ActionBtn from '@/components/layoutComponents/Button/ActionBtn'
+import SlidingMenu from '@/components/SlidingMenu/SlidingMenu'
 import React, { useState } from 'react'
 
 const Testing = () => {
@@ -15,25 +16,10 @@ const Testing = () => {
 
 const Page = () => {
   const actions =  [{action:"action",page:<Testing/>},{action:"more action",page:<Testing/>},{action:"more and more action",page:<Testing/>},{action:"action",page:<Testing/>}]
-  const [active,setActive] = useState(0);
+
   return (
-    <div className='min-h-screen px-12 '>
-      <section className='w-10/12 border-b-2 mx-auto'>
-        <div className='flex justify-between items-center'>
-          <span className='text-5xl font-serif capitalize font-semibold'>page title</span>
-          <ActionBtn className='w-16 h-16'/>
-        </div>
-        <div className='flex gap-x-6 px-6 mt-6'>
-          {actions.map((action,index) => <button key={index} onClick={()=>setActive(index)} className={`capitalize py-8 px-2 transition-colors duration-200 ease-in ${index === active?" text-[#333] border-b-2 border-black":"text-gray-500"}`}>{action.action}</button>)}
-        </div>
-      </section>
-      <section className='my-5'>
-      {actions.map((action,index) =>{return index===active?<div key={index}
-      className={` ${index === 0 && "bg-pink-400"}`}
-      >
-        {action.page}
-      </div>:""})}
-      </section>
+    <div className='min-h-screen '>
+      <SlidingMenu menuOptions={actions}/>
       
     </div>
   )

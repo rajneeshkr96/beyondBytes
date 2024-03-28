@@ -3,7 +3,7 @@ import { dataBasePrisma } from "@/databasePrisma";
 
 async function validateQueryParams(req: NextRequest) {
   const url = req.nextUrl;
-  const allowedParams = ["page", "limit", "sort", "fields"];
+  const allowedParams = ["page", "limit", "sort", "fields", "search", "tags"]; // Include 'search' and 'tags'
   const invalidParams = Object.keys(url.searchParams).filter(
     (param) => !allowedParams.includes(param)
   );
@@ -28,8 +28,18 @@ async function validateQueryParams(req: NextRequest) {
   return { page, limit };
 }
 
-async function getBlogs(page: number, limit: number, sort?: string, fields?: string[]) {
+async function getBlogs(page: number, limit: number, sort?: string, fields?: string[], search?: string, tags?: string[]) {
   const query: any = { }; // Create empty query object
+    if (search) {
+      query.where = {
+          OR: [
+              { title: { contains: search } },
+              { content: { contains: search } },
+              // Add more search fields as needed (e.g., author, tags)
+          ],
+      };
+  }
+
 
   if (sort) {
     const sortFields = sort.split(",").map((field) => {
@@ -38,6 +48,15 @@ async function getBlogs(page: number, limit: number, sort?: string, fields?: str
       return { [fieldName]: order };
     });
     query.orderBy = sortFields;
+  }
+
+  if (tags && tags.length > 0) {
+    query.where = {
+      ...query.where,
+      tags: { // Assuming 'tags' is a relation in the blog model
+        hasSome: tags, // Filter blogs where 'tags' has some of the specified tags
+      },
+    };
   }
 
   if (fields && fields.length > 0) {
@@ -52,7 +71,7 @@ async function getBlogs(page: number, limit: number, sort?: string, fields?: str
       }
     });
   }
-  console.log(query);
+
   const skip = (page - 1) * limit; // Calculate skip for pagination
   const blogs = await dataBasePrisma.blog.findMany({
     take: limit, // Limit results
@@ -69,8 +88,10 @@ export async function GET(req: NextRequest) {
     const { page, limit } = await validateQueryParams(req);
     const sort = req.nextUrl.searchParams.get("sort") ?? "";
     const fields = req.nextUrl.searchParams.get("fields")?.split(",");
+    const search = req.nextUrl.searchParams.get("search") ?? "";
+    const tags = req.nextUrl.searchParams.get("tags")?.split(",");
 
-    let blogs = await getBlogs(page, limit, sort, fields);
+    let blogs = await getBlogs(page, limit, sort, fields,search,tags);
     const total = await dataBasePrisma.blog.count(); // Count all blogs
     return NextResponse.json(
       { success: true, message: "Fetched successfully", data: blogs, total },

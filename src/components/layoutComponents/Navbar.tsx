@@ -56,7 +56,7 @@ const Navbar :React.FC<NavbarProps> = ({email,name,role,image,oAuthSession}) => 
   const handleActiveMenu = () => dispatch(setActiveMenu(!activeMenu));
 
   return (
-    <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
+    <div className="flex justify-between max-md:w-screen p-2 md:ml-6 md:mr-6 relative">
 
       <NavButton  customFunc={handleActiveMenu} color={currentColor} icon={<AiOutlineMenu />} />
       <div className="flex gap-x-2">
@@ -74,7 +74,7 @@ const Navbar :React.FC<NavbarProps> = ({email,name,role,image,oAuthSession}) => 
               width={200}
               height={300}
             />
-            <p>
+            <p className='max-md:hidden'>
               <span className="text-gray-400 text-14">Hi,</span>{' '}
               <span className="text-gray-400 font-bold ml-1 text-14">
                 {name ? name.split(' ')[0]:"User"}

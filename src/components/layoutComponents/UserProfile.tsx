@@ -54,11 +54,8 @@ const UserProfile: React.FC<UserProfileProps> = ({
   ];
 
   return (
-    <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96 shadow-md">
+    <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96 shadow-md max-md:w-11/12">
           <div className="flex justify-between items-center">
-            <p className="font-semibold text-lg dark:text-gray-200 uppercase font-serif ">
-            😎
-            </p>
             <Button
               icon={<MdOutlineCancel />}
               color="rgb(153, 171, 180)"
@@ -90,7 +87,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
                 {" "}
                 {role}{" "}
               </p>
-              <p className="text-gray-500 text-sm font-semibold dark:text-gray-400">
+              <p className="text-gray-500 text-sm font-semibold dark:text-gray-400 overflow-hidden">
                 {" "}
                 {email}{" "}
               </p>

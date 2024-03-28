@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { errorToastHandler } from "../errorTostHandler";
 import Loading from "@/app/loading";
-const   ActionOptions = ({id,authId}:{id:string,authId:string}) => {
+const   ActionOptions = ({id,authId,disable}:{id:string,authId:string,disable?:boolean}) => {
   const session = useSession();
   const btnClass = 'w-full px-4 py-2 capitalize'
   const [isFollow,setIsFollow] = useState(false);
@@ -31,8 +31,8 @@ const   ActionOptions = ({id,authId}:{id:string,authId:string}) => {
   }
 
   useEffect(() => {
-    if(session.status === 'authenticated'){
-      console.log(authId + ' is authenticated');
+    if(session.status === 'authenticated' && !disable){
+
       const res = axios.get(`/api/user/follows/follower/get/${authId}`);
       res.then(res => {
         console.log(res.data);
@@ -45,8 +45,10 @@ const   ActionOptions = ({id,authId}:{id:string,authId:string}) => {
     return (
       <>
         {fullLoading && <Loading background='bg-[#33333375]'/>}
-        <button className={btnClass} onClick={onFollow}>{isFollow?"unfollow author":"follow author"}</button>
-        <button className={btnClass}>mute author</button>
+        {!disable && <>
+          <button className={btnClass} onClick={onFollow}>{isFollow?"unfollow author":"follow author"}</button>
+          <button className={btnClass}>mute author</button>
+        </>}
         <button className={`${btnClass} text-red-400`}>Report......</button>
       </>
     )

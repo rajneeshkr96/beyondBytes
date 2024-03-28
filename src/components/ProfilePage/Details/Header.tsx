@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = async () => {
   
 
   return (
-    <div className="flex min-h-screen w-3/4 mx-auto relative right-20  gap-3 ">
+    <div className="flex  w-3/4 mx-auto relative right-20  gap-3 ">
       <div className="relative md:w-1/3 md:h-1/3   mx-auto border-gray-400 p-2 border-spacing-1 border-4 rounded-full overflow-hidden">
         <Image
           src={user?.image ? user.image : "./user.png"}

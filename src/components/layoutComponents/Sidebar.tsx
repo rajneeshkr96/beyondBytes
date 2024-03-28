@@ -7,31 +7,31 @@ import {setActiveMenu} from "@/redux/action/themeSlice"
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 import { FaProductHunt } from "react-icons/fa6";
-import { AiOutlineCalendar, AiOutlineShoppingCart, AiOutlineAreaChart,AiOutlineStock, AiOutlineBarChart } from 'react-icons/ai';
-import { FiShoppingBag, FiPieChart } from 'react-icons/fi';
+import { AiOutlineCalendar,  AiOutlineAreaChart,AiOutlineStock, AiOutlineBarChart } from 'react-icons/ai';
+import {  FiPieChart } from 'react-icons/fi';
 import { BsKanban } from 'react-icons/bs';
 import { MdAddShoppingCart } from "react-icons/md";
 import { TfiLayoutSliderAlt } from "react-icons/tfi";
 import { TbDiscountCheck } from "react-icons/tb";
-import { IoMdContacts } from 'react-icons/io';
-import { CiDiscount1 } from "react-icons/ci";
-import { RiContactsLine } from 'react-icons/ri';
-import { PiChartPolarThin } from "react-icons/pi";
 import {ReactLenis} from  "@studio-freight/react-lenis";
-import gsap from 'gsap';
-
+import { GiArtificialIntelligence } from "react-icons/gi";
+import { FaHome } from "react-icons/fa";
+import { FcAbout } from "react-icons/fc";
+import { MdPermContactCalendar,MdPolicy } from "react-icons/md";
+import { SiMicrosoftteams } from "react-icons/si";
+import { FcDisclaimer } from "react-icons/fc";
 const Sidebar = () => {
   const { currentColor, activeMenu, screenSize } = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch()
   const pathname = usePathname()
   const links = [
     {
-      title: 'Dashboard',
+      title: 'Home',
       links: [
         {
-          name: 'dashboard',
-          link: 'dashboard',
-          icon: <FiShoppingBag />,
+          name: 'Home',
+          link: '/',
+          icon: <FaHome />,
         },
       ],
     },
@@ -40,98 +40,43 @@ const Sidebar = () => {
       title: 'Pages',
       links: [
         {
-          name: 'orders',
-          link: 'dashboard/orders',
-          icon: <AiOutlineShoppingCart />,
-        },
-        // {
-        //   name: 'employees',
-        //   link: 'employees',
-        //   icon: <IoMdContacts />,
-        // },
-        {
-          name: 'products',
-          link: 'dashboard/products',
-          icon: <FaProductHunt />,
+          name: 'About Us',
+          link: '/about',
+          icon: <FcAbout />,
         },
         {
-          name: 'customers',
-          link: 'dashboard/customers',
-          icon: <RiContactsLine />,
+          name: 'contact us',
+          link: '/contact',
+          icon: <MdPermContactCalendar />,
         },
         {
-          name: 'Promo code',
-          link: 'dashboard/promoCodes',
-          icon: <CiDiscount1 />,
+          name: 'join us',
+          link: '/cureer-page',
+          icon: <SiMicrosoftteams />,
+        },
+        {
+          name: 'privacy and policy',
+          link: 'privacy-policy',
+          icon: <MdPolicy />,
+        },
+        {
+          name: 'Disclaimer ',
+          link: 'disclaimer-page',
+          icon: <FcDisclaimer />,
         },
       ],
     },
     {
-      title: 'Apps',
+      title: 'tags',
       links: [
         {
-          name: 'calendar',
+          name: 'Ai',
           link: 'dashboard/calendar',
-          icon: <AiOutlineCalendar />,
-        },
-        {
-          name: 'hero sliders',
-          link: 'dashboard/sliders',
-          icon: <TfiLayoutSliderAlt />,
-        },
-        {
-          name: 'kanban',
-          link: 'dashboard/kanban',
-          icon: <BsKanban />,
-        },
-        {
-          name: 'Add Product',
-          link: 'dashboard/product/add',
-          icon: <MdAddShoppingCart />,
-        },
-        {
-          name: 'Add Promo code',
-          link: 'dashboard/promoCode/add',
-          icon: <TbDiscountCheck />,
+          icon: <GiArtificialIntelligence />,
         },
       ],
     },
-    {
-      title: 'Charts',
-      links: [
-        {
-          name: 'line',
-          link: 'dashboard/line',
-          icon: <AiOutlineStock />,
-        },
-        {
-          name: 'area',
-          link: 'dashboard/area',
-          icon: <AiOutlineAreaChart />,
-        },
-  
-        {
-          name: 'bar',
-          link: 'dashboard/bar',
-          icon: <AiOutlineBarChart />,
-        },
-        {
-          name: 'pie',
-          link: 'dashboard/pie',
-          icon: <FiPieChart />,
-        },
-        {
-          name: 'polar Area',
-          link: 'dashboard/polar',
-          icon: <PiChartPolarThin />,
-        },
-        {
-          name: 'stacked',
-          link: 'dashboard/stacked',
-          icon: <AiOutlineBarChart />,
-        },
-      ],
-    },
+
   ];
 
   const handleCloseSideBar = () => {
@@ -150,7 +95,7 @@ const Sidebar = () => {
         <>
           <div className="flex justify-between items-center">
             <Link href="/" onClick={handleCloseSideBar} className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
-              <SiShopware /> <span>Beyond Bazar</span>
+              <SiShopware /> <span>Beyondbytes</span>
             </Link>
             <div content="Menu" >
               <button
@@ -172,11 +117,11 @@ const Sidebar = () => {
                 </p>
                 {item.links.map((link) => (
                   <Link
-                    href={`/adminstrative/${link.link}`}
+                    href={`${link.link}`}
                     key={link.name}
                     onClick={handleCloseSideBar}
-                    className={`/adminstrative/${link.link}`=== pathname ? activeLink : normalLink}
-                    style={{"backgroundColor":`${`/adminstrative/${link.link}`=== pathname ?  currentColor: ""}`}}
+                    className={`${link.link}`=== pathname ? activeLink : normalLink}
+                    style={{"backgroundColor":`${`${link.link}`=== pathname ?  currentColor: ""}`}}
                   >
                     {link?.icon}
                     <span className="capitalize ">{link.name}</span>
