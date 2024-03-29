@@ -16,7 +16,8 @@ export async function GET(req:NextRequest){
                 following:true
             }
         })
-        return NextResponse.json({success:true,data:{allFollowing}},{status:200})
+        const followingLength = allFollowing.length;
+        return NextResponse.json({success:true,following:followingLength,data:{allFollowing}},{status:200})
         
     } catch (error) {
         return NextResponse.json({success:false,message:error},{status:400})

@@ -20,7 +20,8 @@ export async function GET(){
                 follower:true
             }
         })
-        return NextResponse.json({success:true,allFollower},{status:200})
+        const length = allFollower.length;
+        return NextResponse.json({success:true,followers:length,allFollower},{status:200})
     } catch (error) {
         return NextResponse.json({success:false,message:error},{status:400})
     }

@@ -46,7 +46,7 @@ const BlogCard:FC<BlogcardProps> = ({id,tags=["blog"],bookmark=false,disableBtn=
       {/* card head  */}
       <div style={{gridTemplateColumns:"3rem 1fr 2rem"}} className='grid grid-rows-1 justify-start items-start gap-x-2 my-2'>
         <Image
-          src={author.image?author.image:"/user.png"}
+          src={author.image? author.image :"/user.png"}
           alt={author.name}
           width={300}
           height={200}

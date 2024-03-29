@@ -24,7 +24,7 @@ const SlidingMenu = ({className,menuOptions,head}:{className?:string,menuOptions
         </section>
         <section className='my-5'>
         {menuOptions.map((action,index) =>{return index===active?<div key={index}
-        className={` ${index === 0 && "bg-pink-400"}`}
+        className={` ${index === 0  }`}
         >
           {action.page}
         </div>:""})}
