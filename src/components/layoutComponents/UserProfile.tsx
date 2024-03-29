@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
 import { Button } from ".";
 import { useAppSelector } from "@/redux/hooks";
-import { currentUser } from "@/lib/authDet";
 import { FiCreditCard } from "react-icons/fi";
-import { BsCurrencyDollar, BsShield } from "react-icons/bs";
+import { BsCurrencyDollar } from "react-icons/bs";
+import { MdAdminPanelSettings } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { TfiWrite } from "react-icons/tfi";
 import { signIn } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface UserProfileProps {
   name: string;
@@ -27,31 +29,44 @@ const UserProfile: React.FC<UserProfileProps> = ({
   image,
 }) => {
   const { currentColor } = useAppSelector((state) => state.theme);
-  console.log(email, name, oAuthSession, role, image);
-
-  const userProfileData = [
+  // console.log(email, name, oAuthSession, role, image);
+  const router = useRouter();
+  const [userProfileData,setUserProfile] = useState([
     {
       icon: <BsCurrencyDollar />,
       title: "My Profile",
       desc: "Account Settings",
       iconColor: "#03C9D7",
       iconBg: "#E5FAFB",
+      link: `/profile/dashboard/${role}`,
     },
-    {
-      icon: <BsShield />,
-      title: "My Inbox",
-      desc: "Messages & Emails",
+    
+  ])
+useEffect(() => {
+  if(oAuthSession === "authenticated" && role === "ADMIN" || role === "WRITER"){
+    const val = [{
+      icon: <TfiWrite />,
+      title: "write your thoughts",
+      desc: "write content or story",
       iconColor: "rgb(0, 194, 146)",
       iconBg: "rgb(235, 250, 242)",
-    },
-    {
-      icon: <FiCreditCard />,
-      title: "My Tasks",
-      desc: "To-do and Daily Tasks",
-      iconColor: "rgb(255, 244, 229)",
-      iconBg: "rgb(254, 201, 15)",
-    },
-  ];
+      link: "/write/new"
+    }]
+
+    if(role === "ADMIN"){
+      val.push({
+        icon: <MdAdminPanelSettings />,
+        title: "Admin Panel",
+        desc: "Admin panel Settings",
+        iconColor: "rgb(255, 244, 229)",
+        iconBg: "rgb(254, 201, 15)",
+        link: "/"
+      })
+    }
+    setUserProfile([...userProfileData,...val]);
+  }
+}, [oAuthSession,role]);
+  
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96 shadow-md max-md:w-11/12">
@@ -98,6 +113,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
               <div
                 key={index}
                 className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]"
+                onClick={()=>router.push(item.link)}
               >
                 <button
                   type="button"

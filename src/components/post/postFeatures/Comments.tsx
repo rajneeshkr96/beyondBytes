@@ -47,20 +47,22 @@ export const Comment: React.FC<CommentProps> = ({ id, commentCount, visible, clo
     }
   };
 
-  useEffect(() => {
-    getComments();
-  }, [commentCounts]);
 
-  const getComments = async () => {
-    try {
-      const res = await axios.get(`/api/user/comment/get/${id}`);
-      if (res.data.success) {
-        setUseComment(res.data.data);
-      }
-    } catch (error: any) {
-      errorToastHandler(error);
-    }
-  };
+
+  useEffect(() => {
+    const getComments = async () => {
+        try {
+            const res = await axios.get(`/api/user/comment/get/${id}`);
+            if (res.data.success) {
+                setUseComment(res.data.data);
+            }
+        } catch (error: any) {
+            errorToastHandler(error);
+        }
+    };
+
+    getComments();
+}, [id]);
 
   const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
     const delta = e.deltaY;

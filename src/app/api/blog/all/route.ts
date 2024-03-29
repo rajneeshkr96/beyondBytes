@@ -28,7 +28,7 @@ async function validateQueryParams(req: NextRequest) {
   return { page, limit };
 }
 
-async function getBlogs(page: number, limit: number, sort?: string, fields?: string[], search?: string, tags?: string[]) {
+async function getBlogs(id:string,page: number, limit: number, sort?: string, fields?: string[], search?: string, tags?: string[]) {
   const query: any = { }; // Create empty query object
     if (search) {
       query.where = {
@@ -71,7 +71,26 @@ async function getBlogs(page: number, limit: number, sort?: string, fields?: str
       }
     });
   }
-
+  if(id !== "undefined"){
+    query.select.likes = {
+      where:{
+        UserId: id,
+      },
+      select:{
+       like: true
+      }
+    }
+    ,
+    query.select.bookmarks={
+      where:{
+        UserId: id,
+      },
+      select:{
+        bookmark: true
+      }
+    }
+  }
+  console.log("quary",query.select);
   const skip = (page - 1) * limit; // Calculate skip for pagination
   const blogs = await dataBasePrisma.blog.findMany({
     take: limit, // Limit results
@@ -90,8 +109,9 @@ export async function GET(req: NextRequest) {
     const fields = req.nextUrl.searchParams.get("fields")?.split(",");
     const search = req.nextUrl.searchParams.get("search") ?? "";
     const tags = req.nextUrl.searchParams.get("tags")?.split(",");
-
-    let blogs = await getBlogs(page, limit, sort, fields,search,tags);
+    const userId = req.nextUrl.searchParams.get("id") ?? "";
+    console.log("id..........", userId);
+    let blogs = await getBlogs(userId,page, limit, sort, fields,search,tags);
     const total = await dataBasePrisma.blog.count(); // Count all blogs
     return NextResponse.json(
       { success: true, message: "Fetched successfully", data: blogs, total },

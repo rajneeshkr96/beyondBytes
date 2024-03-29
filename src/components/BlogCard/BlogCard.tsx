@@ -41,6 +41,7 @@ export function formatDate(dateString:Date) {
 }
 
 const BlogCard:FC<BlogcardProps> = ({id,tags=["blog"],bookmark=false,disableBtn=false,likesCount,meLike=false,title,metaDesc,image,createdAt,author,slug,readTime}) => {
+
   return (
     <div className='w-11/12 min-w-80 max-w-96 sm:w-1/2 md:w-1/4  px-4 py-2 shadow mx-4 my-2'>
       {/* card head  */}

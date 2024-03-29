@@ -42,10 +42,10 @@ export default function HeroSlide() {
   }
   
   return (
-    <div className="min-h-screen gap-y-12 flex flex-col ">
+    <div className="min-h-screen gap-y-12 max-md:gap-y-4 flex flex-col ">
       <h1
         style={{ color: currentColor }}
-        className=" text-5xl uppercase font-bold"
+        className=" text-5xl uppercase font-bold max-md:text-2xl"
       >
         beyondbytes
       </h1>
