@@ -10,8 +10,9 @@ function notfound() {
                     </h1>
                     <h4 className="text-gray-600 mb-5 text-left text-xl pr-0">
                         Whoops, this is a little embarrassing. <br />
-                        This page doesn't seem to exist.
+                        This page doesn&apos;t seem to exist.
                     </h4>
+
                     <Link
                         className="bg-black text-white text-base font-medium px-4 py-2 rounded text-center inline-block mt-5 border click-attached"
                         href="/"

@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
   try {
     const blog = await dataBasePrisma.blog.findMany()
     const length = blog.length
+    console.log(process.env.BASE_URL)
     return NextResponse.json({ success: true,message:"fetched successfully",length:length, data: blog }, { status: 200 });
   } catch (error) {
     console.error(error);

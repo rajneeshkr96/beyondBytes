@@ -35,11 +35,10 @@ const   ActionOptions = ({id,authId,disable}:{id:string,authId:string,disable?:b
 
       const res = axios.get(`/api/user/follows/follower/get/${authId}`);
       res.then(res => {
-        console.log(res.data);
         setIsFollow(res.data.data.follow);
       })
     }
-  }, []);
+  }, [session.status,disable,authId]);
   const onMute = () =>{};
 
     return (

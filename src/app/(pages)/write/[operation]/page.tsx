@@ -54,7 +54,7 @@ const Page = () => {
         setMetaTitle(localStorage.getItem("metaTitle") ?? "");
         setMetaDes(localStorage.getItem("metaDes") ?? ""); 
     }
-  }, []);
+  }, [param.operation]);
   const getData = async () => {
     const { data } = await axios.get("/api/tags/get");
     let tag = data.data.map((val: {

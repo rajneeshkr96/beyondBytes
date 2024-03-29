@@ -6,13 +6,6 @@ import { useAppSelector,useAppDispatch } from '@/redux/hooks';
 import {setActiveMenu} from "@/redux/action/themeSlice"
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
-import { FaProductHunt } from "react-icons/fa6";
-import { AiOutlineCalendar,  AiOutlineAreaChart,AiOutlineStock, AiOutlineBarChart } from 'react-icons/ai';
-import {  FiPieChart } from 'react-icons/fi';
-import { BsKanban } from 'react-icons/bs';
-import { MdAddShoppingCart } from "react-icons/md";
-import { TfiLayoutSliderAlt } from "react-icons/tfi";
-import { TbDiscountCheck } from "react-icons/tb";
 import {ReactLenis} from  "@studio-freight/react-lenis";
 import { GiArtificialIntelligence } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
