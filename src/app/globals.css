@@ -331,8 +331,12 @@ html::-webkit-scrollbar-thumb {
 
 
 
-
-
+/* profile-dashboard */
+@media (min-width: 730px) {
+  .hide-on-large {
+    display: none;
+  }
+}
 
 
 
