@@ -12,7 +12,8 @@ export async function GET(req:NextRequest,  context: { params: { id: string } })
       const follow = await dataBasePrisma.follows.findFirst({
           where:{
               followingId:writerId
-          }
+          },
+          
       });
       if(!follow){
          return NextResponse.json({success:false,message:"You are not following this user"})
@@ -20,6 +21,18 @@ export async function GET(req:NextRequest,  context: { params: { id: string } })
       const writerBlogs = await dataBasePrisma.blog.findMany({
          where:{
             authorId:writerId
+         },
+         select:{
+            content:false,
+            author:true,
+            title:true,
+            slug:true,
+            image:true,
+            createdAt:true,
+            readTime:true,
+            tags:true,
+            likesCount:true,
+            id:true
          }
       })
       if(!writerBlogs){
