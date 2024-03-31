@@ -28,7 +28,7 @@ export interface MyPostsProps {
   readTime: string;
 }
 
-const MyPosts= async () => {
+const MyPosts=  () => {
   const id = "65eabfc18015eaeff8ae6e31";
 
   const [post, setPost] = useState([]);
@@ -52,10 +52,10 @@ const MyPosts= async () => {
             image={data.image}
             slug={data.slug}
             authId={data.author.id}
-            likesCount={data.likesCount}
+            likesCount={8}
             commentCount={data.commentsCount}
 
-            // baseurl={process.env.BASE_URL}
+            baseurl={"loclahost:3000"}
 
           />
         ))}

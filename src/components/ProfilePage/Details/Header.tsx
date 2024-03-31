@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 interface HeaderProps {}
-const Header: React.FC<HeaderProps> = async () => {
+const Header: React.FC<HeaderProps> =  () => {
   const [profileData, setProfileData] = useState({
     followers: 0,
     following: 0,
