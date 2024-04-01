@@ -14,9 +14,9 @@ interface HeaderProps{
     author: {id:string; name:string, email:string,image:string,role:string}
 }
 const Header:FC<HeaderProps> = ({font,title,createdAt,readTime,author}) => {
-
+   
     return (
-        <header className=''>
+        <header className='  '>
             <div className='min-h-[70vh] grid grid-cols-3 grid-rows-[repeat(2,auto)] '>
                 <div className='col-start-1 col-end-4'>
                     <h1 className={`max-xl:text-5xl max-md:line-clamp-3 max-md:text-2xl font-medium ${font} text-7xl  capitalize line-clamp-2`}>{title}</h1>

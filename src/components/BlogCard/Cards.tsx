@@ -10,6 +10,7 @@ import axios from 'axios';
 import { errorToastHandler } from '@/components/errorTostHandler';
 import { useSession } from "next-auth/react";
 import ShareOptions from "../post/postFeatures/shareOptions";
+import Link from "next/link";
 
 interface CardsProps {
   title: string;
@@ -95,19 +96,8 @@ const Cards: FC<CardsProps> = ({
       }
 
   };
-  function trackScreenWidth() {
-    let previousWidth = window.innerWidth;
-  
-    window.addEventListener('resize', () => {
-      const currentWidth = window.innerWidth;
-  
-      if (previousWidth !== currentWidth) {
-        console.log('Screen width changed to:', currentWidth);
-        previousWidth = currentWidth;
-      }
-    });
-  }
-  trackScreenWidth();
+
+ 
   return (
     <div className="border-2 my-2">
     
@@ -115,8 +105,9 @@ const Cards: FC<CardsProps> = ({
         {...props}
         className=" group relative cursor-pointer  max-sm:w-[99%] max-sm:h-[50vh] "
       >
-        <div
-         onClick={() => router.push(`/blog/${slug}`)}
+        <Link
+          href={`/post/${slug}`}
+          target='_blank'
         >
           <Image
             src={image.src}
@@ -126,7 +117,7 @@ const Cards: FC<CardsProps> = ({
             className="w-full h-auto max-sm:h-[50vh] mx-auto object-cover rounded-lg cursor-pointer transition duration-300 transform group-hover:scale-105"
            
           />
-        </div>
+        </Link>
         <div className="absolute p-6 text-[1em] top-0 left-0 w-full h-0 flex flex-col justify-between text-start  bg-half-transparent cursor-pointer opacity-0 group-hover:h-full group-hover:opacity-100 duration-500">
           <h1 className=" text-white duration-300">{title}</h1>
         </div>
