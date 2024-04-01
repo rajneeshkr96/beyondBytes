@@ -1,5 +1,5 @@
 "use client"
-import React, { Dispatch, FC, SetStateAction, useCallback } from 'react'
+import React, { Dispatch, FC, SetStateAction, useCallback, useRef, useState } from 'react'
 import {
     BubbleMenu,
     Editor,
@@ -17,6 +17,8 @@ import {
   import { GrTableAdd } from "react-icons/gr";
   import { RiInsertColumnRight,RiDeleteColumn,RiDeleteRow,RiInsertRowBottom } from "react-icons/ri";
   import { FcDeleteDatabase } from "react-icons/fc";
+import ImageUploadModal from './UploadImage/UploadImage';
+import { PreImageProps } from '@/app/(pages)/write/[operation]/page';
 
 
   // types 
@@ -24,7 +26,9 @@ interface EditorProps {
   editor:Editor;
 }
 const TextEditor:FC<EditorProps> = ({editor}) => {
-
+  const [preImage, setPreImage] = useState<PreImageProps>({src:"",alt:""});
+  const heroImageRef = useRef<HTMLInputElement>(null);
+  const [showImageModal, setShowImageModal] = useState(false);
       const setLink = () => {
         const previousUrl = editor.getAttributes('link').href
         const url = window.prompt('URL', previousUrl)
@@ -47,10 +51,12 @@ const TextEditor:FC<EditorProps> = ({editor}) => {
           .run()
       }
       const addImage = () => {
+
         const url = window.prompt('URL')
+        const alt = window.prompt('alt') ?? ""
     
         if (url) {
-          editor.chain().focus().setImage({ src: url }).run()
+          editor.chain().focus().setImage({ src: url,alt:alt }).run()
         }
       };
       const addYoutubeVideo = () => {
@@ -140,6 +146,14 @@ const TextEditor:FC<EditorProps> = ({editor}) => {
       ]
       return (
         <>
+            <ImageUploadModal
+              preImage={preImage}
+              setPreImage={setPreImage}
+              button={"hello"}
+              heroImageRef={heroImageRef}
+              open={showImageModal}
+            />
+
             <span className='bg-[#333] text-2xl flex justify-center gap-x-4 px-4 py-2  rounded-t-md max-sm:overflow-scroll max-sm:px-6'>
                 <button
                     onClick={() => editor.chain().focus().toggleCode().run()}

@@ -17,11 +17,10 @@ import axios from 'axios';
 import {  toast } from 'react-toastify';
 import SubmitButton from '@/components/layoutComponents/Button/SubmitButton'
 import UploadImage from '@/components/uploadImageWithPre/UploadImage';
-import Modal from '@/components/Modal/Modal'
-import { UploadButton } from '@/utilis'
 import { useDebouncedCallback } from 'use-debounce';
 import { ErrorResponse, errorToastHandler } from '@/components/errorTostHandler'
 import { useRouter } from 'next/navigation'
+import ImageUploadModal from '@/components/UploadImage/UploadImage'
 const animatedComponents = makeAnimated();
 interface Option {
   value: string;
@@ -39,8 +38,6 @@ const Page = () => {
   const [title,setTitle] = useState<string >("");
   const [metaTitle,setMetaTitle] = useState<string >("");
   const [metaDes,setMetaDes] = useState<string >("");
-  const [method, setMethod] = useState("uploadthing")
-  const [dialogRef, setDialogRef] = useState<React.RefObject<HTMLDialogElement> | null>(null);
   const [preImage, setPreImage] = useState<PreImageProps>({src:"",alt:""});
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
   const [tags, setTags] = useState([]);
@@ -76,9 +73,7 @@ const Page = () => {
     setSelectedTags(options ? Array.from(options) : []);
   };
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setMethod(e.target.value);
-  };
+
   const debounced = useDebouncedCallback(
     (val:{key:string,value:string }) => {
       window.localStorage.setItem(val.key,val.value);
@@ -155,67 +150,13 @@ const Page = () => {
     <div className='min-h-screen'>
 
       {/* image uploading ................ */}
-      <Modal setDialog={setDialogRef} btnClass='w-full' className='!px-20 ' button={<UploadImage preImage={preImage} />}>
-        {/* alt  */}
-        <input onChange={(e)=>{
-            setPreImage({src:preImage.src,alt:e.target.value})
-            debounced({key:"alt",value:e.target.value});
-            }} value={preImage.alt} type="text" name="" id="" placeholder='image title....' className="w-full px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" />
-        {/* select method  */}
-        <div className='flex justify-center gap-x-4 mx-auto my-6'>
-          <label>
-            <input
-              type="radio"
-              name="method"
-              id="uploadthing"
-              value="uploadthing"
-              checked={method === 'uploadthing'}
-              onChange={onChange}
-              className="mx-2"
-            />
-            uploadthing
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="method"
-              id="url"
-              value="url"
-              checked={method === 'url'}
-              onChange={onChange}
-              className="mx-2"
-            />
-            url
-          </label>
-        </div>
-        {method === "uploadthing" && <UploadButton
-          endpoint="imageUploader"
-          onClientUploadComplete={(res) => {
-            setPreImage({src:res[0].url,alt:""});
-            dialogRef?.current?.close();
-            debounced({key:"heroImage",value:res[0].url})
-            toast.success("images uploaded successfully");
-          }}
-          onUploadError={(error: Error) => {
-            dialogRef?.current?.close();
-            toast.error(error.message);
-          }}
-        />}
-        {method === "url" &&
-          <div>
-            <input type="url" ref={heroImageRef} placeholder='cover banner URL...' className="w-[70%] px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" />
-            <SubmitButton value="add cover image..." className='py-2 px-4 bg-black text-white rounded-md my-2' onClick={()=>{
-              if(heroImageRef.current?.value){
-                setPreImage({src:heroImageRef.current.value,alt:""});
-                debounced({key:"heroImage",value:heroImageRef.current.value})
-              }else{
-                toast.error("url not found");
-              }
-              dialogRef?.current?.close();
-            }} />
-          </div>
-        }
-      </Modal>
+      
+      <ImageUploadModal
+        preImage={preImage}
+        setPreImage={setPreImage}
+        button={<UploadImage preImage={preImage} />}
+        heroImageRef={heroImageRef}
+      />
 
       <div className='w-11/12 mx-auto mt-16'>
         {/* title ..................  */}

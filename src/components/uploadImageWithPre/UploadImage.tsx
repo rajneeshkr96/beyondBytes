@@ -5,7 +5,7 @@ import { PreImageProps } from '@/app/(pages)/write/[operation]/page';
 const UploadImage = ({preImage,...props}:{preImage:PreImageProps}) => {
   return (
     <div className=" w-full mx-auto sm:max-w-7xl my-2">
-    <div className='flex justify-center items-center gap-4 h-24 '>
+    <div className='flex justify-center items-center gap-4 max-h-24 '>
       {preImage.src && <Image src={preImage.src} alt={preImage.alt} width={300} height={400} className='object-fill h-full w-auto' />}
     </div>
     {/* select method  */}
