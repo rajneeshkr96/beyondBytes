@@ -113,19 +113,21 @@ const Cards: FC<CardsProps> = ({
     
       <div
         {...props}
-        className=" group relative  max-sm:w-[99%] max-sm:h-[50vh] "
+        className=" group relative cursor-pointer  max-sm:w-[99%] max-sm:h-[50vh] "
       >
-        <div>
+        <div
+         onClick={() => router.push(`/blog/${slug}`)}
+        >
           <Image
             src={image.src}
             alt={image.alt}
             width={1000}
             height={1000}
             className="w-full h-auto max-sm:h-[50vh] mx-auto object-cover rounded-lg cursor-pointer transition duration-300 transform group-hover:scale-105"
-            onClick={() => router.push(`/blog/${slug}`)}
+           
           />
         </div>
-        <div className="absolute p-6 text-[1em] top-0 left-0 w-full h-0 flex flex-col justify-between text-start  bg-half-transparent opacity-0 group-hover:h-full group-hover:opacity-100 duration-500">
+        <div className="absolute p-6 text-[1em] top-0 left-0 w-full h-0 flex flex-col justify-between text-start  bg-half-transparent cursor-pointer opacity-0 group-hover:h-full group-hover:opacity-100 duration-500">
           <h1 className=" text-white duration-300">{title}</h1>
         </div>
       </div>

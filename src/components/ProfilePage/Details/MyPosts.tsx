@@ -39,7 +39,7 @@ const MyPosts=  () => {
   useEffect(() => {
     getAllPosts();
   }, []);
-  console.log(post);
+
   return (
     <div className="bg-[#e2eafc] w-11/12 mx-auto">
       <section className="grid grid-cols-3 max-sm:grid-cols-1 justify-evenly max-sm:justify-center gap-2 p-2  max-sm:flex-col   ">
@@ -52,10 +52,9 @@ const MyPosts=  () => {
             image={data.image}
             slug={data.slug}
             authId={data.author.id}
-            likesCount={8}
+            likesCount={data?.likesCount?data.likesCount:0}
             commentCount={data.commentsCount}
-
-            baseurl={"loclahost:3000"}
+            baseurl={process.env.BASE_URL as string} 
 
           />
         ))}
