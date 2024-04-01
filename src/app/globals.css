@@ -325,12 +325,6 @@ html::-webkit-scrollbar-thumb {
   top: calc(-90% + 3.5rem);
 }
 
-
-
-
-
-
-
 /* profile-dashboard */
 @media (min-width: 730px) {
   .hide-on-large {
@@ -344,4 +338,11 @@ html::-webkit-scrollbar-thumb {
 
 .testing{
   font-family: var("source_serif_4");
+}
+
+
+/* blog post */
+/* auto scroll screen */
+.scroll-container{
+  
 }
