@@ -35,6 +35,7 @@ const Page = () => {
   const router = useRouter();
   const [loading,setLoading] = useState(false);
   const heroImageRef = useRef<HTMLInputElement>(null);
+  const altRef = useRef<HTMLInputElement>(null);
   const [title,setTitle] = useState<string >("");
   const [metaTitle,setMetaTitle] = useState<string >("");
   const [metaDes,setMetaDes] = useState<string >("");
@@ -44,6 +45,22 @@ const Page = () => {
   const param = useParams();
 
   useEffect(() => {
+    const getData = async () => {
+      const { data } = await axios.get("/api/tags/get");
+      let tag = data.data.map((val: {
+                      UserId: string
+                      createdAt: Date
+                      id: string
+                      title: string
+                      value: string[]
+                      }) => {
+                        return val.value;
+                      })
+      tag = tag.flat(1).map((val:string) => {
+          return {value:val,label:val};
+        })
+      setTags(tag);
+    };
     getData();
     if(param.operation === "new"){
         setTitle(localStorage.getItem("title") ?? "")
@@ -52,22 +69,7 @@ const Page = () => {
         setMetaDes(localStorage.getItem("metaDes") ?? ""); 
     }
   }, [param.operation]);
-  const getData = async () => {
-    const { data } = await axios.get("/api/tags/get");
-    let tag = data.data.map((val: {
-                    UserId: string
-                    createdAt: Date
-                    id: string
-                    title: string
-                    value: string[]
-                    }) => {
-                      return val.value;
-                    })
-    tag = tag.flat(1).map((val:string) => {
-        return {value:val,label:val};
-      })
-    setTags(tag);
-  };
+
 
   const handleChange = (options: readonly Option[] | null) => {
     setSelectedTags(options ? Array.from(options) : []);
@@ -155,7 +157,9 @@ const Page = () => {
         preImage={preImage}
         setPreImage={setPreImage}
         button={<UploadImage preImage={preImage} />}
+        debounced={debounced}
         heroImageRef={heroImageRef}
+        altRef={altRef}
       />
 
       <div className='w-11/12 mx-auto mt-16'>
@@ -190,7 +194,7 @@ const Page = () => {
         <TextEditor editor={editor} /> 
 
       </div>
-      <SubmitButton loading={loading} value="Public" className='bg-green-700 text-blue-50 px-4 py-2 rounded-full block mx-auto mt-4 hover:bg-green-600 font-bold ' onClick={()=>publicBlog()} />
+      <SubmitButton loading={loading} value="Publish" className='bg-green-700 text-blue-50 px-4 py-2 rounded-full block mx-auto mt-4 hover:bg-green-600 font-bold ' onClick={()=>publicBlog()} />
     </div>
   )
 }

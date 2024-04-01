@@ -1,21 +1,29 @@
 // ImageUploadModal.tsx
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Modal from '@/components/Modal/Modal';
 import { UploadButton } from '@/utilis';
 import { PreImageProps } from '@/app/(pages)/write/[operation]/page';
 import { toast } from 'react-toastify';
+import { DebouncedState } from 'use-debounce';
 
 interface ImageUploadModalProps {
   preImage: PreImageProps;
   setPreImage: React.Dispatch<React.SetStateAction<PreImageProps>>;
   button: React.ReactNode;
   heroImageRef: React.RefObject<HTMLInputElement>;
+  altRef: React.RefObject<HTMLInputElement>;
+  debounced?: DebouncedState<(val: {
+    key: string;
+    value: string;
+}) => void>
   open?: boolean;
-  AdditonalWork?:()=>void;
+  onClose?:()=>void;
+  additionalWork?: (param1: string, param2: string) => void;
+
 }
 
-const ImageUploadModal: React.FC<ImageUploadModalProps> = ({ preImage, setPreImage,open, button, heroImageRef,AdditonalWork }) => {
+const ImageUploadModal: React.FC<ImageUploadModalProps> = ({ preImage, setPreImage,open,onClose, button, heroImageRef,altRef,debounced,additionalWork }) => {
   const [dialogRef, setDialogRef] = useState<React.RefObject<HTMLDialogElement> | null>(null);
   const [method, setMethod] = useState("uploadthing");
 
@@ -23,15 +31,21 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({ preImage, setPreIma
     setMethod(e.target.value);
   };
 
+
+
   return (
-    <Modal open={open} setDialog={setDialogRef } btnClass='w-full' className='!px-20 ' button={button}>
+    <Modal open={open} onClose={onClose} setDialog={setDialogRef } btnClass='w-full' className='!px-20 ' button={button}>
       <input
         onChange={(e) => {
           setPreImage({ src: preImage.src, alt: e.target.value });
-          
+          if(debounced){
+            debounced({key:"alt",value:e.target.value});
+          }
         }}
         value={preImage.alt}
+        ref={altRef}
         type="text"
+
         placeholder='image title....'
         className="w-full px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
       />
@@ -64,8 +78,13 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({ preImage, setPreIma
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {
             setPreImage({ src: res[0].url, alt: "" });
+            if(debounced){
+              debounced({key:"heroImage",value:res[0].url});
+            }
+            if(additionalWork && altRef.current){
+              additionalWork?.(res[0].url, altRef.current?.value);
+            }
             dialogRef?.current?.close();
-            AdditonalWork?.();
           }}
           onUploadError={(error: Error) => {
             dialogRef?.current?.close();
@@ -86,6 +105,9 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({ preImage, setPreIma
             onClick={() => {
               if (heroImageRef.current?.value) {
                 setPreImage({ src: heroImageRef.current.value, alt: "" });
+                if(additionalWork && altRef.current){
+                  additionalWork?.(heroImageRef.current.value,altRef.current?.value);
+                }
               } else {
                 toast.error("url not found");
               }

@@ -8,8 +8,9 @@ interface ModelProps {
   children:React.ReactNode;
   className?:string;
   open?:boolean;
+  onClose?:()=>void;
 }
-const Modal:FC<ModelProps> = ({setDialog,btnClass,button="Button", children, className,open=false,...props }) => {
+const Modal:FC<ModelProps> = ({setDialog,btnClass,button="Button", children, className,onClose,open=false,...props }) => {
   const showRef = useRef<HTMLDialogElement>(null);
 
 useEffect(() => {
@@ -39,6 +40,9 @@ useEffect(() => {
         <button
           onClick={() => {
             showRef?.current?.close();
+            if(onClose){
+              onClose();
+            }
           }}
           aria-label="close"
           className="x cursor-pointer  border-none absolute top-4 right-3"

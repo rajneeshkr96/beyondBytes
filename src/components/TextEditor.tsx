@@ -28,6 +28,7 @@ interface EditorProps {
 const TextEditor:FC<EditorProps> = ({editor}) => {
   const [preImage, setPreImage] = useState<PreImageProps>({src:"",alt:""});
   const heroImageRef = useRef<HTMLInputElement>(null);
+  const altRef = useRef<HTMLInputElement>(null);
   const [showImageModal, setShowImageModal] = useState(false);
       const setLink = () => {
         const previousUrl = editor.getAttributes('link').href
@@ -50,15 +51,21 @@ const TextEditor:FC<EditorProps> = ({editor}) => {
         editor.chain().focus().extendMarkRange('link').setLink({ href: url })
           .run()
       }
-      const addImage = () => {
-
-        const url = window.prompt('URL')
-        const alt = window.prompt('alt') ?? ""
-    
+      const addImage = (url:string,alt:string) => {
+        console.log(alt,"lkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
         if (url) {
           editor.chain().focus().setImage({ src: url,alt:alt }).run()
         }
+        setShowImageModal(false)
+        setPreImage({src:"",alt:""})
+        if(heroImageRef.current){
+          heroImageRef.current.value = ""
+        }
       };
+      const onClose = () => {
+        setShowImageModal(false);
+      }
+      
       const addYoutubeVideo = () => {
         const url = prompt('Enter YouTube URL')
     
@@ -144,16 +151,19 @@ const TextEditor:FC<EditorProps> = ({editor}) => {
         isActive:editor.isActive('link') ? isActive : iconClass,
         icon:<BiLink />},
       ]
+
       return (
         <>
             <ImageUploadModal
               preImage={preImage}
               setPreImage={setPreImage}
-              button={"hello"}
+              button={" "} 
               heroImageRef={heroImageRef}
+              altRef={altRef}
               open={showImageModal}
+              onClose={onClose}
+              additionalWork={addImage} 
             />
-
             <span className='bg-[#333] text-2xl flex justify-center gap-x-4 px-4 py-2  rounded-t-md max-sm:overflow-scroll max-sm:px-6'>
                 <button
                     onClick={() => editor.chain().focus().toggleCode().run()}
@@ -221,7 +231,7 @@ const TextEditor:FC<EditorProps> = ({editor}) => {
           </BubbleMenu>}
     
           {editor && <FloatingMenu className="flex gap-x-2" tippyOptions={{ duration: 100 }} editor={editor}>
-            <button onClick={addImage} className={`${iconClass} ${floatIcon} `}>
+            <button onClick={()=>setShowImageModal(true)} className={`${iconClass} ${floatIcon} `}>
                 <FaImage />
             </button>
             <button id="add" className={`${iconClass} ${floatIcon} `} onClick={addYoutubeVideo}>
