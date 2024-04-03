@@ -45,7 +45,6 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({ preImage, setPreIma
         value={preImage.alt}
         ref={altRef}
         type="text"
-
         placeholder='image title....'
         className="w-full px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
       />
@@ -82,7 +81,7 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({ preImage, setPreIma
               debounced({key:"heroImage",value:res[0].url});
             }
             if(additionalWork && altRef.current){
-              additionalWork?.(res[0].url, altRef.current?.value);
+              additionalWork?.(res[0].url,altRef.current?.value);
             }
             dialogRef?.current?.close();
           }}

@@ -52,7 +52,6 @@ const TextEditor:FC<EditorProps> = ({editor}) => {
           .run()
       }
       const addImage = (url:string,alt:string) => {
-        console.log(alt,"lkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
         if (url) {
           editor.chain().focus().setImage({ src: url,alt:alt }).run()
         }

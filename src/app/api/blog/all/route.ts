@@ -71,7 +71,7 @@ async function getBlogs(id:string,page: number, limit: number, sort?: string, fi
       }
     });
   }
-  if(id !== "undefined"){
+  if(id !== "undefined" && id !== ""){
     query.select.likes = {
       where:{
         UserId: id,

@@ -3,6 +3,7 @@ import { MdOutlineCancel } from 'react-icons/md';
 
 import { Button } from '../layoutComponents/index';
 import { useAppSelector } from '@/redux/hooks';
+import Searchbar from '../SearchBar/SearchBar';
 
 const SearchBar = () => {
   const { currentColor } = useAppSelector((state) => state.theme);
@@ -16,7 +17,7 @@ const SearchBar = () => {
         <Button icon={<MdOutlineCancel />} color="rgb(153, 171, 180)" bgHoverColor="light-gray" size="2xl" borderRadius="50%" />
       </div>
       <div className='dark:text-gray-200'>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta minus placeat assumenda, laudantium dolor ex esse quas illo, facere voluptatem voluptates? Repellat impedit dicta molestias! Error odit incidunt itaque minima?
+        <Searchbar/>
       </div>
     </div>
   );
