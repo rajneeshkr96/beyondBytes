@@ -2,7 +2,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import Cards from "@/components/BlogCard/Cards";
+import BlogsCards from "@/components/BlogCard/BlogsCards";
 export interface MyPostsProps {
   id: string;
   tags?: Array<string>;
@@ -44,7 +44,7 @@ const MyPosts=  () => {
     <div className="bg-[#e2eafc] w-11/12 mx-auto">
       <section className="grid grid-cols-3 max-sm:grid-cols-1 justify-evenly max-sm:justify-center gap-2 p-2  max-sm:flex-col   ">
         {post.map((data: MyPostsProps) => (
-          <Cards
+          <BlogsCards
             key={data.id}
             id={data.id}
             title={data.title}
