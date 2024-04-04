@@ -3,12 +3,13 @@ import React from 'react'
 import Header from '@/components/ProfilePage/Details/Header'
 import SlidingMenu from '@/components/SlidingMenu/SlidingMenu'
 import MyPosts from '@/components/ProfilePage/Details/MyPosts'
-import BlogsCards from '@/components/BlogCard/BlogsCards'
 import Bookmark from '@/components/ProfilePage/Details/Bookmark'
+import Followers from '@/components/ProfilePage/Details/Followers'
+import Following from '@/components/ProfilePage/Details/Following'
 
 
 const page = () => {
-  const actions =  [{action:"My Posts",page:<MyPosts/>},{action:"Bookmark",page:<Bookmark/>}]
+  const actions =  [{action:"My Posts",page:<MyPosts/>},{action:"Bookmark",page:<Bookmark/>},{action:"Followers",page:<Followers/>},{action:"Following",page:<Following/>}]
   return (
     <div className='relative top-0 z-50'>
       <Header/>

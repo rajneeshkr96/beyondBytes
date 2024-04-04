@@ -50,6 +50,7 @@ const BlogsCards: FC<BlogsCardsProps> = ({
           </div>
         </div>
       </Link>
+      
     </div>
   );
 };

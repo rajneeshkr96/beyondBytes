@@ -18,7 +18,9 @@ interface UserProfileProps {
   email: string;
   role: string;
   image: string;
+  userName?: string;
   oAuthSession?: string;
+  id?: string;
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({
@@ -27,6 +29,8 @@ const UserProfile: React.FC<UserProfileProps> = ({
   oAuthSession,
   role,
   image,
+  userName,
+  id,
 }) => {
   const { currentColor } = useAppSelector((state) => state.theme);
   // console.log(email, name, oAuthSession, role, image);
@@ -38,7 +42,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
       desc: "Account Settings",
       iconColor: "#03C9D7",
       iconBg: "#E5FAFB",
-      link: `/profile/dashboard/${role}`,
+      link: `/profile/dashboard/${role}/${userName}/${id}`,
     },
     
   ])

@@ -24,6 +24,7 @@ export const {
       if (session.user) {
         session.user.userId = token.userId as string;
         session.user.name = token.name;
+        session.user.userName = token.userName as string;
         session.user.email = token.email as string;
         session.user.image = token.picture as string;
         session.user.isOAuth = token.isOAuth as boolean;
@@ -57,6 +58,7 @@ export const {
           token.name = newUser.name;
           token.email = newUser.email;
           token.userId = newUser.id;
+          token.userName = newUser.username;
 
           return token;
         }
@@ -65,6 +67,7 @@ export const {
         token.role = existingUser.role;
         token.userId = existingUser.id;
         token.image = existingUser.image;
+        token.userName = existingUser.username;
 
         return token;
       } finally {

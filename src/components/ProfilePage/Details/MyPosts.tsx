@@ -3,6 +3,8 @@ import React, { FC, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import BlogsCards from "@/components/BlogCard/BlogsCards";
+import Pagination from "@/components/Pagination/Pagination";
+
 export interface MyPostsProps {
   id: string;
   tags?: Array<string>;
@@ -24,17 +26,33 @@ export interface MyPostsProps {
   slug: string;
   commentsCount: number;
   baseurl: string;
-
   readTime: string;
 }
 
-const MyPosts=  () => {
-  const id = "65eabfc18015eaeff8ae6e31";
+const MyPosts = ({
+  searchParams,
+}: {
+  searchParams?: {
+    keyword?: string;
+    tags?: string;
+    page?: string;
+  };
+}) => {
+  const session = useSession();
+  const id = session.data?.user?.userId;
+  const keyword = searchParams?.keyword || "";
+  const currentPage = Number(searchParams?.page) || 1;
+  let documentCount = 0;
 
   const [post, setPost] = useState([]);
   const getAllPosts = async () => {
-    const { data } = await axios.get(`/api/blog/writer/${id}`);
-    setPost(data.data);
+    try {
+      const { data } = await axios.get(`/api/blog/writer/${id}`);
+      if (data.success === true) {
+        documentCount = data.total;
+        setPost(data.data);
+      }
+    } catch (error) {}
   };
   useEffect(() => {
     getAllPosts();
@@ -52,12 +70,18 @@ const MyPosts=  () => {
             image={data.image}
             slug={data.slug}
             authId={data.author.id}
-            likesCount={data?.likesCount?data.likesCount:0}
+            likesCount={data?.likesCount ? data.likesCount : 0}
             commentCount={data.commentsCount}
-            baseurl={process.env.BASE_URL as string} 
-
+            baseurl={process.env.BASE_URL as string}
+            />
+          ))}
+          <Pagination
+            className="justify-center mt-4"
+            path="/profile/dashboard/ADMIN"
+            page={currentPage}
+            keyword={keyword}
+            documentCount={documentCount}
           />
-        ))}
       </section>
     </div>
   );

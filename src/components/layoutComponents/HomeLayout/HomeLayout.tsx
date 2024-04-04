@@ -11,7 +11,7 @@ import { useSession } from 'next-auth/react';
 export default function HomeLayout({
     children,
   }: {
-    children: React.ReactNode,name?:string,email?:string,role?:string,image?:string,oAuthSession?:string
+    children: React.ReactNode,name?:string,email?:string,role?:string,image?:string,oAuthSession?:string,userName?:string,id?:string
   }) {
     const { currentMode, activeMenu, currentColor, themeSettings}  = useAppSelector((state) => state.theme)
     const session  = useSession()    
@@ -61,7 +61,7 @@ export default function HomeLayout({
         >
           <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full 
           ">
-            <Navbar email={session?.data?.user.email as string} role= {session?.data?.user?.role as string } name={session?.data?.user.name as string } oAuthSession={session.status as string} image={session?.data?.user.image as string} />
+            <Navbar email={session?.data?.user.email as string} role= {session?.data?.user?.role as string } name={session?.data?.user.name as string } oAuthSession={session.status as string} image={session?.data?.user.image as string } userName={session.data?.user?.userName} id={session.data?.user?.userId}  />
           </div>
             {themeSettings && (<ThemeSettings />)}
           <div className="m-2 md:m-10 mt-24 p-2 md:p-10  dark:text-gray-300 ">

@@ -19,6 +19,8 @@ interface NavbarProps {
   role: string;
   image: string;
   oAuthSession?: string;
+  userName?: string;
+  id?: string;
 }
 
 const NavButton: React.FC<Props> = ({  customFunc, icon, color, dotColor  }) => (
@@ -38,7 +40,7 @@ const NavButton: React.FC<Props> = ({  customFunc, icon, color, dotColor  }) => 
   </div>
 );
 
-const Navbar :React.FC<NavbarProps> = ({email,name,role,image,oAuthSession}) => {
+const Navbar :React.FC<NavbarProps> = ({email,name,role,image,oAuthSession,userName,id}) => {
   const dispatch = useAppDispatch()
   const { currentColor, activeMenu, isClicked,  } = useAppSelector((state) => state.theme);
 
@@ -85,7 +87,7 @@ const Navbar :React.FC<NavbarProps> = ({email,name,role,image,oAuthSession}) => 
         </div>
         {isClicked.searchBar && (<SearchBar/>)}
         {isClicked.notification && (<Notification />)}
-        {isClicked.userProfile && (<UserProfile email={email} name={name} role={role} image={image} oAuthSession={oAuthSession} />)}
+        {isClicked.userProfile && (<UserProfile email={email} name={name} role={role} image={image} oAuthSession={oAuthSession} userName={userName} id={id} />)}
       </div>
     </div>
   );

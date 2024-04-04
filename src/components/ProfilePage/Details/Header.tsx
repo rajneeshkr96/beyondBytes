@@ -6,9 +6,10 @@ import SubmitButton from "@/components/layoutComponents/Button/SubmitButton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useParams } from "next/navigation";
 
 interface HeaderProps {}
-const Header: React.FC<HeaderProps> =  () => {
+const Header: React.FC<HeaderProps> = () => {
   const [profileData, setProfileData] = useState({
     followers: 0,
     following: 0,
@@ -21,10 +22,12 @@ const Header: React.FC<HeaderProps> =  () => {
   const writeBlogs = () => {
     router.push(`/write/new`);
   };
+  const params = useParams();
+  const id = params.id[2];
   const getProfileData = async () => {
     try {
       const { data } = await axios.get(
-        "/api/user/follows/follower/allFollower"
+       ` /api/user/follows/follower/allFollower/${id}`
       );
       const allfollwing = await axios.get(
         "/api/user/follows/following/allFollowing"
@@ -46,6 +49,7 @@ const Header: React.FC<HeaderProps> =  () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getProfileData();
   }, []);
@@ -61,7 +65,7 @@ const Header: React.FC<HeaderProps> =  () => {
               : "/user.png"
           }
           className=" flex-1 mr-4 m-auto rounded-full !w-full !h-full"
-          alt={session.data?.user ? session?.data?.user?.username : "user"}
+          alt={session.data?.user ? session?.data?.user?.userName : "user"}
           width={300}
           height={300}
         />
@@ -85,12 +89,12 @@ const Header: React.FC<HeaderProps> =  () => {
         </div>
 
         <div className="flex gap-3 mt-1 px-3  mx-auto">
-          <Link href={`#`} className="text-lg  text-gray-900 font-semibold">
+          <span className="text-lg  cursor-pointer text-gray-900 font-semibold">
             Followers: {profileData.followers}
-          </Link>
-          <Link href={`#`} className="text-lg text-gray-900 font-semibold">
+          </span>
+          <span className="text-lg cursor-pointer text-gray-900 font-semibold">
             Following: {profileData.following}
-          </Link>
+          </span>
         </div>
         <div className=" mx-auto mt-1 px-3">
           <p className="text-lg font-mediumt-">
