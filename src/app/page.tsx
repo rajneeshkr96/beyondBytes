@@ -5,6 +5,7 @@ import HeroSlide from "@/components/HeroSection/HeroSlide";
 import TagSlide from "@/components/TagSlide/TagSlide";
 import axios from "axios";
 import { currentUserId } from "@/lib/authDet";
+import { notFound } from "next/navigation";
 interface Bookmarks{
   bookmark:boolean
 }
@@ -29,14 +30,20 @@ export interface BlogcardProps{
 export default async function Home() {
   let blog;
   const id = await currentUserId();
+  let success = false;
  try {
   const res = await axios.get(`${process.env.BASE_URL}/api/blog/all?id=${id}&sort=createdAt&fields=id,tags,likesCount,author,title,metaDesc,image,createdAt,slug,readTime`);
   if(res.data.success){
     blog = res.data.data;
+    success = true;
   }
  } catch (error) {
+  success = false;
   console.log(error);
  }
+  if (!success) {
+    return notFound();
+  }
  
   return (
     

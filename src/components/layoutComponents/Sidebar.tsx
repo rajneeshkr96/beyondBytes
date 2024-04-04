@@ -13,6 +13,7 @@ import { FcAbout } from "react-icons/fc";
 import { MdPermContactCalendar,MdPolicy } from "react-icons/md";
 import { SiMicrosoftteams } from "react-icons/si";
 import { FcDisclaimer } from "react-icons/fc";
+import { FaPython } from "react-icons/fa";
 const Sidebar = () => {
   const { currentColor, activeMenu, screenSize } = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch()
@@ -64,8 +65,13 @@ const Sidebar = () => {
       links: [
         {
           name: 'Ai',
-          link: 'dashboard/calendar',
+          link: '/search?tags=ai',
           icon: <GiArtificialIntelligence />,
+        },
+        {
+          name: 'python',
+          link: '/search?tags=python',
+          icon: <FaPython />,
         },
       ],
     },

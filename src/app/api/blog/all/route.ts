@@ -35,11 +35,19 @@ async function getBlogs(id:string,page: number, limit: number, sort?: string, fi
           OR: [
               { title: { contains: search } },
               { content: { contains: search } },
+              { tags: { hasSome: [search] } },
               // Add more search fields as needed (e.g., author, tags)
           ],
       };
   }
-
+  if (search === "" && tags && tags.length > 0) {
+    query.where = {
+      ...query.where,
+      tags: { // Assuming 'tags' is a relation in the blog model
+        hasSome: tags, // Filter blogs where 'tags' has some of the specified tags
+      },
+    };
+  }
 
   if (sort) {
     const sortFields = sort.split(",").map((field) => {
@@ -50,14 +58,7 @@ async function getBlogs(id:string,page: number, limit: number, sort?: string, fi
     query.orderBy = sortFields;
   }
 
-  if (tags && tags.length > 0) {
-    query.where = {
-      ...query.where,
-      tags: { // Assuming 'tags' is a relation in the blog model
-        hasSome: tags, // Filter blogs where 'tags' has some of the specified tags
-      },
-    };
-  }
+
 
   if (fields && fields.length > 0) {
     query.select = {}; // Initialize select object
@@ -90,7 +91,7 @@ async function getBlogs(id:string,page: number, limit: number, sort?: string, fi
       }
     }
   }
-  console.log("quary",query.select);
+
   const skip = (page - 1) * limit; // Calculate skip for pagination
   const blogs = await dataBasePrisma.blog.findMany({
     take: limit, // Limit results
@@ -110,7 +111,6 @@ export async function GET(req: NextRequest) {
     const search = req.nextUrl.searchParams.get("search") ?? "";
     const tags = req.nextUrl.searchParams.get("tags")?.split(",");
     const userId = req.nextUrl.searchParams.get("id") ?? "";
-    console.log("id..........", userId);
     let blogs = await getBlogs(userId,page, limit, sort, fields,search,tags);
     const total = await dataBasePrisma.blog.count(); // Count all blogs
     return NextResponse.json(

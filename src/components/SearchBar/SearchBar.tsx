@@ -22,6 +22,9 @@ const Searchbar = () => {
         setSearchText("");
         setSuggest([]);
         setSelected(-1);
+        if(inputRef.current){
+            inputRef.current.value = '';
+        }
     };
 
     useEffect(() => {
@@ -31,7 +34,7 @@ const Searchbar = () => {
     const suggestion = async () => {
         let query = keywords.replaceAll(' ', '-');
         try {
-            const res = await axios.get(`/api/blog/all?limit=3&sort=createdAt&fields=id,tags,title`);
+            const res = await axios.get(`/api/blog/all?limit=3&sort=createdAt&fields=id,tags,title&search=${query}`);
             let result: string[] = [];
             let tags: string[] = [];
             console.log(res.data);
@@ -53,7 +56,7 @@ const Searchbar = () => {
         if (inputRef.current !== null) { // Added null check for inputRef.current
             let query = inputRef.current.value.replaceAll(' ', '+');
             clear();
-            router.push(`/category-filters?keyword=${query}`);
+            router.push(`/search?keyword=${query}`);
         }
     };
 
@@ -92,7 +95,7 @@ const Searchbar = () => {
                         <div
                             onClick={() => {
                                 let query = item.replaceAll(' ', '-');
-                                router.push(`/category-filters?keyword=${query}`);
+                                router.push(`/search?keyword=${query}`);
                                 clear();
                             }}
                             className={`p-2 cursor-pointer border-black border-solid hover:bg-white hover:border-y-2 hover:text-[#333]  ${index === selected ? "bg-white border-y-2 text-[#333]" : ""}`}
