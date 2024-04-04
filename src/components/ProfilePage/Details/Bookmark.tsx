@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Cards from '@/components/BlogCard/Cards';
+import BlogsCards from '@/components/BlogCard/BlogsCards';
 
 interface BookmarkProps {
     id: string;
@@ -55,7 +56,7 @@ const Bookmark = () => {
     <div className="bg-[#e2eafc] w-11/12 mx-auto">
       <section className={`grid mx-auto ${grid} max-sm:grid-cols-1 justify-evenly max-sm:justify-center gap-2 p-3  max-sm:flex-col`}>
         {bookmark.map((data: BookmarkProps) => (
-          <Cards
+          <BlogsCards
             key={data.id}
             id={data.id}
             title={data.title}
