@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import BlogsCards from "@/components/BlogCard/BlogsCards";
+import BlogsCards from "@/components/(cards)/BlogCard/BlogsCards";
 import Pagination from "@/components/Pagination/Pagination";
 import { useParams } from "next/navigation";
 import axios from "axios";

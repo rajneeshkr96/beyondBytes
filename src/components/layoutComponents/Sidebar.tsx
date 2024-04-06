@@ -14,6 +14,7 @@ import { MdPermContactCalendar,MdPolicy } from "react-icons/md";
 import { SiMicrosoftteams } from "react-icons/si";
 import { FcDisclaimer } from "react-icons/fc";
 import { FaPython } from "react-icons/fa";
+import { LiaHashtagSolid } from "react-icons/lia";
 const Sidebar = () => {
   const { currentColor, activeMenu, screenSize } = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch()
@@ -42,6 +43,11 @@ const Sidebar = () => {
           name: 'contact us',
           link: '/contact',
           icon: <MdPermContactCalendar />,
+        },
+        {
+          name: 'All Tags',
+          link: '/tags',
+          icon: <LiaHashtagSolid />,
         },
         {
           name: 'join us',

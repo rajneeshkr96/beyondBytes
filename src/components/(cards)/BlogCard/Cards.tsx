@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { IoHeartCircleSharp, IoHeartDislikeCircle, IoChatboxEllipses, IoShareSocial } from "react-icons/io5";
 import { MdBookmarkAdd, MdOutlineBookmark } from "react-icons/md";
 import ActionBtn from "@/components/layoutComponents/Button/ActionBtn";
-import ActionOptions from "@/components/BlogCard/ActionOptions";
+import ActionOptions from "@/components/(cards)/BlogCard/ActionOptions";
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { errorToastHandler } from '@/components/errorTostHandler';
 import { useSession } from "next-auth/react";
-import ShareOptions from "../post/postFeatures/shareOptions";
+import ShareOptions from "../../post/postFeatures/shareOptions";
 import Link from "next/link";
 
 interface CardsProps {

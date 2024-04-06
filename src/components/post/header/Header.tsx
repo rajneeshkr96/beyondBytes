@@ -1,5 +1,5 @@
 
-import { formatDate } from '@/components/BlogCard/BlogCard';
+import { formatDate } from '@/components/(cards)/BlogCard/BlogCard';
 import Image from 'next/image'
 import { title } from 'process';
 

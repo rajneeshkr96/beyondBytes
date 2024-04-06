@@ -1,7 +1,7 @@
 
 import Image from 'next/image';
 import React, { FC } from 'react'
-import ActionBtn from '../layoutComponents/Button/ActionBtn';
+import ActionBtn from '../../layoutComponents/Button/ActionBtn';
 import { IoIosHeart } from "react-icons/io";
 import { MdBookmarkAdd,MdOutlineBookmark  } from "react-icons/md";
 import Link from 'next/link';

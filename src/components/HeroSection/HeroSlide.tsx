@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useAppSelector } from "@/redux/hooks";
 export default function HeroSlide() {
   const { currentColor } = useAppSelector((state) => state.theme);
@@ -36,9 +36,10 @@ export default function HeroSlide() {
       description: "Space engineering becomes more and more advanced",
     },
   ];
+  const [mobileIndex,setMobileIndex] = useState(1);
   const setIndex = () => {
-    const val = document.getElementsByClassName("card")
-    console.log(val);
+    console.log(mobileIndex);
+    setMobileIndex(mobileIndex+1);
   }
   
   return (
@@ -58,14 +59,14 @@ export default function HeroSlide() {
               type="radio"
               name="slide"
               id={val.id}
-              defaultChecked={index === 1 ? true : false}
+              defaultChecked={index === mobileIndex ? true : false}
             />
             <label
               key={index}
               htmlFor={val.id}
               onClick={setIndex}
               className="card w-20 mx-3 my-0  bg-cover cursor-pointer overflow-hidden rounded-3xl flex items-end "
-              style={{ backgroundImage: `url(${val.url})` }}
+              style={{ backgroundImage: `url(${val.url})`,zIndex:index==mobileIndex%4 ?"9":"2"}}
             >
               <div className="row">
                 <div className="  bg-[#223] text-white rounded-full w-12 flex justify-center items-center m-4 font-bold">

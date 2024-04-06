@@ -8,7 +8,7 @@ import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { errorToastHandler } from '@/components/errorTostHandler';
-import ActionOptions from '@/components/BlogCard/ActionOptions';
+import ActionOptions from '@/components/(cards)/BlogCard/ActionOptions';
 import Loading from '@/app/loading';
 import ShareOptions from './shareOptions';
 export interface PostFeaturesProps{

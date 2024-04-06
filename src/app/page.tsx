@@ -1,6 +1,6 @@
 
-import BlogCard from "@/components/BlogCard/BlogCard";
-import FeatureCards from "@/components/FeatureCards/FeatureCards";
+import BlogCard from "@/components/(cards)/BlogCard/BlogCard";
+import FeatureCards from "@/components/(cards)/FeatureCards/FeatureCards";
 import HeroSlide from "@/components/HeroSection/HeroSlide";
 import TagSlide from "@/components/TagSlide/TagSlide";
 import axios from "axios";

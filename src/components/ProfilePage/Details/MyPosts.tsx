@@ -2,7 +2,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import BlogsCards from "@/components/BlogCard/BlogsCards";
+import BlogsCards from "@/components/(cards)/BlogCard/BlogsCards";
 import Pagination from "@/components/Pagination/Pagination";
 
 export interface MyPostsProps {

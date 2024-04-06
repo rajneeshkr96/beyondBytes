@@ -1,6 +1,6 @@
 
 import { BlogcardProps } from "@/app/page";
-import BlogCard from "@/components/BlogCard/BlogCard";
+import BlogCard from "@/components/(cards)/BlogCard/BlogCard";
 import Header from "@/components/layoutComponents/Header";
 import Pagination from "@/components/Pagination/Pagination";
 import { currentUserId } from "@/lib/authDet";

@@ -3,10 +3,10 @@ import axios from "axios";
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { errorToastHandler } from "../errorTostHandler";
+import { errorToastHandler } from "../../errorTostHandler";
 import Loading from "@/app/loading";
-import Modal from "../Modal/Modal";
-import SubmitButton from "../layoutComponents/Button/SubmitButton";
+import Modal from "../../Modal/Modal";
+import SubmitButton from "../../layoutComponents/Button/SubmitButton";
 const   ActionOptions = ({id,authId,disable}:{id:string,authId:string,disable?:boolean}) => {
   const session = useSession();
   const btnClass = 'w-full px-4 py-2 capitalize'
