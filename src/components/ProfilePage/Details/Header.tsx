@@ -10,6 +10,7 @@ import { useParams } from "next/navigation";
 
 interface HeaderProps {}
 const Header: React.FC<HeaderProps> = () => {
+  const [checkId , setCheckId] = useState(false);
   const [profileData, setProfileData] = useState({
     followers: 0,
     following: 0,
@@ -24,13 +25,15 @@ const Header: React.FC<HeaderProps> = () => {
   };
   const params = useParams();
   const id = params.id[2];
+  const userId = session.data?.user?.userId;
+
   const getProfileData = async () => {
     try {
       const { data } = await axios.get(
        ` /api/user/follows/follower/allFollower/${id}`
       );
       const allfollwing = await axios.get(
-        "/api/user/follows/following/allFollowing"
+        `/api/user/follows/following/allFollowing/${id}`
       );
       const userData = await axios.get("/api/user/data");
       if (
@@ -52,12 +55,15 @@ const Header: React.FC<HeaderProps> = () => {
 
   useEffect(() => {
     getProfileData();
+    if(id === userId){
+      setCheckId(true);
+    }
   }, []);
-  console.log(profileData.followers);
+  console.log("followers and followngs ..... ",profileData.followers);
 
   return (
-    <div className="flex  w-3/4 mx-auto relative right-20  gap-3 ">
-      <span className="relative md:w-1/3 md:h-1/3   mx-auto border-gray-400 p-2 border-spacing-1 border-4 rounded-full overflow-hidden">
+    <div className="flex  w-3/4 mx-auto relative right-20 max-sm:w-11/12 max-sm:flex-col max-sm:right-0 gap-3 ">
+      <span className="relative md:w-1/3 md:h-1/3 max-sm:w-3/4  mx-auto border-gray-400 p-2 border-spacing-1 border-4 rounded-full overflow-hidden">
         <Image
           src={
             session?.data?.user?.image
@@ -70,35 +76,41 @@ const Header: React.FC<HeaderProps> = () => {
           height={300}
         />
       </span>
-      <div className="w-3/4 ml-8">
-        <div className="flex gap-3 mt-3 p-3   mx-auto">
+      <div className="w-3/4 ml-8 max-sm:w-11/12 max-sm:ml-0">
+        <div className="flex max-sm:flex-col max-sm:justify-center max-sm:text-center max-sm:items-center gap-3 mt-3 p-3   mx-auto">
           <p className="text-2xl font-bold">{session?.data?.user?.name}</p>
+          {
+            checkId && (session.data?.user?.role ==="WRITER" || "ADMIN") ?
+            <div className="max-sm:flex ">
           <span>
             <SubmitButton
               value={`Edit Profile`}
-              className="bg-[#35a8c5] border p-2 w-24  ml-5  !flex-row-reverse rounded-lg text-white text-sm hover:scale-105 duration-300 text-[--first-color]"
+              className="bg-[#35a8c5] border p-2 w-24  max-sm:text-xs  ml-5  !flex-row-reverse rounded-lg text-white text-sm hover:scale-105 duration-300 text-[--first-color]"
             />
           </span>
           <span>
             <SubmitButton
               value={`Write Blogs`}
-              className="bg-[#35a8c5] border p-2 w-24  ml-5  !flex-row-reverse rounded-lg text-white text-sm hover:scale-105 duration-300 text-[--first-color]"
+              className="bg-[#35a8c5] border p-2 w-24  ml-5 max-sm:text-xs !flex-row-reverse rounded-lg text-white text-sm hover:scale-105 duration-300 text-[--first-color]"
               onClick={writeBlogs}
             />
           </span>
+          </div>
+          :""
+          }
         </div>
 
-        <div className="flex gap-3 mt-1 px-3  mx-auto">
+        <div className="flex max-sm:justify-center max-sm:text-center max-sm:ite gap-3 mt-1 px-3  mx-auto">
           <span className="text-lg  cursor-pointer text-gray-900 font-semibold">
-            Followers: {profileData.followers}
+            Followers:{profileData.followers}
           </span>
           <span className="text-lg cursor-pointer text-gray-900 font-semibold">
-            Following: {profileData.following}
+            Following:{profileData.following}
           </span>
         </div>
-        <div className=" mx-auto mt-1 px-3">
-          <p className="text-lg font-mediumt-">
-            BIO :
+        <div className=" mx-auto flex max-sm:justify-center  mt-1 max-sm:ml-7 px-3">
+          <p className="text-lg font-medium"> BIO:</p>
+          <p className="text-lg font-medium  max-sm:mx-auto  px-3 ">
             {profileData.bio ? profileData.bio : "Hi , I am a content writer"}
           </p>
         </div>

@@ -9,9 +9,9 @@ export async function GET(req: NextRequest,context: { params: { id: string } }) 
     try {
         const writerId = context.params.id;
         // find all user details who follows the writerid
-        const allFollower = await dataBasePrisma.user.findMany({
+        const allFollowers = await dataBasePrisma.user.findMany({
             where:{
-                followers:{
+                following:{
                     some:{
                         followingId:writerId
                     }
@@ -20,12 +20,14 @@ export async function GET(req: NextRequest,context: { params: { id: string } }) 
             select:{
                 id:true,
                 name:true,
-                image:true
+                image:true,
+                username:true,
+                role:true
             }
         });
            
-        const length = allFollower.length;
-        return NextResponse.json({success:true,followers:length,allFollower},{status:200})
+        const length = allFollowers.length;
+        return NextResponse.json({success:true,followers:length,allFollowers},{status:200})
     } catch (error) {
         return NextResponse.json({success:false,message:error},{status:400})
     }

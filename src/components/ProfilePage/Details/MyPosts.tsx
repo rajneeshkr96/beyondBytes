@@ -4,6 +4,8 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import BlogsCards from "@/components/(cards)/BlogCard/BlogsCards";
 import Pagination from "@/components/Pagination/Pagination";
+import path from "path";
+import notfound from "@/app/not-found";
 
 export interface MyPostsProps {
   id: string;
@@ -61,6 +63,9 @@ const MyPosts = ({
   return (
     <div className="bg-[#e2eafc] w-11/12 mx-auto">
       <section className="grid grid-cols-3 max-sm:grid-cols-1 justify-evenly max-sm:justify-center gap-2 p-2  max-sm:flex-col   ">
+  
+        {post.length === 0? 
+        "notfound": ""}
         {post.map((data: MyPostsProps) => (
           <BlogsCards
             key={data.id}
@@ -75,6 +80,7 @@ const MyPosts = ({
             baseurl={process.env.BASE_URL as string}
             />
           ))}
+
           <Pagination
             className="justify-center mt-4"
             path="/profile/dashboard/ADMIN"
