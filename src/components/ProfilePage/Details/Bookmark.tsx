@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Cards from '@/components/(cards)/BlogCard/Cards';
 import BlogsCards from '@/components/(cards)/BlogCard/BlogsCards';
+import { useParams } from 'next/navigation';
 
 interface BookmarkProps {
     id: string;

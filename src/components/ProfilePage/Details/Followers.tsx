@@ -8,6 +8,7 @@ import SubmitButton from "@/components/layoutComponents/Button/SubmitButton";
 import { toast } from "react-toastify";
 import { errorToastHandler } from "@/components/errorTostHandler";
 import { PiCheckFatBold } from "react-icons/pi";
+import Image from "next/image";
 
 interface FollowersProps {
   id: string;
