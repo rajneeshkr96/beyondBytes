@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Cards from '@/components/BlogCard/Cards';
 import BlogsCards from '@/components/BlogCard/BlogsCards';
+import { useParams } from 'next/navigation';
 
 interface BookmarkProps {
     id: string;
@@ -32,7 +33,8 @@ interface BookmarkProps {
     }
 
 const Bookmark = () => {
-    const id = "65eabfc18015eaeff8ae6e31";
+    const params = useParams();
+    const id = params.id[2];
     const [bookmark, setBookmark] = useState([]);
     const getAllBookmarks = async () => {
         try {

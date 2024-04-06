@@ -8,9 +8,9 @@ export async function GET(req:NextRequest,context:{params:{id:string}}){
         // find all writers  which userId follows the other writer or user
         const allFollowing = await dataBasePrisma.user.findMany({
             where:{
-                following:{
+                followers:{
                     some:{
-                        followingId:userId
+                        followerId:userId
                     }
                 }
             },

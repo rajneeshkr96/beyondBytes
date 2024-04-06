@@ -9,15 +9,15 @@ export async function GET(req:NextRequest,  context: { params: { id: string } })
       if(!user){
           return NextResponse.redirect('/login');
       }
-      const follow = await dataBasePrisma.follows.findFirst({
-          where:{
-              followingId:writerId
-          },
+      // const follow = await dataBasePrisma.follows.findFirst({
+      //     where:{
+      //         followingId:writerId
+      //     },
           
-      });
-      if(!follow){
-         return NextResponse.json({success:false,message:"You are not following this user"})
-      }
+      // });
+      // if(!follow){
+      //    return NextResponse.json({success:false,message:"You are not following this user"})
+      // }
       const writerBlogs = await dataBasePrisma.blog.findMany({
          where:{
             authorId:writerId

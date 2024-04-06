@@ -9,13 +9,13 @@ import Following from '@/components/ProfilePage/Details/Following'
 
 
 const page = () => {
-  const actions =  [{action:"My Posts",page:<MyPosts/>},{action:"Bookmark",page:<Bookmark/>},{action:"Followers",page:<Followers/>},{action:"Following",page:<Following/>}]
+  const actions =  [{action:"Posts",page:<MyPosts/>},{action:"Bookmark",page:<Bookmark/>},{action:"Followers",page:<Followers/>},{action:"Following",page:<Following/>}]
   return (
     <div className='relative top-0 z-50'>
       <Header/>
 
-      <section >
-        <SlidingMenu  className='justify-center' menuOptions={actions}/>
+      <section className='max-sm:w-full max-sm:text-xs' >
+        <SlidingMenu  className='justify-center max-sm:grid max-sm:grid-cols-4 max-sm:gap-3 max-sm:gap-x-0  ' menuOptions={actions}/>
       </section>
       
     </div>

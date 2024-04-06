@@ -25,50 +25,44 @@ const Following = () => {
 
   const id = params.id[2];
   const [following, setFollowing] = React.useState([]);
-  console.log(id);
 
-  const getFollowers = async () => {
+
+  const getFollowings = async () => {
     try {
       const { data } = await axios.get(
         `/api/user/follows/following/allFollowing/${id}`
       );
-      console.log("data....", data);
+
+ 
       if (data.success === true) {
-        setFollowing(data.allFollowers);
+        setFollowing(data.data.allFollowing);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  const onFollow = async (id:string) =>{
-    try {
+  // const onFollow = async (id:string) =>{
+  //   try {
     
-      setFullLoading(true);
-      const res = await axios.post(`/api/user/follows/${id}`);
-      if(res.data.success){
-        setIsFollow(!isFollow);
-        toast.success(res.data.message);
-      }
-      setFullLoading(false);
-    } catch (error:any) {
-      setFullLoading(false);
-      setIsFollow(false);
-      errorToastHandler(error);
-    }
-  }
-  const checkFollow = (id:string) =>{
-    if(isFollow){
-      setFollow( "unfollow")
-    }else{
-      setFollow( "follow")
-    }
-  }
+  //     setFullLoading(true);
+  //     const res = await axios.post(`/api/user/follows/${id}`);
+  //     if(res.data.success){
+  //       setIsFollow(!isFollow);
+  //       toast.success(res.data.message);
+  //     }
+  //     setFullLoading(false);
+  //   } catch (error:any) {
+  //     setFullLoading(false);
+  //     setIsFollow(false);
+  //     errorToastHandler(error);
+  //   }
+  // }
+ 
 
   React.useEffect(() => {
-    checkFollow(id);  
-    getFollowers();
+    getFollowings();
   }, []);
-  console.log(following);
+
 
   return (
       <div className="bg-[#e9effd] rounded-md w-1/3 max-sm:w-11/12 flex flex-col p-2  mx-auto">
@@ -87,7 +81,7 @@ const Following = () => {
             </div>
             <div className="flex-grow flex items-center">
               {data.role === "WRITER" || "ADMIN" ? (
-                <SubmitButton  onClick={()=> onFollow(data.id)} className="border-2 bg-blue-400 rounded-md px-2 ml-auto relative right-1 " value={follow }/>
+                <SubmitButton   className="border-2 bg-blue-400 rounded-md px-2 ml-auto relative right-1 " value={follow }/>
               ) : (
                 ""
               )}

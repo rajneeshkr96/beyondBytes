@@ -25,14 +25,14 @@ const Followers = () => {
 
   const id = params.id[2];
   const [follower, setFollower] = React.useState([]);
-  console.log(id);
+
 
   const getFollowers = async () => {
     try {
       const { data } = await axios.get(
         `/api/user/follows/follower/allFollower/${id}`
       );
-      console.log("data....", data);
+  
       if (data.success === true) {
         setFollower(data.allFollowers);
       }
@@ -68,7 +68,7 @@ const Followers = () => {
     checkFollow(id);  
     getFollowers();
   }, []);
-  console.log(follower);
+
 
   return (
       <div className="bg-[#e9effd] rounded-md w-1/3 max-sm:w-11/12 flex flex-col p-2  mx-auto">
