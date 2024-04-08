@@ -89,11 +89,8 @@ const Followers = () => {
               <p className="text-xs text-gray-500 ">{data.username}</p>
             </div>
             <div className="flex-grow flex items-center">
-              {data.role === "WRITER" || "ADMIN" ? (
-                <SubmitButton  onClick={()=> onFollow(data.id)} className="border-2 bg-blue-400 rounded-md px-2 ml-auto relative right-1 " value={follow }/>
-              ) : (
-                ""
-              )}
+              {data.role ==="USER" ?  "" :<SubmitButton  onClick={()=> onFollow(data.id)} className="border-2 bg-blue-400 rounded-md px-2 ml-auto relative right-1 " value={follow }/>
+          }
             </div>
           </div>
         ))}

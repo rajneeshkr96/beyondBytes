@@ -44,9 +44,6 @@ const Following = () => {
   //   }
   // }
  
-
-  React.useEffect(() => {
-    
   const getFollowings = async () => {
     try {
       const { data } = await axios.get(
@@ -61,8 +58,38 @@ const Following = () => {
       console.log(error);
     }
   };
+
+  
+  const onFollow = async (id:string) =>{
+    try {
+    
+      setFullLoading(true);
+      const res = await axios.post(`/api/user/follows/${id}`);
+      if(res.data.success){
+        setIsFollow(!isFollow);
+        toast.success(res.data.message);
+      }
+      setFullLoading(false);
+    } catch (error:any) {
+      setFullLoading(false);
+      setIsFollow(false);
+      errorToastHandler(error);
+    }
+  }
+
+
+  React.useEffect(() => {
+    const checkFollow = (id:string) =>{
+      if(isFollow){
+        setFollow( "unfollow")
+      }else{
+        setFollow( "follow")
+      }
+    }
+    checkFollow(id);  
     getFollowings();
-  }, [id]);
+  }, [id,isFollow]);
+    
 
 
   return (
@@ -81,11 +108,8 @@ const Following = () => {
               <p className="text-xs text-gray-500 ">{data.username}</p>
             </div>
             <div className="flex-grow flex items-center">
-              {data.role === "WRITER" || "ADMIN" ? (
-                <SubmitButton   className="border-2 bg-blue-400 rounded-md px-2 ml-auto relative right-1 " value={follow }/>
-              ) : (
-                ""
-              )}
+              {data.role ==="USER" ?  "" :<SubmitButton  onClick={()=> onFollow(data.id)} className="border-2 bg-blue-400 rounded-md px-2 ml-auto relative right-1 " value={follow }/>
+          }
             </div>
           </div>
         ))}
