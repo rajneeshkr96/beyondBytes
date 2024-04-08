@@ -10,7 +10,7 @@ export async function GET(req: NextRequest,context: { params: { slug: string[] }
 
     const userId = context.params.slug[1];
     let blog;
-    console.log(userId,slug);
+
     if(userId !== 'undefined'){
       console.log("its not me" ,userId !== undefined);
       blog = await dataBasePrisma.blog.findUnique({
@@ -47,7 +47,7 @@ export async function GET(req: NextRequest,context: { params: { slug: string[] }
        }
      })
     }else{
-      console.log(slug);
+
       blog = await dataBasePrisma.blog.findUnique({
         where: {
           slug: slug,

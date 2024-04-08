@@ -12,7 +12,6 @@ export const {
   
   callbacks: {
     async session({ token, session }) {
-      console.log("session..................",session);
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }

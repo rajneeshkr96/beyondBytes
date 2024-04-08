@@ -20,7 +20,7 @@ useEffect(() => {
       setDialog(showRef);
     }
   }
-}, [open]);
+}, [open,setDialog]);
   return (
     <>
      {!open && <button

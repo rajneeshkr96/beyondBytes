@@ -36,7 +36,9 @@ const Bookmark = () => {
     const params = useParams();
     const id = params.id[2];
     const [bookmark, setBookmark] = useState([]);
-    const getAllBookmarks = async () => {
+
+    useEffect(() => {
+      const getAllBookmarks = async () => {
         try {
             const { data } = await axios.get(`/api/user/bookmark/my-bookmark/${id}`);
             
@@ -48,9 +50,8 @@ const Bookmark = () => {
             
         }
     };
-    useEffect(() => {
         getAllBookmarks();
-    }, []);
+    }, [id]);
     console.log("bookmark./...............",bookmark);
     const length = bookmark.length;
     let grid = length > 2 ? "grid-cols-3" : "grid-cols-2";

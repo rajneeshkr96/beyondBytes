@@ -27,20 +27,6 @@ const Following = () => {
   const [following, setFollowing] = React.useState([]);
 
 
-  const getFollowings = async () => {
-    try {
-      const { data } = await axios.get(
-        `/api/user/follows/following/allFollowing/${id}`
-      );
-
- 
-      if (data.success === true) {
-        setFollowing(data.data.allFollowing);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   // const onFollow = async (id:string) =>{
   //   try {
     
@@ -60,8 +46,23 @@ const Following = () => {
  
 
   React.useEffect(() => {
+    
+  const getFollowings = async () => {
+    try {
+      const { data } = await axios.get(
+        `/api/user/follows/following/allFollowing/${id}`
+      );
+
+ 
+      if (data.success === true) {
+        setFollowing(data.data.allFollowing);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
     getFollowings();
-  }, []);
+  }, [id]);
 
 
   return (

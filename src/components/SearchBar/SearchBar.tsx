@@ -27,31 +27,31 @@ const Searchbar = () => {
         }
     };
 
+
+
+
+
     useEffect(() => {
+        const suggestion = async () => {
+            let query = keywords.replaceAll(' ', '-');
+            try {
+                const res = await axios.get(`/api/blog/all?limit=3&sort=createdAt&fields=id,tags,title&search=${query}`);
+                let result: string[] = [];
+                let tags: string[] = [];
+                if (res.data.success) {
+                    result = res.data.data.map((val: { title: string; tags: string[] }) => {
+                        val.tags.forEach(tag => tags.push(tag)); // Changed map to forEach
+                        return val.title;
+                    });
+                }
+                const uniqueSuggestions = Array.from(new Set([...tags, ...result])); // Filter out duplicates
+                setSuggest(uniqueSuggestions);
+            } catch (error) {
+                console.error("Error fetching suggestions:", error);
+            }
+        };
         if (keywords) suggestion();
     }, [keywords]);
-
-    const suggestion = async () => {
-        let query = keywords.replaceAll(' ', '-');
-        try {
-            const res = await axios.get(`/api/blog/all?limit=3&sort=createdAt&fields=id,tags,title&search=${query}`);
-            let result: string[] = [];
-            let tags: string[] = [];
-            console.log(res.data);
-            if (res.data.success) {
-                result = res.data.data.map((val: { title: string; tags: string[] }) => {
-                    console.log(val.tags);
-                    val.tags.forEach(tag => tags.push(tag)); // Changed map to forEach
-                    return val.title;
-                });
-            }
-            const uniqueSuggestions = Array.from(new Set([...tags, ...result])); // Filter out duplicates
-            setSuggest(uniqueSuggestions);
-        } catch (error) {
-            console.error("Error fetching suggestions:", error);
-        }
-    };
-
     const onSearch = () => {
         if (inputRef.current !== null) { // Added null check for inputRef.current
             let query = inputRef.current.value.replaceAll(' ', '+');

@@ -22,6 +22,14 @@ interface UserProfileProps {
   oAuthSession?: string;
   id?: string;
 }
+interface UserProfileDataProps {
+  icon: React.JSX.Element;
+  title: string;
+  desc: string;
+  iconColor: string;
+  iconBg: string;
+  link: string;
+}
 
 const UserProfile: React.FC<UserProfileProps> = ({
   email,
@@ -35,17 +43,8 @@ const UserProfile: React.FC<UserProfileProps> = ({
   const { currentColor } = useAppSelector((state) => state.theme);
   // console.log(email, name, oAuthSession, role, image);
   const router = useRouter();
-  const [userProfileData,setUserProfile] = useState([
-    {
-      icon: <BsCurrencyDollar />,
-      title: "My Profile",
-      desc: "Account Settings",
-      iconColor: "#03C9D7",
-      iconBg: "#E5FAFB",
-      link: `/profile/dashboard/${role}/${userName}/${id}`,
-    },
-    
-  ])
+  const [userProfileData,setUserProfileData] = useState<UserProfileDataProps[]>([])
+
 useEffect(() => {
   if(oAuthSession === "authenticated" && role === "ADMIN" || role === "WRITER"){
     const val = [{
@@ -67,9 +66,16 @@ useEffect(() => {
         link: "/"
       })
     }
-    setUserProfile([...userProfileData,...val]);
+    setUserProfileData([{
+      icon: <BsCurrencyDollar />,
+      title: "My Profile",
+      desc: "Account Settings",
+      iconColor: "#03C9D7",
+      iconBg: "#E5FAFB",
+      link: `/profile/dashboard/${role}/${userName}/${id}`,
+    },...val]);
   }
-}, [oAuthSession,role]);
+}, [oAuthSession,role,id,userName]);
   
 
   return (

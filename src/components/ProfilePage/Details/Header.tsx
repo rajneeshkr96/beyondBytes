@@ -27,38 +27,39 @@ const Header: React.FC<HeaderProps> = () => {
   const id = params.id[2];
   const userId = session.data?.user?.userId;
 
-  const getProfileData = async () => {
-    try {
-      const { data } = await axios.get(
-       ` /api/user/follows/follower/allFollower/${id}`
-      );
-      const allfollwing = await axios.get(
-        `/api/user/follows/following/allFollowing/${id}`
-      );
-      const userData = await axios.get("/api/user/data");
-      if (
-        data.success === true &&
-        allfollwing.data.success === true &&
-        userData.data.success === true
-      ) {
-        setProfileData((prevState) => ({
-          ...prevState,
-          followers: data.followers,
-          following: allfollwing.data.following,
-          about: userData.data.data.about,
-        }));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
 
   useEffect(() => {
+    const getProfileData = async () => {
+      try {
+        const { data } = await axios.get(
+         ` /api/user/follows/follower/allFollower/${id}`
+        );
+        const allfollwing = await axios.get(
+          `/api/user/follows/following/allFollowing/${id}`
+        );
+        const userData = await axios.get("/api/user/data");
+        if (
+          data.success === true &&
+          allfollwing.data.success === true &&
+          userData.data.success === true
+        ) {
+          setProfileData((prevState) => ({
+            ...prevState,
+            followers: data.followers,
+            following: allfollwing.data.following,
+            about: userData.data.data.about,
+          }));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getProfileData();
     if(id === userId){
       setCheckId(true);
     }
-  }, []);
+  }, [id, userId]);
   console.log("followers and followngs ..... ",profileData.followers);
 
   return (

@@ -28,19 +28,7 @@ const Followers = () => {
   const [follower, setFollower] = React.useState([]);
 
 
-  const getFollowers = async () => {
-    try {
-      const { data } = await axios.get(
-        `/api/user/follows/follower/allFollower/${id}`
-      );
-  
-      if (data.success === true) {
-        setFollower(data.allFollowers);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const onFollow = async (id:string) =>{
     try {
     
@@ -57,18 +45,32 @@ const Followers = () => {
       errorToastHandler(error);
     }
   }
-  const checkFollow = (id:string) =>{
-    if(isFollow){
-      setFollow( "unfollow")
-    }else{
-      setFollow( "follow")
-    }
-  }
+
 
   React.useEffect(() => {
+    const getFollowers = async () => {
+      try {
+        const { data } = await axios.get(
+          `/api/user/follows/follower/allFollower/${id}`
+        );
+    
+        if (data.success === true) {
+          setFollower(data.allFollowers);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const checkFollow = (id:string) =>{
+      if(isFollow){
+        setFollow( "unfollow")
+      }else{
+        setFollow( "follow")
+      }
+    }
     checkFollow(id);  
     getFollowers();
-  }, []);
+  }, [id,isFollow]);
 
 
   return (

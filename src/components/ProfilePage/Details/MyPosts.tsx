@@ -44,21 +44,23 @@ const MyPosts = ({
   const id = session.data?.user?.userId;
   const keyword = searchParams?.keyword || "";
   const currentPage = Number(searchParams?.page) || 1;
-  let documentCount = 0;
+  const [documentCount,setDocumentCount] = useState(0)
 
   const [post, setPost] = useState([]);
-  const getAllPosts = async () => {
-    try {
-      const { data } = await axios.get(`/api/blog/writer/${id}`);
-      if (data.success === true) {
-        documentCount = data.total;
-        setPost(data.data);
-      }
-    } catch (error) {}
-  };
+
   useEffect(() => {
+    const getAllPosts = async () => {
+      try {
+        const { data } = await axios.get(`/api/blog/writer/${id}`);
+        if (data.success === true) {
+          setDocumentCount(data.total);
+          setPost(data.data);
+        }
+      } catch (error) {}
+    };
+
     getAllPosts();
-  }, []);
+  }, [id]);
 
   return (
     <div className="bg-[#e2eafc] w-11/12 mx-auto">

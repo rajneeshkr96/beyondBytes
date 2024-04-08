@@ -36,7 +36,7 @@ const Sidebar = () => {
       links: [
         {
           name: 'About Us',
-          link: '/about',
+          link: '/about-us',
           icon: <FcAbout />,
         },
         {
