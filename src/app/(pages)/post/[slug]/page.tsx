@@ -15,9 +15,12 @@ type Props = {
   params: { slug: string }
   searchParams: { [key: string]: string | string[] | undefined }
 }
+// export const dynamic = "force-dynamic";
 // export async function generateStaticParams() {
-//   const response = await axios(`${process.env.BASE_URL}/api/blog/all?fields=slug`);
-//   return response.data.data.map((slug:string) => slug);
+//   const response = await fetch(`${process.env.BASE_URL}/api/blog/all?fields=slug`);
+//   const {data} = await response.json();
+//   const val = data.data.map((slug:string) => slug);
+//   return val;
 // }
 
  const getData = cache(async (slug:string,userId?:string) => {

@@ -41,7 +41,7 @@ const Sidebar = () => {
         },
         {
           name: 'contact us',
-          link: '/contact',
+          link: '/contact-us',
           icon: <MdPermContactCalendar />,
         },
         {
@@ -57,6 +57,11 @@ const Sidebar = () => {
         {
           name: 'privacy and policy',
           link: 'privacy-policy',
+          icon: <MdPolicy />,
+        },
+        {
+          name: 'terms and services',
+          link: 'terms-services',
           icon: <MdPolicy />,
         },
         {

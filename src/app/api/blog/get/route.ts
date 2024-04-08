@@ -4,9 +4,24 @@ import { dataBasePrisma } from "@/databasePrisma";
 
 export async function GET(req: NextRequest) {
   try {
-    const blog = await dataBasePrisma.blog.findMany()
+    const fields = req.nextUrl.searchParams.get("fields")?.split(",");
+    const query: any = { }; 
+    if (fields && fields.length > 0) {
+      query.select = {}; // Initialize select object
+  
+      fields.forEach((field) => {
+        if (!field.startsWith("-")) {
+          query.select[field] = true; // Set each field to true for selection
+        } else {
+          const deselectedField = field.slice(1);
+          query.select[deselectedField] = false; // Deselect the field
+        }
+      });
+    }
+    const blog = await dataBasePrisma.blog.findMany({
+      ...query
+    })
     const length = blog.length
-    console.log(process.env.BASE_URL)
     return NextResponse.json({ success: true,message:"fetched successfully",length:length, data: blog }, { status: 200 });
   } catch (error) {
     console.error(error);
