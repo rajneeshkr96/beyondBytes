@@ -79,8 +79,8 @@ useEffect(() => {
   
 
   return (
-    <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96 shadow-md max-md:w-11/12">
-          <div className="flex justify-between items-center">
+    <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96 shadow-md max-md:w-11/12 overflow-hidden">
+          <div className="flex justify-between items-center absolute top-2 right-2">
             <Button
               icon={<MdOutlineCancel />}
               color="rgb(153, 171, 180)"
@@ -112,7 +112,7 @@ useEffect(() => {
                 {" "}
                 {role}{" "}
               </p>
-              <p className="text-gray-500 text-sm font-semibold dark:text-gray-400 overflow-hidden">
+              <p className="text-gray-500 text-sm font-semibold dark:text-gray-400 ">
                 {" "}
                 {email}{" "}
               </p>

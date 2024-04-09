@@ -117,8 +117,6 @@ const Page = () => {
 
 
   const publicBlog = async () => {
-
-
     try {
       setLoading(true);
       if(!title || !preImage.src || !preImage.alt || !metaDes || !metaTitle || selectedTags.length < 1){
@@ -137,8 +135,15 @@ const Page = () => {
       })
       if(res.data.success){
         toast.success("published.....")
-        // router.push()
+        localStorage.setItem("title","")
+        localStorage.setItem("heroImage","")
+        localStorage.setItem("alt","")
+        localStorage.setItem("content","")
+        localStorage.setItem("metaTitle","")
+        localStorage.setItem("metaDes","")
+        router.push(`/post/${res.data.data.slug}`);
       }
+
       setLoading(false);
     } catch (error:ErrorResponse | any) {
       setLoading(false);
@@ -168,7 +173,7 @@ const Page = () => {
           <input onChange={(e)=>{
             setTitle(e.target.value)
             debounced({key:"title",value:e.target.value});
-            }} value={title} type="text" name="" id="" placeholder='Please Enter Your Title....' className="w-[60%] px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" />
+            }} value={title} type="text" name="" id="" placeholder='Please Enter Your Title....' className="w-[60%] px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white max-md:w-full" />
           <Select
             closeMenuOnSelect={false}
             components={animatedComponents}
@@ -176,25 +181,25 @@ const Page = () => {
             value={selectedTags}
             onChange={handleChange}
             options={tags}
-            className='w-[25%]'
+            className='w-[25%] max-md:w-full'
 
           />
           {/* meta title  */}
           <input onChange={(e)=>{
             setMetaTitle(e.target.value)
             debounced({key:"metaTitle",value:e.target.value});
-            }} value={metaTitle} type="text" name="" id="" placeholder='Meta title....' className="w-5/12 px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" />
+            }} value={metaTitle} type="text" name="" id="" placeholder='Meta title....' className="w-5/12 px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white max-md:w-full" />
             {/* meta desc  */}
             <input onChange={(e)=>{
             setMetaDes(e.target.value)
             debounced({key:"metaDes",value:e.target.value});
-            }} value={metaDes} type="text" name="" id="" placeholder='meta description....' className="w-5/12 px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" />
+            }} value={metaDes} type="text" name="" id="" placeholder='meta description....' className="w-5/12 px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white max-md:w-full" />
         </div>
 
         <TextEditor editor={editor} /> 
 
       </div>
-      <SubmitButton loading={loading} value="Publish" className='bg-green-700 text-blue-50 px-4 py-2 rounded-full block mx-auto mt-4 hover:bg-green-600 font-bold ' onClick={()=>publicBlog()} />
+      <SubmitButton loading={loading} value="Publish" className='bg-green-700 text-blue-50 px-4 py-2 rounded-full block mx-auto mt-4 hover:bg-green-600 font-bold ' onClick={publicBlog} />
     </div>
   )
 }

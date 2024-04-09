@@ -15,6 +15,7 @@ import { SiMicrosoftteams } from "react-icons/si";
 import { FcDisclaimer } from "react-icons/fc";
 import { FaPython } from "react-icons/fa";
 import { LiaHashtagSolid } from "react-icons/lia";
+import Image from 'next/image';
 const Sidebar = () => {
   const { currentColor, activeMenu, screenSize } = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch()
@@ -105,12 +106,11 @@ const Sidebar = () => {
         <>
           <div className="flex justify-between items-center">
             <Link href="/" onClick={handleCloseSideBar} className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
-              <SiShopware /> <span>Beyondbytes</span>
+              <Image alt='logo biyondbytes' src="/logo.png" width={35} height={35} /> <span>Biyondbytes</span>
             </Link>
             <div content="Menu" >
               <button
                 onClick={() =>{ 
-                  console.log(activeMenu)
                   dispatch(setActiveMenu(!activeMenu))}}
                 style={{ color: currentColor }}
                 className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
