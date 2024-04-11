@@ -51,8 +51,8 @@ const Sidebar = () => {
           icon: <LiaHashtagSolid />,
         },
         {
-          name: 'join us',
-          link: '/cureer-page',
+          name: 'Careers',
+          link: '/career-page',
           icon: <SiMicrosoftteams />,
         },
         {

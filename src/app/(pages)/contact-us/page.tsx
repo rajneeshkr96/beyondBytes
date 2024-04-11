@@ -13,7 +13,7 @@ const page = () => {
   return (
     <>
       {/* ====== Contact Section Start */}
-      <section className="relative z-10 overflow-hidden bg-white dark:bg-dark px-20 lg:py-[120px] navMargin minScreen">
+      <section className="relative z-10 overflow-hidden bg-white dark:bg-dark px-20 ">
         <div className="container mx-auto">
           <div className="flex flex-wrap -mx-4 lg:justify-between">
             <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
@@ -22,7 +22,7 @@ const page = () => {
                   CONTACT US
                 </h1>
                 <p className="text-base leading-relaxed text-body-color dark:text-dark-6 mb-9">
-                Feel the warmth of personalized support at your fingertips! Have questions or need assistance? Connect with our caring team now. Your joy and satisfaction fuel our commitment. Lets make your shopping experience extraordinary—contact us with a smile!
+                Experience the comfort of personalized assistance right at your fingertips! Whether you have questions or need support, our dedicated team is here for you. Your happiness and satisfaction drive our dedication. 
                 </p>
                 <div className="mb-8 flex w-full max-w-[370px]">
                   <div className="bg-primary/5 text-primary mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded sm:h-[70px] sm:max-w-[70px]">
@@ -33,23 +33,11 @@ const page = () => {
                       Our Location
                     </h4>
                     <p className="text-base text-body-color text-gray-600">
-                        Maharani Enclave, Hastsal , Uttam Nagar, New Delhi, Delhi 110059
+                       New Delhi, Delhi 110059
                     </p>
                   </div>
                 </div>
-                <div className="mb-8 flex w-full max-w-[370px]">
-                  <div className="bg-primary/5 text-primary mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded sm:h-[70px] sm:max-w-[70px]">
-                    <IoCallOutline className="w-1/2 h-1/2" />
-                  </div>
-                  <div className="w-full">
-                    <h4 className="mb-1 text-xl font-bold text-dark text-gray-700">
-                      Phone Number
-                    </h4>
-                    <p className="text-base text-body-color text-gray-600">
-                      +91 9625110498
-                    </p>
-                  </div>
-                </div>
+               
                 <div className="mb-8 flex w-full max-w-[370px]">
                   <div className="bg-primary/5 text-primary mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded sm:h-[70px] sm:max-w-[70px]">
                     <CiMail className="w-1/2 h-1/2" />
@@ -59,7 +47,7 @@ const page = () => {
                       Email Address
                     </h4>
                     <a href="mailto:beyondbazaarofficial@gmail.com?subject=Subject%20of%20the%20email&body=Body%20of%20the%20email" className="text-base text-body-color text-gray-600">
-                      beyondbazaarofficial@gmail.com
+                      biyondbytes@gmail.com
                     </a>
                   </div>
                 </div>
