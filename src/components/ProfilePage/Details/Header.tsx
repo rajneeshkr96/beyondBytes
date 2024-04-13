@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import SubmitButton from "@/components/layoutComponents/Button/SubmitButton";
@@ -7,10 +7,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useParams } from "next/navigation";
+import EditProfileModal from "@/components/Modals/EditProfileModal";
+import Modal from "@/components/Modals/Modal";
 
 interface HeaderProps {}
 const Header: React.FC<HeaderProps> = () => {
   const [checkId , setCheckId] = useState(false);
+  const altRef = useRef<HTMLInputElement>(null);
+  const [profileEditModal,setProfileEditModal]= useState(false)
   let buttonClass ;
   const [profileData, setProfileData] = useState({
     followers: 0,
@@ -27,6 +31,16 @@ const Header: React.FC<HeaderProps> = () => {
   const params = useParams();
   const id = params.id[2];
   const userId = session.data?.user?.userId;
+  const onCLose = () => {
+    setProfileEditModal(false);
+  }
+  // const handleEditModal = () => {
+  //  setProfileEditModal(true);
+  //  return <EditProfileModal setDialogRef={altRef} button={" "} onClose={onCLose} open={profileEditModal}/>
+    
+     
+     
+  // }
 
 
 
@@ -88,10 +102,12 @@ const Header: React.FC<HeaderProps> = () => {
           <p className="text-2xl font-bold">{session?.data?.user?.name}</p>
           {
             session.data?.user?.role ==="USER" ?"":  <div className="max-sm:flex ">
+            
             <span>
               <SubmitButton
                 value={`Edit Profile`}
                 className={`bg-[#35a8c5] border p-2 w-24  max-sm:text-xs  ml-5  !flex-row-reverse rounded-lg text-white text-sm hover:scale-105 duration-300 text-[--first-color] ${buttonClass} `}
+                // onClick={handleEditModal}
               />
             </span>
             <span>

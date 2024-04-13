@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { errorToastHandler } from "../../errorTostHandler";
 import Loading from "@/app/loading";
-import Modal from "../../Modal/Modal";
+import Modal from "@/components/Modals/Modal";
 import SubmitButton from "../../layoutComponents/Button/SubmitButton";
 const   ActionOptions = ({id,authId,disable}:{id:string,authId:string,disable?:boolean}) => {
   const session = useSession();
