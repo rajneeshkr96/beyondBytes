@@ -44,20 +44,7 @@ const Following = () => {
   //   }
   // }
  
-  const getFollowings = async () => {
-    try {
-      const { data } = await axios.get(
-        `/api/user/follows/following/allFollowing/${id}`
-      );
 
- 
-      if (data.success === true) {
-        setFollowing(data.data.allFollowing);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   
   const onFollow = async (id:string) =>{
@@ -79,6 +66,20 @@ const Following = () => {
 
 
   React.useEffect(() => {
+    const getFollowings = async () => {
+      try {
+        const { data } = await axios.get(
+          `/api/user/follows/following/allFollowing/${id}`
+        );
+  
+   
+        if (data.success === true) {
+          setFollowing(data.data.allFollowing);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     const checkFollow = (id:string) =>{
       if(isFollow){
         setFollow( "unfollow")
