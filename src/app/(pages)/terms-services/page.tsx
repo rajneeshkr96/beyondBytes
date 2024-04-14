@@ -294,11 +294,11 @@ __________ */
       <h1 className="text-3xl font-bold dark:text-zinc-100  text-gray-800">TERMS AND SERVICES</h1>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">Last updated 04/04/2024</p>
       <h2 className="text-2xl font-semibold mb-4" id="">AGREEMENT TO OUR LEGAL TERMS</h2>
-      <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">We are biyondbytes ("Company," "we," "us," "our").</p>
+      <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">We are biyondbytes (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; &quot;our&quot;).</p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
         We operate , as well as any other related products and services that
-        refer or link to these legal terms (the "Legal Terms") (collectively,
-        the "Services").
+        refer or link to these legal terms (the &quot;Legal Terms&quot;) (collectively,
+        the &quot;Services&quot;).
       </p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
         You can contact us by email at biyondbytes@gmail.com or by contact page{" "}
@@ -306,7 +306,7 @@ __________ */
       </p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
         These Legal Terms constitute a legally binding agreement made between
-        you, whether personally or on behalf of an entity ("you"), and
+        you, whether personally or on behalf of an entity (&quot;you&quot;), and
         biyondbytes, concerning your access to and use of the Services. You
         agree that by accessing the Services, you have read, understood, and
         agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH
@@ -318,7 +318,7 @@ __________ */
         Services from time to time are hereby expressly incorporated herein by
         reference. We reserve the right, in our sole discretion, to make changes
         or modifications to these Legal Terms at any time and for any reason. We
-        will alert you about any changes by updating the "Last updated" date of
+        will alert you about any changes by updating the &quot;Last updated&quot; date of
         these Legal Terms, and you waive any right to receive specific notice of
         each such change. It is your responsibility to periodically review these
         Legal Terms to stay informed of updates. You will be subject to, and
@@ -413,8 +413,8 @@ __________ */
         We are the owner or the licensee of all intellectual property rights in
         our Services, including all source code, databases, functionality,
         software, website designs, audio, video, text, photographs, and graphics
-        in the Services (collectively, the "Content"), as well as the
-        trademarks, service marks, and logos contained therein (the "Marks").
+        in the Services (collectively, the &quot;Content&quot;), as well as the
+        trademarks, service marks, and logos contained therein (the &quot;Marks&quot;).
       </p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
         Our Content and Marks are protected by copyright and trademark laws (and
@@ -422,13 +422,13 @@ __________ */
         and treaties in the United States and around the world.
       </p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
-        The Content and Marks are provided in or through the Services "AS IS"
+        The Content and Marks are provided in or through the Services &quot;AS IS&quot;
         for your personal, non-commercial use or internal business purpose only.
       </p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">Your use of our Services</p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
         Subject to your compliance with these Legal Terms, including the
-        "PROHIBITED ACTIVITIES" section below, we grant you a non-exclusive,
+        &quot;PROHIBITED ACTIVITIES&quot; section below, we grant you a non-exclusive,
         non-transferable, revocable license to:
       </p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">access the Services; and</p>
@@ -531,9 +531,9 @@ __________ */
         Upload or transmit (or attempt to upload or to transmit) any material
         that acts as a passive or active information collection or transmission
         mechanism, including without limitation, clear graphics interchange
-        formats ("gifs"), 1×1 pixels, web bugs, cookies, or other similar
-        devices (sometimes referred to as "spyware" or "passive collection
-        mechanisms" or "pcms").
+        formats (&quot;gifs&quot;), 1×1 pixels, web bugs, cookies, or other similar
+        devices (sometimes referred to as &quot;spyware&quot; or &quot;passive collection
+        mechanisms&quot; or &quot;pcms&quot;).
       </p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
         Interfere with, disrupt, or create an undue burden on the Services or
@@ -548,7 +548,7 @@ __________ */
         restrict access to the Services, or any portion of the Services.
       </p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
-        Copy or adapt the Services' software, including but not limited to
+        Copy or adapt the Services&apos; software, including but not limited to
         Flash, PHP, HTML, JavaScript, or other code.
       </p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
@@ -586,7 +586,7 @@ __________ */
         transmit, perform, publish, distribute, or broadcast content and
         materials to us or on the Services, including but not limited to text,
         writings, video, audio, photographs, graphics, comments, suggestions, or
-        personal information or other material (collectively, "Contributions").
+        personal information or other material (collectively, &quot;Contributions&quot;).
         Contributions may be viewable by other users of the Services and through
         third-party websites. When you create or make available any
         Contributions, you thereby represent and warrant that:
@@ -689,9 +689,9 @@ __________ */
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">Informal Negotiations</p>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
         To expedite resolution and control the cost of any dispute, controversy,
-        or claim related to these Legal Terms (each a "Dispute" and
-        collectively, the "Disputes") brought by either you or us (individually,
-        a "Party" and collectively, the "Parties"), the Parties agree to first
+        or claim related to these Legal Terms (each a &quot;Dispute&quot; and
+        collectively, the &quot;Disputes&quot;) brought by either you or us (individually,
+        a &quot;Party&quot; and collectively, the &quot;Parties&quot;), the Parties agree to first
         attempt to negotiate any Dispute (except those Disputes expressly
         provided below) informally for at least 30 days before initiating
         arbitration. Such informal negotiations commence upon written notice
@@ -754,7 +754,7 @@ __________ */
         IN CONNECTION WITH THE SERVICES AND YOUR USE THEREOF, INCLUDING, WITHOUT
         LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
         PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE MAKE NO WARRANTIES OR
-        REPRESENTATIONS ABOUT THE ACCURACY OR COMPLETENESS OF THE SERVICES'
+        REPRESENTATIONS ABOUT THE ACCURACY OR COMPLETENESS OF THE SERVICES&apos;
         CONTENT OR THE CONTENT OF ANY WEBSITES OR MOBILE APPLICATIONS LINKED TO
         THE SERVICES AND WE WILL ASSUME NO LIABILITY OR RESPONSIBILITY FOR ANY
         (1) ERRORS, MISTAKES, OR INACCURACIES OF CONTENT AND MATERIALS, (2)
