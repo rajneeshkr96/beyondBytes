@@ -56,8 +56,8 @@ export default function Page() {
         <section>
             <h2 className="text-2xl font-semibold mb-4">Get Started</h2>
             <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">
-                Join our community today to start writing, developing, or designing! Whether you're an experienced
-                professional or just starting out, there's a place for you here at our blogging platform.
+                Join our community today to start writing, developing, or designing! Whether you&apos;re an experienced
+                professional or just starting out, there&apos;s a place for you here at our blogging platform.
             </p>
      
         </section>
