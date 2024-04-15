@@ -9,7 +9,7 @@ import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
-import { useParams } from 'next/navigation'
+import { redirect, useParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -21,7 +21,9 @@ import { useDebouncedCallback } from 'use-debounce';
 import { ErrorResponse, errorToastHandler } from '@/components/errorTostHandler'
 import { useRouter } from 'next/navigation'
 import ImageUploadModal from '@/components/UploadImage/UploadImage'
+import { useSession } from 'next-auth/react'
 const animatedComponents = makeAnimated();
+
 interface Option {
   value: string;
   label: string;
@@ -41,10 +43,14 @@ const Page = () => {
   const [metaDes,setMetaDes] = useState<string >("");
   const [preImage, setPreImage] = useState<PreImageProps>({src:"",alt:""});
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
+  const session = useSession();
   const [tags, setTags] = useState([]);
   const param = useParams();
 
   useEffect(() => {
+    if(session.data?.user.role === "USER"){
+      redirect("/");
+    }
     const getData = async () => {
       const { data } = await axios.get("/api/tags/get");
       let tag = data.data.map((val: {

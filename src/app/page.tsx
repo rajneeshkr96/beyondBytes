@@ -29,7 +29,7 @@ export interface BlogcardProps{
 }
 export default async function Home() {
   let blog;
-  const id = await currentUserId();
+  const id:string = await currentUserId();
   let success = false;
  try {
   const res = await axios.get(`${process.env.BASE_URL}/api/blog/all?id=${id}&sort=createdAt&fields=id,tags,likesCount,author,title,metaDesc,image,createdAt,slug,readTime`);
@@ -50,8 +50,7 @@ export default async function Home() {
     <main className="min-h-screen">
       <HeroSlide/>
       <FeatureCards/>
-      <TagSlide/>
-      <h2 className="text-4xl font-bold px-4 max-sm:px-6   ">Feature Blogs</h2>
+      <h2 className="text-4xl font-bold px-4 max-sm:px-6 mt-6">Feature Blogs</h2>
       <section className="flex justify-center  flex-wrap ">
       {blog.map((data:BlogcardProps)=>
       <BlogCard

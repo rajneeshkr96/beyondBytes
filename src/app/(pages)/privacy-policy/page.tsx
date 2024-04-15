@@ -1,5 +1,11 @@
 import React from 'react'
 
+export const metadata = {
+  title: {
+    absolute: "privacy and policy Page",
+  },
+
+};
 const page = () => {
 
 

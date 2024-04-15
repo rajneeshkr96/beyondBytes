@@ -1,5 +1,11 @@
 import React from "react";
 
+export const metadata = {
+  title: {
+    absolute: "terms and services Page",
+  },
+
+};
 const page = () => {
   
   return (
