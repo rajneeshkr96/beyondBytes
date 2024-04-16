@@ -27,12 +27,22 @@ const { auth } = NextAuth(authConfig);
 // })
 
 export default async function middleware(request: NextRequest) {
-	const session = await auth()
-  console.log(session,"kkkkkkkkkkkkkkkkkkkkkkkkkk");
-	if (!session && request.nextUrl.pathname.includes('/projects')) {
-		return NextResponse.redirect(process.env.NEXTAUTH_URL as string)
-	}
+	const isAuthenticated = await auth()
 
+  if (request.nextUrl.pathname.startsWith('/write/') && !isAuthenticated) {
+    return NextResponse.redirect(new URL('/', request.url))
+  }else if (request.nextUrl.pathname.startsWith('/adminstrative/') && !isAuthenticated){
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+  else if (request.nextUrl.pathname.startsWith('/profile/' ) && !isAuthenticated){
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+  else if (request.nextUrl.pathname.startsWith('/me/') && !isAuthenticated){
+    return NextResponse.redirect(new URL('/', request.url))
+  }else {
+    // Allow authenticated or unauthenticated users for other routes
+    return NextResponse.next();
+  }
 
 }
 
