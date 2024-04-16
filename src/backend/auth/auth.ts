@@ -73,6 +73,12 @@ export const {
         await dataBasePrisma.$disconnect();
       }
     },
+    authorized({request,auth}){
+      if(auth?.user?.role === UserRole.ADMIN){
+        return true;
+      }
+      return false;
+    }
   },
 
   // session: { strategy: "jwt" },
