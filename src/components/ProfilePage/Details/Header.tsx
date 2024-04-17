@@ -104,11 +104,10 @@ const Header: React.FC<HeaderProps> = () => {
             session.data?.user?.role ==="USER" ?"":  <div className="max-sm:flex ">
             
             <span>
-              <SubmitButton
-                value={`Edit Profile`}
-                className={`bg-[#35a8c5] border p-2 w-24  max-sm:text-xs  ml-5  !flex-row-reverse rounded-lg text-white text-sm hover:scale-105 duration-300 text-[--first-color] ${buttonClass} `}
-                // onClick={handleEditModal}
-              />
+              <Modal btnClass={`bg-[#35a8c5] border p-2 w-24  max-sm:text-xs  ml-5  !flex-row-reverse rounded-lg text-white text-sm hover:scale-105 duration-300 text-[--first-color] ${buttonClass} `} button={"edit profile"}>
+                <EditProfileModal/>
+              </Modal>
+             
             </span>
             <span>
               <SubmitButton
