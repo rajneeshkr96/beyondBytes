@@ -48,6 +48,7 @@ const Page = () => {
   const param = useParams();
 
   useEffect(() => {
+
     if(session.data?.user.role === "USER"){
       redirect("/");
     }
@@ -86,7 +87,7 @@ const Page = () => {
     (val:{key:string,value:string }) => {
       window.localStorage.setItem(val.key,val.value);
     },
-    5000
+    50000
   );
   const editor = useEditor({
     extensions: [

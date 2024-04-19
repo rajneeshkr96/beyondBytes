@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   console.log(data);
 
   const postEntries: MetadataRoute.Sitemap = data.map(({slug,updatedAt}:{slug:string,updatedAt:string}) => ({
-    url: `${process.env.BASE_URL}/posts/${slug}`,
+    url: `${process.env.BASE_URL}/post/${slug}`,
     lastModified: new Date(updatedAt),
   }));
 
