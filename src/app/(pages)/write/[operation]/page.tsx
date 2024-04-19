@@ -87,7 +87,7 @@ const Page = () => {
     (val:{key:string,value:string }) => {
       window.localStorage.setItem(val.key,val.value);
     },
-    50000
+    10000
   );
   const editor = useEditor({
     extensions: [
