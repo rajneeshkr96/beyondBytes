@@ -7,13 +7,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   console.log(data);
 
   const postEntries: MetadataRoute.Sitemap = data.map(({slug,updatedAt}:{slug:string,updatedAt:string}) => ({
-    url: `${process.env.BASE_URL}/posts/${slug}`,
+    url: `${process.env.BASE_URL}/post/${slug}`,
     lastModified: new Date(updatedAt),
   }));
 
   return [
     {
       url: `${process.env.BASE_URL}/about-us`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${process.env.BASE_URL}/contact-us`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${process.env.BASE_URL}/career-page`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${process.env.BASE_URL}/privacy-policy`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${process.env.BASE_URL}/terms-services`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${process.env.BASE_URL}/disclaimer-page`,
       lastModified: new Date(),
     },
     ...postEntries,
