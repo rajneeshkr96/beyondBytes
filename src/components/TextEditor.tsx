@@ -245,7 +245,7 @@ const TextEditor:FC<EditorProps> = ({editor}) => {
 
           </FloatingMenu>}
     
-          <EditorContent  onChange={()=>console.log("object")} editor={editor} />
+          <EditorContent  onChange={()=>console.log("kkkkkkkkkkkkk")} editor={editor} />
           
         </>
       )

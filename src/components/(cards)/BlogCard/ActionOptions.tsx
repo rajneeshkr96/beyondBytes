@@ -7,9 +7,13 @@ import { errorToastHandler } from "../../errorTostHandler";
 import Loading from "@/app/loading";
 import Modal from "@/components/Modals/Modal";
 import SubmitButton from "../../layoutComponents/Button/SubmitButton";
+import { TbPhotoEdit } from "react-icons/tb";
+import { MdReportProblem } from "react-icons/md";
+import { useRouter } from "next/navigation";
 const   ActionOptions = ({id,authId,disable}:{id:string,authId:string,disable?:boolean}) => {
   const session = useSession();
-  const btnClass = 'w-full px-4 py-2 capitalize'
+  const router = useRouter();
+  const btnClass = 'w-full px-4 py-2 capitalize flex justify-center items-center gap-x-2'
   const [isFollow,setIsFollow] = useState(false);
   const [fullLoading,setFullLoading] = useState(false);
   const onFollow = async () =>{
@@ -53,7 +57,8 @@ const   ActionOptions = ({id,authId,disable}:{id:string,authId:string,disable?:b
           <button className={btnClass} onClick={onFollow}>{isFollow?"unfollow author":"follow author"}</button>
           <button className={btnClass}>mute author</button>
         </>}
-        <Modal className="px-12 py-2" btnClass={`${btnClass} text-red-400`} button='Report......'>
+          {authId === session.data?.user.userId && <button className={btnClass} onClick={()=>router.push(`/write/edit?id=${id}`)}><TbPhotoEdit /> edit</button>}
+        <Modal className="px-12 py-2 " btnClass={`${btnClass} text-red-400`} button={"report" }>
           <div className="px-4 py-2 ">
             <h4 className="font-semibold text-xl my-4">Report Post</h4>
             <div className="flex flex-col gap-y-2">
