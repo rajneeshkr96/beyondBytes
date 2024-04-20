@@ -9,7 +9,7 @@ import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
-import { redirect, useParams } from 'next/navigation'
+import { redirect, useParams, useSearchParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -46,6 +46,7 @@ const Page = () => {
   const session = useSession();
   const [tags, setTags] = useState([]);
   const param = useParams();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
 
@@ -74,6 +75,11 @@ const Page = () => {
         setPreImage({src: localStorage.getItem("heroImage") ?? "",alt: localStorage.getItem("alt") ?? ""})
         setMetaTitle(localStorage.getItem("metaTitle") ?? "");
         setMetaDes(localStorage.getItem("metaDes") ?? ""); 
+    }
+    if(param.operation === "edit"){
+      const id = searchParams.get("id");
+      // const { data } = await axios.get(`/api/blog/writer/get/${id}`);
+
     }
   }, [param.operation]);
 
@@ -113,14 +119,23 @@ const Page = () => {
     `,
   })
   
+  useEffect(() => {
+    const saveToLocalStorage = () => {
+      if (editor) {
+        localStorage.setItem('content', editor.getHTML());
+      }
+    };
+
+    const intervalId = setInterval(saveToLocalStorage, 5000); // Save every 5 seconds
+
+    return () => clearInterval(intervalId);
+  }, [editor]);
+
+  
   if (!editor) {
     return null
   }
     
-
-  editor.on('update', ({ editor }) => {
-    debounced({key:"content",value:editor.getHTML()});
-  });
 
 
   const publicBlog = async () => {
