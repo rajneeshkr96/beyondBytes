@@ -3,13 +3,19 @@ import { User } from "@prisma/client";
 import { currentUserId } from "@/lib/authDet";
 import { NextResponse, NextRequest } from "next/server";
 
+interface UserUpdate {
+  userName: string;
+  bio: string;
+}
+
 export async function PUT(
   req: NextRequest,
   context: { params: { id: string } }
 ) {
-   
+  console.log("hellowrorld jksfjvc")   
   try {
-    const { userName, bio } = await req.json();
+
+    const { userName, bio }:UserUpdate = await req.json();
     const userId = await currentUserId();
     console.log("userid/////////////",userId);
     

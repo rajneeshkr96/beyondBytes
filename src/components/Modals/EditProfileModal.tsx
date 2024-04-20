@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 
+
 interface EditProfileModalProps {
   userName?: string;
   bio?: string;
@@ -31,7 +32,7 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ userName, bio,userId }) =
       .string()
       .required("Bio is required")
       .min(10, "Bio is too short")
-      .max(100, "Bio is too long"),
+      .max(200, "Bio is too long"),
   });
 
   const {
@@ -46,21 +47,30 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ userName, bio,userId }) =
   } = useForm<bio>({ resolver: yupResolver(bioSchema) });
 
   const submitUserName: SubmitHandler<EditProfileModalProps> = async (data) => {
-    console.log(data);
+
     try {
-      const res = await axios.post(`${process.env.BASE_URL}/api/user/update/${userId}`);
-    console.log(res);
+      const res = await axios.put(`/api/user/update/${userId}`, data);
+    
     if (res.data.success) {
       console.log("User name updated successfully");
+      
     }
     } catch (error) {
-      console.log(error);
-      
+      return "error"
     }
   };
 
   const submitBio: SubmitHandler<EditProfileModalProps> = async (data) => {
-    console.log(data);
+    try {
+      const res = await axios.put(`/api/user/update/${userId}`, data);
+    
+    if (res.data.success) {
+      console.log("Bio updated successfully");
+    }
+    } catch (error) {
+     
+      
+    }
   };
 
   return (
