@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import BlogsCards from "@/components/(cards)/BlogCard/BlogsCards";
+import Loading from "@/app/loading";
 
 import path from "path";
 import notfound from "@/app/not-found";
@@ -47,6 +48,7 @@ const MyPosts = ({
   const [documentCount, setDocumentCount] = useState(0);
 
   const [post, setPost] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getAllPosts = async () => {
@@ -55,12 +57,17 @@ const MyPosts = ({
         if (data.success === true) {
           setDocumentCount(data.total);
           setPost(data.data);
+          setLoading(false);
         }
-      } catch (error) {}
+
+      } catch (error) {
+        setLoading(false);
+      }
     };
 
     getAllPosts();
   }, [id]);
+  if(loading) return <Loading />;
 
   return (
     <div className="bg-[#e2eafc] w-11/12 mx-auto">

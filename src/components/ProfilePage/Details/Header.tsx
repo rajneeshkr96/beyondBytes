@@ -9,10 +9,12 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import EditProfileModal from "@/components/Modals/EditProfileModal";
 import Modal from "@/components/Modals/Modal";
+import Loading from "@/app/loading";
 
 interface HeaderProps {}
 const Header: React.FC<HeaderProps> = () => {
   const [checkId , setCheckId] = useState(false);
+  const [loading, setLoading] = useState(true);
   const altRef = useRef<HTMLInputElement>(null);
   const [profileEditModal,setProfileEditModal]= useState(false)
   let buttonClass ;
@@ -74,9 +76,12 @@ const Header: React.FC<HeaderProps> = () => {
 
 
           }));
+          setLoading(false);
         }
+      
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     getProfileData();
@@ -88,6 +93,9 @@ const Header: React.FC<HeaderProps> = () => {
    
   if(!checkId){
     buttonClass = "hidden";
+  }
+  if(loading){
+    return <Loading/>
   }
   return (
     <div className="flex  w-3/4 mx-auto relative right-20 max-sm:w-11/12 max-sm:flex-col max-sm:right-0 gap-3 ">
