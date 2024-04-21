@@ -6,6 +6,10 @@ import TagSlide from "@/components/TagSlide/TagSlide";
 import axios from "axios";
 import { currentUserId } from "@/lib/authDet";
 import { notFound } from "next/navigation";
+
+export const metadata = {
+  description: "Explore the world of technology, lifestyle, travel, and more at BiyondBytes. Discover insightful articles across all categories and stay updated on the latest trends. Join us as we dive deep into diverse topics beyond the ordinary, only at BiyondBytes",
+};
 interface Bookmarks{
   bookmark:boolean
 }

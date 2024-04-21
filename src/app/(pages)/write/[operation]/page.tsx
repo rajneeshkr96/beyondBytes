@@ -22,6 +22,8 @@ import { ErrorResponse, errorToastHandler } from '@/components/errorTostHandler'
 import { useRouter } from 'next/navigation'
 import ImageUploadModal from '@/components/UploadImage/UploadImage'
 import { useSession } from 'next-auth/react'
+import { json } from 'stream/consumers'
+import Loading from '@/app/loading'
 const animatedComponents = makeAnimated();
 
 interface Option {
@@ -47,6 +49,8 @@ const Page = () => {
   const [tags, setTags] = useState([]);
   const param = useParams();
   const searchParams = useSearchParams();
+  const [content,setContent] = useState('');
+  const [fullLoading,setFullLoading] = useState(false);
 
   useEffect(() => {
 
@@ -77,24 +81,31 @@ const Page = () => {
         setMetaDes(localStorage.getItem("metaDes") ?? ""); 
     }
     if(param.operation === "edit"){
-      const id = searchParams.get("id");
-      // const { data } = await axios.get(`/api/blog/writer/get/${id}`);
+      setFullLoading(true);
+      
+      const slug = searchParams.get("slug");
+      if(!slug){
+        router.back();
+        return;
+      }
+      const getPostData = async ()=>{
+        const res = await axios.get(`/api/blog/${slug}`);
+        if(res.data.success){
+          setTitle(res.data.data.title);
+          setMetaTitle(res.data.data.metaTitle);
+          setMetaDes(res.data.data.metaDesc);
+          setPreImage({src: res.data.data.image.src,alt: res.data.data.image.alt});
+          const content = JSON.parse(res.data.data.content);
+          setContent(content);
+        }
+        setFullLoading(false);
+      }
+      getPostData();
+     
 
     }
-  }, [param.operation]);
+  }, [param.operation,searchParams]);
 
-
-  const handleChange = (options: readonly Option[] | null) => {
-    setSelectedTags(options ? Array.from(options) : []);
-  };
-
-
-  const debounced = useDebouncedCallback(
-    (val:{key:string,value:string }) => {
-      window.localStorage.setItem(val.key,val.value);
-    },
-    10000
-  );
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -118,6 +129,18 @@ const Page = () => {
       ${typeof window !== 'undefined' && localStorage?.getItem("content")}
     `,
   })
+  const handleChange = (options: readonly Option[] | null) => {
+    setSelectedTags(options ? Array.from(options) : []);
+  };
+
+
+  const debounced = useDebouncedCallback(
+    (val:{key:string,value:string }) => {
+      window.localStorage.setItem(val.key,val.value);
+    },
+    10000
+  );
+
   
   useEffect(() => {
     const saveToLocalStorage = () => {
@@ -130,14 +153,16 @@ const Page = () => {
 
     return () => clearInterval(intervalId);
   }, [editor]);
-
+  
   
   if (!editor) {
     return null
   }
-    
+  
 
-
+  if(param.operation === "edit" && !localStorage.getItem("content")){
+    editor.commands.setContent(content);
+  }
   const publicBlog = async () => {
     try {
       setLoading(true);
@@ -172,10 +197,53 @@ const Page = () => {
       errorToastHandler(error);
     }
   }
+  const updatePost = async () => {
+    try {
+      const id = searchParams.get('id');
+      if(!id){
+        toast.error("blog not found");
+        router.back();
+        return;
+      }
+      setLoading(true);
+      if(!title || !preImage.src || !preImage.alt || !metaDes || !metaTitle || selectedTags.length < 1){
+        toast.error("Please fill all fields....");
+        setLoading(false);
+        return;
+      }
+      const tags = selectedTags.map(tag =>tag.value);
+      const res = await axios.put("/api/blog/writer/update", {
+        id:id,
+        title: title,
+        image: preImage,
+        content: JSON.stringify(editor.getHTML()),
+        metaTitle: metaTitle,
+        metaDesc: metaDes,
+        tags: tags
+      })
+      if(res.data.success){
+        toast.success("edit successfully")
+        localStorage.setItem("title","")
+        localStorage.setItem("heroImage","")
+        localStorage.setItem("alt","")
+        localStorage.setItem("content","")
+        localStorage.setItem("metaTitle","")
+        localStorage.setItem("metaDes","")
+        router.push(`/post/${res.data.data.slug}`);
+      }
+
+      setLoading(false);
+    } catch (error:ErrorResponse | any) {
+      setLoading(false);
+      errorToastHandler(error);
+    }
+  }
   
   
 
   return (
+    <>
+    {fullLoading && <Loading background='bg-[#33333375]' />}
     <div className='min-h-screen'>
 
       {/* image uploading ................ */}
@@ -221,8 +289,9 @@ const Page = () => {
         <TextEditor editor={editor} /> 
 
       </div>
-      <SubmitButton loading={loading} value="Publish" className='bg-green-700 text-blue-50 px-4 py-2 rounded-full block mx-auto mt-4 hover:bg-green-600 font-bold ' onClick={publicBlog} />
+      <SubmitButton loading={loading} value={param.operation === "new" ?"publich":"edit"} className='bg-green-700 text-blue-50 px-4 py-2 rounded-full block mx-auto mt-4 hover:bg-green-600 font-bold ' onClick={param.operation === "new" ?publicBlog:updatePost} />
     </div>
+    </>
   )
 }
 

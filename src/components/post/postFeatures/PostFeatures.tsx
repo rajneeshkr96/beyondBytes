@@ -101,7 +101,7 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ id,authId,slug,baseurl,com
                         {meBookmark ? <MdOutlineBookmark  /> : <MdBookmarkAdd  />}
                     </span>
                     <ActionBtn className='text-lg' iconClass="!text-3xl"  >
-                        <ActionOptions  authId={authId}  id={id}/>
+                        <ActionOptions slug={slug}  authId={authId}  id={id}/>
                     </ActionBtn>
                 </span>
             </div>
