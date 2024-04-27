@@ -80,13 +80,13 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ userName, bio,userId }) =
           <div className="flex gap-y-4 gap-x-3">
             <input
               placeholder="Enter your Username"
-              className="bg-gray-300 border rounded-sm p-2"
+              className="w-full px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white max-md:w-full"
               type="text"
               {...registerUserName("userName")}
             />
             <SubmitButton
-              className="bg-blue-400 w-16 rounded-md "
-              value={"Submit"}
+              className="bg-[#333] text-white px-4 py-2 rounded-lg"
+              value={"username"}
             />
           </div>
         </form>
@@ -96,12 +96,12 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ userName, bio,userId }) =
           <div className="flex flex-col items-end gap-4">
             <textarea
               placeholder="Enter your Bio"
-              className="w-full bg-gray-300 border rounded-sm p-2"
+              className="w-full px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white max-md:w-full"
               {...registerBio("bio")}
             />
             <SubmitButton
-              className="bg-blue-400 w-20 p-2   rounded-md "
-              value={"Submit"}
+              className="bg-[#333] text-white px-4 py-2 rounded-lg w-full"
+              value={"edit bio"}
             />
           </div>
         </form>

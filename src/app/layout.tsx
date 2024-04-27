@@ -19,20 +19,7 @@ export const metadata: Metadata = {
     template: `%s | Biyond Bytes`,
   },
   description: "Biyond Bytes",
-  openGraph:{
-    title: "Biyond Bytes",
-    description: "Biyond Bytes",
-    url: `${process.env.BASE_URL}/`,
-    type: "website",
-    images: [
-      {
-        url: `${process.env.BASE_URL}/opengraph-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Biyond Bytes",
-      },
-    ],
-  }
+
 };
 
 export default async function RootLayout({
