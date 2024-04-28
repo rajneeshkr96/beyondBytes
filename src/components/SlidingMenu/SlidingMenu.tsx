@@ -16,7 +16,7 @@ const SlidingMenu = ({className,menuOptions,head}:{className?:string,menuOptions
     return (
       <div className='min-h-full'>
         <section className='w-10/12 max-sm:w-full border-b-2 mx-auto'>
-         {head?.title && head.actionBtn && <div className='flex justify-between items-center'>
+         {head?.title && head.actionBtn.length > 0 && <div key={head.title} className='flex justify-between items-center'>
             <span style={{ color: currentColor }} className='text-5xl font-serif uppercase font-bold max-sm:text-2xl'>{head?.title}</span>
             {head?.actionBtn.map((action,index) =>{return index===active?<span key={index}>{action}</span>:""})}
           </div>}
