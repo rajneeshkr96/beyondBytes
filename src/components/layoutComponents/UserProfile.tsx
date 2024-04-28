@@ -63,7 +63,7 @@ useEffect(() => {
         desc: "Admin panel Settings",
         iconColor: "rgb(255, 244, 229)",
         iconBg: "rgb(254, 201, 15)",
-        link: "/"
+        link: "/adminstrative/dashboard"
       })
     }
     setUserProfileData([{
