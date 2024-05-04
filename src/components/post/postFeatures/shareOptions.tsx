@@ -19,10 +19,10 @@ const ShareOptions = ({link}:{link:string}) => {
     return (
       <>
         <button onClick={onCopy} className={btnClass}><CiLink /> <span>copy link</span></button>
-        <Link href={"#"} target='_blank'  className={`${btnClass} border-t`}><FaFacebookF /> <span>share of facebook</span> </Link>
-        <Link href={"#"} target='_blank' className={`${btnClass} `}><FaXTwitter /> <span>share of twitter</span> </Link>
-        <Link href={"#"} target='_blank' className={`${btnClass} `}><FaWhatsapp /><span>share of whatsapp</span> </Link>
-        <Link href={"#"} target='_blank' className={`${btnClass} `}><FaLinkedinIn /><span>share of linkedin</span> </Link>
+        <Link href={`https://www.facebook.com/sharer/sharer.php?u=${link}`} target='_blank'  className={`${btnClass} border-t`}><FaFacebookF /> <span>share of facebook</span> </Link>
+        <Link href={`https://twitter.com/intent/tweet?text=${link}`} target='_blank' className={`${btnClass} `}><FaXTwitter /> <span>share of twitter</span> </Link>
+        <Link href={`whatsapp://send?text=${link}`} target='_blank' className={`${btnClass} `}><FaWhatsapp /><span>share of whatsapp</span> </Link>
+        <Link href={`https://www.linkedin.com/cws/share?url=${link}`} target='_blank' className={`${btnClass} `}><FaLinkedinIn /><span>share of linkedin</span> </Link>
       </>
     ) 
 }

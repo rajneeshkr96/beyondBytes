@@ -104,7 +104,7 @@ const Page = () => {
      
 
     }
-  }, [param.operation,searchParams]);
+  }, [param.operation,searchParams,router,session.data?.user.role]);
 
   const editor = useEditor({
     extensions: [
