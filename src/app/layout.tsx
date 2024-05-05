@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter,Source_Serif_4 } from "next/font/google";
+import { GoogleTagManager } from '@next/third-parties/google'
 import "./globals.css";
 import HomeLayout from "@/components/layoutComponents/HomeLayout/HomeLayout";
 import { ToastContainer } from 'react-toastify';
@@ -31,6 +32,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="GTM-MCDRPZ4H" />
       <body className={`${inter.className} ${source_serif_4.variable}`}>
       <SessionProvider session={session}>
         <ReduxProvider>

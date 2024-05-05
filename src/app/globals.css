@@ -319,6 +319,13 @@ html::-webkit-scrollbar-thumb {
   cursor: col-resize;
 }
 
+@media not all and (min-width: 640px) {
+  .tiptap img {
+    width: 100%;
+    margin: 1rem auto !important;
+  }
+}
+
 /* action btn  */
 
 .action-btn {
