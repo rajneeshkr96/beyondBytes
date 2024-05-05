@@ -54,7 +54,7 @@ export default async function Home() {
     
     <main className="min-h-screen">
       <HeroSlide/>
-      <FeatureCards/>
+      {/* <FeatureCards/> */}
       <h2 className="text-4xl font-bold px-4 max-sm:px-6 mt-6">Feature Blogs</h2>
       <section className="flex justify-center  flex-wrap ">
       {blog.map((data:BlogcardProps)=>
