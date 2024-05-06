@@ -12,30 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   return [
-    {
-      url: `${process.env.BASE_URL}/about-us`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${process.env.BASE_URL}/contact-us`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${process.env.BASE_URL}/career-page`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${process.env.BASE_URL}/privacy-policy`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${process.env.BASE_URL}/terms-services`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${process.env.BASE_URL}/disclaimer-page`,
-      lastModified: new Date(),
-    },
     ...postEntries,
   ];
 }

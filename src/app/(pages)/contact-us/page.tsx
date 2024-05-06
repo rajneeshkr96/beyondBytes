@@ -6,6 +6,12 @@ import { IoCallOutline } from "react-icons/io5";
 import { RiHomeOfficeLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 
+export const metadata = {
+  title: {
+      absolute: "contact us page",
+  },
+  description: "contact us page ", 
+};
 
 const page = () => {
 
