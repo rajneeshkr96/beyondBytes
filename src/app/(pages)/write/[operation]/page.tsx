@@ -185,10 +185,10 @@ const Page = () => {
         localStorage.setItem("title","")
         localStorage.setItem("heroImage","")
         localStorage.setItem("alt","")
-        localStorage.setItem("content","")
         localStorage.setItem("metaTitle","")
-        localStorage.setItem("metaDes","")
         router.push(`/post/${res.data.data.slug}`);
+        localStorage.setItem("metaDes","")
+        localStorage.setItem("content","")
       }
 
       setLoading(false);
