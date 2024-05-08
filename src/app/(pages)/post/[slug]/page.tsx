@@ -24,8 +24,13 @@ type Props = {
 // }
 
  const getData = cache(async (slug:string,userId?:string) => {
-  const res = await axios.get(`${process.env.BASE_URL}/api/blog/${slug}/${userId}`);
-  return res;
+  try {
+    const res = await axios.get(`${process.env.BASE_URL}/api/blog/${slug}/${userId}`);
+    return res;
+    
+  } catch (error) {
+    return null;
+  }
  })
 export async function generateMetadata(
   { params, searchParams }: Props
@@ -33,19 +38,28 @@ export async function generateMetadata(
   // read route params
   const slug = params.slug
   const product = await getData(slug);
-  // optionally access and extend (rather than replace) parent metadata
-  return {
-    title: product.data.data.metaTitle,
-    description: product.data.data.metaDesc,
-    openGraph: {
-      images: [{
-        url: product.data.data.image.src,
-        alt: product.data.data.image.alt,
-        width: 1200,
-        height: 630,
-      }],
-
-    },
+  if(product){
+    // optionally access and extend (rather than replace) parent metadata
+    return {
+      title: product.data.data.metaTitle || "page not found",
+      description: product.data.data.metaDesc || "page not found",
+      openGraph: {
+        images: [{
+          url: product.data.data.image.src,
+          alt: product.data.data.image.alt,
+          width: 1200,
+          height: 630,
+        }],
+  
+      },
+    }
+  }else{
+    return {
+      title: {
+        absolute:"page not found"
+      },
+      description:"page not found",
+    }
   }
 }
 
@@ -58,12 +72,12 @@ const Page = async (context: { params: { slug: string } }) => {
    const userId = await currentUserId();
    const res = await getData(slug,userId);
     
-   if(res.data.success){
+   if(res && res.data.success){
     success = true;
      blog = {...res.data.data,content:JSON.parse(res.data.data.content)};
    }
   } catch (error) {
-   console.log(error);
+    return notFound();
   }
   if (!success) {
     return notFound();
