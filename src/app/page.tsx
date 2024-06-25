@@ -1,8 +1,7 @@
 
 import BlogCard from "@/components/(cards)/BlogCard/BlogCard";
 import FeatureCards from "@/components/(cards)/FeatureCards/FeatureCards";
-import HeroSlide from "@/components/HeroSection/HeroSlide";
-import TagSlide from "@/components/TagSlide/TagSlide";
+import HeroSection from "@/components/HeroSection/HeroSection";
 import axios from "axios";
 import { currentUserId } from "@/lib/authDet";
 import { notFound } from "next/navigation";
@@ -53,7 +52,7 @@ export default async function Home() {
   return (
     
     <main className="min-h-screen">
-      <HeroSlide/>
+        <HeroSection/>
       {/* <FeatureCards/> */}
       <h2 className="text-4xl font-bold px-4 max-sm:px-6 mt-6">Feature Blogs</h2>
       <section className="flex justify-center  flex-wrap ">

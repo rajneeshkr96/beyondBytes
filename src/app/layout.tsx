@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     template: `%s | Biyond Bytes`,
   },
   description: "Biyond Bytes",
+  
 
 };
 
@@ -32,6 +33,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <meta name="robots" content="max-image-preview:large"></meta>
       <GoogleTagManager gtmId="GTM-MCDRPZ4H" />
       <body className={`${inter.className} ${source_serif_4.variable}`}>
       <SessionProvider session={session}>
