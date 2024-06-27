@@ -73,7 +73,7 @@ const changeBg = (newImgSrc: string, previewBg: HTMLElement) => {
       duration: 0.5,
       onComplete: () => {
         if(previewBg.contains(oldImg))
-        previewBg.removeChild(oldImg);
+          previewBg.removeChild(oldImg);
       },
     });
   }
@@ -82,6 +82,7 @@ const changeBg = (newImgSrc: string, previewBg: HTMLElement) => {
 const HeroSection: React.FC = () => {
   const [activePreview, setActivePreview] = useState<HTMLElement | null>(null);
   const [isMouseOverItem, setIsMouseOverItem] = useState(false);
+
   const previewBg = useRef<HTMLInputElement>(null);
   const container = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -92,7 +93,7 @@ const HeroSection: React.FC = () => {
 
     previews.forEach((preview, index) => {
       const previewElement = document.createElement("div");
-      previewElement.className = `preview ${mapClasses[index]} preview-${index + 1}`;
+      previewElement.className = `preview ${mapClasses[index]} preview-${index + 1} opCheck`;
       previewElement.innerHTML = `
         <div class="preview-img" ><img src="${preview.img}" alt="" /></div>
         <div class="preview-title"><h1>${preview.title}</h1></div>
@@ -147,13 +148,11 @@ const HeroSection: React.FC = () => {
 
 };
 
-const mounseLeave = () => {
+const mounseLeave = async () => {
   setIsMouseOverItem(false);
   applyVariantStyles(activePreview!);
   const defaultPreview = document.querySelector(".preview.default") as HTMLElement;
-  console.log(defaultPreview,"defaultPreview")
-  setTimeout(() => {
-    console.log(isMouseOverItem,"isMouseOverItem")
+  setTimeout( () => {
     if (!isMouseOverItem) {
       if(previewBg.current !== null){
         changeBg("./assets/default-bg.jpg", previewBg.current);
@@ -171,8 +170,19 @@ const mounseLeave = () => {
           ease: "power3.out",
         });
       }
+      
     }
+    setTimeout( () => {
+      const preview = document.querySelectorAll(".opCheck")
+      preview.forEach((pre) => {
+        pre.setAttribute("style", "opacity:0;")
+      })
+    }, 1000);
   }, 10);
+
+  
+
+
 }
 
   return (
@@ -206,6 +216,7 @@ const mounseLeave = () => {
             alt=""
           />
         </div>
+        <div className="preview default"></div>
       </div>
     </header>
   );
