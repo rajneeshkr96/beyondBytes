@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import localFont from 'next/font/local'
 import { Inter,Source_Serif_4 } from "next/font/google";
 import { GoogleTagManager } from '@next/third-parties/google'
 import "./globals.css";
@@ -9,6 +10,7 @@ import ReduxProvider from "@/redux/Provider";
 import { auth } from "@/backend/auth/auth";
 import {SessionProvider} from "next-auth/react"
 const inter = Inter({ subsets: ["latin"] });
+
 export const source_serif_4 = Source_Serif_4({
   subsets: ['latin'],
   variable: '--source_serif_4',

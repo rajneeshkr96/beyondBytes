@@ -41,6 +41,7 @@
     "react-toastify": "^10.0.4",
     "reading-time": "^1.5.0",
     "remark-gfm": "^4.0.0",
+    "swiper": "^11.1.4",
     "uploadthing": "^6.5.2",
     "use-debounce": "^10.0.0",
     "yup": "^1.4.0"
