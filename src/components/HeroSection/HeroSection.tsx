@@ -186,8 +186,8 @@ const mounseLeave = async () => {
 }
 
   return (
-    <header className="main-container">
-      <div className="container" ref={container} >
+    <header className="main-container ">
+      <div className="container max-w-[100vw]" ref={container} >
         <footer>
           <p>match shoreel</p>
           <p>collection 2024</p>
