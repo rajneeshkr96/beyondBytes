@@ -6,7 +6,7 @@ import React, { FC, useEffect } from 'react'
 interface BodyProps{
     font: string
     content: string
-    image:{src:string, alt:string},
+    image:{src:string, alt:string,caption?:string},
 }
 
 
@@ -39,7 +39,7 @@ const PostBody:FC<BodyProps> = ({font,content,image}) => {
             <div className='max-lg:row-start-2 max-lg:row-end-3' >
                 <figure>
                     <Image src={image.src} alt={image.alt} width={2000} height={1000} className='w-full h-auto' />
-                    <figcaption className='mx-auto inline-block'>Optional caption for the image, providing additional context.</figcaption>
+                   {image?.caption && <figcaption className='mx-auto inline-block'>Optional caption for the image, providing additional context.</figcaption>}
                 </figure>
                 <div className='my-10 px-2 text-lg font-serif'>
                     {

@@ -5,9 +5,9 @@ import axios from "axios";
 import { currentUserId } from "@/lib/authDet";
 import { notFound } from "next/navigation";
 import MainCard from "@/components/(cards)/MainCard/MainCard";
-import FeatureCards from "@/components/(cards)/FeatureCards/FeatureCards";
 import CategorySlide from "@/components/categorySlide/CategorySlide";
-import { SwiperSlide } from 'swiper/react';
+
+
 export const metadata = {
   description: "Explore the world of technology, lifestyle, travel, and more at BiyondBytes. Discover insightful articles across all categories and stay updated on the latest trends. Join us as we dive deep into diverse topics beyond the ordinary, only at BiyondBytes",
 
@@ -47,12 +47,15 @@ export default async function Home() {
   return (
 
     <main className="min-h-screen">
-      <div className="w-screen h-screen">
+
+      <div className="heroSection w-screen h-screen">
         <HeroSection />
       </div>
-      <section className="my-12 ">
-        <CategorySlide data={blog}/>
+      <section className="my-12 featureSection">
+        <CategorySlide data={blog} />
       </section>
+
+
       <section className="flex justify-center  flex-wrap ">
 
         {blog.map((data: BlogcardProps) =>

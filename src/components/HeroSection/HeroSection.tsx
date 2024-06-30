@@ -177,7 +177,7 @@ const mounseLeave = async () => {
       preview.forEach((pre) => {
         pre.setAttribute("style", "opacity:0;")
       })
-    }, 1000);
+    }, 500);
   }, 10);
 
   
@@ -188,17 +188,6 @@ const mounseLeave = async () => {
   return (
     <header className="main-container">
       <div className="container" ref={container} >
-        <nav className="nav">
-          <div className="menu-btn">
-            <p>menu</p>
-          </div>
-          <div className="logo">
-            <a href="#">thetalab</a>
-          </div>
-          <div className="local-time">
-            <p>12:00</p>
-          </div>
-        </nav>
         <footer>
           <p>match shoreel</p>
           <p>collection 2024</p>

@@ -84,9 +84,9 @@ const Page = async (context: { params: { slug: string } }) => {
   }
 
   return (
-    <article>
+    <article className='px-12 py-12'>
       <Header title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime} author={blog.author} font={ogg.className}/>
-      <PostFeatures authId={blog.author.id}  baseurl={baseURL ?? ""} meLike={blog.likes && blog?.likes[0]?.like} bookmark={blog.bookmarks &&blog?.bookmarks[0]?.bookmark} slug={blog.slug}  commentCount={blog.commentsCount} likesCount={blog.likesCount}  id={blog.id}/>
+      {/* <PostFeatures authId={blog.author.id}  baseurl={baseURL ?? ""} meLike={blog.likes && blog?.likes[0]?.like} bookmark={blog.bookmarks &&blog?.bookmarks[0]?.bookmark} slug={blog.slug}  commentCount={blog.commentsCount} likesCount={blog.likesCount}  id={blog.id}/> */}
       <PostBody image={blog.image} content={blog.content} font={ogg.className}/>
       <div className='flex w-9/12 justify-center gap-x-4 my-6 items-center'>
                 <span className={`${ogg.className} text-2xl`}>Tags</span>

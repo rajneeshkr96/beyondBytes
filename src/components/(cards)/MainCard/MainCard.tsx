@@ -34,15 +34,17 @@ const MainCard: FC<CardsProps> = ({
 }) => {
   return (
     <div {...props} className={`${monaRegular.className} max-w-80 mx-2 my-4 `}>
-      <div className='w-full rounded-xl h-48 mb-2 '>
-        <Image
-          src={image.src}
-          alt={image.alt}
-          width={300}
-          height={200}
-          className="w-full h-full object-cover rounded-xl"
-        />
-      </div>
+      <Link href={`/post/${slug}`}>
+        <div  className='w-full rounded-xl h-48 mb-2 cursor-pointer'>
+          <Image
+            src={image.src}
+            alt={image.alt}
+            width={300}
+            height={200}
+            className="w-full h-full object-cover rounded-xl"
+          />
+        </div>
+      </Link>
       <div className='px-2'>
         <h2 className={`${monaRegular.className} font-semibold line-clamp-2`}>
           <Link href={`/post/${slug}`}>{title}</Link>
