@@ -6,6 +6,8 @@ import { currentUserId } from "@/lib/authDet";
 import { notFound } from "next/navigation";
 import MainCard from "@/components/(cards)/MainCard/MainCard";
 import CategorySlide from "@/components/categorySlide/CategorySlide";
+import Footer from "@/components/Footer/Footer";
+import {data} from "@/components/Footer/data"
 
 
 export const metadata = {
@@ -70,6 +72,9 @@ export default async function Home() {
           />
         )}
 
+      </section>
+      <section>
+        <Footer data={data} />
       </section>
 
 
