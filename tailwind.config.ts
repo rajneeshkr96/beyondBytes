@@ -19,11 +19,16 @@ export default withUt({
         14: '14px',
       },
       backgroundColor: {
-        'main-bg': '#FAFBFB',
-        'main-dark-bg': '#20232A',
-        'secondary-dark-bg': '#33373E',
-        'light-gray': '#F7F7F7',
-        'half-transparent': 'rgba(0, 0, 0, 0.5)',
+        'main-bg': '#FCF8F3',
+        'main-dark-bg': '#45474B',
+        'main-color': '#495E57',
+        'main-sec-color': '#F4CE14',
+        'hover-bg': '#52665A',
+      },
+      colors:{
+        "light-color": '#F5F7F8',
+        "main-text-color": '#495E57',
+        "dark-color":"#45474B",
       },
       borderWidth: {
         1: '1px',

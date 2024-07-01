@@ -153,7 +153,9 @@ const mounseLeave = async () => {
   applyVariantStyles(activePreview!);
   const defaultPreview = document.querySelector(".preview.default") as HTMLElement;
   setTimeout( () => {
-    if (!isMouseOverItem) {
+    console.log(!isMouseOverItem,"................................................................")
+    if (isMouseOverItem) {
+      console.log("................................................................")
       if(previewBg.current !== null){
         changeBg("./assets/default-bg.jpg", previewBg.current);
       }
