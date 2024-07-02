@@ -10,6 +10,14 @@ export const mapClasses = [
     "variant-3",
     "variant-1",
 ]
+export const links = [
+    {name:"Get Start",link:"/"},
+    {name:"home",link:"/"},
+    {name:"Team Page",link:"/"},
+    {name:"Blog reel",link:"/"},
+    {name:"About US",link:"/"},
+    {name:"Contect US",link:"/"},
+]
 
 export const previews = [
     {

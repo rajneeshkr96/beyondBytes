@@ -1,9 +1,11 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { mapClasses, previews } from "./data";
+import { mapClasses, previews,links } from "./data";
 import gsap from "gsap";
 import Image from "next/image";
-
+import Link from "next/link";
+import localFont from 'next/font/local'
+const ogg = localFont({ src: '../../../fonts/Ogg-Medium-BF646c18fc4e918.otf' })
 const defaultClipPaths: { [key: string]: string } = {
   "variant-1": "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
   "variant-2": "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
@@ -87,10 +89,7 @@ const HeroSection: React.FC = () => {
   const previewBg = useRef<HTMLInputElement>(null);
   const container = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    
-
     const defaultPreview = document.querySelector(".preview.default") as HTMLElement;
-    console.log(defaultPreview,"default preview")
 
     previews.forEach((preview, index) => {
       const previewElement = document.createElement("div");
@@ -154,9 +153,7 @@ const mounseLeave = async () => {
   applyVariantStyles(activePreview!);
   const defaultPreview = document.querySelector(".preview.default") as HTMLElement;
   setTimeout( () => {
-    console.log(!isMouseOverItem,"................................................................")
     if (isMouseOverItem) {
-      console.log("................................................................")
       if(previewBg.current !== null){
         changeBg("./assets/default-bg.jpg", previewBg.current);
       }
@@ -180,7 +177,7 @@ const mounseLeave = async () => {
       preview.forEach((pre) => {
         pre.setAttribute("style", "opacity:0;")
       })
-    }, 500);
+    }, 50);
   }, 10);
 
   
@@ -196,10 +193,10 @@ const mounseLeave = async () => {
           <p>collection 2024</p>
         </footer>
         <div className="items">
-          {previews.map((_, index) => (
-            <div key={index} className="item" onMouseEnter={()=>Mouseenter(index)} onMouseLeave={mounseLeave} >
-              <p>item name</p>
-            </div>
+          {links.map((link, index) => (
+            <Link href={link.link} key={index} className={`${ogg.className} item w-max bg-main-bg bg-opacity-60 backdrop-blur-sm rounded-3xl px-3 py-1 my-1 border font-semibold hover:border-main-text-color hover:bg-transparent hover:text-light-color`} onMouseEnter={()=>Mouseenter(index)} onMouseLeave={mounseLeave} >
+              <p className="">{link.name}</p>
+            </Link>
           ))}
         </div>
         <div className="preview-bg" ref={previewBg} >

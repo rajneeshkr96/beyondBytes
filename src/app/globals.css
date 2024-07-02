@@ -43,23 +43,14 @@ img {
   overflow: hidden;
 }
 
-nav {
-  position: absolute;
-  width: 100%;
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  z-index: 2;
-}
+
 
 footer p {
   color: #fff;
   font-size: 12px;
 }
 
-nav > div {
-  flex: 1;
-}
+
 
 .menu-btn p {
   width: max-content;
@@ -69,22 +60,6 @@ nav > div {
   padding: 6px 12px;
 }
 
-.logo {
-  display: flex;
-  justify-content: center;
-}
-
-.local-time {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.logo a {
-  text-decoration: none;
-  /* color: #fff; */
-  font-size: 20px;
-  font-weight: 500;
-}
 
 footer {
   position: absolute;
@@ -107,28 +82,6 @@ footer {
   justify-content: center;
   z-index: 2;
 }
-
-.item {
-  width: max-content;
-  padding: 0.24em 0;
-  cursor: pointer;
-}
-
-.item p {
-  color: #fff;
-  padding: 6px 12px;
-  font-weight: lighter;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 40px;
-  backdrop-filter: blur(20px);
-  transition: 0.3s;
-}
-
-.item:hover p {
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
 .preview {
   position: absolute;
   width: 100vw;

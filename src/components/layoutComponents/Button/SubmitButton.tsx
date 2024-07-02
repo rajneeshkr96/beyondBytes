@@ -6,11 +6,12 @@ interface SubmitButtonProps {
   className?: string,
   loading?: boolean,
   mainClass?: string,
+  logoGap?: string,
   children:React.JSX.Element | string,
   onClick?:()=>void,
   props?:object,
 }
-const SubmitButton:FC<SubmitButtonProps>= ({type,className,loading,children,mainClass, onClick=()=>{},...props}) => {
+const SubmitButton:FC<SubmitButtonProps>= ({type,className,logoGap="gap-4",loading,children,mainClass, onClick=()=>{},...props}) => {
 
   return (
     <button type={type} {...props} className={mainClass?mainClass:`px-2 py-1 my-2 bg-main-color text-light-color dark:text-main-text-color dark:bg-main-bg rounded-md hover:bg-hover-bg ${className}` } onClick={()=>onClick()} >
@@ -21,7 +22,7 @@ const SubmitButton:FC<SubmitButtonProps>= ({type,className,loading,children,main
               </svg>
               Loading...
             </div>):
-            (<div className='flex justify-center items-center gap-4'>
+            (<div className={`flex justify-center items-center ${logoGap} `}>
               {children}
             </div>)}
 

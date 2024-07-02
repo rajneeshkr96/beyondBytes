@@ -1,13 +1,13 @@
 
 
-import HeroSection from "@/components/HeroSection/HeroSection";
+import HeroSection from "@/components/layoutComponents/HeroSection/HeroSection";
 import axios from "axios";
 import { currentUserId } from "@/lib/authDet";
 import { notFound } from "next/navigation";
 import MainCard from "@/components/(cards)/MainCard/MainCard";
 import CategorySlide from "@/components/categorySlide/CategorySlide";
-import Footer from "@/components/Footer/Footer";
-import {data} from "@/components/Footer/data"
+import MediaQuery from "@/components/layoutComponents/MediaQuery";
+
 
 
 export const metadata = {
@@ -49,10 +49,11 @@ export default async function Home() {
   return (
 
     <main className="min-h-screen">
-
-      <div className="heroSection w-screen h-screen">
-        <HeroSection />
-      </div>
+      <MediaQuery minSize={999}>
+        <div className="heroSection w-screen h-screen">
+          <HeroSection />
+        </div>
+      </MediaQuery>
       <section className="my-12 featureSection">
         <CategorySlide data={blog} />
       </section>
@@ -73,12 +74,6 @@ export default async function Home() {
         )}
 
       </section>
-      <section>
-        <Footer data={data} />
-      </section>
-
-
-
     </main>
 
 
