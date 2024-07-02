@@ -28,7 +28,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
     console.log("send to page");
   };
   return (
-    <div className="container !h-min !bg-green-700 text-white max-w-[100vw]">
+    <div className="container !h-min !bg-main-text-color mt-6 dark:!bg-dark-color text-white max-w-[100vw]">
       <div className="px-4 py-8">
         <section className=" grid grid-cols-3  max-sm:grid-cols-1 ">
           <div className="flex w--[1/3] flex-col gap-4 max-md:hidden ">
@@ -38,9 +38,8 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             </h2>
             <p> The latest industry news,interviews and resources</p>
             <SubmitButton
-              className=" w-36 border-2 px-1 mt-3 py-2 rounded-md text-lg"
-              value={"View all posts"}
-            />
+              mainClass=" w-36 border-2 px-1 mt-3 py-2 rounded-md text-lg"
+            >View all posts</SubmitButton>
           </div>
           <div className=" flex col-span-2 max-md:hidden">
             {data.map((item, index) => (
@@ -83,9 +82,8 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
               />
 
               <SubmitButton
-                className=" lg:w-32 max-md:w-full border-2 px-1 lg:mt-6 py-1 max-sm:mt-0 font-light rounded-sm lg:h-11  text-lg"
-                value={"Subscribe"}
-              />
+                mainClass=" lg:w-32 max-md:w-full border-2 px-1 lg:mt-6 py-1 max-sm:mt-0 font-light rounded-sm lg:h-11  text-lg"
+              >Subscribe</SubmitButton>
             </div>
           </div>
         </div>
