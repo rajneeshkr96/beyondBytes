@@ -12,6 +12,8 @@ yarn dev
 pnpm dev
 # or
 
+#updated tags
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
