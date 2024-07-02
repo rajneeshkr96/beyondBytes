@@ -8,11 +8,11 @@ export default function DashboardLayout({
     children: React.ReactNode
   }) {
     return (
-      <section className='w-full min-h-screen flex justify-between' >
-        <div className="flex justify-center items-center w-[45%]">
+      <section className='w-full min-h-screen flex justify-between max-[900px]:justify-center' >
+        <div className="flex justify-center items-center w-[45%] max-md:w-3/5">
             {children}
         </div>
-        <div className='w-[55%]'>
+        <div className='w-[55%] max-[900px]:hidden'>
             <Image
                 src={"/assets/bg-6.jpg"}
                 alt="default-bg"

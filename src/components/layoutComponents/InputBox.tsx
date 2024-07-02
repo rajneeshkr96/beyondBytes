@@ -1,4 +1,4 @@
-// src/CustomInputBox.tsx
+"use client"
 import React, { forwardRef, ChangeEvent, FocusEvent, CSSProperties } from 'react';
 
 interface CustomInputBoxProps {
@@ -47,7 +47,7 @@ const CustomInputBox = forwardRef<HTMLInputElement, CustomInputBoxProps>(({
                 placeholder={placeholder}
                 disabled={disabled}
                 style={inputStyle}
-                className={`rounded-md border-[#D0D5DD] border-1 border-solid px-3 py-1 placeholder:text-[#667085] focus:border-[#333741] dark:border-[#333741] outline-none ${inputClass}`}
+                className={`rounded-md border-[#D0D5DD] border-1 border-solid px-3 py-1 placeholder:text-[#667085] placeholder:text-sm focus:border-[#333741] dark:border-[#333741] outline-none ${inputClass}`}
             />
         </div>
     );
