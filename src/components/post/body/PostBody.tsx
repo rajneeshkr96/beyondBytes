@@ -38,7 +38,7 @@ const PostBody:FC<BodyProps> = ({content,image}) => {
         <div style={{ gridTemplateColumns: "70% 20%" }} className='grid gap-x-[10%] max-lg:gap-y-16 max-lg:!grid-cols-[100%] mt-4'>
             <div className='max-lg:row-start-2 max-lg:row-end-3' >
                 <figure>
-                    <Image src={image.src} alt={image.alt} width={2000} height={1000} className='w-full h-auto' />
+                    <Image src={image.src} alt={image.alt} width={200} height={200} className='w-full h-auto' />
                     <figcaption className='mx-auto inline-block'>Optional caption for the image, providing additional context.</figcaption>
                 </figure>
                 <div className='my-10 px-2 text-lg font-serif'>
