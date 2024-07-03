@@ -13,26 +13,26 @@ interface BodyProps{
 const PostBody:FC<BodyProps> = ({content,image}) => {
 
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const list = document.getElementsByTagName("h2");
-            let counter = 1;
-            const contentIndex = document.getElementById("content-index");
-            for (let i = 0; i < list.length; i++) {
-                if (!list[i].id && contentIndex) {
-                  list[i].id = `h2-${counter}`;
-                  const listItem = document.createElement('li');
-                  const anchor = document.createElement('a');
-                  anchor.href = `#h2-${counter}`;
-                  anchor.textContent = `${counter}. ${list[i].textContent}`;
-                  listItem.appendChild(anchor);
-                  contentIndex.appendChild(listItem);
-                  counter++;
-                }
-              }
-        }
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined') {
+    //         const list = document.getElementsByTagName("h2");
+    //         let counter = 1;
+    //         const contentIndex = document.getElementById("content-index");
+    //         for (let i = 0; i < list.length; i++) {
+    //             if (!list[i].id && contentIndex) {
+    //               list[i].id = `h2-${counter}`;
+    //               const listItem = document.createElement('li');
+    //               const anchor = document.createElement('a');
+    //               anchor.href = `#h2-${counter}`;
+    //               anchor.textContent = `${counter}. ${list[i].textContent}`;
+    //               listItem.appendChild(anchor);
+    //               contentIndex.appendChild(listItem);
+    //               counter++;
+    //             }
+    //           }
+    //     }
 
-    }, []);
+    // }, []);
 
     return (
         <div style={{ gridTemplateColumns: "70% 20%" }} className='grid gap-x-[10%] max-lg:gap-y-16 max-lg:!grid-cols-[100%] mt-4'>

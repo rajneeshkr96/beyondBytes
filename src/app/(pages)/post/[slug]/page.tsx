@@ -1,5 +1,5 @@
 
- PostBody from '@/components/post/body/PostBody'
+import PostBody from '@/components/post/body/PostBody'
 import Header from '@/components/post/header/Header'
 import React from 'react'
 import localFont from 'next/font/local'
@@ -87,9 +87,7 @@ const Page = async (context: { params: { slug: string } }) => {
   return (
     <article>
       <Header title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime} author={blog.author} />
-{/*
-      <PostFeatures authId={blog.author.id}  baseurl={baseURL ?? ""} meLike={blog.likes && blog?.likes[0]?.like} bookmark={blog.bookmarks &&blog?.bookmarks[0]?.bookmark} slug={blog.slug}  commentCount={blog.commentsCount} likesCount={blog.likesCount}  id={blog.id}/>
-*/}
+      {/* <PostFeatures authId={blog.author.id}  baseurl={baseURL ?? ""} meLike={blog.likes && blog?.likes[0]?.like} bookmark={blog.bookmarks &&blog?.bookmarks[0]?.bookmark} slug={blog.slug}  commentCount={blog.commentsCount} likesCount={blog.likesCount}  id={blog.id}/> */}
       <PostBody image={blog.image} content={blog.content} />
       <div className='flex w-9/12 justify-center gap-x-4 my-6 items-center'>
                 <span className={` text-2xl`}>Tags</span>
