@@ -4,13 +4,13 @@ import Link from 'next/link'
 import React, { FC, useEffect } from 'react'
 
 interface BodyProps{
-    font: string
+
     content: string
     image:{src:string, alt:string},
 }
 
 
-const PostBody:FC<BodyProps> = ({font,content,image}) => {
+const PostBody:FC<BodyProps> = ({content,image}) => {
 
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const PostBody:FC<BodyProps> = ({font,content,image}) => {
 
             <div className='relative max-lg:row-start-1 max-lg:row-end-2'>
                 <div className='sticky top-8 left-0'>
-                    <h4 className={`${font} text-2xl`} >Content</h4>
+                    <h4 className={` text-2xl`} >Content</h4>
                     <ul id='content-index'>
                     </ul>
                 </div>
