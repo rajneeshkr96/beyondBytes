@@ -46,7 +46,7 @@ const CustomInputBox = forwardRef<HTMLInputElement, CustomInputBoxProps>(({
                 onBlur={onBlur}
                 placeholder={placeholder}
                 disabled={disabled}
-                style={inputStyle}
+                // style={inputStyle}
                 className={`rounded-md border-[#D0D5DD] border-1 border-solid px-3 py-1 placeholder:text-[#667085] placeholder:text-sm focus:border-[#333741] dark:border-[#333741] outline-none ${inputClass}`}
             />
         </div>

@@ -101,6 +101,7 @@ model Comment {
   likesCount Int     @default(0)
   User      User     @relation(fields: [UserId], references: [id])
   UserId    String   @db.ObjectId
+  UserName  String?
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
 }

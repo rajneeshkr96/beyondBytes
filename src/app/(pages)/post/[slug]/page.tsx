@@ -8,6 +8,7 @@ import axios from 'axios'
 import { notFound } from 'next/navigation'
 import type { Metadata, ResolvingMetadata } from 'next'
 import { cache } from 'react'
+import CommentSDisplay from '@/components/post/Comments/CommentSDisplay'
 const ogg = localFont({ src: '../../../../fonts/Ogg-Medium-BF646c18fc4e918.otf' })
 
 
@@ -93,6 +94,9 @@ const Page = async (context: { params: { slug: string } }) => {
                 <ul className='flex gap-x-2 font-bold'>
                     {blog.tags.map((val:string  ,index:string)=><li key={index}>{val}</li>)}
                 </ul>
+            </div>
+            <div className='w-[65vw]'>
+              <CommentSDisplay />
             </div>
     </article>
   )

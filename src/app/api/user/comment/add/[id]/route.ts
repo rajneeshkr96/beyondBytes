@@ -37,6 +37,7 @@ export async function POST(req:NextRequest,context:{params:{id:string}}) {
             comment: comment,
             BlogId: blogId,
             UserId: userId,
+            UserName: user?.userName,
         },
         });
         // update blog comment count

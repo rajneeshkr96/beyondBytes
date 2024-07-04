@@ -3,7 +3,6 @@ import ActionBtn from '@/components/layoutComponents/Button/ActionBtn';
 import React, { useState, FC } from 'react';
 import { IoHeartCircleSharp, IoHeartDislikeCircle, IoChatboxEllipses, IoShareSocial } from "react-icons/io5";
 import { MdBookmarkAdd, MdOutlineBookmark } from "react-icons/md";
-import {  Comment } from './Comments';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -105,9 +104,6 @@ export const PostFeatures: FC<PostFeaturesProps> = ({ id,authId,slug,baseurl,com
                     </ActionBtn>
                 </span>
             </div>
-
-            <Comment id={id} commentCount={commentCount} author={{name:session.data?.user.name ?? "user",image:session.data?.user.image ?? "/user.png"}} isAuth={session.status} visible={viewCmt} close={setViewCmt} />
-
         </section>
         </>
     );

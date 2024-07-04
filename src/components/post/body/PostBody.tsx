@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC, useEffect } from 'react'
-
 interface BodyProps{
     font: string
     content: string
