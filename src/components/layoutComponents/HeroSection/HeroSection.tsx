@@ -194,7 +194,7 @@ const mounseLeave = async () => {
         </footer>
         <div className="items">
           {links.map((link, index) => (
-            <Link href={link.link} key={index} className={`${ogg.className} item w-max bg-main-bg bg-opacity-60 backdrop-blur-sm rounded-3xl px-3 py-1 my-1 border font-semibold hover:border-main-text-color hover:bg-transparent hover:text-light-color`} onMouseEnter={()=>Mouseenter(index)} onMouseLeave={mounseLeave} >
+            <Link href={link.link} key={index} className={`${ogg.className} text-[#4f585a] item w-max bg-main-bg bg-opacity-60 backdrop-blur-sm rounded-3xl px-3 py-1 my-1 border font-semibold hover:border-main-text-color hover:bg-transparent hover:text-light-color`} onMouseEnter={()=>Mouseenter(index)} onMouseLeave={mounseLeave} >
               <p className="">{link.name}</p>
             </Link>
           ))}

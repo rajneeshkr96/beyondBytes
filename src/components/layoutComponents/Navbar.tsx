@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <div>
       <nav className="fixed top-0 left-0 z-20 bg-main-bg bg-opacity-60 backdrop-blur-sm w-full px-6 py-2 flex justify-between items-center">
-        <div className={`${ogg.className} font-bold text-xl logo`}>BiyondBytes</div>
+        <div onClick={()=>router.push("/")} className={`${ogg.className} font-bold text-xl text-[#4f585a] logo`}>BiyondBytes</div>
         <SubmitButton logoGap='gap-2' className='rounded-3xl' onClick={()=>router.push("/byAuthBtn")}>
           <>
             <BiSolidLogInCircle />
