@@ -1,44 +1,41 @@
 
-import { formatDate } from '@/components/(cards)/BlogCard/BlogCard';
+import { formatDate } from '@/tools/FormatDate';
 import Image from 'next/image'
-import { title } from 'process';
-
 import React, { FC } from 'react'
 
 
-interface HeaderProps{
-    font: string,
-    title:string,
-    createdAt:Date,
-    readTime:string,
-    author: {id:string; name:string, email:string,image:string,role:string}
+interface HeaderProps {
+    title: string,
+    createdAt: Date,
+    readTime: string,
+    metaDesc:string
+    tags:string[],
+    author: { id: string; name: string, email: string, image: string, role: string }
+    image: { src: string, alt: string, caption?: string },
 }
-const Header:FC<HeaderProps> = ({font,title,createdAt,readTime,author}) => {
-   
+const Header: FC<HeaderProps> = ({title, createdAt, readTime,metaDesc,tags, author, image }) => {
+
     return (
-        <header className='  '>
-            <div className='min-h-[70vh] grid grid-cols-3 grid-rows-[repeat(2,auto)] '>
-                <div className='col-start-1 col-end-4'>
-                    <h1 className={`max-xl:text-5xl max-md:line-clamp-3 max-md:text-2xl font-medium ${font} text-7xl  capitalize line-clamp-2`}>{title}</h1>
-                    <p className='text-gray-600 capitalize px-6 line-clamp-1 max-md:line-clamp-2'>{title}</p>
+        <header className=' w-full flex flex-col justify-center items-center py-4'>
+            <div className='text-main-text-color text-sm text-center py-4 flex flex-col gap-y-2'>
+                <div >
+                    <time dateTime={createdAt.toString()}>{formatDate(createdAt)}</time> 
+                    <p>Reading Time: {readTime}</p>
                 </div>
-                <div className='col-start-1 col-end-2 max-md:col-end-4 px-6 py-2 flex  gap-x-2 '>
-                    <Image src={author.image} alt={author.name} width={200} height={300} className='w-12 h-12 rounded-full' />
-                    <span className='uppercase font-bold mt-3 text-gray-600'>{author.name}</span>
-                </div>
-                <div className='col-start-2 col-end-3 max-xl:col-end-4 max-md:col-start-1 max-md:justify-center max-md:gap-x-4 flex justify-between px-6 py-2'>
-                    <div >
-                        <span className='text-gray-600'>Date</span><br />
-                        <time className='font-bold' dateTime={createdAt.toString()}>{formatDate(createdAt)}</time>
-                    </div>
-                    <div >
-                        <span className='text-gray-600'>Reading Time</span><br />
-                        <time className='font-bold' >{readTime}</time>
-                    </div>
-                </div>
-               
+                <h1 className='text-5xl text-dark-color font-bold'>{title}</h1>
+                <p className='text-gray-500'>{metaDesc}</p>
+                <ul className='flex items-center gap-x-2 justify-center'>
+                    {tags.map((tag) => (
+                        <li key={tag} className='bg-main-sec-color bg-opacity-60 backdrop-blur-sm  text-dark-color text-xs px-1 py-1 rounded-sm'>{tag}</li>
+                    ))}
+                </ul>
+    
             </div>
 
+            <figure className='w-[65%] '>
+                <Image src={image.src} alt={image.alt} width={300} height={200} className='w-full h-full object-cover' />
+                {image?.caption && <figcaption className='mx-auto inline-block'>{image.caption}</figcaption>}
+            </figure>
         </header>
     )
 }

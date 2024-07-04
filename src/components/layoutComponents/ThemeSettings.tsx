@@ -2,11 +2,11 @@ import React from 'react';
 import { useAppSelector,useAppDispatch } from '@/redux/hooks';
 import { MdOutlineCancel } from 'react-icons/md';
 import { BsCheck } from 'react-icons/bs';
-import { setMode, setColor,setThemeSettings  } from '@/redux/action/themeSlice';
+import { setMode  } from '@/redux/action/themeSlice';
 
 const ThemeSettings = () => {
   const dispatch = useAppDispatch();
-  const {currentColor,currentMode,themeSettings} = useAppSelector((state) => state.theme);
+  const {currentMode} = useAppSelector((state) => state.theme);
   const themeColors = [
     {
       name: 'blue-theme',
@@ -36,7 +36,7 @@ const ThemeSettings = () => {
 
 
   const closeSettings = () => {
-    dispatch(setThemeSettings(false));
+    // dispatch(setThemeSettings(false));
   };
 
   return (
@@ -97,11 +97,11 @@ const ThemeSettings = () => {
                     type="button"
                     className="h-10 w-10 rounded-full cursor-pointer"
                     style={{ backgroundColor: item.color }}
-                    onClick={() => dispatch(setColor(item.color))}
+                    
                   >
                     <BsCheck
                       className={`ml-2 text-2xl text-white ${
-                        item.color === currentColor ? 'block' : 'hidden'
+                        item.color === "currentColor" ? 'block' : 'hidden'
                       }`}
                     />
                   </button>
