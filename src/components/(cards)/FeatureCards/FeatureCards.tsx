@@ -7,8 +7,8 @@ import { FaBlog } from "react-icons/fa";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import localFont from 'next/font/local'
 
-const monaRegular = localFont({
-  src: '../../../fonts/HubotSans-Regular.otf',
+export const monaRegular = localFont({
+  src: './HubotSans-Regular.otf',
   display: 'swap',
 })
 interface FeatureCardProps extends CardsProps{
