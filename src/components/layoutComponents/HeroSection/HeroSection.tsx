@@ -5,7 +5,6 @@ import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
 import localFont from 'next/font/local'
-const ogg = localFont({ src: '../../../fonts/Ogg-Medium-BF646c18fc4e918.otf' })
 const defaultClipPaths: { [key: string]: string } = {
   "variant-1": "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
   "variant-2": "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
@@ -194,7 +193,7 @@ const mounseLeave = async () => {
         </footer>
         <div className="items gap-y-2">
           {links.map((link, index) => (
-            <Link href={link.link} key={index} className={`${ogg.className} item w-max bg-main-bg bg-opacity-60 backdrop-blur-sm rounded-3xl px-3 py-1 my-1 border font-semibold hover:border-main-text-color hover:bg-transparent hover:text-light-color`} onMouseEnter={()=>Mouseenter(index)} onMouseLeave={mounseLeave} >
+            <Link href={link.link} key={index} className={`font-serif item w-max bg-main-bg bg-opacity-60 backdrop-blur-sm rounded-3xl px-3 py-1 my-1 border font-semibold hover:border-main-text-color hover:bg-transparent hover:text-light-color`} onMouseEnter={()=>Mouseenter(index)} onMouseLeave={mounseLeave} >
               <p className="">{link.name}</p>
             </Link>
           ))}

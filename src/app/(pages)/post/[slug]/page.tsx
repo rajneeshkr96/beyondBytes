@@ -1,14 +1,11 @@
 import PostBody from '@/components/post/body/PostBody'
 import Header from '@/components/post/header/Header'
 import React from 'react'
-import localFont from 'next/font/local'
 import { currentUserId } from "@/lib/authDet";
 import axios from 'axios'
 import { notFound } from 'next/navigation'
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 import { cache } from 'react'
-import CommentSDisplay from '@/components/post/Comments/CommentSDisplay'
-const ogg = localFont({ src: '../../../../fonts/Ogg-Medium-BF646c18fc4e918.otf' })
 
 
 type Props = {
@@ -93,7 +90,6 @@ const Page = async (context: { params: { slug: string } }) => {
                     {blog.tags.map((val:string  ,index:string)=><li key={index}>{val}</li>)}
                 </ul>
             </div>
-      <CommentSDisplay Blogid={blog.id}  />
     </article>
   )
 }

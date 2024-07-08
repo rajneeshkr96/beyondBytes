@@ -8,11 +8,9 @@ import React, { FC } from 'react'
 import { CiCalendar } from "react-icons/ci";
 import { FaBlog } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
+import { monaRegular } from '../FeatureCards/FeatureCards';
 
-const monaRegular = localFont({
-  src: '../../../fonts/HubotSans-Regular.otf',
-  display: 'swap',
-})
+
 export interface CardsProps {
   title: string;
   image: { src: string; alt: string };
