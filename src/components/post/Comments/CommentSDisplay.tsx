@@ -1,10 +1,12 @@
 import React from 'react'
 import CommentsInput from './CommentsInput'
-
-const CommentSDisplay = () => {
+interface CommentSDisplayProps {
+  Blogid: string;
+}
+const CommentSDisplay: React.FC<CommentSDisplayProps>  = ({Blogid}) => {
   return (
     <div>
-        <CommentsInput />
+        <CommentsInput BlogId={Blogid} />
     </div>
   )
 }

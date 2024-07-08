@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React,{useEffect, useState} from "react";
 import CustomInputBox from "@/components/layoutComponents/InputBox";
 import { IoIosSend } from "react-icons/io";
 import MediaQuery from "@/components/layoutComponents/MediaQuery";
@@ -7,13 +7,29 @@ import SubmitButton from "@/components/layoutComponents/Button/SubmitButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm,SubmitHandler  } from "react-hook-form";
 import * as yup from "yup";
+import axios from "axios";
 
 type CommentsInputProps = {
   comment:string;
   
+  
 };
+interface CommentsInputPropsd {
+  BlogId:string;
+}
 
-const CommentsInput = () => {
+const CommentsInput:React.FC<CommentsInputPropsd> = ({BlogId}) => {
+  const [comment, setComment] = useState<Boolean>(true);
+  useEffect(() => {
+    if (comment) {
+      setComment(false);
+    }
+    else {
+      setComment(true);
+    }
+  }, []);
+  console.log(comment)
+  
   const validateSchema = yup.object().shape({
     comment: yup.string().required()
     .max(500)
@@ -23,7 +39,8 @@ const CommentsInput = () => {
   const {register,handleSubmit,formState:{errors}} = useForm<CommentsInputProps>(forOptions);
   const onSubmit: SubmitHandler<CommentsInputProps> = data => {
     try {
-      console.log(data);
+      const res = axios.post(`/api/user/comment/add/${BlogId}`,data);
+      console.log(res);
     } catch (error) {
       console.log(error);
       
@@ -33,15 +50,16 @@ const CommentsInput = () => {
   return (
     <div className="w-[65vw]">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full" action="#">
-        <div className="relative w-full  min-w-[200px] h-10">
+        <div className="relative w-full  min-w-[200px] h-auto ">
           <MediaQuery maxSize={999}>
             <div className="absolute grid w-5 h-5 place-items-center  text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
               <button className="!bg-none !border-none p-0 m-0" ><IoIosSend type="submit" className=" cursor-pointer max-sm:w-4 max-sm:h-4 text-2xl" /></button>
             </div>
           </MediaQuery>
           <MediaQuery minSize={1000}>
-            <div className="absolute right-0 top-0  ">
-              <SubmitButton type="submit" className="!h-10 !my-0" children={"Comment"} />
+            <div className="absolute right-0 top-10 flex flex-row-reverse gap-6 my-1  ">
+              <SubmitButton type="submit" className="!h-10  !rounded-3xl !my-0" children={"Comment"} />
+              <SubmitButton type="reset" className=" !my-0 !rounded-3xl  w-[89px] h-[40px]" children={"cancel"} />
             </div>
           </MediaQuery>
           <input
@@ -51,7 +69,7 @@ const CommentsInput = () => {
               maxLength:500
             })
           }
-            className="peer w-full h-full  bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] !pr-9 border-blue-gray-200 focus:border-gray-900"
+            className="peer w-full h-full  bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] !pr-9 border-blue-gray-200 focus:border-gray-900 text-wrap"
             placeholder=" "
           />
           {errors.comment && <p className="text-red-500 text-sm">{errors.comment.message}</p>}

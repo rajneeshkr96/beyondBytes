@@ -95,17 +95,18 @@ model Follows {
 model Comment {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   comment   String
-  Blog      Blog     @relation(fields: [BlogId], references: [id])
-  CommentLikes commentLikes[]
-  BlogId    String   @db.ObjectId
-  likesCount Int     @default(0)
-  User      User     @relation(fields: [UserId], references: [id])
-  UserId    String   @db.ObjectId
-  UserName  String?
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
+  User      User     @relation(fields: [UserId], references: [id])
+  UserName  String
+  UserId    String   @db.ObjectId
+  Blog      Blog     @relation(fields: [BlogId], references: [id])
+  BlogId    String   @db.ObjectId
+  parent    Comment? @relation("ParentChild", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  children  Comment[] @relation("ParentChild")
+  parentId  String? @db.ObjectId
+  likes     commentLikes[]
 }
-
 model Like {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   Blog      Blog     @relation(fields: [BlogId], references: [id])
