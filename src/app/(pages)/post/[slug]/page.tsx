@@ -93,6 +93,7 @@ const Page = async (context: { params: { slug: string } }) => {
                     {blog.tags.map((val:string  ,index:string)=><li key={index}>{val}</li>)}
                 </ul>
             </div>
+      <CommentSDisplay Blogid={blog.id}  />
     </article>
   )
 }
