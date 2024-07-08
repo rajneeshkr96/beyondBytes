@@ -6,6 +6,7 @@ import axios from 'axios'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { cache } from 'react'
+import Author from '@/components/post/Author/Author';
 
 
 type Props = {
@@ -81,10 +82,13 @@ const Page = async (context: { params: { slug: string } }) => {
   }
 
   return (
-    <article className='px-12 py-12'>
-      <Header title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime} author={blog.author}  image={blog.image} />
+    <article className='px-6 py-12'>
+      <Header title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime}  image={blog.image}  />
       <PostBody image={blog.image} content={blog.content} />
-
+      <Author author={blog.author} isFollow={blog.isFollow}/>
+      <ul className='text-center'>
+        {blog.tags.map((tag:string) => <li className=''>{tag}</li>)}
+      </ul>
     </article>
   )
 }

@@ -7,6 +7,8 @@ import { notFound } from "next/navigation";
 import MainCard from "@/components/(cards)/MainCard/MainCard";
 import CategorySlide from "@/components/categorySlide/CategorySlide";
 import MediaQuery from "@/components/layoutComponents/MediaQuery";
+import AddStorie from "@/components/(cards)/DiscoverCard/AddStorie";
+import ViewStorie from "@/components/(cards)/DiscoverCard/ViewStorie";
 
 
 
@@ -52,6 +54,14 @@ export default async function Home() {
       <MediaQuery minSize={999}>
         <div className="heroSection w-screen h-screen">
           <HeroSection />
+        </div>
+      </MediaQuery>
+      <MediaQuery maxSize={720}>
+        <div className="flex gap-x-3 mt-14 px-4 py-4 flex-row overflow-auto">
+          <AddStorie/>
+          <ViewStorie/>
+          <ViewStorie/>
+          <ViewStorie/>
         </div>
       </MediaQuery>
       <section className="my-12 featureSection">

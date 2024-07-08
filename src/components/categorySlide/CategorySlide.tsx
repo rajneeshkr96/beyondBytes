@@ -15,7 +15,6 @@ const CategorySlide = ({data}:{data:BlogcardProps[]}) => {
 
     return (
         <>
-        <div >
             <Swiper
                 scrollbar={{
                     hide: true,
@@ -36,8 +35,6 @@ const CategorySlide = ({data}:{data:BlogcardProps[]}) => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-        </div>
-        
         </>
     )
 }
