@@ -5,7 +5,7 @@ import { IoIosSend } from "react-icons/io";
 import MediaQuery from "@/components/layoutComponents/MediaQuery";
 import SubmitButton from "@/components/layoutComponents/Button/SubmitButton";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm,SubmitHandler  } from "react-hook-form";
+import { useForm,SubmitHandler, set  } from "react-hook-form";
 import * as yup from "yup";
 import axios from "axios";
 
@@ -19,16 +19,9 @@ interface CommentsInputPropsd {
 }
 
 const CommentsInput:React.FC<CommentsInputPropsd> = ({BlogId}) => {
-  const [comment, setComment] = useState<Boolean>(true);
-  useEffect(() => {
-    if (comment) {
-      setComment(false);
-    }
-    else {
-      setComment(true);
-    }
-  }, []);
-  console.log(comment)
+  
+  const [comment, setComment] = useState<Boolean>(false);
+
   
   const validateSchema = yup.object().shape({
     comment: yup.string().required()
@@ -36,19 +29,33 @@ const CommentsInput:React.FC<CommentsInputPropsd> = ({BlogId}) => {
     .min(6),
   });
   const forOptions = {resolver:yupResolver(validateSchema)};
-  const {register,handleSubmit,formState:{errors}} = useForm<CommentsInputProps>(forOptions);
-  const onSubmit: SubmitHandler<CommentsInputProps> = data => {
+  const {register,handleSubmit,formState:{errors},watch,reset} = useForm<CommentsInputProps>(forOptions);
+  const onSubmit: SubmitHandler<CommentsInputProps> = async data => {
     try {
-      const res = axios.post(`/api/user/comment/add/${BlogId}`,data);
-      console.log(res);
+      const res = await axios.post(`/api/user/comment/add/${BlogId}`,data);
+   
+      if(res){
+        setComment(false);
+        reset();
+      }
     } catch (error) {
       console.log(error);
       
     }
   };
+  const watchedComment = watch("comment", "");
+  useEffect(() => {
+    if (watchedComment.length > 0) {
+      setComment(true);
+    } else {
+      setComment(false);
+    }
+  }, [watchedComment]);
+ 
+
 
   return (
-    <div className="w-[65vw]">
+    <div className="w-full">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full" action="#">
         <div className="relative w-full  min-w-[200px] h-auto ">
           <MediaQuery maxSize={999}>
@@ -57,12 +64,17 @@ const CommentsInput:React.FC<CommentsInputPropsd> = ({BlogId}) => {
             </div>
           </MediaQuery>
           <MediaQuery minSize={1000}>
-            <div className="absolute right-0 top-10 flex flex-row-reverse gap-6 my-1  ">
+            {
+              comment ? (
+                <div className="absolute right-0 top-10 flex flex-row-reverse gap-6 my-1  ">
               <SubmitButton type="submit" className="!h-10  !rounded-3xl !my-0" children={"Comment"} />
               <SubmitButton type="reset" className=" !my-0 !rounded-3xl  w-[89px] h-[40px]" children={"cancel"} />
             </div>
+              ) :""
+            }
           </MediaQuery>
           <input
+            
           {
             ...register("comment",{
               required:"Comment is required",

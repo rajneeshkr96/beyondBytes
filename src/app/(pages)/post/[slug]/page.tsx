@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { cache } from 'react'
 import Author from '@/components/post/Author/Author';
+import CommentSDisplay from '@/components/post/Comments/CommentSDisplay';
 
 
 type Props = {
@@ -39,6 +40,7 @@ export async function generateMetadata(
   if(product){
     // optionally access and extend (rather than replace) parent metadata
     return {
+      
       title: product.data.data.metaTitle || "page not found",
       description: product.data.data.metaDesc || "page not found",
       openGraph: {
@@ -89,6 +91,7 @@ const Page = async (context: { params: { slug: string } }) => {
       <ul className='text-center'>
         {blog.tags.map((tag:string) => <li key={tag} className=''>{tag}</li>)}
       </ul>
+      <CommentSDisplay Blogid={blog.id} />
     </article>
   )
 }

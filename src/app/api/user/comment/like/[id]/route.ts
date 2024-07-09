@@ -10,6 +10,7 @@ export async function POST(req: NextRequest,context:{params:{id:string}}) {
     try {
         const  commentId = context.params.id;
         
+        
         if(commentId === undefined){
             return NextResponse.json({success:false,message:"blogId is required"},{status:400})
         }
@@ -60,7 +61,7 @@ export async function POST(req: NextRequest,context:{params:{id:string}}) {
         console.log(comment);
         return NextResponse.json({success:true, message:"liked successfully",data:{like:true}},{status:200})
     } catch (error:any) {
-        console.log(error.message);
+        console.log(error);
         return NextResponse.json({success:false,message:"something went wrong"},{status:500})
     }
 }
