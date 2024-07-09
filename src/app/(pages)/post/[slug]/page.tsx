@@ -87,7 +87,7 @@ const Page = async (context: { params: { slug: string } }) => {
       <PostBody image={blog.image} content={blog.content} />
       <Author author={blog.author} isFollow={blog.isFollow}/>
       <ul className='text-center'>
-        {blog.tags.map((tag:string) => <li className=''>{tag}</li>)}
+        {blog.tags.map((tag:string) => <li key={tag} className=''>{tag}</li>)}
       </ul>
     </article>
   )

@@ -28,7 +28,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
     console.log("send to page");
   };
   return (
-    <div className="container !h-min !bg-main-text-color mt-6 dark:!bg-dark-color text-white max-w-[100vw]">
+    <div className="container !h-min !bg-main-text-color mt-6 dark:!bg-dark-color text-white max-w-[100vw] max-md:pb-16">
       <div className="px-4 py-8">
         <section className=" grid grid-cols-3  max-sm:grid-cols-1 ">
           <div className="flex w--[1/3] flex-col gap-4 max-md:hidden ">

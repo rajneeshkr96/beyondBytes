@@ -1,7 +1,6 @@
 
 import { BlogcardProps } from "@/app/page";
-import BlogCard from "@/components/(cards)/BlogCard/BlogCard";
-import Header from "@/components/layoutComponents/Header";
+import MainCard from "@/components/(cards)/MainCard/MainCard";
 import Pagination from "@/components/Pagination/Pagination";
 import { currentUserId } from "@/lib/authDet";
 import axios from "axios";
@@ -33,8 +32,7 @@ export default async function Page({
     if (res.data.success) {
       blog = res.data.data;
       documentCount = res.data.total
-      tag = res.data.data.map((tag:BlogcardProps) =>{return tag.tags})
-      tag = Array.from(new Set([...tag.flat(1)]));
+     
       success = true;
     }
   } catch (error) {
@@ -47,37 +45,21 @@ export default async function Page({
   }
   return (
     <div className="w-full min-h-screen">
-      <Header title={keyword == "" ? "Tag" : "Search"} category={keyword == "" ? tags : keyword} />
       <div style={{ gridTemplateColumns: "80% 20%" }} className='grid  max-lg:gap-y-16 max-lg:!grid-cols-[100%] mt-4'>
         <div className='max-lg:row-start-2 max-lg:row-end-3 flex justify-center  flex-wrap' >
           {blog.map((data: BlogcardProps) =>
-            <BlogCard
+            <MainCard
               key={data.id}
-              disableBtn={true}
               id={data.id}
-              tags={data.tags}
-              meLike={data.likes && data?.likes[0]?.like}
-              bookmark={data.bookmarks && data?.bookmarks[0]?.bookmark}
-              likesCount={data.likesCount}
               title={data.title}
-              metaDesc={data.metaDesc}
               image={data.image}
               createdAt={data.createdAt}
               author={data.author}
               slug={data.slug}
-              readTime={data.readTime}
             />
           )}
         </div>
 
-        <div className='relative max-lg:row-start-1 max-lg:row-end-2 max-lg:hidden'>
-          <div className='sticky top-8 left-0'>
-              <h4>Topics matching Tags</h4>
-            <ul className='flex gap-x-3 font-bold flex-wrap px-4 mt-4'>
-              {tag.map((val: string, index: string) => <li className="px-4 py-2 bg-[#f2f2f2] rounded-3xl" key={index}><Link href={`/search?tags=${val}`}>{val}</Link></li>)}
-            </ul>
-          </div>
-        </div>
 
       </div>
 

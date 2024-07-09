@@ -1,64 +1,60 @@
+import Link from 'next/link'
 import React from 'react'
-
+import { FiPlusCircle } from "react-icons/fi";
+import { ImHome } from "react-icons/im";
+import { FaUserSecret } from "react-icons/fa";
+import { IoSearchCircleSharp } from "react-icons/io5";
+import { AiFillMessage } from "react-icons/ai";
 const FooterNav = () => {
     return (
         <div className="main">
-            <div>
-                <center>
-                    <h1>Bottom Navigation Bar</h1>
-                </center>
-            </div>
-            <div className="bottom-nav">
-                <div className="nav-slot bg-white round-top-left">
-                    <a
+            <div className="fixed bottom-0 flex justify-center flex-row w-full h-12 bottom-nav ">
+                <div className="nav-slot bg-main-color round-top-left">
+                    <Link
                         href="https://wa.me/6285804233884"
                         target="_blank"
                         className="nav-link"
-                        style={{ color: "#075e54" }}
                     >
-                        <i className="fa-brands fa-whatsapp" />
-                    </a>
+                        <ImHome className='w-full h-full' />
+                    </Link>
                 </div>
-                <div className="nav-slot bg-white">
-                    <a
+                <div className="nav-slot bg-main-color">
+                    <Link
                         href="#features"
                         target="_blank"
                         className="nav-link"
-                        style={{ color: "#964d4d" }}
                     >
-                        <i className="fa-solid fa-list-tree" />
-                    </a>
+                        <IoSearchCircleSharp  className='w-full h-full' />
+                        
+                    </Link>
                 </div>
-                <div className="nav-slot curve">
-                    <a
+                <div className="nav-slot relative curve">
+                    <Link
                         href="tel:+62858-0423-3884"
                         target="_blank"
-                        role="button"
-                        className="floating-button"
+                        className="fixed left-[5px] right-0 mx-auto bottom-6 bg-main-bg border  w-14 h-14 rounded-full text-center"
                     >
-                        <i className="fa-duotone fa-phone" />
-                    </a>
+                        <FiPlusCircle className='bg-main-text-color w-full h-full rounded-full text-white text-2xl' />
+                    </Link>
                 </div>
-                <div className="nav-slot bg-white">
-                    <a
+                <div className="nav-slot bg-main-color">
+                    <Link
                         href="#testimoni"
                         className="nav-link"
                         title="Testimoni"
-                        style={{ color: "#4b5da1" }}
                     >
-                        <i className="fa-duotone fa-comments" />
-                    </a>
+                        <AiFillMessage className='w-full h-full' />
+                    </Link>
                 </div>
-                <div className="nav-slot bg-white round-top-right">
-                    <a
+                <div className="nav-slot bg-main-color round-top-right">
+                    <Link
                         href="https://maps.app.goo.gl/RMJ3kXzhUH6YKXrt7"
                         target="_blank"
                         className="nav-link"
                         title="Lokasi pada peta"
-                        style={{ color: "#4a80f5" }}
                     >
-                        <i className="fa-duotone fa-map-location-dot" />
-                    </a>
+                        <FaUserSecret className='w-full h-full' />
+                    </Link>
                 </div>
             </div>
         </div>
