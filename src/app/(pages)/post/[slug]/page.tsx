@@ -85,12 +85,10 @@ const Page = async (context: { params: { slug: string } }) => {
 
   return (
     <article className='px-6 py-12'>
-      <Header title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime}  image={blog.image}  />
+      <Header author={blog.author} title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime}  image={blog.image} tags={blog.tags}  />
       <PostBody image={blog.image} content={blog.content} />
       <Author author={blog.author} isFollow={blog.isFollow}/>
-      <ul className='text-center'>
-        {blog.tags.map((tag:string) => <li key={tag} className=''>{tag}</li>)}
-      </ul>
+
       <CommentSDisplay Blogid={blog.id} />
     </article>
   )
