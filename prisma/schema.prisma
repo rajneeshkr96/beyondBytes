@@ -105,6 +105,7 @@ model Comment {
   parentId  String? @db.ObjectId
   CommentLikes commentLikes[]
   likesCount Int @default(0)
+  repliesCount Int @default(0)
   UserImage String?
   ReplyUserName String?
   name      String?
