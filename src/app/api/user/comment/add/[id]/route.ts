@@ -37,7 +37,7 @@ export async function POST(req:NextRequest,context:{params:{id:string}}) {
                 UserId:user!.userId,
                 UserName:user!.userName,
                 UserImage:usr?.image,
-                name:usr?.name
+                name:usr?.name,
             }
         });
         console.log(res);

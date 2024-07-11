@@ -1,20 +1,15 @@
-// get all comments by post id 
 import { NextResponse } from "next/server";
 import { dataBasePrisma } from "@/databasePrisma";
 import { NextRequest } from "next/server";
 import {  currentUserId } from "@/lib/authDet";
+
 export async function GET(req:NextRequest,context:{params:{id:string}}) {
     try {
+        const commentid = context.params.id;
         const user = await currentUserId();
-        const blogId = context.params.id;
-        if (blogId === undefined)
-        return NextResponse.json(
-            { success: false, message: "blogId is undefined" },
-            { status: 400 }
-        );
         const comments =await dataBasePrisma.comment.findMany({
             where:{
-                BlogId:blogId
+                parentId:commentid
             }
         });
         return NextResponse.json(
@@ -23,6 +18,6 @@ export async function GET(req:NextRequest,context:{params:{id:string}}) {
         );
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ success: false, message: error }, { status: 500 });
+        return NextResponse.json({ success: false, message: error }, { status: 500 });        
     }
-    }
+}
