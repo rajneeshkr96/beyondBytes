@@ -5,11 +5,14 @@ import {  currentUserId } from "@/lib/authDet";
 
 export async function GET(req:NextRequest,context:{params:{id:string}}) {
     try {
+        
         const commentid = context.params.id;
         const user = await currentUserId();
         const comments =await dataBasePrisma.comment.findMany({
             where:{
-                parentId:commentid
+                parentId:{
+                    has:commentid
+                }
             }
         });
         return NextResponse.json(
