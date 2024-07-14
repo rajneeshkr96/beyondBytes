@@ -39,7 +39,6 @@ const CommentsInput:React.FC<CommentsInputPropsd> = ({id,isReply,setIsReply,repl
      
       try {
         if(isReply){
-          console.log("ijg...........................",id,data);
           const res = await axios.post(`/api/user/comment/reply/add/${id}`,data);
           if(res){
             setIsReply && setIsReply(true);
@@ -73,7 +72,7 @@ const CommentsInput:React.FC<CommentsInputPropsd> = ({id,isReply,setIsReply,repl
   if(isReply){
     setFocus("comment");
   }
-  // console.log("isreply",isReply)
+
 
 
   return (

@@ -102,7 +102,7 @@ model Comment {
   BlogId    String?   @db.ObjectId
   parent    Comment? @relation("ParentChild", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   children  Comment[] @relation("ParentChild")
-  parentId  String? @db.ObjectId
+  parentId  String[] @db.ObjectId
   CommentLikes commentLikes[]
   likesCount Int @default(0)
   repliesCount Int @default(0)
