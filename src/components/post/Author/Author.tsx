@@ -11,7 +11,7 @@ interface AuthorProps {
 }
 const Author: FC<AuthorProps> = ({author, isFollow = true}) => {
     return (
-            <div className='flex items-center px-12 gap-x-12 justify-between max-md:justify-center flex-wrap max-md:gap-2 max-w-[799px] mx-auto max-md:gap-y-2 ' >
+            <div className='flex items-center px-12 gap-x-12 justify-between max-md:justify-center flex-wrap max-md:gap-2 max-w-[799px] mx-auto max-md:gap-y-2 my-12' >
                 <div className='flex justify-center items-center gap-1 text-sm '>
                     <Image
                     src={author.image}

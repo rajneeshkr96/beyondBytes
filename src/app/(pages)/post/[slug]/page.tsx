@@ -67,7 +67,6 @@ const Page = async (context: { params: { slug: string } }) => {
   let blog;
   let success = false;
   const slug = context.params.slug
-  const baseURL = process.env.BASE_URL
   try {
    const userId = await currentUserId();
    const res = await getData(slug,userId);
@@ -88,7 +87,6 @@ const Page = async (context: { params: { slug: string } }) => {
       <Header author={blog.author} title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime}  image={blog.image} tags={blog.tags}  />
       <PostBody image={blog.image} content={blog.content} />
       <Author author={blog.author} isFollow={blog.isFollow}/>
-
       <CommentSDisplay Blogid={blog.id} />
     </article>
   )

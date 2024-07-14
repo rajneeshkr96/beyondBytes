@@ -289,7 +289,7 @@ const Page = () => {
         <TextEditor editor={editor} /> 
 
       </div>
-      <SubmitButton loading={loading} value={param.operation === "new" ?"publish":"edit"} className='bg-green-700 text-blue-50 px-4 py-2 rounded-full block mx-auto mt-4 hover:bg-green-600 font-bold ' onClick={param.operation === "new" ?publicBlog:updatePost} />
+      <SubmitButton loading={loading} className='bg-green-700 text-blue-50 px-4 py-2 rounded-full block mx-auto mt-4 hover:bg-green-600 font-bold ' onClick={param.operation === "new" ?publicBlog:updatePost} >{param.operation === "new" ?"publish":"edit"}</SubmitButton>
     </div>
     </>
   )

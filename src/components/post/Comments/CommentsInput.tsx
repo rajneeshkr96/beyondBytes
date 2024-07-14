@@ -1,6 +1,5 @@
 "use client";
 import React,{useEffect, useState} from "react";
-import CustomInputBox from "@/components/layoutComponents/InputBox";
 import { IoIosSend } from "react-icons/io";
 import MediaQuery from "@/components/layoutComponents/MediaQuery";
 import SubmitButton from "@/components/layoutComponents/Button/SubmitButton";
@@ -97,14 +96,14 @@ const CommentsInput:React.FC<CommentsInputPropsd> = ({id,isReply,setIsReply,repl
                 <SubmitButton
                   type="submit"
                   className="!h-10  !rounded-3xl !my-0"
-                  children={"Comment"}
+
                   
-                />
+                >Comment</SubmitButton>
+                
                 <SubmitButton
                   type="reset"
                   className=" !my-0 !rounded-3xl  w-[89px] h-[40px]"
-                  children={"cancel"}
-                />
+                >cancel</SubmitButton>
               </div>
             ) : (
               ""

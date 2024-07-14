@@ -72,7 +72,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             <h2 className="text-2xl font-bold max-sm:font-medium max-sm:text-xl">
               Join our newsletter
             </h2>
-            <p>we'll send you a nice letter once per week. No spam. </p>
+            <p>we&apos;ll send you a nice letter once per week. No spam. </p>
           </div>
           <div className="my-5 lg:w-1/3 mr-6">
             <div className="relative flex h-16 w-full max-md:flex-col max-md:gap-y-4 ">

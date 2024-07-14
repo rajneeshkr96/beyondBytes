@@ -21,17 +21,18 @@ const CommentSDisplay: React.FC<CommentSDisplayProps> = ({ Blogid }) => {
   const [replyId, setReplyId] = useState("");
 
   let success = false;
-  const getComments = async () => {
-    try {
-      const res = await axios.get(`/api/user/comment/get/${Blogid}`);
-      if (res.data.success) {
-        setComments(res.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   useEffect(() => {
+    const getComments = async () => {
+      try {
+        const res = await axios.get(`/api/user/comment/get/${Blogid}`);
+        if (res.data.success) {
+          setComments(res.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getComments();
   }, [Blogid, success,isReply,replyUserName]);
  

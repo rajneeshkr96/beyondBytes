@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ReduxProvider from "@/redux/Provider";
 import { auth } from "@/backend/auth/auth";
 import {SessionProvider} from "next-auth/react"
+import Navbar from "@/components/layoutComponents/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const source_serif_4 = Source_Serif_4({
@@ -41,6 +42,7 @@ export default async function RootLayout({
       <SessionProvider session={session}>
         <ReduxProvider>
           <HomeLayout>
+          <Navbar />
             {children}
           </HomeLayout>
         </ReduxProvider>
