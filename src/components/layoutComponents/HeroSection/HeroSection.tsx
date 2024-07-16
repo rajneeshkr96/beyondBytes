@@ -4,7 +4,7 @@ import { mapClasses, previews,links } from "./data";
 import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
-import localFont from 'next/font/local'
+
 const defaultClipPaths: { [key: string]: string } = {
   "variant-1": "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
   "variant-2": "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
