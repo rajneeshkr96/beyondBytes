@@ -23,7 +23,6 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ data }) => {
-  console.log(data);
   const sendONPage = () => {
     console.log("send to page");
   };

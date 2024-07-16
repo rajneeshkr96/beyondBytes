@@ -9,7 +9,6 @@ import { cache } from 'react'
 import Author from '@/components/post/Author/Author';
 import CommentSDisplay from '@/components/post/Comments/CommentSDisplay';
 
-
 type Props = {
   params: { slug: string }
   searchParams: { [key: string]: string | string[] | undefined }
@@ -63,7 +62,8 @@ export async function generateMetadata(
   }
 }
 
-const Page = async (context: { params: { slug: string } }) => {
+
+const Page = async (context: { params: { slug: string,schema:object }}) => {
   let blog;
   let success = false;
   const slug = context.params.slug
@@ -81,14 +81,56 @@ const Page = async (context: { params: { slug: string } }) => {
   if (!success) {
     return notFound();
   }
+  const BreadcrumbListSchema = {
+    '@context': 'https://schema.org',
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Biyondbytes-make your skills like a pro",
+        item:`${process.env.BASE_URL}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Login",
+        item:`${process.env.BASE_URL}/byAuthBtn`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Contact Us",
+        item:`${process.env.BASE_URL}/contact-us`
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "About Us",
+        item:`${process.env.BASE_URL}/about-us`
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Policy Page",
+        item:`${process.env.BASE_URL}/privacy-policy`
+      }
+    ]
+  }
 
   return (
-    <article className='px-6 py-12'>
-      <Header author={blog.author} title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime}  image={blog.image} tags={blog.tags}  />
-      <PostBody image={blog.image} content={blog.content} />
-      <Author author={blog.author} isFollow={blog.isFollow}/>
-      <CommentSDisplay Blogid={blog.id} />
-    </article>
+    <>
+      <article className='px-6 py-12'>
+        <Header author={blog.author} title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime}  image={blog.image} tags={blog.tags}  />
+        <PostBody image={blog.image} content={blog.content} />
+        <Author author={blog.author} isFollow={blog.isFollow}/>
+        <CommentSDisplay Blogid={blog.id} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(BreadcrumbListSchema) }}
+        />
+      </article>
+    </>
   )
 }
 
