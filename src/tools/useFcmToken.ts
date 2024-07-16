@@ -19,16 +19,15 @@ const useFcmToken = () => {
     const requestPermissionAndGetToken = async () => {
       if (notificationPermissionStatus === 'default') {
         const permission = await Notification.requestPermission();
-        alert(permission)
         setNotificationPermissionStatus(permission);
       }
-
       if (notificationPermissionStatus === 'granted') {
         const messaging = getMessaging(firebaseApp);
         try {
           const currentToken = await getToken(messaging, { vapidKey: 'BGfPo8UDSGQZCqqA_Gq3U_ioWiNs3aNUVv7Quoq5ni6vYuDWDTxo5CI8h6NEnkQKAE7ysgCPQDeATpTG4mbhDTI' });
           if (currentToken) {
             setFcmToken(currentToken);
+            alert(currentToken);
             console.log('Device token:', currentToken);
           } else {
             console.log('No registration token available. Request permission to generate one.');
@@ -41,6 +40,7 @@ const useFcmToken = () => {
           console.log('Message received. ', payload);
         });
       }
+      
     };
 
     requestPermissionAndGetToken();

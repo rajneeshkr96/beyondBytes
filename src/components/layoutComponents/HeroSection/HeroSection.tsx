@@ -113,7 +113,7 @@ const HeroSection: React.FC = () => {
       changeBg(newBg, previewBg.current);
     }
     const newActivePreview = document.querySelector(`.preview-${index + 1}`) as HTMLElement;
-    if (activePreview && activePreview !== newActivePreview) {
+    if (activePreview !== null && activePreview !== newActivePreview) {
       const previousActivePreviewImg = activePreview.querySelector(".preview-img") as HTMLElement;
       const previousDefaultClipPath = getDefaultClipPath(activePreview);
       gsap.to(previousActivePreviewImg, {
