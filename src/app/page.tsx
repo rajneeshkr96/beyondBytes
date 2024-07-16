@@ -9,6 +9,7 @@ import CategorySlide from "@/components/categorySlide/CategorySlide";
 import MediaQuery from "@/components/layoutComponents/MediaQuery";
 import AddStorie from "@/components/(cards)/DiscoverCard/AddStorie";
 import ViewStorie from "@/components/(cards)/DiscoverCard/ViewStorie";
+import Test from "@/components/test/Test";
 
 
 
@@ -16,12 +17,7 @@ export const metadata = {
   description: "Explore the world of technology, lifestyle, travel, and more at BiyondBytes. Discover insightful articles across all categories and stay updated on the latest trends. Join us as we dive deep into diverse topics beyond the ordinary, only at BiyondBytes",
 
 };
-interface Bookmarks {
-  bookmark: boolean
-}
-interface Likes {
-  like: boolean
-}
+
 export interface BlogcardProps {
   title: string;
   image: { src: string; alt: string };
@@ -48,43 +44,87 @@ export default async function Home() {
     return notFound();
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Biyondbytes-make your skills like a pro",
+        item: `${process.env.BASE_URL}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Login",
+        item: `${process.env.BASE_URL}/byAuthBtn`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Contact Us",
+        item: `${process.env.BASE_URL}/contact-us`
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "About Us",
+        item: `${process.env.BASE_URL}/about-us`
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Policy Page",
+        item: `${process.env.BASE_URL}/privacy-policy`
+      }
+    ]
+  }
+
   return (
+    <>
 
-    <main className="min-h-screen">
-      <MediaQuery minSize={999}>
-        <div className="heroSection w-screen h-screen">
-          <HeroSection />
-        </div>
-      </MediaQuery>
-      <MediaQuery maxSize={720}>
-        <div className="flex gap-x-3 mt-14 px-4 py-4 flex-row overflow-auto">
-          <AddStorie/>
-          <ViewStorie/>
-          <ViewStorie/>
-          <ViewStorie/>
-        </div>
-      </MediaQuery>
-      <section className="my-12 featureSection">
-        <CategorySlide data={blog} />
-      </section>
+      <main className="min-h-screen">
+        <MediaQuery minSize={999}>
+          <div className="heroSection w-screen h-screen">
+            <HeroSection />
+          </div>
+        </MediaQuery>
+        <MediaQuery maxSize={720}>
+          <div className="flex gap-x-3 mt-14 px-4 py-4 flex-row overflow-auto">
+            <AddStorie />
+            <ViewStorie />
+            <ViewStorie />
+            <ViewStorie />
+          </div>
+        </MediaQuery>
+        <section className="my-12 featureSection">
+          <CategorySlide data={blog} />
+        </section>
 
 
-      <section className="flex justify-center  flex-wrap ">
+        <section className="flex justify-center  flex-wrap ">
 
-        {blog.map((data: BlogcardProps) =>
-          <MainCard
-            key={data.id}
-            id={data.id}
-            title={data.title}
-            image={data.image}
-            createdAt={data.createdAt}
-            author={data.author}
-            slug={data.slug}
-          />
-        )}
+          {blog.map((data: BlogcardProps) =>
+            <MainCard
+              key={data.id}
+              id={data.id}
+              title={data.title}
+              image={data.image}
+              createdAt={data.createdAt}
+              author={data.author}
+              slug={data.slug}
+            />
+          )}
 
-      </section>
-    </main>
+        </section>
+        <Test/>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </main>
+    </>
 
 
   );

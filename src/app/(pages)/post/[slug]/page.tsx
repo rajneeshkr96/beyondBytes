@@ -9,6 +9,7 @@ import { cache } from 'react'
 import Author from '@/components/post/Author/Author';
 import CommentSDisplay from '@/components/post/Comments/CommentSDisplay';
 
+
 type Props = {
   params: { slug: string }
   searchParams: { [key: string]: string | string[] | undefined }
@@ -81,42 +82,7 @@ const Page = async (context: { params: { slug: string,schema:object }}) => {
   if (!success) {
     return notFound();
   }
-  const BreadcrumbListSchema = {
-    '@context': 'https://schema.org',
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Biyondbytes-make your skills like a pro",
-        item:`${process.env.BASE_URL}/`
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Login",
-        item:`${process.env.BASE_URL}/byAuthBtn`
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Contact Us",
-        item:`${process.env.BASE_URL}/contact-us`
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "name": "About Us",
-        item:`${process.env.BASE_URL}/about-us`
-      },
-      {
-        "@type": "ListItem",
-        "position": 5,
-        "name": "Policy Page",
-        item:`${process.env.BASE_URL}/privacy-policy`
-      }
-    ]
-  }
+
 
   return (
     <>
@@ -125,10 +91,7 @@ const Page = async (context: { params: { slug: string,schema:object }}) => {
         <PostBody image={blog.image} content={blog.content} />
         <Author author={blog.author} isFollow={blog.isFollow}/>
         <CommentSDisplay Blogid={blog.id} />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(BreadcrumbListSchema) }}
-        />
+
       </article>
     </>
   )

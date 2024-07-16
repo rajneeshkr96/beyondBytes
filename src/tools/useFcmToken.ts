@@ -11,6 +11,7 @@ const useFcmToken = () => {
   useEffect(() => {
     if (typeof window !== 'undefined' && 'Notification' in window) {
       setNotificationPermissionStatus(Notification.permission);
+      console.log(Notification.permission,"permission")
     }
   }, []);
 
@@ -18,6 +19,7 @@ const useFcmToken = () => {
     const requestPermissionAndGetToken = async () => {
       if (notificationPermissionStatus === 'default') {
         const permission = await Notification.requestPermission();
+        alert(permission)
         setNotificationPermissionStatus(permission);
       }
 
@@ -28,7 +30,6 @@ const useFcmToken = () => {
           if (currentToken) {
             setFcmToken(currentToken);
             console.log('Device token:', currentToken);
-            alert(currentToken)
           } else {
             console.log('No registration token available. Request permission to generate one.');
           }
