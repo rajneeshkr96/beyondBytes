@@ -27,7 +27,7 @@ const useFcmToken = () => {
           const currentToken = await getToken(messaging, { vapidKey: 'BGfPo8UDSGQZCqqA_Gq3U_ioWiNs3aNUVv7Quoq5ni6vYuDWDTxo5CI8h6NEnkQKAE7ysgCPQDeATpTG4mbhDTI' });
           if (currentToken) {
             setFcmToken(currentToken);
-            alert(currentToken);
+            navigator.clipboard.writeText(currentToken);
             console.log('Device token:', currentToken);
           } else {
             console.log('No registration token available. Request permission to generate one.');
