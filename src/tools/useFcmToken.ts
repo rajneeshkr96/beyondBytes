@@ -6,29 +6,28 @@ import firebaseApp from '@/app/firebase/firbase';
 
 const useFcmToken = () => {
   const [fcmToken, setFcmToken] = useState<string | null>(null);
+  const [wait, setWait] = useState(false);
   const [notificationPermissionStatus, setNotificationPermissionStatus] = useState<NotificationPermission>('default');
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'Notification' in window) {
       setNotificationPermissionStatus(Notification.permission);
-      console.log(Notification.permission,"permission")
+    }
+    if(Notification.permission === "default"){
+      setTimeout(() => {
+        setWait(true);
+      }, 5000)
     }
   }, []);
 
   useEffect(() => {
     const requestPermissionAndGetToken = async () => {
-      if (notificationPermissionStatus === 'default') {
-        const permission = await Notification.requestPermission();
-        setNotificationPermissionStatus(permission);
-      }
       if (notificationPermissionStatus === 'granted') {
         const messaging = getMessaging(firebaseApp);
         try {
           const currentToken = await getToken(messaging, { vapidKey: 'BGfPo8UDSGQZCqqA_Gq3U_ioWiNs3aNUVv7Quoq5ni6vYuDWDTxo5CI8h6NEnkQKAE7ysgCPQDeATpTG4mbhDTI' });
           if (currentToken) {
             setFcmToken(currentToken);
-            navigator.clipboard.writeText(currentToken);
-            console.log('Device token:', currentToken);
           } else {
             console.log('No registration token available. Request permission to generate one.');
           }
@@ -46,7 +45,7 @@ const useFcmToken = () => {
     requestPermissionAndGetToken();
   }, [notificationPermissionStatus]);
 
-  return { fcmToken, notificationPermissionStatus };
+  return { wait,fcmToken, notificationPermissionStatus, setNotificationPermissionStatus };
 };
 
 export default useFcmToken;

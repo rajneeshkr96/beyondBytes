@@ -4,7 +4,7 @@ import { useRef } from "react";
 interface ModelProps {
   setDialog?:Dispatch<React.SetStateAction<React.RefObject<HTMLDialogElement> | null>>; 
   btnClass?:string;
-  button:React.ReactNode ;
+  button?:React.ReactNode ;
   children:React.ReactNode;
   className?:string;
   open?:boolean;
@@ -45,7 +45,7 @@ useEffect(() => {
             }
           }}
           aria-label="close"
-          className="x cursor-pointer  border-none absolute top-4 right-3"
+          className="x cursor-pointer  border-none absolute top-4 right-3 text-sm"
         >
           ❌
         </button>

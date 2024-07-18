@@ -1,5 +1,3 @@
-
-
 import HeroSection from "@/components/layoutComponents/HeroSection/HeroSection";
 import axios from "axios";
 import { currentUserId } from "@/lib/authDet";
@@ -10,6 +8,7 @@ import MediaQuery from "@/components/layoutComponents/MediaQuery";
 import AddStorie from "@/components/(cards)/DiscoverCard/AddStorie";
 import ViewStorie from "@/components/(cards)/DiscoverCard/ViewStorie";
 import Test from "@/components/test/Test";
+import Script from "next/script";
 
 
 
@@ -119,7 +118,7 @@ export default async function Home() {
 
         </section>
         <Test/>
-        <script
+        <Script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />

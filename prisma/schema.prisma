@@ -158,3 +158,10 @@ model Tags {
   UserId    String   @db.ObjectId
   createdAt DateTime @default(now()) @map("created_at")
 }
+model PushNotificationToken {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  token     String @unique
+  email     String?
+}
+
+

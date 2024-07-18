@@ -8,6 +8,7 @@ import type { Metadata } from 'next'
 import { cache } from 'react'
 import Author from '@/components/post/Author/Author';
 import CommentSDisplay from '@/components/post/Comments/CommentSDisplay';
+import PushNotification from '@/components/post/pushNotification/PushNotification';
 
 
 type Props = {
@@ -91,6 +92,7 @@ const Page = async (context: { params: { slug: string,schema:object }}) => {
         <PostBody image={blog.image} content={blog.content} />
         <Author author={blog.author} isFollow={blog.isFollow}/>
         <CommentSDisplay Blogid={blog.id} />
+        <PushNotification/>
 
       </article>
     </>

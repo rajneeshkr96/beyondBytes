@@ -3,7 +3,6 @@ import Footer from '@/components/Footer/Footer';
 import { data } from '@/components/Footer/data';
 import MediaQuery from '../MediaQuery';
 import FooterNav from '../FooterNav';
-import PushNotification from '@/components/post/pushNotification/PushNotification';
 
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {
@@ -17,7 +16,7 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
       <MediaQuery maxSize={720}>
         <FooterNav />
       </MediaQuery>
-      <PushNotification/>
+
     </div>
   );
 }
