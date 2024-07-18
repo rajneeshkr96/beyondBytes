@@ -9,6 +9,7 @@ import { cache } from 'react'
 import Author from '@/components/post/Author/Author';
 import CommentSDisplay from '@/components/post/Comments/CommentSDisplay';
 import PushNotification from '@/components/post/pushNotification/PushNotification';
+import Script from 'next/script';
 
 
 type Props = {
@@ -83,6 +84,29 @@ const Page = async (context: { params: { slug: string,schema:object }}) => {
   if (!success) {
     return notFound();
   }
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${process.env.BASE_URL}/${slug}`
+    },
+    "headline": blog.title,
+    "image": [blog.image],
+    "datePublished": blog.createdAt,
+    "author": {
+      "@type": "Person",
+      "name": blog.author.name
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "biyond bytes",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "/logo.png"
+      }
+    },
+  };
 
 
   return (
@@ -93,6 +117,11 @@ const Page = async (context: { params: { slug: string,schema:object }}) => {
         <Author author={blog.author} isFollow={blog.isFollow}/>
         <CommentSDisplay Blogid={blog.id} />
         <PushNotification/>
+        <Script
+          id="Blog-script"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
 
       </article>
     </>
