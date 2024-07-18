@@ -119,6 +119,7 @@ export default async function Home() {
         </section>
         <Test/>
         <Script
+          id="layout-script"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
