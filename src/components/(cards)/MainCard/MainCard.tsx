@@ -10,7 +10,8 @@ import { FaBlog } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { monaRegular } from '../FeatureCards/FeatureCards';
 
-
+import { CiBookmark } from "react-icons/ci";
+import { IoBookmark } from "react-icons/io5";
 export interface CardsProps {
   title: string;
   image: { src: string; alt: string };
@@ -18,6 +19,8 @@ export interface CardsProps {
   id: string;
   author: { id: string; name: string, email: string, image: string, role: string };
   createdAt: Date;
+  className?: string;
+  bookMarked?: boolean;
 
 }
 
@@ -28,10 +31,12 @@ const MainCard: FC<CardsProps> = ({
   slug,
   author,
   createdAt,
+  className,
   ...props
 }) => {
+  console.log(props.bookMarked)
   return (
-    <div {...props} className={`${monaRegular.className} max-w-80 mx-2 my-4 `}>
+    <div {...props} className={`${monaRegular.className} ${className} max-w-80 mx-2 my-4 `}>
       <Link href={`/post/${slug}`}>
         <div  className='w-full rounded-xl h-48 mb-2 cursor-pointer'>
           <Image
@@ -47,7 +52,7 @@ const MainCard: FC<CardsProps> = ({
         <h2 className={`${monaRegular.className} font-semibold line-clamp-2`}>
           <Link href={`/post/${slug}`}>{title}</Link>
         </h2>
-        <div className='text-[#6a6a6a] text-sm capitalize flex gap-x-2 px-2 py-3' >
+        <div className='text-[#6a6a6a] text-sm capitalize flex flex-4 gap-x-2 px-2 py-3' >
           <span className='flex justify-center items-center gap-1 ' ><Image
             src={author.image}
             alt={author.name}
@@ -61,6 +66,10 @@ const MainCard: FC<CardsProps> = ({
           <span className='flex justify-center items-center gap-1' >
             <GoDotFill /> <FaBlog />
           </span>
+          <span className=''>
+            {props.bookMarked ? <CiBookmark className='w-4 mt-0.5  h-4 '  /> : ""}
+          </span>
+          
         </div>
 
       </div>
