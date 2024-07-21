@@ -1,8 +1,11 @@
+
 import React, { FC } from 'react'
 interface BodyProps {
+
     content: string
     image: { src: string, alt: string, caption?: string },
 }
+
 
 
 const PostBody: FC<BodyProps> = ({ content }) => {
@@ -13,6 +16,7 @@ const PostBody: FC<BodyProps> = ({ content }) => {
             {
                 <div className='tiptap !border-none' dangerouslySetInnerHTML={{ __html: content }} />
             }
+
         </div>
     )
 }

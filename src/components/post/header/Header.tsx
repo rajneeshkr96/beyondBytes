@@ -3,6 +3,7 @@ import { formatDate } from '@/tools/FormatDate';
 import Image from 'next/image'
 import React, { FC } from 'react'
 
+
 interface HeaderProps {
     title: string,
     createdAt: Date,
@@ -20,6 +21,7 @@ const Header: FC<HeaderProps> = ({title, createdAt, readTime,image,tags,author }
                 <div >
                     <time dateTime={createdAt.toString()}>Published {formatDate(createdAt)}</time> 
                 </div>    
+
             </div>
             <div className='flex items-center px-12 justify-center gap-2 max-w-[799px] mx-auto ' >
                 <Image
