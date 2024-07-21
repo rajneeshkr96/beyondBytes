@@ -43,7 +43,7 @@ interface CommentCardProps {
           success = true;
           return null;
         } catch (error) {
-          console.log(error);
+          // console.log(error);
           success = false;
           return null;
         }
@@ -143,7 +143,7 @@ interface CommentCardProps {
                   try {
                     await item.apiFunction(comment.id);
                   } catch (error) {
-                    console.error(error);
+                    // console.error(error);
                   }
                 }}
               >

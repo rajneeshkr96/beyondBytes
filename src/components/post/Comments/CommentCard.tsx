@@ -49,7 +49,7 @@ const CommentCard: React.FC<
       success = true;
       return null;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       success = false;
       return null;
     }
@@ -103,7 +103,7 @@ const CommentCard: React.FC<
       
       
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   // useEffect(() => {
@@ -159,7 +159,7 @@ const CommentCard: React.FC<
                   try {
                     await item.apiFunction(comment.id);
                   } catch (error) {
-                    console.error(error);
+                    // console.error(error);
                   }
                 }}
               >

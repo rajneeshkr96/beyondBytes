@@ -16,6 +16,11 @@ export const currentUserId = async () => {
 
   return session?.user?.userId as string;
 }
+export const currentUserProfile = async () => {
+  const session = await auth();
+  const image = session?.user?.image;
+  return image;
+}
 
 export const getCurrentRole = async () => {
   try {

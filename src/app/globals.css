@@ -39,7 +39,7 @@ img {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #000;
+  /* background: #000; */
   overflow: hidden;
 }
 
@@ -86,7 +86,7 @@ footer {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  color: #fff;
+  /* color: #fff; */
   z-index: 1;
 }
 
@@ -94,7 +94,7 @@ footer {
   position: absolute;
   width: 100%;
   height: 100%;
-  opacity: 0.35;
+  /* opacity: 0.35; */
 }
 
 .preview-title h1 {

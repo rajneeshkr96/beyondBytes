@@ -1,58 +1,59 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { mapClasses, previews,links } from "./data";
+// import { mapClasses, previews,links, backgroundImage } from "./data";
+import { links, backgroundImage } from "./data";
 import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
 
-const defaultClipPaths: { [key: string]: string } = {
-  "variant-1": "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
-  "variant-2": "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
-  "variant-3": "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
-};
+// const defaultClipPaths: { [key: string]: string } = {
+//   "variant-1": "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+//   "variant-2": "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
+//   "variant-3": "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+// };
 
-const variantTransforms: { [key: string]: { [key: string]: { [key: string]: number } } } = {
-  "variant-1": {
-    title: { x: 75, opacity: 0 },
-    tags: { y: -75, opacity: 0 },
-    description: { x: -75, opacity: 0 },
-  },
-  "variant-2": {
-    title: { x: -75, opacity: 0 },
-    tags: { y: -75, opacity: 0 },
-    description: { y: 75, opacity: 0 },
-  },
-  "variant-3": {
-    title: { x: 75, opacity: 0 },
-    tags: { y: 75, opacity: 0 },
-    description: { x: 75, opacity: 0 },
-  },
-};
+// const variantTransforms: { [key: string]: { [key: string]: { [key: string]: number } } } = {
+//   "variant-1": {
+//     title: { x: 75, opacity: 0 },
+//     tags: { y: -75, opacity: 0 },
+//     description: { x: -75, opacity: 0 },
+//   },
+//   "variant-2": {
+//     title: { x: -75, opacity: 0 },
+//     tags: { y: -75, opacity: 0 },
+//     description: { y: 75, opacity: 0 },
+//   },
+//   "variant-3": {
+//     title: { x: 75, opacity: 0 },
+//     tags: { y: 75, opacity: 0 },
+//     description: { x: 75, opacity: 0 },
+//   },
+// };
 
-const getDefaultClipPath = (previewElement: Element): string => {
-  for (const variant in defaultClipPaths) {
-    if (previewElement.classList.contains(variant)) {
-      return defaultClipPaths[variant];
-    }
-  }
-  return "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)";
-};
+// const getDefaultClipPath = (previewElement: Element): string => {
+//   for (const variant in defaultClipPaths) {
+//     if (previewElement.classList.contains(variant)) {
+//       return defaultClipPaths[variant];
+//     }
+//   }
+//   return "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)";
+// };
 
-const applyVariantStyles = (previewElement: Element) => {
-  if(previewElement !== null){
-    const variant = previewElement.className
-      .split(" ")
-      .find((className) => className.startsWith("variant-"));
-    if (variant && variantTransforms[variant]) {
-      Object.entries(variantTransforms[variant]).forEach(([elementClass, transform]) => {
-        const element = previewElement.querySelector(`.preview-${elementClass}`);
-        if (element) {
-          gsap.set(element, transform);
-        }
-      });
-    }
-  }
-};
+// const applyVariantStyles = (previewElement: Element) => {
+//   if(previewElement !== null){
+//     const variant = previewElement.className
+//       .split(" ")
+//       .find((className) => className.startsWith("variant-"));
+//     if (variant && variantTransforms[variant]) {
+//       Object.entries(variantTransforms[variant]).forEach(([elementClass, transform]) => {
+//         const element = previewElement.querySelector(`.preview-${elementClass}`);
+//         if (element) {
+//           gsap.set(element, transform);
+//         }
+//       });
+//     }
+//   }
+// };
 
 const changeBg = (newImgSrc: string, previewBg: HTMLElement) => {
   const newImg = document.createElement("img");
@@ -87,96 +88,98 @@ const HeroSection: React.FC = () => {
 
   const previewBg = useRef<HTMLInputElement>(null);
   const container = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    const defaultPreview = document.querySelector(".preview.default") as HTMLElement;
+  // useEffect(() => {
+  //   const defaultPreview = document.querySelector(".preview.default") as HTMLElement;
 
-    previews.forEach((preview, index) => {
-      const previewElement = document.createElement("div");
-      previewElement.className = `preview ${mapClasses[index]} preview-${index + 1} opCheck`;
-      previewElement.innerHTML = `
-        <div class="preview-img" ><img src="${preview.img}" alt="" /></div>
-        <div class="preview-title"><h1>${preview.title}</h1></div>
-        <div class="preview-tags"><p>${preview.tags}</p></div>
-        <div class="preview-description"><p>${preview.description}</p></div>`;
-        if(container.current !== null){
-          container.current.appendChild(previewElement);
-        }
-      applyVariantStyles(previewElement);
-    });
-    setActivePreview(defaultPreview);
-  }, []);
+  //   previews.forEach((preview, index) => {
+  //     if(index === 0 ) return;
+  //     const previewElement = document.createElement("div");
+  //     previewElement.className = `preview ${mapClasses[index]} preview-${index + 1} opCheck`;
+  //     previewElement.innerHTML = `
+  //       <div class="preview-img" ><img src="${preview.img}" alt="" /></div>
+  //       <div class="preview-title"><h1>${preview.title}</h1></div>
+  //       <div class="preview-tags"><p>${preview.tags}</p></div>
+  //       <div class="preview-description"><p>${preview.description}</p></div>`;
+  //       if(container.current !== null){
+  //         container.current.appendChild(previewElement);
+  //       }
+  //     applyVariantStyles(previewElement);
+  //   });
+  //   setActivePreview(defaultPreview);
+  // }, []);
 
   const Mouseenter = (index:number) => {
     setIsMouseOverItem(true);
-    const newBg = `./assets/bg-${index + 1}.jpg`;
+    console.log(backgroundImage[index],"img",index)
+    const newBg = `${backgroundImage[index]}`;
     if(previewBg.current !== null){
       changeBg(newBg, previewBg.current);
     }
-    const newActivePreview = document.querySelector(`.preview-${index + 1}`) as HTMLElement;
-    if (activePreview !== null && activePreview !== newActivePreview) {
-      const previousActivePreviewImg = activePreview.querySelector(".preview-img") as HTMLElement;
-      const previousDefaultClipPath = getDefaultClipPath(activePreview);
-      gsap.to(previousActivePreviewImg, {
-        clipPath: previousDefaultClipPath,
-        duration: 0.75,
-        ease: "power3.out",
-      });
-      gsap.to(activePreview, {
-        opacity: 0,
-        duration: 0.3,
-        delay: 0.2,
-      });
-      applyVariantStyles(activePreview);
-    }
-    gsap.to(newActivePreview, { opacity: 1, duration: 0.1 });
-    setActivePreview(newActivePreview);
-    const elementsToAnimate = ["title", "tags", "description"];
-    elementsToAnimate.forEach((el) => {
-      const element = newActivePreview.querySelector(`.preview-${el}`) as HTMLElement;
-      if (element) {
-        gsap.to(element, { x: 0, y: 0, opacity: 1, duration: 0.5 });
-      }
+    // const newActivePreview = document.querySelector(`.preview-${index + 1}`) as HTMLElement;
+    // if (activePreview !== null && activePreview !== newActivePreview) {
+    //   const previousActivePreviewImg = activePreview.querySelector(".preview-img") as HTMLElement;
+    //   const previousDefaultClipPath = getDefaultClipPath(activePreview);
+    //   gsap.to(previousActivePreviewImg, {
+    //     clipPath: previousDefaultClipPath,
+    //     duration: 0.75,
+    //     ease: "power3.out",
+    //   });
+    //   gsap.to(activePreview, {
+    //     opacity: 0,
+    //     duration: 0.3,
+    //     delay: 0.2,
+    //   });
+    //   applyVariantStyles(activePreview);
+    // }
+    // gsap.to(newActivePreview, { opacity: 1, duration: 0.1 });
+    // setActivePreview(newActivePreview);
+    // const elementsToAnimate = ["title", "tags", "description"];
+    // elementsToAnimate.forEach((el) => {
+    //   const element = newActivePreview.querySelector(`.preview-${el}`) as HTMLElement;
+    //   if (element) {
+    //     gsap.to(element, { x: 0, y: 0, opacity: 1, duration: 0.5 });
+    //   }
 
-  const activePreviewImg = newActivePreview.querySelector(".preview-img") as HTMLElement;
-  gsap.to(activePreviewImg, {
-    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-    duration: 1,
-    ease: "power3.out",
-  });
-});
+//   const activePreviewImg = newActivePreview.querySelector(".preview-img") as HTMLElement;
+//   gsap.to(activePreviewImg, {
+//     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+//     duration: 1,
+//     ease: "power3.out",
+//   });
+// });
 
 };
 
 const mounseLeave = async () => {
   setIsMouseOverItem(false);
-  applyVariantStyles(activePreview!);
-  const defaultPreview = document.querySelector(".preview.default") as HTMLElement;
+  // applyVariantStyles(activePreview!);
+  // const defaultPreview = document.querySelector(".preview.default") as HTMLElement;
   setTimeout( () => {
     if (isMouseOverItem) {
       if(previewBg.current !== null){
-        changeBg("https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jw8wdl78sbmm5jl8q68f.jpg", previewBg.current);
+        changeBg("https://dev-to-uploads.s3.amazonaws.com/uploads/articles/p38gsgk2j42ogrzf1rnm.gif", previewBg.current);
       }
 
-      if (activePreview) {
-        gsap.to(activePreview, { opacity: 0, duration: 0.1 });
-        gsap.to(defaultPreview, { opacity: 1, duration: 0.1 });
-        setActivePreview(defaultPreview);
-        const activePreviewImg = defaultPreview.querySelector(".preview-img") as HTMLElement;
-        const defaultClipPath = getDefaultClipPath(defaultPreview);
-        gsap.to(activePreviewImg, {
-          clipPath: defaultClipPath,
-          duration: 1,
-          ease: "power3.out",
-        });
-      }
+      // if (activePreview) {
+      //   gsap.to(activePreview, { opacity: 0, duration: 0.1 });
+      //   gsap.to(defaultPreview, { opacity: 1, duration: 0.1 });
+      //   setActivePreview(defaultPreview);
+      //   const activePreviewImg = defaultPreview.querySelector(".preview-img") as HTMLElement;
+      //   const defaultClipPath = getDefaultClipPath(defaultPreview);
+      //   gsap.to(activePreviewImg, {
+      //     clipPath: defaultClipPath,
+      //     duration: 1,
+      //     ease: "power3.out",
+      //   });
+      // }
       
     }
-    setTimeout( () => {
-      const preview = document.querySelectorAll(".opCheck")
-      preview.forEach((pre) => {
-        pre.setAttribute("style", "opacity:0;")
-      })
-    }, 50);
+    // setTimeout( () => {
+    //   const preview = document.querySelectorAll(".opCheck")
+    //   preview.forEach((pre) => {
+    //     pre.setAttribute("style", "opacity:0;")
+    //   })
+    // }, 50);
   }, 10);
 
   
@@ -200,10 +203,10 @@ const mounseLeave = async () => {
         </div>
         <div className="preview-bg" ref={previewBg} >
           <Image
-            src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jw8wdl78sbmm5jl8q68f.jpg"
+            src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/p38gsgk2j42ogrzf1rnm.gif"
             alt="hero image"
-            width={200}
-            height={200}
+            width={800}
+            height={800}
           />
         </div>
         <div className="preview default"></div>

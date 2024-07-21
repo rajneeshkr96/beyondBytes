@@ -47,7 +47,7 @@ const CommentSDisplay: React.FC<CommentSDisplayProps> = ({ Blogid }) => {
           setComments(res.data.data);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     getComments();

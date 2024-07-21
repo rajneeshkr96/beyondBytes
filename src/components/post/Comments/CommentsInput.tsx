@@ -56,7 +56,7 @@ const CommentsInput:React.FC<CommentsInputPropsd> = ({id,isReply,setIsReply,repl
         }
 
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       
     }
   };

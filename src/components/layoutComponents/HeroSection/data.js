@@ -1,22 +1,27 @@
 export const mapClasses = [
-    "variant-1",
     "variant-2",
     "variant-3",
-    "variant-1",
     "variant-2",
     "variant-3",
-    "variant-1",
     "variant-2",
     "variant-3",
-    "variant-1",
 ]
 export const links = [
-    {name:"Get Start",link:"/"},
-    {name:"home",link:"/"},
+    {name:"Home",link:"/"},
+    {name:"BiyondBytes",link:"/"},
     {name:"Team Page",link:"/"},
     {name:"Blog reel",link:"/"},
     {name:"About US",link:"/"},
-    {name:"Contect US",link:"/"},
+    {name:"Contact US",link:"/"},
+]
+
+export const backgroundImage = [
+    "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6xaz1oq764j30n9abjkv.jpg",
+    "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zule53j02pezvkvwcdo1.png",
+    "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6xaz1oq764j30n9abjkv.jpg",
+    "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6xaz1oq764j30n9abjkv.jpg",
+    "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6xaz1oq764j30n9abjkv.jpg",
+    "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6xaz1oq764j30n9abjkv.jpg",
 ]
 
 export const previews = [

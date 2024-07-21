@@ -24,7 +24,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ data }) => {
   const sendONPage = () => {
-    console.log("send to page");
+    // console.log("send to page");
   };
   return (
     <div className="container !h-min !bg-main-text-color mt-6 dark:!bg-dark-color text-white max-w-[100vw] max-md:pb-16">
