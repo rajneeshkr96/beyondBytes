@@ -111,7 +111,6 @@ const Page = async (context: { params: { slug: string,schema:object }}) => {
 
 
   return (
-<
     <>
       <article className='px-6 py-12'>
         <Header author={blog.author} title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime}  image={blog.image} tags={blog.tags}  />
