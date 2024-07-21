@@ -93,7 +93,7 @@ const Page = async (context: { params: { slug: string,schema:object }}) => {
       "@id": `${process.env.BASE_URL}/${slug}`
     },
     "headline": blog.title,
-    "image": [blog.image],
+    "image": [blog.image.src],
     "datePublished": blog.createdAt,
     "author": {
       "@type": "Person",
