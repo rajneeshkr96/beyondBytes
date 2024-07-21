@@ -2,14 +2,15 @@
 import PostBody from '@/components/post/body/PostBody'
 import Header from '@/components/post/header/Header'
 import React from 'react'
-import localFont from 'next/font/local'
-//import { PostFeatures } from '@/components/post/postFeatures/PostFeatures'
 import { currentUserId } from "@/lib/authDet";
 import axios from 'axios'
 import { notFound } from 'next/navigation'
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 import { cache } from 'react'
-const ogg = localFont({ src: '../../../../fonts/Ogg-Medium-BF646c18fc4e918.otf' })
+import Author from '@/components/post/Author/Author';
+import CommentSDisplay from '@/components/post/Comments/CommentSDisplay';
+import PushNotification from '@/components/post/pushNotification/PushNotification';
+import Script from 'next/script';
 
 
 type Props = {
@@ -42,6 +43,7 @@ export async function generateMetadata(
   if(product){
     // optionally access and extend (rather than replace) parent metadata
     return {
+      
       title: product.data.data.metaTitle || "page not found",
       description: product.data.data.metaDesc || "page not found",
       openGraph: {
@@ -64,11 +66,11 @@ export async function generateMetadata(
   }
 }
 
-const Page = async (context: { params: { slug: string } }) => {
+
+const Page = async (context: { params: { slug: string,schema:object }}) => {
   let blog;
   let success = false;
   const slug = context.params.slug
-  const baseURL = process.env.BASE_URL
   try {
    const userId = await currentUserId();
    const res = await getData(slug,userId);
@@ -83,19 +85,48 @@ const Page = async (context: { params: { slug: string } }) => {
   if (!success) {
     return notFound();
   }
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${process.env.BASE_URL}/${slug}`
+    },
+    "headline": blog.title,
+    "image": [blog.image],
+    "datePublished": blog.createdAt,
+    "author": {
+      "@type": "Person",
+      "name": blog.author.name
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "biyond bytes",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "/logo.png"
+      }
+    },
+  };
+
 
   return (
-    <article>
-      <Header title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime} author={blog.author} />
-      {/* <PostFeatures authId={blog.author.id}  baseurl={baseURL ?? ""} meLike={blog.likes && blog?.likes[0]?.like} bookmark={blog.bookmarks &&blog?.bookmarks[0]?.bookmark} slug={blog.slug}  commentCount={blog.commentsCount} likesCount={blog.likesCount}  id={blog.id}/> */}
-      <PostBody image={blog.image} content={blog.content} />
-      {/* <div className='flex w-9/12 justify-center gap-x-4 my-6 items-center'>
-                <span className={` text-2xl`}>Tags</span>
-                <ul className='flex gap-x-2 font-bold'>
-                    {blog.tags.map((val:string  ,index:string)=><li key={index}>{val}</li>)}
-                </ul>
-            </div> */}
-    </article>
+<
+    <>
+      <article className='px-6 py-12'>
+        <Header author={blog.author} title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime}  image={blog.image} tags={blog.tags}  />
+        <PostBody image={blog.image} content={blog.content} />
+        <Author author={blog.author} isFollow={blog.isFollow}/>
+        <CommentSDisplay Blogid={blog.id} />
+        <PushNotification/>
+        <Script
+          id="Blog-script"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+      </article>
+    </>
   )
 }
 

@@ -76,7 +76,7 @@ const   ActionOptions = ({id,authId,slug,disable}:{id:string,authId:string,slug:
               </span>
 
             </div>
-            <SubmitButton className="px-4 py-2 bg-red-400 text-white rounded-3xl my-3" value="Report"/>
+            <SubmitButton className="px-4 py-2 bg-red-400 text-white rounded-3xl my-3" >Report</SubmitButton>
           </div>
         </Modal>
       </>

@@ -86,8 +86,8 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ userName, bio,userId }) =
             />
             <SubmitButton
               className="bg-[#333] text-white px-4 py-2 rounded-lg"
-              value={"username"}
-            />
+            >username</SubmitButton>
+    
           </div>
         </form>
         <p className="text-start">{userNameErrors.userName?.message}</p>
@@ -101,8 +101,7 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ userName, bio,userId }) =
             />
             <SubmitButton
               className="bg-[#333] text-white px-4 py-2 rounded-lg w-full"
-              value={"edit bio"}
-            />
+            >edit bio</SubmitButton>
           </div>
         </form>
         <p className="text-start">{bioErrors.bio?.message}</p>

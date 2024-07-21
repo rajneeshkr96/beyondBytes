@@ -38,7 +38,7 @@ const AddTags = () => {
                 <Modal btnClass='px-4 py-2 text-white bg-black rounded-3xl font-semibold' button="ADD TAG">
                     <div className="px-4 py-2">
                         <input type="text" className="w-full px-8 py-2 rounded-md font-medium  border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white max-md:w-full text-center" placeholder="Enter Tag" />
-                        <SubmitButton className="w-full px-4 py-2 bg-black text-white mt-2" value="Add" />
+                        <SubmitButton className="w-full px-4 py-2 bg-black text-white mt-2"  >Add</SubmitButton>
                     </div>
                 </Modal>
 
@@ -47,7 +47,7 @@ const AddTags = () => {
                 {value.map(val=><span key={val} className="flex justify-between gap-x-12 border-solid border-2 border-blue-300  capitalize items-center px-4 py-2 w-fit text-gray-700 font-medium rounded-full shadow-md shadow-[#7dbcffa7]  max-md:px-2 max-md:py-1 max-md:gap-x-8 dark:text-white">
                     {val}
                     <ActionBtn className="w-8 h-8" >
-                        <SubmitButton onClick={()=>delTag(id,val)} className="px-4 py-2 text-center" value="Delete"/>
+                        <SubmitButton onClick={()=>delTag(id,val)} className="px-4 py-2 text-center" >Delete</SubmitButton>
                     </ActionBtn>
                 </span>)}
 

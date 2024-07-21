@@ -3,59 +3,56 @@ import { NextResponse } from "next/server";
 import { dataBasePrisma } from "@/databasePrisma";
 import { currentUser } from "@/lib/authDet";
 import { NextRequest } from "next/server";
-import { currentUserId } from "@/lib/authDet";
+
+
 export async function POST(req:NextRequest,context:{params:{id:string}}) {
 
-    const userId:string = await currentUserId();
-    
     try {
+        const {id} = context.params;
+        const {comment} = await req.json();
+        console.log("comment.......................",comment);
         const user = await currentUser();
-        console.log(user);
-        const blogId = context.params.id;
-        const {  comment } = await req.json();
-        
-        if (comment === undefined || blogId === undefined)
-        return NextResponse.json(
-            { success: false, message: "comment or blogId is undefined" },
-            { status: 400 }
-        );
-        // check comment is allready exist or not 
-        const isCommentExist = await dataBasePrisma.comment.findFirst({
-        where: {
-            BlogId: blogId,
-            UserId: userId,
-        },
+        const usr = await dataBasePrisma.user.findUnique({
+            where:{
+                id:user?.userId
+            },select:{
+                username:true,
+                image:true,
+                name:true
+            }
         });
-        if (isCommentExist && user?.role !== "ADMIN"){
-        return NextResponse.json(
-            { success: false, message: "comment already exist" },
-            { status: 400 }
-        );
+        // user can write maximum 5 comments on a post
+        const userComment = await dataBasePrisma.comment.findMany({
+            where:{
+                UserId:user?.userId
+            }
+        });
+        if(userComment.length > 5){
+            return NextResponse.json( { success: false, message: "you can write maximum 5 comments on a post" }, { status: 400 });
         }
-        const commentData = await dataBasePrisma.comment.create({
-        data: {
-            comment: comment,
-            BlogId: blogId,
-            UserId: userId,
-        },
+        const res = await dataBasePrisma.comment.create({
+            data:{
+                comment:comment,
+                BlogId:id,
+                UserId:user!.userId,
+                UserName:user!.userName,
+                UserImage:usr?.image,
+                name:usr?.name,
+            }
         });
-        // update blog comment count
-        await dataBasePrisma.blog.update({
-            where: {
-                id: blogId,
-            },
-            data: {
-                commentsCount: {
-                    increment: 1,
-                },
-            },
-        });
+        console.log(res);
         return NextResponse.json(
-        { success: true, message: "comment added successfully", data: commentData },
-        { status: 200 }
+            { success: true, message: "comment added successfully", data: res },
+            { status: 200 }
         );
+
+        
     } catch (error) {
         console.error(error);
         return NextResponse.json({ success: false, message: error }, { status: 500 });
+        
     }
-    }
+   
+    
+    
+}

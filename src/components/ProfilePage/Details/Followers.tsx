@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import BlogsCards from "@/components/(cards)/BlogCard/BlogsCards";
-import Pagination from "@/components/Pagination/Pagination";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import SubmitButton from "@/components/layoutComponents/Button/SubmitButton";
@@ -89,7 +87,7 @@ const Followers = () => {
               <p className="text-xs text-gray-500 ">{data.username}</p>
             </div>
             <div className="flex-grow flex items-center">
-              {data.role ==="USER" ?  "" :<SubmitButton  onClick={()=> onFollow(data.id)} className="border-2 bg-blue-400 rounded-md px-2 ml-auto relative right-1 " value={follow }/>
+              {data.role ==="USER" ?  "" :<SubmitButton  onClick={()=> onFollow(data.id)} className="border-2 bg-blue-400 rounded-md px-2 ml-auto relative right-1 " >{follow}</SubmitButton>
           }
             </div>
           </div>

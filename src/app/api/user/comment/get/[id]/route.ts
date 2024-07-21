@@ -12,33 +12,11 @@ export async function GET(req:NextRequest,context:{params:{id:string}}) {
             { success: false, message: "blogId is undefined" },
             { status: 400 }
         );
-        const comments = await dataBasePrisma.comment.findMany({
-        where: {
-            BlogId: blogId,
-        },
-        select:{
-            id:true,
-            comment:true,
-            User: {
-                select:{
-                    id:true,
-                    name:true,
-                    email:true,
-                    image:true,
-                }
-            },
-            likesCount:true,
-            CommentLikes:{
-                select:{
-                    CommentId:true,
-                },
-                where:{
-                    UserId:user
-                }
+        const comments =await dataBasePrisma.comment.findMany({
+            where:{
+                BlogId:blogId
             }
-        }
         });
-
         return NextResponse.json(
         { success: true, message: "comments fetched successfully", data: comments },
         { status: 200 }

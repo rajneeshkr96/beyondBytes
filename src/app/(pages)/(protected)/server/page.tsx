@@ -9,7 +9,7 @@ const Page = async () => {
         alt : session?.user?.name as string,
         id : session?.user?.userId as string
     }
-    console.log(session,"protected");
+
   return (
     <div className='flex gap-2  items-center'>
         {

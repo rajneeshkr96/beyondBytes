@@ -122,10 +122,9 @@ const Header: React.FC<HeaderProps> = () => {
             </span>
             <span>
               <SubmitButton
-                value={`Write Blogs`}
                 className={`bg-[#35a8c5] border p-2 w-24  max-sm:text-xs  ml-5  !flex-row-reverse rounded-lg text-white text-sm hover:scale-105 duration-300 text-[--first-color] ${buttonClass} `}
                 onClick={writeBlogs}
-              />
+              >Write Blogs</SubmitButton>
             </span>
             </div>
           }

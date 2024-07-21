@@ -1,9 +1,8 @@
 "use client";
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import Cards from '@/components/(cards)/BlogCard/Cards';
-import BlogsCards from '@/components/(cards)/BlogCard/BlogsCards';
 import { useParams } from 'next/navigation';
+import MainCard from '@/components/(cards)/MainCard/MainCard';
 
 interface BookmarkProps {
     id: string;
@@ -59,19 +58,15 @@ const Bookmark = () => {
     <div className="bg-[#e2eafc] w-11/12 mx-auto">
       <section className={`grid mx-auto ${grid} max-sm:grid-cols-1 justify-evenly max-sm:justify-center gap-2 p-3  max-sm:flex-col`}>
         {bookmark.map((data: BookmarkProps) => (
-          <BlogsCards
+          <MainCard
             key={data.id}
             id={data.id}
             title={data.title}
-            description={data.metaDesc}
             image={data.image}
+            createdAt={data.createdAt}
+            author={data.author}
             slug={data.slug}
-            authId={data.author?.id?data?.author.id:""}
-            likesCount={data?.likesCount?data.likesCount:0}
-            commentCount={data.commentsCount}
-            baseurl={process.env.BASE_URL as string} 
-
-          />
+        />
         ))}
       </section>
     </div>

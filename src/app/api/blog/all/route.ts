@@ -18,7 +18,7 @@ async function validateQueryParams(req: NextRequest) {
     throw new Error("Invalid page number: must be a positive integer");
   }
 
-  const limit = parseInt(url.searchParams.get("limit") || "10");
+  const limit = parseInt(url.searchParams.get("limit") || "12");
   if (isNaN(limit) || limit < 1 || limit > 100) {
     throw new Error(
       "Invalid limit: must be a positive integer between 1 and 100"

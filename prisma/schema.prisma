@@ -40,6 +40,24 @@ model Blog {
   createdAt     DateTime        @default(now()) @map("created_at")
   updatedAt     DateTime        @default(now()) @map("updated_at")
 }
+model Store {
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  slug          String          @unique
+  content       contentData[]  @map("content")
+  metaTitle     String
+  metaDesc      String
+  author        User            @relation(fields: [authorId], references: [id])
+  authorId      String          @db.ObjectId
+  viewsCount    Int             @default(0)
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @default(now()) @map("updated_at")
+}
+type contentData{
+ instance_id                String
+  instance_name              String
+ os                         String
+version                    String
+}
 
 model User {
   id            String          @id @default(auto()) @map("_id") @db.ObjectId
@@ -53,6 +71,7 @@ model User {
   followers     Follows[]       @relation("following")
   following     Follows[]       @relation("follower")
   Blogs         Blog[]
+  Store         Store[]
   comments      Comment[]
   likes         Like[]
   CommentLikes  commentLikes[]
@@ -76,16 +95,23 @@ model Follows {
 model Comment {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   comment   String
-  Blog      Blog     @relation(fields: [BlogId], references: [id])
-  CommentLikes commentLikes[]
-  BlogId    String   @db.ObjectId
-  likesCount Int     @default(0)
   User      User     @relation(fields: [UserId], references: [id])
+  UserName  String?
   UserId    String   @db.ObjectId
+  Blog      Blog ?   @relation(fields: [BlogId], references: [id])
+  BlogId    String?   @db.ObjectId
+  parent    Comment? @relation("ParentChild", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  children  Comment[] @relation("ParentChild")
+  parentId  String[] @db.ObjectId
+  CommentLikes commentLikes[]
+  likesCount Int @default(0)
+  repliesCount Int @default(0)
+  UserImage String?
+  ReplyUserName String?
+  name      String?
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
 }
-
 model Like {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   Blog      Blog     @relation(fields: [BlogId], references: [id])
@@ -132,3 +158,10 @@ model Tags {
   UserId    String   @db.ObjectId
   createdAt DateTime @default(now()) @map("created_at")
 }
+model PushNotificationToken {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  token     String @unique
+  email     String?
+}
+
+
