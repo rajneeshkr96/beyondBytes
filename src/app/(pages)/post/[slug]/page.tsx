@@ -93,7 +93,7 @@ const Page = async (context: { params: { slug: string,schema:object }}) => {
       "@id": `${process.env.BASE_URL}/${slug}`
     },
     "headline": blog.title,
-    "image": [blog.image],
+    "image": [blog.image.src],
     "datePublished": blog.createdAt,
     "author": {
       "@type": "Person",
@@ -111,7 +111,7 @@ const Page = async (context: { params: { slug: string,schema:object }}) => {
 
 
   return (
-<
+
     <>
       <article className='px-6 py-12'>
         <Header author={blog.author} title={blog.title} createdAt={blog.createdAt} readTime={blog.readTime}  image={blog.image} tags={blog.tags}  />
