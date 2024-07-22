@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: `%s | Biyond Bytes`,
   },
   description: "Biyond Bytes",
-  
+
 
 
 };
@@ -40,6 +40,10 @@ export default async function RootLayout({
     <html lang="en">
       <meta name="robots" content="max-image-preview:large"></meta>
       <GoogleTagManager gtmId="GTM-MCDRPZ4H" />
+      <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2216699954641967"
+          crossOrigin="anonymous"></script>
+      </head>
       <body className={`${inter.className} ${source_serif_4.variable}`}>
         <SessionProvider session={session}>
           <ReduxProvider>
