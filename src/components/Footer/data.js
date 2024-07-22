@@ -22,7 +22,7 @@ export const companyProducts = [
     },
     {
         title:"Sign in",
-        link:"/",
+        link:"/byAuthBtn",
     }
 
 ]
@@ -50,7 +50,7 @@ export const companyDetails = [
     },
     {
         title:"Contact",
-        link:"/",
+        link:"/contct-us",
     }
 ]
 
@@ -88,23 +88,23 @@ export const companySocials = [
     },
     {
         title:"Twitter",
-        link:"/",
+        link:"https://x.com/BiyondBytes",
     },
     {
         title:"LinkedIn",
-        link:"/",
+        link:"https://www.linkedin.com/company/biyondbytes",
     },
     {
         title:"Instagram",
-        link:"/",
+        link:"https://www.instagram.com/biyondbytes/",
     },
     {
         title:"YouTube",
-        link:"/",
+        link:"https://www.youtube.com/@biyondbytes",
     },
     {
         title:"GitHub",
-        link:"/",
+        link:"https://github.com/BiyondBytes",
     }
 ]
 
@@ -138,27 +138,27 @@ export const companyUpCases = [
 export const companyLegal = [
     {
         title:"Privacy",
-        link:"/",
+        link:"/privacy-policy",
     },
     {
         title:"Terms",
-        link:"/",
+        link:"/terms-services",
     },
     {
-        title:"Cookies",
-        link:"/",
+        title:"Disclaimer",
+        link:"/disclaimer-page",
     },
     {
-        title:"Licenses",
-        link:"/",
+        title:"About",
+        link:"/about-us",
     },
     {
         title:"Settings",
-        link:"/",
+        link:"/settings",
     },
     {
         title:"Contact",
-        link:"/",
+        link:"/contact-us",
     }
 ]
 

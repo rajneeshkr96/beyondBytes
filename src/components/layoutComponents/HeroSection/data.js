@@ -11,8 +11,8 @@ export const links = [
     {name:"BiyondBytes",link:"/"},
     {name:"Team Page",link:"/"},
     {name:"Blog reel",link:"/"},
-    {name:"About US",link:"/"},
-    {name:"Contact US",link:"/"},
+    {name:"About US",link:"/about-us"},
+    {name:"Contact US",link:"/contact-us"},
 ]
 
 export const backgroundImage = [

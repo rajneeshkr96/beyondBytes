@@ -7,7 +7,6 @@ import CategorySlide from "@/components/categorySlide/CategorySlide";
 import MediaQuery from "@/components/layoutComponents/MediaQuery";
 import AddStorie from "@/components/(cards)/DiscoverCard/AddStorie";
 import ViewStorie from "@/components/(cards)/DiscoverCard/ViewStorie";
-import Test from "@/components/test/Test";
 import Script from "next/script";
 
 

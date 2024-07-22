@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import SubmitButton from "../layoutComponents/Button/SubmitButton";
-import { useRouter } from "next/navigation";
 import {
   companyProducts,
   companyDetails,
