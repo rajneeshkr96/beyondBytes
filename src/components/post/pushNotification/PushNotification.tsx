@@ -10,7 +10,14 @@ const PushNotification = () => {
   const { wait,fcmToken, notificationPermissionStatus,setNotificationPermissionStatus } = useFcmToken();
   
   const saveToken = async (token: string) => {
-    await axios.post("/api/pushNotification", { token: token });
+    let country
+    try {
+      const data = (await axios.get("https://api.country.is/")).data;
+      country = data.country;
+    } catch (error) {
+      country = null;
+    }
+    await axios.post("/api/pushNotification", { token: token,country:country });
   };
   useEffect(() => {
     if ('serviceWorker' in navigator) {
@@ -28,7 +35,6 @@ const PushNotification = () => {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
       if (notificationPermissionStatus === 'granted') {
         if (fcmToken) saveToken(fcmToken);
-        console.log('FCM Token:', fcmToken);
       }
     }
   }, [fcmToken, notificationPermissionStatus]);

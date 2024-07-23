@@ -162,6 +162,8 @@ model PushNotificationToken {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   token     String @unique
   email     String?
+  country     String?
+  state     String?
 }
 
 

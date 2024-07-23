@@ -7,13 +7,14 @@ export async function POST(req: NextRequest) {
     
     try {
         const email = await currentUser();
-        const { token } = await req.json();
+        const { token,country } = await req.json();
         const isExist = await dataBasePrisma.pushNotificationToken.findUnique(
             {
-                where: { token:token},
+                where: { token:token,country:country},
               }
         );
         if (!isExist) {
+            
             await dataBasePrisma.pushNotificationToken.create({data:{
                 token: token,
                 email: email?.email

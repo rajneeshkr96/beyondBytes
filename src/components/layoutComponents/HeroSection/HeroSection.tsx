@@ -83,11 +83,11 @@ const changeBg = (newImgSrc: string, previewBg: HTMLElement) => {
 };
 
 const HeroSection: React.FC = () => {
-  const [activePreview, setActivePreview] = useState<HTMLElement | null>(null);
+  // const [activePreview, setActivePreview] = useState<HTMLElement | null>(null);
   const [isMouseOverItem, setIsMouseOverItem] = useState(false);
 
   const previewBg = useRef<HTMLInputElement>(null);
-  const container = useRef<HTMLInputElement>(null);
+  // const container = useRef<HTMLInputElement>(null);
   // useEffect(() => {
   //   const defaultPreview = document.querySelector(".preview.default") as HTMLElement;
 
@@ -189,7 +189,7 @@ const mounseLeave = async () => {
 
   return (
     <header className="main-container ">
-      <div className="container max-w-[100vw]" ref={container} >
+       <div className="container max-w-[100vw]" /*ref={container}*/ > 
         <footer>
           <p>match shoreel</p>
           <p>collection 2024</p>
