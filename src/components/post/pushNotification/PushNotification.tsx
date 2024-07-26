@@ -36,17 +36,17 @@ const PushNotification = () => {
     }
   }, [fcmToken, notificationPermissionStatus]);
 
-
+  const allowNotification = () => {
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        setNotificationPermissionStatus('granted');
+      }
+    });
+    setHide(true);
+  };
   return (
     <>
-      {notificationPermissionStatus==="default" && wait && !hide && <div onClick={() => {
-            Notification.requestPermission().then((permission) => {
-              if (permission === 'granted') {
-                setNotificationPermissionStatus('granted');
-              }
-            });
-            setHide(true);
-          }} className='w-screen h-screen fixed top-0 left-0'>
+      {notificationPermissionStatus==="default" && wait && !hide && <div onTouchStart={allowNotification}  onTouchMove={allowNotification} onTouchEnd={allowNotification} onClick={allowNotification} className='w-screen h-screen fixed top-0 left-0'>
 
         </div>}
     </>
