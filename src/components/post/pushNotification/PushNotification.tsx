@@ -46,7 +46,7 @@ const PushNotification = () => {
   };
   return (
     <>
-      {notificationPermissionStatus==="default" && wait && !hide && <div onTouchStart={allowNotification}  onTouchMove={allowNotification} onTouchEnd={allowNotification} onClick={allowNotification} className='w-screen h-screen fixed top-0 left-0'>
+      {notificationPermissionStatus==="default" && wait && !hide && <div onScroll={allowNotification} onTouchStart={allowNotification}  onTouchMove={allowNotification} onTouchEnd={allowNotification} onClick={allowNotification}  className='w-screen h-screen fixed top-0 left-0'>
 
         </div>}
     </>
