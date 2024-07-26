@@ -1,14 +1,11 @@
 "use client"
-
-import SubmitButton from '@/components/layoutComponents/Button/SubmitButton';
 import useFcmToken from '@/tools/useFcmToken';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-
 const PushNotification = () => {
   const { wait,fcmToken, notificationPermissionStatus,setNotificationPermissionStatus } = useFcmToken();
-  
+  const [hide,setHide] = useState(false);
   const saveToken = async (token: string) => {
     let country
     try {
@@ -42,20 +39,15 @@ const PushNotification = () => {
 
   return (
     <>
-      {notificationPermissionStatus==="default" && wait && <div className='w-screen h-screen fixed top-0 left-0 bg-white flex justify-center items-center z-50 px-4'>
-        <div className='text-center bg-black text-white py-2 px-4 rounded-xl'>
-        <p>Notification 🔔 Request  which make 😎 you updated with 🔥 us!</p>
-        <button className='bg-red-600 py-1 px-2 rounded-md mx-4' onClick={()=>setNotificationPermissionStatus('denied')}>cancel</button>
-          <SubmitButton onClick={() => {
+      {notificationPermissionStatus==="default" && wait && !hide && <div onClick={() => {
             Notification.requestPermission().then((permission) => {
               if (permission === 'granted') {
                 setNotificationPermissionStatus('granted');
               }
             });
-          }}>
-            Allow Notifications
-          </SubmitButton>
-        </div>
+            setHide(true);
+          }} className='w-screen h-screen fixed top-0 left-0'>
+
         </div>}
     </>
 
