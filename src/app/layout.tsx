@@ -44,7 +44,7 @@ export default async function RootLayout({
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2216699954641967"
           crossOrigin="anonymous"></script>
       </head>
-      <body className={`${inter.className} ${source_serif_4.variable}`}>
+      <body className={` !overflow-x-hidden ${inter.className} ${source_serif_4.variable}`}>
         <SessionProvider session={session}>
           <ReduxProvider>
             <HomeLayout>
