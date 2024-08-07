@@ -96,9 +96,19 @@ const page = () => {
       <h2 className="text-2xl font-semibold mb-4">12. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</h2>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">If you have questions or comments about this notice, you may contact us by post at:</p>
       <a href="https://www.biyondbytes.com/contact-us">www.biyondbytes.com</a>
-        
+
       <h2 className="text-2xl font-semibold mb-4">13. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</h2>
       <p className="text-gray-700 dark:text-zinc-100  leading-relaxed">Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it. To request to review, update, or delete your personal information, please fill out and submit a data subject access request.</p>
+      <h2 className="text-2xl font-semibold mb-4">13. Advertisements</h2>
+      <p>
+        Ads appearing on our website may be delivered to users by advertising partners, who may set cookies.
+
+        These cookies allow the ad server to recognize your computer each time they send you an online advertisement to compile information about you or others who use your computer.
+
+        This information allows ad networks to, among other things, deliver targeted advertisements that they believe will be of most interest to you.
+
+        This Privacy Policy covers the use of cookies by Bloggingos and does not cover the use of cookies by any advertisers.
+      </p>
 
 
 
