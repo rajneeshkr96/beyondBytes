@@ -23,7 +23,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   // Fetch country information using ipinfo.io
   let country = 'Unknown';
   try {
-    const response = await axios.get(`https://ipinfo.io/${ipv4}/json?token=YOUR_IPINFO_TOKEN`);
+    const response = await axios.get(`https://ipinfo.io/${ipv4}/json?token=2586ea5d7aac0a`);
     country = response.data.country || 'Unknown';
   } catch (error) {
     console.error('Error fetching IP info:', error);
