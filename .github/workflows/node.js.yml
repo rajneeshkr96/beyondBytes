@@ -38,4 +38,7 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
+    - name: Change Directory
+      run: cd /home/biyond/actions-runner/_work/biyondbytes/biyondbytes
+    - run: pm2 restart 0
 
