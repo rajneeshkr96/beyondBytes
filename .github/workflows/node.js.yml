@@ -30,6 +30,8 @@ jobs:
       UPLOADTHING_APP_ID: ${{secrets.UPLOADTHING_APP_ID}}
 
     steps:
+    - name: "test secrets"
+      run: echo "BASE_URL ${{vars.BASE_URL}} ${{secrets.BASE_URL}} ${{secrets.DATABASE_URL}}"
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
