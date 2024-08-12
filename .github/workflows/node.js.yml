@@ -18,10 +18,9 @@ jobs:
         node-version: [20.16.0]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     env:
-      BASE_URL: ${{secrets.BASE_URL}}
-      DATABASE_URL: ${{secrets.DATABASE_URL}}
-      DATABASE_COMPASS: ${{secrets.DATABASE_COMPASS}}
-      GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
+      BASE_URL: ${{ secrets.BASE_URL }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
       GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
       # GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
       # GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
