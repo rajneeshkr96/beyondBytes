@@ -31,7 +31,7 @@ jobs:
 
     steps:
     - name: "test secrets"
-      run: echo "BASE_URL ${{vars.BASE_URL}} ${{secrets.BASE_URL}} ${{secrets.DATABASE_URL}}"
+      run: echo "testing secrets BASE_URL=${{ secrets.BASE_URL }} DATABASE_URL=${{ secrets.DATABASE_URL }}"
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
