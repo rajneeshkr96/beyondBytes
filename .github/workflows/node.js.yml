@@ -31,16 +31,16 @@ jobs:
 
     steps:
     - name: "test secrets"
-      run: echo "testing secrets BASE_URL=${{ secrets.BASE_URL }} DATABASE_URL=${{ secrets.DATABASE_URL }}"
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - name: Change Directory
-      run: cd /home/biyond/actions-runner/_work/biyondbytes/biyondbytes
-    - run: pm2 restart 0
+      run: echo "testing secrets BASE_URL=${{ secrets.BASE_URL }} DATABASE_URL=${{ vars.DATABASE_URL }}"
+    # - uses: actions/checkout@v4
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v4
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    #     cache: 'npm'
+    # - run: npm ci
+    # - run: npm run build --if-present
+    # - name: Change Directory
+    #   run: cd /home/biyond/actions-runner/_work/biyondbytes/biyondbytes
+    # - run: pm2 restart 0
 
