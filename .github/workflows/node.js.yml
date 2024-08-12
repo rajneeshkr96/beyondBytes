@@ -39,7 +39,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: Change Directory
-      run: cd /home/biyond/actions-runner/_work/biyondbytes/biyondbytes
+      run: cd /home/biyond/actions-runner/_work/beyondbytes/beyondbytes
     - run: pm2 restart 0
 
 
