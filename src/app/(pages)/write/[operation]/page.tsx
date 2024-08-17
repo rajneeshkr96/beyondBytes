@@ -158,10 +158,10 @@ const Page = () => {
   }, [editor]);
   
   useEffect(() => {
-    if(editor && content && param.operation === "edit" && !localStorage.getItem("content")){
+    if(editor && !!content && param.operation === "edit" && (!!localStorage.getItem("content") || localStorage.getItem("content") === "<p></p>" )){
       editor.commands.setContent(content);
     }
-  }, [content]);
+  }, [editor,content]);
   
   if (!editor) {
     return null
