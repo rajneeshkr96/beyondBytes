@@ -159,10 +159,11 @@ const Page = () => {
     return null
   }
   
-
-  if(param.operation === "edit" && !localStorage.getItem("content")){
-    editor.commands.setContent(content);
-  }
+useEffect(() => {
+    if(param.operation === "edit" && !localStorage.getItem("content")){
+      editor.commands.setContent(content);
+    }
+}, [content]);
   const publicBlog = async () => {
     try {
       setLoading(true);

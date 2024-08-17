@@ -3,6 +3,7 @@
 import { dataBasePrisma } from "@/databasePrisma";
 import { NextRequest,NextResponse } from "next/server";
 import { currentRole, currentUserId } from "@/lib/authDet";
+import readingTime from 'reading-time';
 import { BlogPops } from "../create/route";
 
 interface Blog extends BlogPops{
@@ -13,6 +14,7 @@ export async function PUT(request: NextRequest) {
   try {
     const {id,title,image,content,metaTitle,metaDesc}:Blog = await request.json();
     const authorId = await currentUserId() || "65e6de30136474657e223231";
+    const readTime = readingTime(content).text;
     const blog = await dataBasePrisma.blog.update({
       where: {
         id: id,
@@ -24,6 +26,7 @@ export async function PUT(request: NextRequest) {
         content: content,
         metaTitle: metaTitle,
         metaDesc: metaDesc,
+        readTime: readTime,
       },
     });
     return NextResponse.json({ success: true, message: "Blog updated successfully", data: blog }, { status: 200 });
