@@ -167,7 +167,16 @@ const Page = () => {
     return null
   }
   
-
+  const clearData = (msg:string,path:string)=>{
+    toast.success(msg)
+    localStorage.setItem("title", "")
+    localStorage.setItem("heroImage", "")
+    localStorage.setItem("alt", "")
+    localStorage.setItem("content", "")
+    localStorage.setItem("metaTitle", "")
+    localStorage.setItem("metaDes", "")
+    router.push(`/post/${path}`);
+  }
 
   const publicBlog = async () => {
     try {
@@ -187,14 +196,7 @@ const Page = () => {
         tags: tags
       })
       if(res.data.success){
-        toast.success("published.....")
-        localStorage.setItem("title","")
-        localStorage.setItem("heroImage","")
-        localStorage.setItem("alt","")
-        localStorage.setItem("metaTitle","")
-        router.push(`/post/${res.data.data.slug}`);
-        localStorage.setItem("metaDes","")
-        localStorage.setItem("content","")
+        clearData("Blog Published Successfully",res.data.data.slug)
       }
 
       setLoading(false);
@@ -205,8 +207,8 @@ const Page = () => {
   }
   const updatePost = async () => {
     try {
-      const id = searchParams.get('id');
-      if(!id){
+      const slug = searchParams.get("slug");
+      if(!slug){
         toast.error("blog not found");
         router.back();
         return;
@@ -219,7 +221,7 @@ const Page = () => {
       }
       const tags = selectedTags.map(tag =>tag.value);
       const res = await axios.put("/api/blog/writer/update", {
-        id:id,
+        slug:slug,
         title: title,
         image: preImage,
         content: JSON.stringify(editor.getHTML()),
@@ -228,14 +230,7 @@ const Page = () => {
         tags: tags
       })
       if(res.data.success){
-        toast.success("edit successfully")
-        localStorage.setItem("title","")
-        localStorage.setItem("heroImage","")
-        localStorage.setItem("alt","")
-        localStorage.setItem("content","")
-        localStorage.setItem("metaTitle","")
-        localStorage.setItem("metaDes","")
-        router.push(`/post/${res.data.data.slug}`);
+        clearData("edit successfully",res.data.data.slug)
       }
 
       setLoading(false);

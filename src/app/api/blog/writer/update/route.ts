@@ -7,17 +7,18 @@ import readingTime from 'reading-time';
 import { BlogPops } from "../create/route";
 
 interface Blog extends BlogPops{
-  id: string;
+  slug: string;
 }
 
 export async function PUT(request: NextRequest) {
   try {
-    const {id,title,image,content,metaTitle,metaDesc}:Blog = await request.json();
+    const {slug,title,image,content,metaTitle,metaDesc}:Blog = await request.json();
     const authorId = await currentUserId() || "65e6de30136474657e223231";
+    console.log(authorId)
     const readTime = readingTime(content).text;
     const blog = await dataBasePrisma.blog.update({
       where: {
-        id: id,
+        slug: slug,
         authorId: authorId
       },
       data: {
