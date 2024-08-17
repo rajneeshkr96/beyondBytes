@@ -22,9 +22,7 @@ import { ErrorResponse, errorToastHandler } from '@/components/errorTostHandler'
 import { useRouter } from 'next/navigation'
 import ImageUploadModal from '@/components/UploadImage/UploadImage'
 import { useSession } from 'next-auth/react'
-import { json } from 'stream/consumers'
 import Loading from '@/app/loading'
-const animatedComponents = makeAnimated();
 
 interface Option {
   value: string;
@@ -51,6 +49,37 @@ const Page = () => {
   const searchParams = useSearchParams();
   const [content,setContent] = useState('');
   const [fullLoading,setFullLoading] = useState(false);
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      
+      Image,
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+      }),
+      Youtube.configure({
+        controls: false,
+      }),
+      Table.configure({
+        resizable: true,
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
+    ],
+    content: `
+      ${typeof window !== 'undefined' && localStorage?.getItem("content")}
+    `,
+  })
+
+  const animatedComponents = makeAnimated();
+  const debounced = useDebouncedCallback(
+    (val:{key:string,value:string }) => {
+      window.localStorage.setItem(val.key,val.value);
+    },
+    10000
+  );
 
   useEffect(() => {
 
@@ -97,6 +126,7 @@ const Page = () => {
           setPreImage({src: res.data.data.image.src,alt: res.data.data.image.alt});
           const content = JSON.parse(res.data.data.content);
           setContent(content);
+          editor?.commands.setContent(content);
         }
         setFullLoading(false);
       }
@@ -106,40 +136,13 @@ const Page = () => {
     }
   }, [param.operation,searchParams,router,session.data?.user.role]);
 
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      
-      Image,
-      Link.configure({
-        openOnClick: false,
-        autolink: true,
-      }),
-      Youtube.configure({
-        controls: false,
-      }),
-      Table.configure({
-        resizable: true,
-      }),
-      TableRow,
-      TableHeader,
-      TableCell,
-    ],
-    content: `
-      ${typeof window !== 'undefined' && localStorage?.getItem("content")}
-    `,
-  })
+
   const handleChange = (options: readonly Option[] | null) => {
     setSelectedTags(options ? Array.from(options) : []);
   };
 
 
-  const debounced = useDebouncedCallback(
-    (val:{key:string,value:string }) => {
-      window.localStorage.setItem(val.key,val.value);
-    },
-    10000
-  );
+
 
   
   useEffect(() => {
@@ -154,16 +157,18 @@ const Page = () => {
     return () => clearInterval(intervalId);
   }, [editor]);
   
+  useEffect(() => {
+    if(editor && content && param.operation === "edit" && !localStorage.getItem("content")){
+      editor.commands.setContent(content);
+    }
+  }, [content]);
   
   if (!editor) {
     return null
   }
   
-useEffect(() => {
-    if(param.operation === "edit" && !localStorage.getItem("content")){
-      editor.commands.setContent(content);
-    }
-}, [content]);
+
+
   const publicBlog = async () => {
     try {
       setLoading(true);
