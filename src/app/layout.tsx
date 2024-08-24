@@ -18,7 +18,7 @@ export const source_serif_4 = Source_Serif_4({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.BASE_URL || "http://localhost:3003"),
+  metadataBase: new URL(process.env.BASE_URL || ""),
   title: {
     default: "Biyond Bytes",
     template: `%s | Biyond Bytes`,
