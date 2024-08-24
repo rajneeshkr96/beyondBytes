@@ -43,23 +43,23 @@ jobs:
       - name: Build Project
         run: yarn build
 
-  deploy:
-    runs-on: self-hosted
-    needs: build  # Ensure that the deploy job only runs if the build job is successful
+  # deploy:
+  #   runs-on: self-hosted
+  #   needs: build  # Ensure that the deploy job only runs if the build job is successful
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout repo
+  #       uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.17.0'  # Same Node.js version as in the build step
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20.17.0'  # Same Node.js version as in the build step
 
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+  #     - name: Install Dependencies
+  #       run: yarn install --frozen-lockfile
 
-      - name: Apply all pending migrations to the database
-        run: npx prisma migrate deploy
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  #     - name: Apply all pending migrations to the database
+  #       run: npx prisma migrate deploy
+  #       env:
+  #         DATABASE_URL: ${{ secrets.DATABASE_URL }}
