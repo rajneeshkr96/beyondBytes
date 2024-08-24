@@ -7,8 +7,8 @@ export default {
 
   providers: [
     GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      clientId: process.env.GIT_CLIENT_ID!,
+      clientSecret: process.env.GIT_CLIENT_SECRET!,
     }),
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
