@@ -3,6 +3,9 @@ name: CI and Deploy
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - prisma/migrations/** # Only run this workflow when migrations are updated
+      - '**'  # Run for any other file changes in the repository
 
 jobs:
   build:
@@ -41,22 +44,22 @@ jobs:
         run: yarn build
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build  # Ensure that the deploy job only runs if the build job is successful
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20.17.0'
+          node-version: '20.17.0'  # Same Node.js version as in the build step
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Deploy to Vercel
-        run: vercel --prod
+      - name: Apply all pending migrations to the database
+        run: npx prisma migrate deploy
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}          
-          # Add any other environment variables required for deployment
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
