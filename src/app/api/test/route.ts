@@ -9,9 +9,11 @@ export async function GET(req: NextRequest) {
     console.log('NEXTAUTH_SECRET:', process.env.NEXTAUTH_SECRET);
     console.log('UPLOADTHING_APP_ID:', process.env.UPLOADTHING_APP_ID);
     console.log('UPLOADTHING_SECRET:', process.env.UPLOADTHING_SECRET);
+    const val = process.env.BASE_URL;
+    const val1 = process.env.DATABASE_URL;
 
     try {
-        return NextResponse.json({ success: true, message: "Token saved successfully" }, { status: 200 });
+        return NextResponse.json({ success: true, message: "Token saved successfully",data:{ val,val1} }, { status: 200 });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ success: false, message: "error.message" }, { status: 500 });
