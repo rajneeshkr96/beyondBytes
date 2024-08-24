@@ -1,11 +1,8 @@
-name: CI and Deploy
+name: Node.js CI
 
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - prisma/migrations/** # Only run this workflow when migrations are updated
-      - '**'  # Run for any other file changes in the repository
 
 jobs:
   build:
@@ -24,42 +21,15 @@ jobs:
       UPLOADTHING_SECRET: ${{ secrets.UPLOADTHING_SECRET }}
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Generate Prisma Client
-        run: npx prisma generate
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-      - name: Build Project
-        run: yarn build
-
-  # deploy:
-  #   runs-on: self-hosted
-  #   needs: build  # Ensure that the deploy job only runs if the build job is successful
-
-  #   steps:
-  #     - name: Checkout repo
-  #       uses: actions/checkout@v4
-
-  #     - name: Setup Node
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '20.17.0'  # Same Node.js version as in the build step
-
-  #     - name: Install Dependencies
-  #       run: yarn install --frozen-lockfile
-
-  #     - name: Apply all pending migrations to the database
-  #       run: npx prisma migrate deploy
-  #       env:
-  #         DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+    - name: Install Dependencies
+      run: yarn install --frozen-lockfile
+    - name: create .env file
+      run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+    - name: Build Project
+      run: yarn build
