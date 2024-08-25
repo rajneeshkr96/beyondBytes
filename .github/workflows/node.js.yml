@@ -38,4 +38,4 @@ jobs:
       run: yarn build
     - name: Change Directory
       run: cd /home/biyondbytes/biyondblogs/actions-runner/_work/biyondbytes/biyondbytes
-    - run: pm2 restart biyondbytes
+    - run: pm2 restart biyondblogs
