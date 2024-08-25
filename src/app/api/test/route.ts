@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
     console.log('UPLOADTHING_APP_ID:', process.env.UPLOADTHING_APP_ID);
     console.log('UPLOADTHING_SECRET:', process.env.UPLOADTHING_SECRET);
     const val = process.env.BASE_URL;
-    const val1 = process.env.DATABASE_URL;
+    const val1 = process.env.NEXTAUTH_URL;
 
     try {
         return NextResponse.json({ success: true, message: "Token saved successfully",data:{ val,val1} }, { status: 200 });
