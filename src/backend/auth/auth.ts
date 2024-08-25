@@ -10,71 +10,71 @@ export const {
   signOut,
 } = NextAuth({
   
-  callbacks: {
-    async session({ token, session }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
-      }
+  // callbacks: {
+  //   async session({ token, session }) {
+  //     if (token.sub && session.user) {
+  //       session.user.id = token.sub;
+  //     }
 
-      if (token.role && session.user) {
-        session.user.role = token.role as UserRole;
-      }
+  //     if (token.role && session.user) {
+  //       session.user.role = token.role as UserRole;
+  //     }
 
-      if (session.user) {
-        session.user.userId = token.userId as string;
-        session.user.name = token.name;
-        session.user.userName = token.userName as string;
-        session.user.email = token.email as string;
-        session.user.image = token.picture as string;
-        session.user.isOAuth = token.isOAuth as boolean;
-      }
+  //     if (session.user) {
+  //       session.user.userId = token.userId as string;
+  //       session.user.name = token.name;
+  //       session.user.userName = token.userName as string;
+  //       session.user.email = token.email as string;
+  //       session.user.image = token.picture as string;
+  //       session.user.isOAuth = token.isOAuth as boolean;
+  //     }
 
-      return session;
-    },
-    async jwt({ token }) {
-      try {
-        dataBasePrisma.$connect();
-        if (!token.sub) return token;
-        const existingUser = await dataBasePrisma.user.findUnique({
-          where: { email: token.email as string},
-        });
-        var newUser;
+  //     return session;
+  //   },
+  //   async jwt({ token }) {
+  //     try {
+  //       dataBasePrisma.$connect();
+  //       if (!token.sub) return token;
+  //       const existingUser = await dataBasePrisma.user.findUnique({
+  //         where: { email: token.email as string},
+  //       });
+  //       var newUser;
         
         
         
-        if (!existingUser) {
-          const userName = token?.email?.split('@')[0];
-          newUser = await dataBasePrisma.user.create({
-            data: {
-              username: userName,
-              email: token.email,
-              name: token.name,
-              role: UserRole.USER,
-              image: token.picture,
-            },
-          });
-          token.role = newUser.role;
-          token.name = newUser.name;
-          token.email = newUser.email;
-          token.userId = newUser.id;
-          token.userName = newUser.username;
+  //       if (!existingUser) {
+  //         const userName = token?.email?.split('@')[0];
+  //         newUser = await dataBasePrisma.user.create({
+  //           data: {
+  //             username: userName,
+  //             email: token.email,
+  //             name: token.name,
+  //             role: UserRole.USER,
+  //             image: token.picture,
+  //           },
+  //         });
+  //         token.role = newUser.role;
+  //         token.name = newUser.name;
+  //         token.email = newUser.email;
+  //         token.userId = newUser.id;
+  //         token.userName = newUser.username;
 
-          return token;
-        }
-        token.name = existingUser.name;
-        token.email = existingUser.email;
-        token.role = existingUser.role;
-        token.userId = existingUser.id;
-        token.image = existingUser.image;
-        token.userName = existingUser.username;
+  //         return token;
+  //       }
+  //       token.name = existingUser.name;
+  //       token.email = existingUser.email;
+  //       token.role = existingUser.role;
+  //       token.userId = existingUser.id;
+  //       token.image = existingUser.image;
+  //       token.userName = existingUser.username;
 
-        return token;
-      } finally {
-        await dataBasePrisma.$disconnect();
-      }
-    },
+  //       return token;
+  //     } finally {
+  //       await dataBasePrisma.$disconnect();
+  //     }
+  //   },
 
-  },
+  // },
 
   // session: { strategy: "jwt" },
   
