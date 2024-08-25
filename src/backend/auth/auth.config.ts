@@ -1,10 +1,9 @@
-import GitHub from "next-auth/providers/github"
-import Google from "next-auth/providers/google"
-import Credentials from "next-auth/providers/credentials"
-import type { NextAuthConfig } from "next-auth"
+import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
+import Credentials from "next-auth/providers/credentials";
+import type { NextAuthConfig } from "next-auth";
 
-export default {
-
+const nextAuthConfig: NextAuthConfig = {
   providers: [
     GitHub({
       clientId: process.env.GIT_CLIENT_ID!,
@@ -13,10 +12,16 @@ export default {
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-
     }),
   ],
   trustHost: true,
 
+  // Explicitly set the NEXTAUTH_URL if necessary
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      return process.env.NEXTAUTH_URL ?? baseUrl;
+    },
+  },
+};
 
-} satisfies NextAuthConfig
+export default nextAuthConfig satisfies NextAuthConfig;
