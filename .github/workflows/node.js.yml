@@ -13,6 +13,7 @@ jobs:
 
     env:
       BASE_URL: ${{ secrets.BASE_URL }}
+      NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
       GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
@@ -37,4 +38,4 @@ jobs:
       run: yarn build
     - name: Change Directory
       run: cd /home/biyondbytes/biyondblogs/actions-runner/_work/biyondbytes/biyondbytes
-    - run: pm2 restart biyondbytes
+    - run: pm2 restart biyondblogs
