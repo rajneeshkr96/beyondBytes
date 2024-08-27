@@ -19,8 +19,7 @@ const nextAuthConfig: NextAuthConfig = {
   // Explicitly set the NEXTAUTH_URL if necessary
   callbacks: {
     async redirect({ url, baseUrl }) {
-      if(url.startsWith("/")) return `${baseUrl}${url}`
-      else if (new URL(url).origin === baseUrl) return url
+      if(process.env.NEXTAUTH_URL) return process.env.NEXTAUTH_URL
       return baseUrl;
     },
   },
