@@ -32,10 +32,13 @@ jobs:
         cache: 'yarn'
     - name: Install Dependencies
       run: yarn install --frozen-lockfile
-    - name: create .env file
-      run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+    - name: Create .env file
+      run: |
+        echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+        echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
     - name: Build Project
       run: yarn build
     - name: Change Directory
-      run: cd /home/biyondbytes/biyondblogs/actions-runner/_work/biyondbytes/biyondbytes
-    - run: pm2 restart biyondblogs
+      run: cd /home/biyondbytes/biyondblogs/actions-runner/_work/biyondbytes/biyondbytes || exit 1
+    - name: Restart Application
+      run: pm2 restart biyondblogs
