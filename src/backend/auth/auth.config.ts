@@ -14,7 +14,7 @@ const nextAuthConfig: NextAuthConfig = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  // trustHost: true,
+  trustHost: true,
   
 
   // Explicitly set the NEXTAUTH_URL if necessary
